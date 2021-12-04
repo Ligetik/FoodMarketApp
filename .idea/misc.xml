@@ -12,14 +12,18 @@
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.20104166666666667" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.20104166666666667" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/side_nav_bar.xml" value="0.1814814814814815" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/splashscreen.xml" value="0.2390625" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/splashscreen_dark.xml" value="0.2390625" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/splashscreen_night.xml" value="0.2390625" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/stock.xml" value="0.35052083333333334" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_custom.xml" value="0.17177914110429449" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_restaurants.xml" value="0.2264151024877837" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_restaurants.xml" value="0.19924529018924966" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_splash.xml" value="0.18385416666666668" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/app_bar_main.xml" value="0.18072916666666666" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/content_main.xml" value="0.18823529411764706" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_gallery.xml" value="0.18072916666666666" />
-        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_home.xml" value="0.1279128672745694" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_home.xml" value="0.2988679352838745" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_logout.xml" value="0.1" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_slideshow.xml" value="0.18177083333333333" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/nav_header_main.xml" value="0.2543352601156069" />

@@ -32,6 +32,12 @@
         <item name="color">@color/orange</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+    </style>
+
     <style name="Theme.TestActivityAndroid_9.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.TestActivityAndroid_9.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
