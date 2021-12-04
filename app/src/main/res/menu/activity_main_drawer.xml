@@ -4,6 +4,10 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+<!--        <item
+            android:id="@+id/nav_restaurants"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Custom" />-->
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
@@ -22,7 +26,7 @@
             android:title="Выйти" />
         <item
             android:id="@+id/nav_custom"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Custom" />
+            android:icon="@drawable/ic_baseline_exit_to_app_24"
+            android:title="custom" />
     </group>
 </menu>

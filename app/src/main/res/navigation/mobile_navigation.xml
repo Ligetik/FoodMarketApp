@@ -33,4 +33,9 @@
         android:name="com.example.testactivityandroid_9.ui.custom.CustomActivity"
         android:label="custom"
         tools:layout="@layout/activity_custom" />
+<!--    <activity
+        android:id="@+id/nav_restaurants"
+        android:name="com.example.testactivityandroid_9.ui.restaurants.RestaurantsActivity"
+        android:label="restaurants"
+        tools:layout="@layout/activity_restaurants" />-->
 </navigation>
