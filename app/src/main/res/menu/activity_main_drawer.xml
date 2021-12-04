@@ -3,30 +3,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-<!--        <item
-            android:id="@+id/nav_restaurants"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Custom" />-->
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
-        <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_baseline_exit_to_app_24"
-            android:title="Выйти" />
-        <item
-            android:id="@+id/nav_custom"
-            android:icon="@drawable/ic_baseline_exit_to_app_24"
-            android:title="custom" />
-    </group>
+<!--    <group android:checkableBehavior="single">-->
+<!--&lt;!&ndash;        <item-->
+<!--            android:id="@+id/nav_restaurants"-->
+<!--            android:icon="@drawable/ic_menu_slideshow"-->
+<!--            android:title="Custom" />&ndash;&gt;-->
+<!--       &lt;!&ndash; <item-->
+<!--            android:id="@+id/nav_home"-->
+<!--            android:icon="@drawable/ic_menu_camera"-->
+<!--            android:title="@string/menu_home" />&ndash;&gt;-->
+<!--        <item-->
+<!--            android:id="@+id/nav_gallery"-->
+<!--            android:icon="@drawable/ic_menu_gallery"-->
+<!--            android:title="@string/menu_gallery" />-->
+<!--        <item-->
+<!--            android:id="@+id/nav_slideshow"-->
+<!--            android:icon="@drawable/ic_menu_slideshow"-->
+<!--            android:title="@string/menu_slideshow" />-->
+<!--        <item-->
+<!--            android:id="@+id/nav_logout"-->
+<!--            android:icon="@drawable/ic_baseline_exit_to_app_24"-->
+<!--            android:title="Выйти" />-->
+<!--        <item-->
+<!--            android:id="@+id/nav_custom"-->
+<!--            android:icon="@drawable/ic_baseline_exit_to_app_24"-->
+<!--            android:title="custom" />-->
+<!--    </group>-->
+
+    <item
+        android:title="Город">
+        <menu>
+            <group>
+                <item
+                    android:id="@+id/usury"
+                    android:icon="@drawable/ic_baseline_tour_24"
+                    android:title="@string/town" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Меню">
+        <menu>
+            <group>
+                <item
+                    android:id="@+id/entrance"
+                    android:icon="@drawable/enrtance"
+                    android:title="@string/log_in" />
+
+                <item android:title="@string/stock"
+                    android:icon="@drawable/stock"
+                    android:id="@+id/stock"/>
+
+                <item android:title="@string/cafe"
+                    android:icon="@drawable/cafe"
+                    android:id="@+id/nav_home"/>
+
+                <item android:title="@string/search"
+                    android:icon="@drawable/search"
+                    android:id="@+id/search"/>
+
+                <item android:title="@string/basket"
+                    android:icon="@drawable/basket"
+                    android:id="@+id/basket"/>
+
+                <item android:title="@string/history"
+                    android:icon="@drawable/history"
+                    android:id="@+id/history"/>
+
+                <item android:title="@string/bacall"
+                    android:icon="@drawable/call"
+                    android:id="@+id/bacall"/>
+            </group>
+        </menu>
+    </item>
 </menu>

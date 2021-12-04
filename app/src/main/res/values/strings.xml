@@ -27,4 +27,23 @@
     <string name="ordering_cash">Наличными</string>
     <string name="ordering_card">Картой курьеру</string>
     <string name="commentary">Ваш комментарий</string>
+
+
+    <string name="town">Уссурийск</string>
+
+    <string name="log_in">Войти</string>
+
+    <string name="stock">Акции</string>
+
+    <string name="cafe">Рестораны и кафе</string>
+
+    <string name="dinner">Обед</string>
+
+    <string name="search">Поиск</string>
+
+    <string name="basket">Корзина</string>
+
+    <string name="history">История заказов</string>
+
+    <string name="bacall">Обратный звонок</string>
 </resources>
