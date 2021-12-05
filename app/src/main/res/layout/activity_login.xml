@@ -25,7 +25,7 @@
             android:layout_marginTop="0dp"
             android:background="@color/blue"
             android:gravity="center"
-            android:text="@string/Регистрация"
+            android:text="@string/Войти"
             android:textAlignment="center"
             android:textColor="@color/orange"
             android:textSize="23sp" />
@@ -42,147 +42,70 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/panel">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:text="@string/Регистрация"
-            android:textAlignment="center"
-            android:textColor="@color/blue"
-            android:textSize="25sp" />
-
-        <EditText
-            android:id="@+id/userName"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView4"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/rounded_corner"
-            android:hint="@string/user_name"
-            android:padding="5dp" />
-
         <EditText
             android:id="@+id/Number"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/userName"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
             android:background="@drawable/rounded_corner"
             android:hint="@string/_7_000_000_00_00"
             android:padding="5dp" />
 
         <EditText
-            android:id="@+id/address"
+            android:id="@+id/userPassword"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Number"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:background="@drawable/rounded_corner"
-            android:hint="@string/address"
+            android:hint="@string/Пароль"
             android:padding="5dp" />
 
         <Button
-            android:id="@+id/btnOrder"
-            android:layout_width="wrap_content"
+            android:id="@+id/main_login_button"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/userPassword"
             android:layout_centerHorizontal="true"
-            android:text="@string/order_btn"
+            android:layout_marginTop="50dp"
+            android:text="@string/Войти"
             android:textAllCaps="false"
             android:textSize="25sp"
-            app:backgroundTint="@color/orange" />
+            app:backgroundTint="@color/blue" />
 
-        <EditText
-            android:id="@+id/commentary"
-            android:layout_width="300dp"
+        <Button
+            android:id="@+id/forgot_you_password"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/address"
+            android:layout_below="@+id/main_login_button"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_corner"
-            android:hint="@string/commentary"
-            android:padding="5dp" />
+            android:background="#00FFFFFF"
+            android:padding="3dp"
+            android:text="@string/Забыли_пароль"
+            android:textAllCaps="false"
+            android:textColor="@color/blue"
+            android:textSize="18sp" />
 
+        <Button
+            android:id="@+id/registration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/forgot_you_password"
+            android:layout_centerHorizontal="true"
+            android:background="#00FFFFFF"
+            android:padding="3dp"
+            android:text="@string/Регистрация"
+            android:textAllCaps="false"
+            android:textColor="@color/blue"
+            android:textSize="18sp" />
     </RelativeLayout>
-
-    <EditText
-        android:id="@+id/Number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="280dp"
-        android:layout_marginRight="70dp"
-        android:background="@drawable/rounded_corner"
-        android:hint="@string/_7_000_000_00_00"
-        android:padding="5dp" />
-
-    <EditText
-        android:id="@+id/address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_corner"
-        android:hint="@string/Пароль"
-        android:padding="5dp"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteX="70dp" />
-
-    <Button
-        android:id="@+id/main_login_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/white"
-        android:text="@string/Войти"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/blue"
-        android:textSize="18sp"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteX="70dp" />
-
-    <Button
-        android:id="@+id/forgot_you_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/main_login_button"
-        android:background="#00FFFFFF"
-        android:padding="3dp"
-        android:text="@string/Забыли_пароль"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/blue"
-        android:textSize="18sp"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteX="70dp" />
-
-    <Button
-        android:id="@+id/registration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/forgot_you_password"
-        android:background="#00FFFFFF"
-        android:padding="3dp"
-        android:text="@string/Регистрация"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/blue"
-        android:textSize="18sp"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteX="70dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

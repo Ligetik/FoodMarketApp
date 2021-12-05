@@ -5,6 +5,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange"
     tools:context=".ui.login.signup.Login_SignupActivity">
+
+    <RelativeLayout
+        android:id="@+id/panel"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:orientation="horizontal"
+        android:weightSum="16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:text="@string/Регистрация"
+            android:textAlignment="center"
+            android:textColor="@color/orange"
+            android:textSize="23sp" />
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="35dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/blue"
+            android:src="@drawable/ic_baseline_chevron_left_24" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/panel">
+
+        <EditText
+            android:id="@+id/Number"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/_7_000_000_00_00"
+            android:padding="5dp" />
+
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Number"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/name"
+            android:padding="5dp" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/email"
+            android:padding="5dp" />
+
+        <EditText
+            android:id="@+id/userPassword"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/Пароль"
+            android:padding="5dp" />
+
+        <Button
+            android:id="@+id/btnOrder"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userPassword"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="@string/register"
+            android:textAllCaps="false"
+            android:textSize="25sp"
+            app:backgroundTint="@color/blue" />
+
+        <TextView
+            android:id="@+id/agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnOrder"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="@string/agreement_descr"
+            android:textAlignment="center"
+            android:textColor="@color/blue" />
+
+        <TextView
+            android:id="@+id/btnAgreement"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_below="@+id/agreement"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:clickable="true"
+            android:minHeight="48dp"
+            android:text="@string/agreement"
+            android:textAlignment="center"
+            android:textColor="@color/blue" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
