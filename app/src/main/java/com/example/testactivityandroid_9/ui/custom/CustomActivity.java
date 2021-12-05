@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.testactivityandroid_9.R;
 
 public class CustomActivity extends AppCompatActivity {
-
     ImageButton imageButton;
 
     @Override
@@ -16,5 +15,15 @@ public class CustomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom);
 
+        clickBtnBack();
+    }
+
+    private void clickBtnBack() {
+        imageButton = (ImageButton)findViewById(R.id.back);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {onBackPressed();
+            }
+        });
     }
 }
