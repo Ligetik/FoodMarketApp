@@ -16,6 +16,8 @@ public class CallBackActivity extends AppCompatActivity {
         setContentView(R.layout.activity_callback);
 
         clickBtnBack();
+
+
     }
 
     private void clickBtnBack() {

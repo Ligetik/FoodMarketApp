@@ -51,7 +51,7 @@
 
     <string name="agreement"><u>Пользовательское соглашение</u></string>
 
-    <string name="agreement_descr">Нажимая "Зарегистрироваться", Вы принимаете</string>
+    <string name="agreement_descr">Нажимая "\""Зарегистрироваться"\"", Вы принимаете</string>
     <string name="name">Имя</string>
     <string name="email">Эл. почта</string>
 </resources>
