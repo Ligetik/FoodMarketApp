@@ -2,7 +2,6 @@ package com.example.testactivityandroid_9.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.testactivity.R;
-import com.example.testactivity.eventbus.MyUpdateCartEvent;
-import com.example.testactivity.model.CartModel;
+import com.example.testactivityandroid_9.R;
+import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
+import com.example.testactivityandroid_9.model.CartModel;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.greenrobot.eventbus.EventBus;
@@ -67,8 +66,8 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
             AlertDialog dialog = new AlertDialog.Builder(context)
                     .setTitle("Удалить предмет")
                     .setMessage("Вы действительно хотите удалить?")
-                    .setNegativeButton(Html.fromHtml("<font color='#ff9933'>Нет</font>"), (dialog1, which) -> dialog1.dismiss())
-                    .setPositiveButton(Html.fromHtml("<font color='#ff9933'>Да</font>"), (dialog12, which) -> {
+                    .setNegativeButton("Нет", (dialog1, which) -> dialog1.dismiss())
+                    .setPositiveButton("Да", (dialog12, which) -> {
 
                         notifyItemRemoved(position);
 
@@ -95,7 +94,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
 
     private void plusCartItem(MyCartViewHolder holder, CartModel cartModel) {
         cartModel.setQuantity(cartModel.getQuantity()+1);
-//        cartModel.setTotalPrice(cartModel.getQuantity()*Float.parseFloat(cartModel.getPrice()));
+        /*cartModel.setTotalPrice(cartModel.getQuantity()*Float.parseFloat(cartModel.getPrice()));*/
 
         holder.txtQuantity.setText(new StringBuilder().append(cartModel.getQuantity()));
         updateFribase(cartModel);
@@ -105,7 +104,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
         if(cartModel.getQuantity() > 1)
         {
             cartModel.setQuantity(cartModel.getQuantity()-1);
-//            cartModel.setTotalPrice(cartModel.getQuantity()*Float.parseFloat(cartModel.getPrice()));
+            /*cartModel.setTotalPrice(cartModel.getQuantity()*Float.parseFloat(cartModel.getPrice()));*/
 
             //Обновление
             holder.txtQuantity.setText(new StringBuilder().append(cartModel.getQuantity()));

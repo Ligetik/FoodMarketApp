@@ -17,7 +17,10 @@
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/splashscreen_dark.xml" value="0.2390625" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/splashscreen_night.xml" value="0.2390625" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/stock.xml" value="0.35052083333333334" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_all_restaurants.xml" value="0.22291666666666668" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_callback.xml" value="0.2264151024877837" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_cart.xml" value="0.22291666666666668" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_cart_ordering.xml" value="0.22291666666666668" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_custom.xml" value="0.17177914110429449" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_login.xml" value="0.40896358543417366" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_login_signup.xml" value="0.16301887379120425" />
@@ -31,6 +34,7 @@
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_logout.xml" value="0.1" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_slideshow.xml" value="0.18177083333333333" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/nav_header_main.xml" value="0.2543352601156069" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/tovar_item.xml" value="0.1" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/menu/activity_main_drawer.xml" value="0.2988679352838745" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/menu/main.xml" value="0.1" />
       </map>

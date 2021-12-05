@@ -1,6 +1,6 @@
 package com.example.testactivityandroid_9.listener;
 
-import com.example.testactivity.model.PPpizzaModel;
+import com.example.testactivityandroid_9.model.PPpizzaModel;
 
 import java.util.List;
 

@@ -11,12 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.testactivity.R;
-import com.example.testactivity.eventbus.MyUpdateCartEvent;
-import com.example.testactivity.listener.ICartLoadListener;
-import com.example.testactivity.listener.IRecyclerViewClickListener;
-import com.example.testactivity.model.CartModel;
-import com.example.testactivity.model.PPpizzaModel;
+import com.example.testactivityandroid_9.R;
+import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
+import com.example.testactivityandroid_9.listener.ICartLoadListener;
+import com.example.testactivityandroid_9.listener.IRecyclerViewClickListener;
+import com.example.testactivityandroid_9.model.CartModel;
+import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -91,7 +91,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                             cartModel.setQuantity(cartModel.getQuantity()+1);
                             Map<String,Object> updateData = new HashMap<>();
                             updateData.put("quantity",cartModel.getQuantity());
-//                            updateData.put("totalPrice",cartModel.getQuantity()*Float.parseFloat(cartModel.getPrice()));
+                            /*updateData.put("totalPrice",cartModel.getQuantity()*Float.parseFloat(cartModel.getPrice()));*/
 
                             userCart.child(pPpizzaModel.getKey())
                                     .updateChildren(updateData)
@@ -108,9 +108,9 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                 cartModel.setName(pPpizzaModel.getName());
                                 cartModel.setImage(pPpizzaModel.getImage());
                                 cartModel.setKey(pPpizzaModel.getKey());
-//                                cartModel.setPrice(pPpizzaModel.getPrice());
+                                /*cartModel.setPrice(pPpizzaModel.getPrice());*/
                                 cartModel.setQuantity(1);
-//                                cartModel.setTotalPrice(Float.parseFloat(pPpizzaModel.getPrice()));
+                                /*cartModel.setTotalPrice(Float.parseFloat(pPpizzaModel.getPrice()));*/
 
                                 userCart.child(pPpizzaModel.getKey())
                                         .setValue(cartModel)

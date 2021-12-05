@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:id="@+id/mainLayout"
+android:background="@color/blue"
+tools:context=".MainActivity">
+
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:id="@+id/panel"
+    android:weightSum="16"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize">
+
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/blue"
+        android:src="@drawable/ic_baseline_arrow_back" />
+
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="88dp"
+        android:layout_centerHorizontal="true"
+        android:text="PodkrePizza"
+        android:textColor="@color/orange"
+        android:textSize="23dp"/>
+
+    <FrameLayout
+        android:layout_width="5dp"
+        android:layout_weight="5"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/cartButton"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:background="@color/blue"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/add_shopping_cart"/>
+
+        <com.nex3z.notificationbadge.NotificationBadge
+            android:id="@+id/badge"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            app:nbMaxTextLength="2"/>
+        <!--                android:layout_toRinghtOf="@id/cartButton"-->
+        <!--                android:layout_alignTop="@id/cartButton"-->
+
+
+    </FrameLayout>
+
+
+
+
+</LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/resview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/panel"
+        android:padding="1dp" />
+
+</RelativeLayout>

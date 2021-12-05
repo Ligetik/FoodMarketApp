@@ -54,4 +54,18 @@
     <string name="agreement_descr">Нажимая "\""Зарегистрироваться"\"", Вы принимаете</string>
     <string name="name">Имя</string>
     <string name="email">Эл. почта</string>
+
+    <string name="descrName">Выберите и укажите в комментариях соус</string>
+
+    <string name="bonus">Бонусы</string>
+
+    <string name="total">Итого</string>
+
+    <string name="order_btn">Оформить заказ</string>
+
+    <string name="nettuno">Неттуно</string>
+
+    <string name="_190">190</string>
+
+    <string name="todo">TODO</string>
 </resources>
