@@ -56,7 +56,10 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/rounded_corner"
             android:hint="@string/_7_000_000_00_00"
-            android:padding="5dp" />
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/white" />
 
         <EditText
             android:id="@+id/userPassword"
@@ -67,7 +70,10 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/rounded_corner"
             android:hint="@string/Пароль"
-            android:padding="5dp" />
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/main_login_button"
