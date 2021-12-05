@@ -72,7 +72,7 @@
 
                 <item android:title="@string/bacall"
                     android:icon="@drawable/call"
-                    android:id="@+id/nav_custom"/>
+                    android:id="@+id/nav_callback"/>
             </group>
         </menu>
     </item>

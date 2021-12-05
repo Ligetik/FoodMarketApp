@@ -29,10 +29,10 @@
         android:label="logout"
         tools:layout="@layout/fragment_logout" />
     <activity
-        android:id="@+id/nav_custom"
-        android:name="com.example.testactivityandroid_9.ui.custom.CustomActivity"
+        android:id="@+id/nav_callback"
+        android:name="com.example.testactivityandroid_9.ui.callback.CallBackActivity"
         android:label="custom"
-        tools:layout="@layout/activity_custom" />
+        tools:layout="@layout/activity_callback" />
 <!--    <activity
         android:id="@+id/nav_restaurants"
         android:name="com.example.testactivityandroid_9.ui.restaurants.RestaurantsActivity"

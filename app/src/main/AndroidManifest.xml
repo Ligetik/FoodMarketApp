@@ -28,7 +28,7 @@
             android:name=".ui.restaurants.RestaurantsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.custom.CustomActivity"
+            android:name=".ui.callback.CallBackActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
