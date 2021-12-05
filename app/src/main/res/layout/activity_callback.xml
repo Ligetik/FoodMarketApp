@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
+    android:background="@color/orange"
     tools:context=".ui.callback.CallBackActivity">
 
     <RelativeLayout
@@ -18,16 +18,17 @@
 
 
         <TextView
+            android:background="@color/blue"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="0dp"
             android:gravity="center"
-            android:text="PodkrePizza"
+            android:text="@string/bacall"
             android:textAlignment="center"
             android:textColor="@color/orange"
-            android:textSize="23dp" />
+            android:textSize="23sp" />
 
         <ImageButton
             android:id="@+id/back"
