@@ -45,6 +45,6 @@
 
     <string name="history">История заказов</string>
 
-    <string name="bacall">Обратный звонок</string>
+    <string name="callback">Обратный звонок</string>
     <string name="podkrepizza">PodkrePizza</string>
 </resources>
