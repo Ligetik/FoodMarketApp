@@ -11,7 +11,7 @@
         android:label="Рестораны и Кафе"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
+<!--    <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.testactivityandroid_9.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
@@ -27,12 +27,17 @@
         android:id="@+id/nav_logout"
         android:name="com.example.testactivityandroid_9.ui.logout.LogoutFragment"
         android:label="logout"
-        tools:layout="@layout/fragment_logout" />
+        tools:layout="@layout/fragment_logout" />-->
     <activity
         android:id="@+id/nav_callback"
         android:name="com.example.testactivityandroid_9.ui.callback.CallBackActivity"
         android:label="custom"
         tools:layout="@layout/activity_callback" />
+    <activity
+        android:id="@+id/nav_login"
+        android:name="com.example.testactivityandroid_9.ui.login.LogInActivity"
+        android:label="login"
+        tools:layout="@layout/activity_login" />
 <!--    <activity
         android:id="@+id/nav_restaurants"
         android:name="com.example.testactivityandroid_9.ui.restaurants.RestaurantsActivity"
