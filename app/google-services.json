@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "349355707726",
+    "firebase_url": "https://foodmarketbase-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "foodmarketbase",
+    "storage_bucket": "foodmarketbase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349355707726:android:0ce125ccce4624b35da21f",
+        "android_client_info": {
+          "package_name": "com.example.testactivity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349355707726-ecd33o49aala9cig2pvvf4p1l82g4irm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATELS_Tx4lG1Xxx3dGwjU7YDVvy5u4kvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349355707726-ecd33o49aala9cig2pvvf4p1l82g4irm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "349355707726-vglrsppbjiibkpkhdh0qi384h3n0qjgf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "FoodMarketSK"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349355707726:android:18255f9f2e648f665da21f",
+        "android_client_info": {
+          "package_name": "com.example.testactivityandroid_9"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349355707726-ecd33o49aala9cig2pvvf4p1l82g4irm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATELS_Tx4lG1Xxx3dGwjU7YDVvy5u4kvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349355707726-ecd33o49aala9cig2pvvf4p1l82g4irm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "349355707726-vglrsppbjiibkpkhdh0qi384h3n0qjgf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "FoodMarketSK"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

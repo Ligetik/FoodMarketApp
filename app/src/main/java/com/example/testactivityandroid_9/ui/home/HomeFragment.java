@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.testactivityandroid_9.AllRestaurants;
 import com.example.testactivityandroid_9.R;
 import com.example.testactivityandroid_9.databinding.FragmentHomeBinding;
 import com.example.testactivityandroid_9.ui.restaurants.RestaurantsActivity;
@@ -33,14 +34,14 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
 
-/*        podkrepizza_imagebutton = (ImageButton) getActivity().findViewById(R.id.podkrepizza_imagebutton);
+        podkrepizza_imagebutton = (ImageButton)root.findViewById(R.id.podkrepizza_imagebutton);
         podkrepizza_imagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), RestaurantsActivity.class);
+                Intent intent = new Intent(getContext(), AllRestaurants.class);
                 startActivity(intent);
             }
-        });*/
+        });
 
 
 /*        final TextView textView = binding.textHome;

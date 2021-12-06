@@ -58,11 +58,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="9dp"
             android:text="При оформлении заказа, зарегистрированные пользователи получают бонусы"
             android:textAlignment="center"
-            android:textColor="@color/orange" />
+            android:textColor="@color/orange"
+            android:textSize="17sp" />
 
         <EditText
             android:id="@+id/userName"

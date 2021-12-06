@@ -32,11 +32,73 @@
 
         <ImageButton
             android:id="@+id/back"
-            android:layout_width="35dp"
+            android:layout_width="45dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:background="@color/blue"
             android:src="@drawable/ic_baseline_chevron_left_24" />
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/panel">
+
+        <TextView
+            android:id="@+id/callbackDescr"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:text="При возникновении вопросов, оставьте
+             заявку и мы свяжемся с Вами в ближайшее время"
+            android:textAlignment="center"
+            android:textColor="@color/blue"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/callbackDescr"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/name"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/Number"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/_7_000_000_00_00"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnCallback"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Number"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="@string/submit_request"
+            android:textAllCaps="false"
+            android:textSize="25sp"
+            app:backgroundTint="@color/blue" />
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
