@@ -1,13 +1,17 @@
 package com.example.testactivityandroid_9;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,11 +23,19 @@ import com.example.testactivityandroid_9.listener.IPPpizzaLoadListener;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.example.testactivityandroid_9.utils.SpaceItemDeconstration;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.nex3z.notificationbadge.NotificationBadge;
 
 import org.greenrobot.eventbus.EventBus;
@@ -79,7 +91,6 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_restaurants);
 
-
         init();
         loadPizzaFromFirebase();
         countCartItem();
@@ -87,7 +98,8 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
         imageButton = (ImageButton)findViewById(R.id.back);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {onBackPressed();
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
@@ -95,10 +107,37 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     }
 
     private void loadPizzaFromFirebase() {
+/*        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        FirebaseFirestore myDB = FirebaseFirestore.getInstance();
+*//*        myDB.collection("Items")
+            .document("Tfu0EQZz19g6mQUTHXU3")*//*
+           *//* .orderBy("item_cost", Query.Direction.ASCENDING)*//*
+        myDB.collection("Items")
+                .document("hYBO9afiXVTS9vzx73w9")
+                .collection("Pizza")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
-        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        FirebaseDatabase.getInstance()
-                .getReference("Drink")
+                        if (error != null) {
+                            Log.e("Firestore error", error.getMessage());
+                            return;
+                        }
+                        for (DocumentChange dc : value.getDocumentChanges()) {
+
+                            if (dc.getType() == DocumentChange.Type.ADDED) {
+
+                                ppizzaModels.add(dc.getDocument().toObject(PPpizzaModel.class));
+                            }
+                        }
+                        ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);
+                    }
+                });
+        */
+
+       /* List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        FirebaseFirestore.getInstance()
+                .getReference("Item")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -122,7 +161,7 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         ppizzaLoadListener.OnPPpizzaloadFailed(databaseError.getMessage());
                     }
-                });
+                });*/
     }
 
 

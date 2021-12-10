@@ -75,7 +75,7 @@
             android:padding="5dp" />
 
         <EditText
-            android:id="@+id/Number"
+            android:id="@+id/userNumber"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/userName"
@@ -89,7 +89,7 @@
             android:id="@+id/address"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Number"
+            android:layout_below="@+id/userNumber"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:background="@drawable/rounded_corner"
@@ -97,7 +97,7 @@
             android:padding="5dp" />
 
         <Button
-            android:id="@+id/btnOrder"
+            android:id="@+id/btnSignUp"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

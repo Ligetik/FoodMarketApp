@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/panel">
 
         <EditText
-            android:id="@+id/Number"
+            android:id="@+id/userNumber"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -65,7 +65,7 @@
             android:id="@+id/userPassword"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Number"
+            android:layout_below="@+id/userNumber"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:background="@drawable/rounded_corner"

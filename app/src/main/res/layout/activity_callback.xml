@@ -75,7 +75,7 @@
             android:textColor="@color/white" />
 
         <EditText
-            android:id="@+id/Number"
+            android:id="@+id/userNumber"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
@@ -92,7 +92,7 @@
             android:id="@+id/btnCallback"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Number"
+            android:layout_below="@+id/userNumber"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:text="@string/submit_request"
