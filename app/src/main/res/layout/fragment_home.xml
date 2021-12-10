@@ -30,7 +30,7 @@
                     android:layout_alignParentEnd="true"
 
                     android:layout_marginTop="15dp"
-                    android:background="@color/orange"
+                    android:background="@android:color/transparent"
                     android:src="@drawable/lpodkrepizzaa"
                     android:textAlignment="center" />
 
@@ -47,7 +47,8 @@
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/blue"
-                    android:textSize="36sp" />
+                    android:textSize="36sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
         </FrameLayout>
     </LinearLayout>
