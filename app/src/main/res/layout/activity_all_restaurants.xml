@@ -5,7 +5,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
+    android:background="@drawable/gradient_background_blue"
     tools:context=".MainActivity">
 
 
@@ -13,6 +13,7 @@
         android:id="@+id/panel"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
+
         android:orientation="horizontal"
         android:weightSum="16">
 
@@ -25,14 +26,15 @@
             android:text="PodkrePizza"
             android:textAlignment="center"
             android:textColor="@color/orange"
-            android:textSize="23dp" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/back"
             android:layout_width="35dp"
             android:layout_height="50dp"
             android:layout_marginTop="4dp"
-            android:background="@color/blue"
+            android:background="#00FFFFFF"
             android:src="@drawable/ic_baseline_chevron_left_24" />
 
         <FrameLayout
@@ -52,7 +54,7 @@
                 android:layout_width="40dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/blue"
+                android:background="#00FFFFFF"
                 android:src="@drawable/add_shopping_cart" />
 
             <com.nex3z.notificationbadge.NotificationBadge
@@ -74,12 +76,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/resview"
         android:layout_width="match_parent"
-        android:layout_height="551dp"
+        android:layout_height="550dp"
         android:layout_below="@+id/titleFoodName"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
         android:padding="1dp">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -98,13 +101,13 @@
     <TextView
         android:id="@+id/titleFoodName"
         android:layout_width="wrap_content"
-        android:layout_height="21dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/search"
-        android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="183dp"
-        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="Пицца"
-        android:textColor="@color/orange" />
+        android:textColor="@color/orange"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
