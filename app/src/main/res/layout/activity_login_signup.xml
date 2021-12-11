@@ -59,6 +59,7 @@
             android:background="@drawable/rounded_corner"
             android:hint="@string/_7_000_000_00_00"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:textColor="@color/white" />
@@ -73,6 +74,7 @@
             android:background="@drawable/rounded_corner"
             android:hint="@string/name"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:textColor="@color/white" />
@@ -87,6 +89,7 @@
             android:background="@drawable/rounded_corner"
             android:hint="@string/email"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:textColor="@color/white" />
@@ -101,6 +104,7 @@
             android:background="@drawable/rounded_corner"
             android:hint="@string/Пароль"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:textColor="@color/white" />

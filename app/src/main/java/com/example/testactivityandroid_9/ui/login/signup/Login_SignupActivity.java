@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,14 +35,12 @@ public class Login_SignupActivity extends AppCompatActivity {
     private static final String TAG = "MyActivity";
 
     ImageButton imageButton;
-    EditText userNumber, userName, userEmail, userPassword;
-    Button btnSignUp;
     String userID;
     FirebaseFirestore db;
     FirebaseAuth firebaseAuth;
-    ProgressBar progressBar;
 
-/*    @BindView(R.id.userNumber)
+
+    @BindView(R.id.userNumber)
     EditText userNumber;
     @BindView(R.id.userName)
     EditText userName;
@@ -50,7 +49,7 @@ public class Login_SignupActivity extends AppCompatActivity {
     @BindView(R.id.userPassword)
     EditText userPassword;
     @BindView(R.id.btnSignUp)
-    Button btnSignUp;*/
+    Button btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,16 +58,10 @@ public class Login_SignupActivity extends AppCompatActivity {
 
         clickBtnBack();
 
-        /*ButterKnife.bind(this);*/
+        ButterKnife.bind(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
-        userNumber = findViewById(R.id.userNumber);
-        userName = findViewById(R.id.userName);
-        userEmail = findViewById(R.id.userEmail);
-        userPassword = findViewById(R.id.userPassword);
-        btnSignUp = findViewById(R.id.btnSignUp);
 
 /*        if (firebaseAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -83,6 +76,18 @@ public class Login_SignupActivity extends AppCompatActivity {
                 final String UserEmail = userEmail.getText().toString();
                 String UserPassword = userPassword.getText().toString().trim();
 
+                if (TextUtils.isEmpty(UserEmail)) {
+                    userEmail.setError("Не указан электронный адрес");
+                    return;
+                }
+                if (TextUtils.isEmpty(UserPassword)) {
+                    userPassword.setError("Не указан пароль");
+                    return;
+                }
+                if (UserPassword.length() < 6) {
+                    userPassword.setError("Пароль должен состоять как минимум из 6 символов");
+                    return;
+                }
 
                 firebaseAuth.createUserWithEmailAndPassword(UserEmail, UserPassword).addOnCompleteListener((Task<AuthResult> task) -> {
                     if (task.isSuccessful()) {
@@ -91,10 +96,10 @@ public class Login_SignupActivity extends AppCompatActivity {
                         DocumentReference documentReference = db.collection("user").document(userID);
 
                         Map<String, Object>  user = new HashMap<>();
-                        user.put("UserNumber", UserNumber);
-                        user.put("UserName", UserName);
-                        user.put("UserEmail", UserEmail);
-                        user.put("UserPassword", UserPassword);
+                        user.put("Имя", UserName);
+                        user.put("Номер телефона", UserNumber);
+                        user.put("Пароль", UserPassword);
+                        user.put("Почта", UserEmail);
 
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
