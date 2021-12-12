@@ -1,13 +1,11 @@
 package com.example.testactivityandroid_9;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -107,14 +105,15 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     }
 
     private void loadPizzaFromFirebase() {
-/*        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
         FirebaseFirestore myDB = FirebaseFirestore.getInstance();
-*//*        myDB.collection("Items")
-            .document("Tfu0EQZz19g6mQUTHXU3")*//*
-           *//* .orderBy("item_cost", Query.Direction.ASCENDING)*//*
+/*        myDB.collection("Item")
+                .document("n7vmOkAhYVIlkJGuRLaS")
+                .collection("Pizza")*/
         myDB.collection("Items")
                 .document("hYBO9afiXVTS9vzx73w9")
                 .collection("Pizza")
+                .orderBy("item_cost", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -133,9 +132,8 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
                         ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);
                     }
                 });
-        */
 
-       /* List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+/*        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
         FirebaseFirestore.getInstance()
                 .getReference("Item")
                 .addListenerForSingleValueEvent(new ValueEventListener() {

@@ -57,11 +57,11 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
     @Override
     public void onBindViewHolder(@NonNull MyPizzaViewHolder holder, int position) {
         Glide.with(context)
-                .load(ppizzaModelList.get(position).getImage())
+                .load(ppizzaModelList.get(position).getItem_image())
                 .into(holder.imagetovar);
 
-        holder.textMoney.setText(new StringBuilder().append(ppizzaModelList.get(position).getPrice()));
-        holder.textName.setText(new StringBuilder().append(ppizzaModelList.get(position).getName()));
+        holder.textMoney.setText(new StringBuilder().append(ppizzaModelList.get(position).getItem_cost()));
+        holder.textName.setText(new StringBuilder().append(ppizzaModelList.get(position).getItem_name()));
 
         holder.setListener((view, adapterPosition) -> {
 
@@ -106,8 +106,8 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                         {
 
                                 CartModel cartModel = new CartModel();
-                                cartModel.setName(pPpizzaModel.getName());
-                                cartModel.setImage(pPpizzaModel.getImage());
+                                cartModel.setName(pPpizzaModel.getItem_name());
+                                cartModel.setImage(pPpizzaModel.getItem_image());
                                 cartModel.setKey(pPpizzaModel.getKey());
                                 /*cartModel.setPrice(pPpizzaModel.getPrice());*/
                                 cartModel.setQuantity(1);
