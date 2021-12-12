@@ -28,13 +28,22 @@
             android:orientation="horizontal"
             android:padding="10dp">
 
-            <ImageView
+<!--            <ImageView
                 android:id="@+id/imagetovar"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_gravity="left"
                 android:layout_marginRight="10dp"
-                android:contentDescription="@string/todo" />
+                android:contentDescription="@string/todo" />-->
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imagetovar"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="left"
+                android:layout_marginRight="10dp"
+                android:adjustViewBounds="true"
+                app:shapeAppearanceOverlay="@style/ShapeableImageView.Corner" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
