@@ -32,10 +32,11 @@
 
         <ImageButton
             android:id="@+id/back"
-            android:layout_width="35dp"
+            android:layout_width="45dp"
             android:layout_height="50dp"
-            android:layout_marginTop="4dp"
-            android:background="#00FFFFFF"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/blue"
             android:src="@drawable/ic_baseline_chevron_left_24" />
 
         <FrameLayout
@@ -78,13 +79,13 @@
         android:id="@+id/resview"
         android:layout_width="match_parent"
         android:layout_height="550dp"
-        android:layout_below="@+id/titleFoodName"
+        android:layout_below="@+id/tabs"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
-        android:padding="1dp">
+        android:paddingLeft="10dp"
+        android:paddingEnd="10dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -96,10 +97,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp" />
 
-    <TextView
+<!--    <TextView
         android:id="@+id/titleFoodName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -110,6 +111,49 @@
         android:text="Пицца"
         android:textColor="@color/orange"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:visibility="gone" />-->
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        style="@style/MyTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:background="#00FFFFFF"
+        app:tabContentStart="25dp"
+        app:tabIndicatorColor="@color/orange"
+        app:tabMinWidth="70dp"
+        app:tabMode="scrollable"
+        app:tabTextColor="@color/orange">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pizza" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Бургеры" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Роллы" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Десерты" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Напитки" />
+    </com.google.android.material.tabs.TabLayout>
 
 </RelativeLayout>

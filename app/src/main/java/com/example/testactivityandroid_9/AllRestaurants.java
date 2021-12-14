@@ -218,7 +218,34 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     }
 
     private void countCartItem() {
-        List<CartModel> cartModels = new ArrayList<>();
+      /*  List<CartModel> cartModels = new ArrayList<>();
+        FirebaseFirestore myDB = FirebaseFirestore.getInstance();
+        myDB.getInstance().collection("Cart")
+                .child("UNIQUE_USER_ID")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                        if (error != null) {
+                            Log.e("Firestore error", error.getMessage());
+                            return;
+                        }
+                        for (DocumentChange dc : value.getDocumentChanges()) {
+
+                            if (dc.getType() == DocumentChange.Type.ADDED) {
+
+                                cartModels.add(dc.getDocument().toObject(CartModel.class));
+                            }
+                        }
+                        cartLoadListener.OnCartloadSuccess(cartModels);
+                    }
+                });*/
+
+
+
+
+
+      /*  List<CartModel> cartModels = new ArrayList<>();
         FirebaseDatabase
                 .getInstance().getReference("Cart")
                 .child("UNIQUE_USER_ID")
@@ -240,7 +267,7 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
                     public void onCancelled(@NonNull DatabaseError error) {
                         cartLoadListener.OnCartloadFailed(error.getMessage());
                     }
-                });
+                });*/
     }
 }
 

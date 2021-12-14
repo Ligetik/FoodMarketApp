@@ -40,9 +40,18 @@
     </style>
 
     <style name="ShapeableImageView.Corner" parent="">
-        <item name="cornerSize">20%</item>
+        <item name="cornerSize">25dp</item>
         <item name="cornerFamily">rounded</item>
         <item name="color">@color/white</item>
+    </style>
+
+    <style name="MyTabLayout" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="tabTextAppearance">@style/MyTabTextAppearance</item>
+    </style>
+
+    <style name="MyTabTextAppearance" parent="Widget.Design.TabLayout">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Theme.TestActivityAndroid_9.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

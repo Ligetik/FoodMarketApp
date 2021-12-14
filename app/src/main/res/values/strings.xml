@@ -69,4 +69,5 @@
 
     <string name="todo">TODO</string>
     <string name="submit_request">Оставить заявку</string>
+    <string name="pizza">Пицца</string>
 </resources>
