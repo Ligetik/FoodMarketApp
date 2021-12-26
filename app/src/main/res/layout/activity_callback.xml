@@ -105,7 +105,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/userNumber"
                 android:layout_width="match_parent"
-                android:layout_height="56dp" />
+                android:layout_height="56dp"
+                android:inputType="phone"
+                android:maxLength="10" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
