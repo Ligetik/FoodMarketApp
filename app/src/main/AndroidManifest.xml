@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestActivityAndroid_9">
         <activity
+            android:name=".DetailedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.login.signup.Login_SignupActivity"
             android:exported="false" />
         <activity

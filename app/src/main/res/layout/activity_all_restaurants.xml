@@ -85,9 +85,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:paddingLeft="10dp"
-        android:paddingEnd="10dp">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:paddingTop="0dp"
+        android:paddingEnd="10dp"></androidx.recyclerview.widget.RecyclerView>
 
     <SearchView
         android:id="@+id/search"

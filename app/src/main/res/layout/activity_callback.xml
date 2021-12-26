@@ -58,37 +58,99 @@
              заявку и мы свяжемся с Вами в ближайшее время"
             android:textAlignment="center"
             android:textColor="@color/blue"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/name"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userNameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/callbackDescr"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/rounded_corner"
+            android:layout_marginTop="10dp"
             android:hint="@string/name"
-            android:paddingLeft="10dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:textColor="@color/white" />
+            app:boxStrokeColor="@color/blue"
+            app:boxCornerRadiusBottomEnd="13dp"
+            app:boxCornerRadiusBottomStart="13dp"
+            app:boxCornerRadiusTopEnd="13dp"
+            app:boxCornerRadiusTopStart="13dp"
+            app:hintTextColor="@color/blue">
 
-        <EditText
-            android:id="@+id/userNumber"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userName"
+                android:layout_width="match_parent"
+                android:layout_height="56dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userNumberLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/name"
+            android:layout_below="@+id/userNameLayout"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_corner"
+            android:layout_marginTop="20dp"
             android:hint="@string/_7_000_000_00_00"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:textColor="@color/white" />
+            app:boxCornerRadiusBottomEnd="13dp"
+            app:boxCornerRadiusBottomStart="13dp"
+            app:boxCornerRadiusTopEnd="13dp"
+            app:boxCornerRadiusTopStart="13dp"
+            app:boxStrokeColor="@color/blue"
+            app:hintTextColor="@color/blue"
+            app:prefixText="+7">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userNumber"
+                android:layout_width="match_parent"
+                android:layout_height="56dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/btnCallback2"
+            android:layout_width="320dp"
+            android:layout_height="68dp"
+            android:layout_below="@+id/userNumberLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="Отправить заявку"
+            android:textAllCaps="false"
+            android:textSize="25sp"
+            app:backgroundTint="@color/blue" />
+
+        <!--        <EditText
+                    android:id="@+id/name"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/callbackDescr"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/rounded_corner"
+                    android:hint="@string/name"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textColor="@color/white"
+                    tools:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/userNumber"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/rounded_corner"
+                    android:hint="@string/_7_000_000_00_00"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textColor="@color/white"
+                    tools:visibility="gone" />-->
+
+        <!--<Button
             android:id="@+id/btnCallback"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
@@ -98,7 +160,7 @@
             android:text="@string/submit_request"
             android:textAllCaps="false"
             android:textSize="25sp"
-            app:backgroundTint="@color/blue" />
+            app:backgroundTint="@color/blue" />-->
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

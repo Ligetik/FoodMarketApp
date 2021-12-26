@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testactivityandroid_9.adapter.MyPizzaAdapter;
+import com.example.testactivityandroid_9.adapter.MyCartAdapter;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.listener.ICartLoadListener;
 import com.example.testactivityandroid_9.listener.IPPpizzaLoadListener;
@@ -23,6 +24,7 @@ import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.example.testactivityandroid_9.utils.SpaceItemDeconstration;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -41,6 +43,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -58,9 +61,10 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     @BindView(R.id.cartButton)
     ImageView cartButton;
 
-
     IPPpizzaLoadListener ppizzaLoadListener;
     ICartLoadListener cartLoadListener;
+
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onStart() {
@@ -218,11 +222,12 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     }
 
     private void countCartItem() {
-      /*  List<CartModel> cartModels = new ArrayList<>();
+ /*       List<CartModel> cartModels = new ArrayList<>();
         FirebaseFirestore myDB = FirebaseFirestore.getInstance();
         myDB.getInstance().collection("Cart")
-                .child("UNIQUE_USER_ID")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .document("UNIQUE_USER_ID")
+                .getDocuments()
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
@@ -239,35 +244,12 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
                         }
                         cartLoadListener.OnCartloadSuccess(cartModels);
                     }
-                });*/
+                });
+*/
+        /*final HashMap<String, Object> cartMap = new HashMap<>();*/
 
+        /*cartMap.put("Название", txtName)*/
 
-
-
-
-      /*  List<CartModel> cartModels = new ArrayList<>();
-        FirebaseDatabase
-                .getInstance().getReference("Cart")
-                .child("UNIQUE_USER_ID")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot cartSnapshot:snapshot.getChildren())
-                        {
-                            CartModel cartModel = cartSnapshot.getValue(CartModel.class);
-                            cartModel.setKey(cartSnapshot.getKey());
-                            cartModels.add(cartModel);
-
-                        }
-
-                        cartLoadListener.OnCartloadSuccess(cartModels);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        cartLoadListener.OnCartloadFailed(error.getMessage());
-                    }
-                });*/
     }
 }
 

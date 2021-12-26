@@ -1,9 +1,9 @@
 package com.example.testactivityandroid_9.model;
 
 public class CartModel {
-    private  String key,name,image;
+    private  String key,name,image, price;
     private int quantity;
-    private float totalPrice, price;
+    private float totalPrice;
 
     public CartModel() {
     }
@@ -32,13 +32,13 @@ public class CartModel {
         this.image = image;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-//    public void setPrice(String price) {
-//        this.price = price;
-//    }
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     public int getQuantity() {
         return quantity;
@@ -52,7 +52,7 @@ public class CartModel {
         return totalPrice;
     }
 
-//    public void setTotalPrice(float totalPrice) {
-//        this.totalPrice = totalPrice;
-//    }
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }

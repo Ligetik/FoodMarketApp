@@ -97,7 +97,7 @@ public class Login_SignupActivity extends AppCompatActivity {
 
                         Map<String, Object>  user = new HashMap<>();
                         user.put("Имя", UserName);
-                        user.put("Номер телефона", UserNumber);
+                        user.put("Номер телефона", "+7" + UserNumber);
                         user.put("Пароль", UserPassword);
                         user.put("Почта", UserEmail);
 

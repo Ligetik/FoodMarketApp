@@ -2,10 +2,12 @@ package com.example.testactivityandroid_9.ui.callback;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.testactivityandroid_9.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class CallBackActivity extends AppCompatActivity {
     ImageButton imageButton;
@@ -28,4 +30,5 @@ public class CallBackActivity extends AppCompatActivity {
             }
         });
     }
+
 }
