@@ -47,12 +47,12 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
     @Override
     public void onBindViewHolder(@NonNull MyCartViewHolder holder, int position) {
         Glide.with(context)
-                .load(cartModelList.get(position).getImage())
+                .load(cartModelList.get(position).getItem_image())
                 .into(holder.imageView);
 
-        holder.txtPrice.setText(new StringBuilder().append(cartModelList.get(position).getPrice()));
-        holder.txtName.setText(new StringBuilder().append(cartModelList.get(position).getName()));
-        holder.txtQuantity.setText(new StringBuilder().append(cartModelList.get(position).getQuantity()));
+        holder.txtPrice.setText(new StringBuilder().append(cartModelList.get(position).getItem_cost()));
+        holder.txtName.setText(new StringBuilder().append(cartModelList.get(position).getItem_name()));
+/*        holder.txtQuantity.setText(new StringBuilder().append(cartModelList.get(position).getQuantity()));*/
 
         //Event
         holder.btnMinus.setOnClickListener(v -> {
@@ -83,42 +83,42 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
 
     private void deleteFromFirebase(CartModel cartModel) {
 
-        FirebaseDatabase.getInstance()
+/*        FirebaseDatabase.getInstance()
                 .getReference("Cart")
                 .child("UNIQUE_USER_ID")
                 .child(cartModel.getKey())
                 .removeValue()
-                .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
+                .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));*/
 
     }
 
     private void plusCartItem(MyCartViewHolder holder, CartModel cartModel) {
-        cartModel.setQuantity(cartModel.getQuantity()+1);
+/*        cartModel.setQuantity(cartModel.getQuantity()+1);*/
         /*cartModel.setTotalPrice(cartModel.getQuantity()*Float.parseFloat(cartModel.getPrice()));*/
 
-        holder.txtQuantity.setText(new StringBuilder().append(cartModel.getQuantity()));
+/*        holder.txtQuantity.setText(new StringBuilder().append(cartModel.getQuantity()));*/
         updateFribase(cartModel);
     }
 
     private void minusCartItem(MyCartViewHolder holder, CartModel cartModel) {
-        if(cartModel.getQuantity() > 1)
+/*        if(cartModel.getQuantity() > 1)
         {
             cartModel.setQuantity(cartModel.getQuantity()-1);
-            /*cartModel.setTotalPrice(cartModel.getQuantity()*Float.parseFloat(cartModel.getPrice()));*/
+            *//*cartModel.setTotalPrice(cartModel.getQuantity()*Float.parseFloat(cartModel.getPrice()));*//*
 
             //Обновление
             holder.txtQuantity.setText(new StringBuilder().append(cartModel.getQuantity()));
             updateFribase(cartModel);
-        }
+        }*/
     }
 
     private void updateFribase(CartModel cartModel) {
-        FirebaseDatabase.getInstance()
+        /*FirebaseDatabase.getInstance()
                 .getReference("Cart")
                 .child("UNIQUE_USER_ID")
                 .child(cartModel.getKey())
                 .setValue(cartModel)
-                .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
+                .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));*/
 
     }
 

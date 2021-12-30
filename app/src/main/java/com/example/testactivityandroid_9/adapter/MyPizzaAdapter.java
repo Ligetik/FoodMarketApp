@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,11 +18,18 @@ import com.example.testactivityandroid_9.listener.ICartLoadListener;
 import com.example.testactivityandroid_9.listener.IRecyclerViewClickListener;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.example.testactivityandroid_9.model.PPpizzaModel;
+import com.example.testactivityandroid_9.ui.login.signup.Login_SignupActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -41,10 +49,17 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
     private List<PPpizzaModel> ppizzaModelList;
     private ICartLoadListener iCartLoadListener;
 
+    FirebaseFirestore db;
+    FirebaseAuth firebaseAuth;
+
+
     public MyPizzaAdapter(Context context, List<PPpizzaModel> ppizzaModelList, ICartLoadListener iCartLoadListener) {
         this.context = context;
         this.ppizzaModelList = ppizzaModelList;
         this.iCartLoadListener = iCartLoadListener;
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
     }
 
     @NonNull
@@ -72,7 +87,30 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
     }
 
     private void addToCart(PPpizzaModel pPpizzaModel) {
-        DatabaseReference userCart = FirebaseDatabase
+
+        final HashMap<String, Object> cartMap = new HashMap<>();
+
+        cartMap.put("item_name", pPpizzaModel.getItem_name());
+        cartMap.put("item_cost", pPpizzaModel.getItem_cost());
+        cartMap.put("item_image", pPpizzaModel.getItem_image());
+
+
+
+        firebaseAuth.signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            db.collection("AddToCart").document(firebaseAuth.getCurrentUser().getUid())
+                    .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentReference> task) {
+                    /*Toast.makeText(MyPizzaAdapter.this,"ffff", Toast.LENGTH_SHORT).show();*/
+                    iCartLoadListener.OnCartloadFailed("Добавлено");
+                }
+            });
+        });
+
+
+
+
+       /* DatabaseReference userCart = FirebaseDatabase
                 .getInstance()
                 .getReference("Cart")
                 .child("UNIQUE_USER_ID"); // В другом проекте вы добавите сюда идентификатор пользователя
@@ -89,10 +127,10 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                             // Просто обновите количество и общую цену
 
                             CartModel cartModel = snapshot.getValue(CartModel.class);
-                            cartModel.setQuantity(cartModel.getQuantity()+1);
+                            *//*cartModel.setQuantity(cartModel.getQuantity()+1);*//*
                             Map<String,Object> updateData = new HashMap<>();
-                            updateData.put("quantity",cartModel.getQuantity());
-                            updateData.put("totalPrice",cartModel.getQuantity()*Integer.parseInt(cartModel.getPrice()));
+                            *//*updateData.put("quantity",cartModel.getQuantity());*//*
+                           *//* updateData.put("totalPrice",cartModel.getQuantity()*Integer.parseInt(cartModel.getPrice()));*//*
 
                             userCart.child(pPpizzaModel.getKey())
                                     .updateChildren(updateData)
@@ -106,12 +144,12 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                         {
 
                                 CartModel cartModel = new CartModel();
-                                cartModel.setName(pPpizzaModel.getItem_name());
-                                cartModel.setImage(pPpizzaModel.getItem_image());
+                                cartModel.setItem_name(pPpizzaModel.getItem_name());
+                                cartModel.setItem_image(pPpizzaModel.getItem_image());
                                 cartModel.setKey(pPpizzaModel.getKey());
-                                cartModel.setPrice(pPpizzaModel.getItem_name());
-                                cartModel.setQuantity(1);
-                                cartModel.setTotalPrice(Integer.parseInt(pPpizzaModel.getItem_name()));
+                                *//*cartModel.setPrice(pPpizzaModel.getItem_name());*//*
+*//*                                cartModel.setQuantity(1);
+                                cartModel.setTotalPrice(Integer.parseInt(pPpizzaModel.getItem_name()));*//*
 
                                 userCart.child(pPpizzaModel.getKey())
                                         .setValue(cartModel)
@@ -130,7 +168,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                         iCartLoadListener.OnCartloadFailed(error.getMessage());
 
                     }
-                });
+                });*/
 
     }
 

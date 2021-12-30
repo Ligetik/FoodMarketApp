@@ -119,10 +119,10 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     @Override
     public void OnCartloadSuccess(List<CartModel> cartModelList) {
         double sum = 0;
-        for (CartModel cartModel : cartModelList)
+        /*for (CartModel cartModel : cartModelList)
         {
             sum+=cartModel.getTotalPrice();
-        }
+        }*/
 
         txtTotal.setText(new StringBuilder("RUB").append(sum));
         MyCartAdapter adapter = new MyCartAdapter (this,cartModelList);

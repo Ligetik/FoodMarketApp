@@ -201,8 +201,8 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
 
 
         int cartSum = 0;
-        for (CartModel cartModel: cartModelList)
-            cartSum += cartModel.getQuantity();
+       /* for (CartModel cartModel: cartModelList)
+            cartSum += cartModel.getQuantity();*/
         badge.setNumber(cartSum);
 
 
@@ -222,11 +222,14 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     }
 
     private void countCartItem() {
- /*       List<CartModel> cartModels = new ArrayList<>();
+        List<CartModel> cartModels = new ArrayList<>();
         FirebaseFirestore myDB = FirebaseFirestore.getInstance();
-        myDB.getInstance().collection("Cart")
-                .document("UNIQUE_USER_ID")
-                .getDocuments()
+        myDB.collection("Items")
+                .document("hYBO9afiXVTS9vzx73w9")
+                .collection("Pizza")
+               /* .orderBy("item_cost", Query.Direction.ASCENDING)*/
+/*        myDB.collection("Cart")
+                .document("UNIQUE_USER_ID")*/
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -245,11 +248,6 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
                         cartLoadListener.OnCartloadSuccess(cartModels);
                     }
                 });
-*/
-        /*final HashMap<String, Object> cartMap = new HashMap<>();*/
-
-        /*cartMap.put("Название", txtName)*/
-
     }
 }
 

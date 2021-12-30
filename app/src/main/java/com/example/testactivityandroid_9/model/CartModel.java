@@ -1,14 +1,63 @@
 package com.example.testactivityandroid_9.model;
 
 public class CartModel {
-    private  String key,name,image, price;
-    private int quantity;
+    private  String key,item_name,item_image;
+    private int quantity, item_cost;
     private float totalPrice;
 
     public CartModel() {
     }
 
     public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getItem_name() {
+        return item_name;
+    }
+
+    public void setItem_name(String item_name) {
+        this.item_name = item_name;
+    }
+
+    public String getItem_image() {
+        return item_image;
+    }
+
+    public void setItem_image(String item_image) {
+        this.item_image = item_image;
+    }
+
+   /* public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }*/
+
+    public int getItem_cost() {
+        return item_cost;
+    }
+
+    public void setItem_cost(int item_cost) {
+        this.item_cost = item_cost;
+    }
+
+/*    public float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }*/
+
+
+    /*    public String getKey() {
         return key;
     }
 
@@ -54,5 +103,5 @@ public class CartModel {
 
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
-    }
+    }*/
 }
