@@ -49,17 +49,12 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
     private List<PPpizzaModel> ppizzaModelList;
     private ICartLoadListener iCartLoadListener;
 
-    FirebaseFirestore db;
-    FirebaseAuth firebaseAuth;
-
 
     public MyPizzaAdapter(Context context, List<PPpizzaModel> ppizzaModelList, ICartLoadListener iCartLoadListener) {
         this.context = context;
         this.ppizzaModelList = ppizzaModelList;
         this.iCartLoadListener = iCartLoadListener;
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
     }
 
     @NonNull
@@ -94,17 +89,18 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
         cartMap.put("item_cost", pPpizzaModel.getItem_cost());
         cartMap.put("item_image", pPpizzaModel.getItem_image());
 
-
-
-        firebaseAuth.signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
-            db.collection("AddToCart").document(firebaseAuth.getCurrentUser().getUid())
-                    .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            FirebaseFirestore.getInstance().collection("Users_Cart")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .collection("Корзина")
+                    .add(cartMap)
+                    .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentReference> task) {
-                    /*Toast.makeText(MyPizzaAdapter.this,"ffff", Toast.LENGTH_SHORT).show();*/
                     iCartLoadListener.OnCartloadFailed("Добавлено");
                 }
             });
+            EventBus.getDefault().postSticky(new MyUpdateCartEvent());
         });
 
 

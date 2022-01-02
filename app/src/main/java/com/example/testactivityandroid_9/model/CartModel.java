@@ -1,11 +1,19 @@
 package com.example.testactivityandroid_9.model;
 
 public class CartModel {
-    private  String key,item_name,item_image;
+    private  String key,item_name,item_image,documentId;
     private int quantity, item_cost;
     private float totalPrice;
 
     public CartModel() {
+    }
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 
     public String getKey() {

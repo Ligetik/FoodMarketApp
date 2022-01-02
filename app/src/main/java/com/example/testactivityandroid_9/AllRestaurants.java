@@ -110,11 +110,11 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
 
     private void loadPizzaFromFirebase() {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        FirebaseFirestore myDB = FirebaseFirestore.getInstance();
+/*        FirebaseFirestore myDB = FirebaseFirestore.getInstance();*/
 /*        myDB.collection("Item")
                 .document("n7vmOkAhYVIlkJGuRLaS")
                 .collection("Pizza")*/
-        myDB.collection("Items")
+        FirebaseFirestore.getInstance().collection("Items")
                 .document("hYBO9afiXVTS9vzx73w9")
                 .collection("Pizza")
                 .orderBy("item_cost", Query.Direction.ASCENDING)
@@ -222,14 +222,11 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     }
 
     private void countCartItem() {
-        List<CartModel> cartModels = new ArrayList<>();
-        FirebaseFirestore myDB = FirebaseFirestore.getInstance();
-        myDB.collection("Items")
-                .document("hYBO9afiXVTS9vzx73w9")
-                .collection("Pizza")
-               /* .orderBy("item_cost", Query.Direction.ASCENDING)*/
-/*        myDB.collection("Cart")
-                .document("UNIQUE_USER_ID")*/
+        /*List<CartModel> cartModels = new ArrayList<>();
+        FirebaseFirestore.getInstance()
+                .collection("AddToCart")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .collection("CurrentUser")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -247,7 +244,7 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
                         }
                         cartLoadListener.OnCartloadSuccess(cartModels);
                     }
-                });
+                });*/
     }
 }
 

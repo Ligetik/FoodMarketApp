@@ -1,11 +1,14 @@
 package com.example.testactivityandroid_9;
 
+import android.mtp.MtpConstants;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,11 +18,21 @@ import com.example.testactivityandroid_9.adapter.MyCartAdapter;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.listener.ICartLoadListener;
 import com.example.testactivityandroid_9.model.CartModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,8 +56,6 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     TextView txtTotal;
 
     ICartLoadListener cartLoadListener;
-
-
 
     @Override
     protected void onStart() {
@@ -76,7 +87,99 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     }
 
     private void loadCartFromFribase() {
+
+
+
+/*               //new3
         List<CartModel> cartModels = new ArrayList<>();
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            FirebaseFirestore.getInstance()
+                    .collection("Users_Cart")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .collection("Корзина")
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                            if (error != null) {
+                                Log.e("Firestore error", error.getMessage());
+                                return;
+                            }
+                            for (DocumentSnapshot documentSnapshot : value.getDocuments()) {
+                                String documentId = documentSnapshot.getId();
+                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+                                cartModel.setDocumentId(documentId);
+                            }
+
+                            for (DocumentChange dc : value.getDocumentChanges()) {
+                                if (dc.getType() == DocumentChange.Type.ADDED) {
+
+                                    cartModels.add(dc.getDocument().toObject(CartModel.class));
+                                }
+                            }
+                            cartLoadListener.OnCartloadSuccess(cartModels);
+                        }
+                    });
+        });*/
+
+
+
+        //new 2
+/*
+        List<CartModel> cartModels = new ArrayList<>();
+        MyCartAdapter cartAdapter = new MyCartAdapter (this,cartModels);
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            FirebaseFirestore.getInstance()
+                    .collection("Users_Cart")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .collection("Корзина")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                                    CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+                                    cartModels.add(cartModel);
+                                    cartAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        });
+*/
+
+
+
+
+                //new
+         List<CartModel> cartModels = new ArrayList<>();
+         FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+             FirebaseFirestore.getInstance()
+                    .collection("Users_Cart")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .collection("Корзина")
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                            if (error != null) {
+                                Log.e("Firestore error", error.getMessage());
+                                return;
+                            }
+
+                            for (DocumentChange dc : value.getDocumentChanges()) {
+                                if (dc.getType() == DocumentChange.Type.ADDED) {
+
+                                    cartModels.add(dc.getDocument().toObject(CartModel.class));
+                                }
+                            }
+                            cartLoadListener.OnCartloadSuccess(cartModels);
+                        }
+                    });
+        });
+
+
+                    //old
+       /* List<CartModel> cartModels = new ArrayList<>();
         FirebaseDatabase.getInstance()
                 .getReference("Cart")
                 .child("UNIQUE_USER_ID")
@@ -101,7 +204,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                     public void onCancelled(@NonNull DatabaseError error) {
                         cartLoadListener.OnCartloadFailed(error.getMessage());
                     }
-                });
+                });*/
     }
 
     private void init(){

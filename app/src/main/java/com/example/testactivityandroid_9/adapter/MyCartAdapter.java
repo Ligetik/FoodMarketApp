@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +16,13 @@ import com.bumptech.glide.Glide;
 import com.example.testactivityandroid_9.R;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.model.CartModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -62,7 +69,49 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
            plusCartItem(holder,cartModelList.get(position));
         });
 
-        holder.btnDelete.setOnClickListener(v -> {
+
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                /*AlertDialog dialog = new AlertDialog.Builder(context)
+                        .setTitle("Удалить предмет")
+                        .setMessage("Вы действительно хотите удалить?")
+                        .setNegativeButton("Нет", (dialog1, which) -> dialog1.dismiss())
+                        .setPositiveButton("Да", (dialog12, which) -> {
+
+                            notifyItemRemoved(position);
+
+                            dialog12.dismiss();
+                        }).create();
+                dialog.show();*/
+
+                FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+                    FirebaseFirestore.getInstance()
+                            .collection("Users_Cart")
+                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .collection("Корзина")
+                            .document(cartModelList.get(position).getDocumentId())
+                            .delete()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    /*if (task.isSuccessful()) {
+                                        cartModelList.remove(cartModelList.get(position));
+                                        Toast.makeText(context, "f", Toast.LENGTH_SHORT).show();
+                                    }*/
+
+                                }
+                            });
+                });
+
+            }
+
+        });
+
+
+
+       /* holder.btnDelete.setOnClickListener(v -> {
             AlertDialog dialog = new AlertDialog.Builder(context)
                     .setTitle("Удалить предмет")
                     .setMessage("Вы действительно хотите удалить?")
@@ -74,14 +123,15 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
                         deleteFromFirebase(cartModelList.get(position));
                         dialog12.dismiss();
                     }).create();
-            dialog.show();
-        });
+            dialog.show();*/
+       /* });*/
 
 
 
     }
 
-    private void deleteFromFirebase(CartModel cartModel) {
+/*    private void deleteFromFirebase(CartModel cartModel) {
+
 
 /*        FirebaseDatabase.getInstance()
                 .getReference("Cart")
@@ -90,7 +140,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
                 .removeValue()
                 .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));*/
 
-    }
+    /*}*/
 
     private void plusCartItem(MyCartViewHolder holder, CartModel cartModel) {
 /*        cartModel.setQuantity(cartModel.getQuantity()+1);*/
