@@ -67,15 +67,17 @@
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/nettuno"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/descrName"
                         android:layout_width="113dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="start"
+                        android:ellipsize="end"
+                        android:maxLines="3"
                         android:text="@string/descrName"
-                        android:textSize="12sp" />
+                        android:textSize="13sp" />
                 </LinearLayout>
 
                 <ImageView
@@ -113,8 +115,8 @@
                     <ImageView
 
                         android:id="@+id/imageButton1nettuno"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
                         android:background="@color/white"
                         android:contentDescription="@string/todo"
                         android:src="@drawable/ic_baseline_currency_ruble" />
@@ -127,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/price"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:text="270 гр."
                     android:textAlignment="viewEnd"

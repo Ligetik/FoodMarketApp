@@ -72,6 +72,8 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
 
         holder.textMoney.setText(new StringBuilder().append(ppizzaModelList.get(position).getItem_cost()));
         holder.textName.setText(new StringBuilder().append(ppizzaModelList.get(position).getItem_name()));
+        holder.descrName.setText(new StringBuilder().append(ppizzaModelList.get(position).getItem_details()));
+        holder.titleWeight.setText(new StringBuilder().append(ppizzaModelList.get(position).getItem_weight()));
 
         holder.setListener((view, adapterPosition) -> {
 
@@ -180,6 +182,10 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
         TextView textMoney;
         @BindView(R.id.titleName)
         TextView textName;
+        @BindView(R.id.descrName)
+        TextView descrName;
+        @BindView(R.id.titleWeight)
+        TextView titleWeight;
 
         IRecyclerViewClickListener listener;
 

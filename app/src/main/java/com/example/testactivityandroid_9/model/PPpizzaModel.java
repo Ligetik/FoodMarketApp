@@ -1,20 +1,21 @@
 package com.example.testactivityandroid_9.model;
 
 public class PPpizzaModel {
-    private String key, item_name, item_image, item_details, item_ratings;
+    private String key, item_name, item_image, item_details, item_ratings, item_weight;
     private int item_cost;
 
     public PPpizzaModel() {
     }
 
 
-    public PPpizzaModel(String key, String item_name, String item_image, int item_cost, String item_details, String item_ratings) {
+    public PPpizzaModel(String key, String item_name, String item_image, int item_cost, String item_details, String item_ratings, String item_weight) {
         this.key = key;
         this.item_name = item_name;
         this.item_image = item_image;
         this.item_cost = item_cost;
         this.item_details = item_details;
         this.item_ratings = item_ratings;
+        this.item_weight = item_weight;
     }
 
     /*public String getKey() {
@@ -96,5 +97,13 @@ public class PPpizzaModel {
 
     public void setItem_ratings(String item_ratings) {
         this.item_ratings = item_ratings;
+    }
+
+    public String getItem_weight() {
+        return item_weight;
+    }
+
+    public void setItem_weight(String item_weight) {
+        this.item_weight = item_weight;
     }
 }

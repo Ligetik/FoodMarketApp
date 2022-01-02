@@ -36,7 +36,7 @@
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:background="@color/blue"
+            android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_chevron_left_24" />
 
         <FrameLayout
