@@ -89,6 +89,36 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     private void loadCartFromFribase() {
 
 
+            //new 2_1
+        List<CartModel> cartModels = new ArrayList<>();
+        MyCartAdapter cartAdapter = new MyCartAdapter (this,cartModels);
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            FirebaseFirestore.getInstance()
+                    .collection("Users_Cart")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .collection("Корзина")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+
+                                    String documentId = documentSnapshot.getId();
+
+                                    CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+
+                                    cartModel.setDocumentId(documentId);
+
+                                    cartModels.add(cartModel);
+                                    /*cartAdapter.notifyDataSetChanged();*/
+                                }
+                                cartLoadListener.OnCartloadSuccess(cartModels);
+                            }
+                        }
+                    });
+        });
+
 
 /*               //new3
         List<CartModel> cartModels = new ArrayList<>();
@@ -122,10 +152,8 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         });*/
 
 
-
-        //new 2
-/*
-        List<CartModel> cartModels = new ArrayList<>();
+        //new 2     РАБОЧИЙ
+        /*List<CartModel> cartModels = new ArrayList<>();
         MyCartAdapter cartAdapter = new MyCartAdapter (this,cartModels);
         FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
             FirebaseFirestore.getInstance()
@@ -140,19 +168,17 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                 for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                                     CartModel cartModel = documentSnapshot.toObject(CartModel.class);
                                     cartModels.add(cartModel);
-                                    cartAdapter.notifyDataSetChanged();
+                                    *//*cartAdapter.notifyDataSetChanged();*//*
                                 }
+                                cartLoadListener.OnCartloadSuccess(cartModels);
                             }
                         }
                     });
-        });
-*/
+        });*/
 
 
-
-
-                //new
-         List<CartModel> cartModels = new ArrayList<>();
+                //new       РАБОЧИЙ
+        /* List<CartModel> cartModels = new ArrayList<>();
          FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
              FirebaseFirestore.getInstance()
                     .collection("Users_Cart")
@@ -175,7 +201,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                             cartLoadListener.OnCartloadSuccess(cartModels);
                         }
                     });
-        });
+        });*/
 
 
                     //old
@@ -222,12 +248,12 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     @Override
     public void OnCartloadSuccess(List<CartModel> cartModelList) {
         double sum = 0;
-        /*for (CartModel cartModel : cartModelList)
+        for (CartModel cartModel : cartModelList)
         {
             sum+=cartModel.getTotalPrice();
-        }*/
+        }
 
-        txtTotal.setText(new StringBuilder("RUB").append(sum));
+        txtTotal.setText(sum + " RUB");
         MyCartAdapter adapter = new MyCartAdapter (this,cartModelList);
         recyclerCart.setAdapter(adapter);
     }

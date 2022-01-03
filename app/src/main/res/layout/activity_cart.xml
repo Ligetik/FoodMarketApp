@@ -21,6 +21,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/blue"
             android:gravity="center"
             android:text="@string/basket"
             android:textAlignment="center"
@@ -50,8 +51,9 @@
     <RelativeLayout
         android:id="@+id/order"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@color/blue"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -63,12 +65,12 @@
 
             <TextView
                 android:id="@+id/titleBonus"
-                android:layout_width="200dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:text="@string/bonus"
                 android:textColor="@color/orange"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -79,7 +81,36 @@
                 android:text=""
                 android:textAlignment="textEnd"
                 android:textColor="@color/orange"
-                android:textSize="24sp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/orderFreeDelivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderBonus"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/titleFreeDelivery"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="До бесплатной доставки осталось"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtFreeDelivery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="textEnd"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -88,27 +119,27 @@
             android:id="@+id/orderTotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/orderBonus"
+            android:layout_below="@+id/orderFreeDelivery"
             android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/titleTotal"
-                android:layout_width="200dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:text="@string/total"
                 android:textColor="@color/orange"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtTotal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
                 android:textColor="@color/orange"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -116,14 +147,14 @@
         <Button
             android:id="@+id/btnSignUp"
             android:layout_width="320dp"
-            android:layout_height="wrap_content"
+            android:layout_height="68dp"
             android:layout_below="@+id/orderTotal"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="25dp"
             android:text="@string/order_btn"
             android:textAllCaps="false"
             android:textSize="25sp"
+            android:textStyle="bold"
             app:backgroundTint="@color/orange" />
 
     </RelativeLayout>

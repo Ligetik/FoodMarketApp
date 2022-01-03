@@ -40,13 +40,13 @@ public class CartModel {
         this.item_image = item_image;
     }
 
-   /* public int getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }*/
+    }
 
     public int getItem_cost() {
         return item_cost;
@@ -56,13 +56,13 @@ public class CartModel {
         this.item_cost = item_cost;
     }
 
-/*    public float getTotalPrice() {
+    public float getTotalPrice() {
         return totalPrice;
     }
 
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
-    }*/
+    }
 
 
     /*    public String getKey() {

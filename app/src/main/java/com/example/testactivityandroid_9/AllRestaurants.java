@@ -201,8 +201,8 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
 
 
         int cartSum = 0;
-       /* for (CartModel cartModel: cartModelList)
-            cartSum += cartModel.getQuantity();*/
+        for (CartModel cartModel: cartModelList)
+            cartSum += cartModel.getQuantity();
         badge.setNumber(cartSum);
 
 
