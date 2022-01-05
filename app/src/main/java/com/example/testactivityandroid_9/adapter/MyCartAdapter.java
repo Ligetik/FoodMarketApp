@@ -53,9 +53,10 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
                 .load(cartModelList.get(position).getItem_image())
                 .into(holder.imageView);
 
-        holder.txtPrice.setText(new StringBuilder().append(cartModelList.get(position).getItem_cost()));
+        holder.txtPrice.setText(new StringBuilder().append(cartModelList.get(position).getItem_cost()) + " ₽");
         holder.txtName.setText(new StringBuilder().append(cartModelList.get(position).getItem_name()));
         holder.txtQuantity.setText(new StringBuilder().append(cartModelList.get(position).getQuantity()));
+        holder.descrNameCart.setText(new StringBuilder().append(cartModelList.get(position).getItem_details()));
 
         //Event
         holder.btnMinus.setOnClickListener(v -> {
@@ -217,6 +218,8 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
         TextView txtPrice;
         @BindView(R.id.txtQuantity)
         TextView txtQuantity;
+        @BindView(R.id.descrNameCart)
+        TextView descrNameCart;
 
         Unbinder unbinder;
         public MyCartViewHolder(@NonNull View itemView) {

@@ -139,6 +139,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                     CartModel cartModel = new CartModel();
                                     cartModel.setItem_name(pPpizzaModel.getItem_name());
                                     cartModel.setItem_image(pPpizzaModel.getItem_image());
+                                    cartModel.setItem_details(pPpizzaModel.getItem_details());
                                     cartModel.setKey(pPpizzaModel.getKey());
                                     cartModel.setItem_cost(pPpizzaModel.getItem_cost());
                                     cartModel.setQuantity(1);

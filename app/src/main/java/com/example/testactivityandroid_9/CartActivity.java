@@ -254,7 +254,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
             sum+=cartModel.getTotalPrice();
         }
 
-        txtTotal.setText(sum + " RUB");
+        txtTotal.setText(sum + " ₽");
         MyCartAdapter adapter = new MyCartAdapter (this,cartModelList);
         recyclerCart.setAdapter(adapter);
     }
