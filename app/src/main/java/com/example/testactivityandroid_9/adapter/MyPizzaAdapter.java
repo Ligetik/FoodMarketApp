@@ -85,11 +85,15 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
         holder.descrName.setText(new StringBuilder().append(ppizzaModelList.get(position).getItem_details()));
         holder.titleWeight.setText(new StringBuilder().append(ppizzaModelList.get(position).getItem_weight()));
 
-        holder.setListener((view, adapterPosition) -> {
+        holder.btnAddToCart.setOnClickListener(v -> {
+            addToCart(ppizzaModelList.get(position));
+        });
+
+/*        holder.setListener((view, adapterPosition) -> {
 
             addToCart(ppizzaModelList.get(position));
 
-        });
+        });*/
 
     }
 
@@ -463,6 +467,8 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
         TextView descrName;
         @BindView(R.id.titleWeight)
         TextView titleWeight;
+        @BindView(R.id.btnAddToCart)
+        ImageView btnAddToCart;
 
         IRecyclerViewClickListener listener;
 
@@ -479,7 +485,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
 
         @Override
         public void onClick(View v) {
-            listener.OnRecyclerClick(v,getAdapterPosition());
+            /*listener.OnRecyclerClick(v,getAdapterPosition());*/
         }
     }
 }
