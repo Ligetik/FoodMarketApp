@@ -183,7 +183,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
                     .collection("Корзина")
                     .document(cartModel.getKey())
                     .set(cartModel)
-                    .addOnSuccessListener(aVoid -> notifyDataSetChanged() /*EventBus.getDefault().postSticky(new MyUpdateCartEvent())*/);
+                    .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
         });
 
                 //old
