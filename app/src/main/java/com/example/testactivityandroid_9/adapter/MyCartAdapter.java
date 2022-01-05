@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,13 +15,9 @@ import com.bumptech.glide.Glide;
 import com.example.testactivityandroid_9.R;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.model.CartModel;
-import com.example.testactivityandroid_9.ui.login.signup.Login_SignupActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.greenrobot.eventbus.EventBus;
@@ -70,10 +65,11 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
            plusCartItem(holder,cartModelList.get(position));
         });
 
+        //new1  РАБОЧИЙ
 
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+        /*holder.btnDelete.setOnClickListener(new View.OnClickListener() {*/
 
-            @Override
+            /*@Override
             public void onClick(View v) {
                 AlertDialog dialog = new AlertDialog.Builder(context)
                         .setTitle("Удалить предмет")
@@ -81,14 +77,15 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
                         .setNegativeButton("Нет", (dialog1, which) -> dialog1.dismiss())
                         .setPositiveButton("Да", (dialog12, which) -> {
 
-                            /*notifyItemRemoved(position);*/
+                            *//*notifyItemRemoved(position);*//*
 
                             FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
                                 FirebaseFirestore.getInstance()
                                         .collection("Users_Cart")
                                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .collection("Корзина")
-                                        .document(cartModelList.get(position).getDocumentId())
+                                        *//*.document(cartModelList.get(position).getDocumentId())*//*
+                                        .document(cartModelList.get(position).getKey())
                                         .delete()
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -96,7 +93,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
                                                 if (task.isSuccessful()) {
                                                     cartModelList.remove(cartModelList.get(position));
                                                     notifyDataSetChanged();
-                                                    /*Toast.makeText(context, "", Toast.LENGTH_SHORT).show();*/
+                                                    *//*Toast.makeText(context, "", Toast.LENGTH_SHORT).show();*//*
                                                 }
                                                 else {
                                                     Toast.makeText(context, "Ошибка " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -114,10 +111,10 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
             }
 
         });
+*/
 
-
-
-/*        holder.btnDelete.setOnClickListener(v -> {
+        //NEW2 РАБОЧИЙ
+        holder.btnDelete.setOnClickListener(v -> {
             AlertDialog dialog = new AlertDialog.Builder(context)
                     .setTitle("Удалить предмет")
                     .setMessage("Вы действительно хотите удалить?")
@@ -125,35 +122,45 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
                     .setPositiveButton("Да", (dialog12, which) -> {
 
                         notifyItemRemoved(position);
-
-                        *//*deleteFromFirebase(cartModelList.get(position));*//*
+                        notifyDataSetChanged();
+                        deleteFromFirebase(cartModelList.get(position));
                         dialog12.dismiss();
                     }).create();
             dialog.show();
-        });*/
+        });
 
 
 
     }
 
-/*    private void deleteFromFirebase(CartModel cartModel) {
+    private void deleteFromFirebase(CartModel cartModel) {
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            FirebaseFirestore.getInstance()
+                    .collection("Users_Cart")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .collection("Корзина")
+                    .document(cartModel.getKey())
+                    .delete()
+                    .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
+        });
 
 
-/*        FirebaseDatabase.getInstance()
+                //old
+           /*FirebaseDatabase.getInstance()
                 .getReference("Cart")
                 .child("UNIQUE_USER_ID")
                 .child(cartModel.getKey())
                 .removeValue()
                 .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));*/
 
-    /*}*/
+    }
 
     private void plusCartItem(MyCartViewHolder holder, CartModel cartModel) {
         cartModel.setQuantity(cartModel.getQuantity()+1);
         cartModel.setTotalPrice(cartModel.getQuantity()*/*Float.parseFloat*/(cartModel.getItem_cost()));
 
         holder.txtQuantity.setText(new StringBuilder().append(cartModel.getQuantity()));
-        updateFribase(cartModel);
+        updateFirebase(cartModel);
     }
 
     private void minusCartItem(MyCartViewHolder holder, CartModel cartModel) {
@@ -164,11 +171,22 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
 
             //Обновление
             holder.txtQuantity.setText(new StringBuilder().append(cartModel.getQuantity()));
-            updateFribase(cartModel);
+            updateFirebase(cartModel);
         }
     }
 
-    private void updateFribase(CartModel cartModel) {
+    private void updateFirebase(CartModel cartModel) {
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            FirebaseFirestore.getInstance()
+                    .collection("Users_Cart")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .collection("Корзина")
+                    .document(cartModel.getKey())
+                    .set(cartModel)
+                    .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
+        });
+
+                //old
         /*FirebaseDatabase.getInstance()
                 .getReference("Cart")
                 .child("UNIQUE_USER_ID")

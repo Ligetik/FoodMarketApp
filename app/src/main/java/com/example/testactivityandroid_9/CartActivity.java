@@ -91,7 +91,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
             //new 2_1
         List<CartModel> cartModels = new ArrayList<>();
-        MyCartAdapter cartAdapter = new MyCartAdapter (this,cartModels);
+        /*MyCartAdapter cartAdapter = new MyCartAdapter (this,cartModels);*/
         FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
             FirebaseFirestore.getInstance()
                     .collection("Users_Cart")
@@ -104,11 +104,12 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                             if (task.isSuccessful()) {
                                 for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
 
-                                    String documentId = documentSnapshot.getId();
+                                    /*String documentId = documentSnapshot.getId();*/
 
                                     CartModel cartModel = documentSnapshot.toObject(CartModel.class);
 
-                                    cartModel.setDocumentId(documentId);
+                                    /*cartModel.setDocumentId(documentId);*/
+                                    cartModel.setKey(documentSnapshot.getId());
 
                                     cartModels.add(cartModel);
                                     /*cartAdapter.notifyDataSetChanged();*/
@@ -247,7 +248,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
     @Override
     public void OnCartloadSuccess(List<CartModel> cartModelList) {
-        double sum = 0;
+        int sum = 0;
         for (CartModel cartModel : cartModelList)
         {
             sum+=cartModel.getTotalPrice();

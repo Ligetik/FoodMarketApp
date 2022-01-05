@@ -1,20 +1,19 @@
 package com.example.testactivityandroid_9.model;
 
 public class CartModel {
-    private  String key,item_name,item_image,documentId;
-    private int quantity, item_cost;
-    private float totalPrice;
+    private  String key,item_name,item_image/*,documentId*/;
+    private int quantity, item_cost, totalPrice;
 
     public CartModel() {
     }
 
-    public String getDocumentId() {
+/*    public String getDocumentId() {
         return documentId;
     }
 
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
-    }
+    }*/
 
     public String getKey() {
         return key;
@@ -56,13 +55,15 @@ public class CartModel {
         this.item_cost = item_cost;
     }
 
-    public float getTotalPrice() {
+    public int getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(float totalPrice) {
+    public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+
 
 
     /*    public String getKey() {

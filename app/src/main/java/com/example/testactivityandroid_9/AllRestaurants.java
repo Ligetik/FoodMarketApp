@@ -22,8 +22,11 @@ import com.example.testactivityandroid_9.listener.IPPpizzaLoadListener;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.example.testactivityandroid_9.utils.SpaceItemDeconstration;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -109,11 +113,39 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     }
 
     private void loadPizzaFromFirebase() {
+                //new2 РАБОТАЕТ
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-/*        FirebaseFirestore myDB = FirebaseFirestore.getInstance();*/
-/*        myDB.collection("Item")
-                .document("n7vmOkAhYVIlkJGuRLaS")
-                .collection("Pizza")*/
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            FirebaseFirestore.getInstance()
+                    .collection("Items")
+                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Pizza")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+
+                                    PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+
+                                    ppizzaModel.setKey(documentSnapshot.getId());
+
+                                    ppizzaModels.add(ppizzaModel);
+                                }
+                                ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);
+                            }
+                            else {
+                                ppizzaLoadListener.OnPPpizzaloadFailed("Ошибка");
+                            }
+                        }
+                    });
+        });
+
+
+
+                //new1 РАБОЧИЙ
+       /* List<PPpizzaModel> ppizzaModels = new ArrayList<>();
         FirebaseFirestore.getInstance().collection("Items")
                 .document("hYBO9afiXVTS9vzx73w9")
                 .collection("Pizza")
@@ -135,8 +167,10 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
                         }
                         ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);
                     }
-                });
+                });*/
 
+
+        //old
 /*        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
         FirebaseFirestore.getInstance()
                 .getReference("Item")
@@ -222,29 +256,25 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     }
 
     private void countCartItem() {
-        /*List<CartModel> cartModels = new ArrayList<>();
+        List<CartModel> cartModels = new ArrayList<>();
         FirebaseFirestore.getInstance()
-                .collection("AddToCart")
+                .collection("Users_Cart")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .collection("CurrentUser")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                .collection("Корзина")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-                        if (error != null) {
-                            Log.e("Firestore error", error.getMessage());
-                            return;
-                        }
-                        for (DocumentChange dc : value.getDocumentChanges()) {
-
-                            if (dc.getType() == DocumentChange.Type.ADDED) {
-
-                                cartModels.add(dc.getDocument().toObject(CartModel.class));
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+                                cartModel.setKey(documentSnapshot.getId());
+                                cartModels.add(cartModel);
                             }
+                            cartLoadListener.OnCartloadSuccess(cartModels);
                         }
-                        cartLoadListener.OnCartloadSuccess(cartModels);
                     }
-                });*/
+                });
     }
 }
 
