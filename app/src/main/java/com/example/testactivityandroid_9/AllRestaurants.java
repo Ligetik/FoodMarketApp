@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -112,33 +114,7 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
 
     }
 
-    private void loadPizzaFromFirebase() {
-                //new2 РАБОТАЕТ
-        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
-            FirebaseFirestore.getInstance()
-                    .collection("Items")
-                    .document("hYBO9afiXVTS9vzx73w9")
-                    .collection("Pizza")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
 
-                                    PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
-                                    ppizzaModel.setKey(documentSnapshot.getId());
-                                    ppizzaModels.add(ppizzaModel);
-                                }
-                                ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);
-                            }
-                            else {
-                                ppizzaLoadListener.OnPPpizzaloadFailed("Ошибка");
-                            }
-                        }
-                    });
-        });
 
 
 
@@ -196,8 +172,66 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
                         ppizzaLoadListener.OnPPpizzaloadFailed(databaseError.getMessage());
                     }
                 });*/
+
+
+    @NonNull
+    private Task<QuerySnapshot> loadMenuPodkrePizza(List<PPpizzaModel> ppizzaModels, String pizza) {
+        return FirebaseFirestore.getInstance()
+                .collection("Items")
+                .document("hYBO9afiXVTS9vzx73w9")
+                .collection(pizza)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+
+                                PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                                ppizzaModel.setKey(documentSnapshot.getId());
+                                ppizzaModels.add(ppizzaModel);
+                            }
+                            ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);
+                        } else {
+                            ppizzaLoadListener.OnPPpizzaloadFailed("Ошибка");
+                        }
+                    }
+                });
     }
 
+    private void loadPizzaFromFirebase() {
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            loadMenuPodkrePizza(ppizzaModels, "Pizza");
+        });
+    }
+    private void loadBurgerFromFirebase() {
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            loadMenuPodkrePizza(ppizzaModels, "Burger");
+        });
+    }
+
+    private void loadRollsFromFirebase() {
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            loadMenuPodkrePizza(ppizzaModels, "Rolls");
+        });
+    }
+
+    private void loadDesertiFromFirebase() {
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            loadMenuPodkrePizza(ppizzaModels, "Deserti");
+        });
+    }
+
+    private void loadNapitkiFromFirebase() {
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            loadMenuPodkrePizza(ppizzaModels, "Napitki");
+        });
+    }
 
     private void init() {
         ButterKnife.bind(this);
@@ -212,7 +246,35 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
 
         cartButton.setOnClickListener(v -> startActivity(new Intent(this,CartActivity.class)));
 
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 0) {
+                    loadPizzaFromFirebase();
+                }
+                if (tab.getPosition() == 1) {
+                    loadBurgerFromFirebase();
+                }
+                if (tab.getPosition() == 2) {
+                    loadRollsFromFirebase();
+                }
+                if (tab.getPosition() == 3) {
+                    loadDesertiFromFirebase();
+                }
+                if (tab.getPosition() == 4) {
+                    loadNapitkiFromFirebase();
+                }
+            }
 
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
 
     }
 
@@ -274,6 +336,9 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
                     }
                 });
     }
+
+
+
 }
 
 

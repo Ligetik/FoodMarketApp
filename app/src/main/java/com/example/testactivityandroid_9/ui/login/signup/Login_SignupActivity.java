@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.example.testactivityandroid_9.MainActivity;
 import com.example.testactivityandroid_9.R;
@@ -21,7 +20,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -44,7 +42,7 @@ public class Login_SignupActivity extends AppCompatActivity {
     EditText userNumber;
     @BindView(R.id.userName)
     EditText userName;
-    @BindView(R.id.userEmail)
+    @BindView(R.id.orderAddress)
     EditText userEmail;
     @BindView(R.id.userPassword)
     EditText userPassword;

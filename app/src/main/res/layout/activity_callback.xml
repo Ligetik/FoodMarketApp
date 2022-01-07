@@ -62,7 +62,7 @@
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/userNameLayout"
+            android:id="@+id/orderNameLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -87,11 +87,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/userNumberLayout"
+            android:id="@+id/orderNumberLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/userNameLayout"
+            android:layout_below="@+id/orderNameLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:hint="@string/_7_000_000_00_00"
@@ -115,7 +115,7 @@
             android:id="@+id/btnCallback2"
             android:layout_width="320dp"
             android:layout_height="68dp"
-            android:layout_below="@+id/userNumberLayout"
+            android:layout_below="@+id/orderNumberLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:text="Отправить заявку"
