@@ -17,7 +17,7 @@
 
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -85,7 +85,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/orderFreeDelivery"
+            android:id="@+id/item_topping2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/orderBonus"
@@ -114,10 +114,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/orderTotal"
+            android:id="@+id/item_topping3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/orderFreeDelivery"
+            android:layout_below="@+id/item_topping2"
             android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
@@ -146,7 +146,7 @@
             android:id="@+id/btnSignUp"
             android:layout_width="320dp"
             android:layout_height="68dp"
-            android:layout_below="@+id/orderTotal"
+            android:layout_below="@+id/item_topping3"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
             android:text="@string/order_btn"

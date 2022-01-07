@@ -1,14 +1,18 @@
 package com.example.testactivityandroid_9.model;
 
-public class PPpizzaModel {
+import java.io.Serializable;
+import java.util.List;
+
+public class PPpizzaModel implements Serializable {
     private String key, item_name, item_image, item_details, item_ratings, item_weight;
     private int item_cost;
+    private List<String> details;
 
     public PPpizzaModel() {
     }
 
-
-    public PPpizzaModel(String key, String item_name, String item_image, int item_cost, String item_details, String item_ratings, String item_weight) {
+    public PPpizzaModel(String key, String item_name, String item_image, int item_cost,
+                        String item_details, String item_ratings, String item_weight, List<String> details) {
         this.key = key;
         this.item_name = item_name;
         this.item_image = item_image;
@@ -16,6 +20,7 @@ public class PPpizzaModel {
         this.item_details = item_details;
         this.item_ratings = item_ratings;
         this.item_weight = item_weight;
+        this.details = details;
     }
 
     /*public String getKey() {
@@ -105,5 +110,13 @@ public class PPpizzaModel {
 
     public void setItem_weight(String item_weight) {
         this.item_weight = item_weight;
+    }
+
+    public List<String> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<String> details) {
+        this.details = details;
     }
 }

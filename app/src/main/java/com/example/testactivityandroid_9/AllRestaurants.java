@@ -128,9 +128,7 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
                                 for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
 
                                     PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
-
                                     ppizzaModel.setKey(documentSnapshot.getId());
-
                                     ppizzaModels.add(ppizzaModel);
                                 }
                                 ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);
