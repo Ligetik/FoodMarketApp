@@ -92,7 +92,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
             //new 2_1
         List<CartModel> cartModels = new ArrayList<>();
         /*MyCartAdapter cartAdapter = new MyCartAdapter (this,cartModels);*/
-        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+        /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
             FirebaseFirestore.getInstance()
                     .collection("Users_Cart")
                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -118,7 +118,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                             }
                         }
                     });
-        });
+        /*});*/
 
 
 /*               //new3

@@ -41,13 +41,13 @@
         android:id="@+id/recycler_cart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/order"
+        android:layout_above="@+id/orderPayment"
         android:layout_below="@id/panel">
 
     </androidx.recyclerview.widget.RecyclerView>
 
     <RelativeLayout
-        android:id="@+id/order"
+        android:id="@+id/orderPayment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

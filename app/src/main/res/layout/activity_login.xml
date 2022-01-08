@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/panel">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/orderNumberLayout"
+            android:id="@+id/userLogInNumberLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -68,19 +68,45 @@
             app:prefixText="+7">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userNumber"
+                android:id="@+id/userLogInNumber"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:inputType="phone"
                 android:maxLength="10" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/userPasswordLayout"
+            android:id="@+id/userLogInEmailLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/orderNumberLayout"
+            android:layout_below="@+id/userLogInNumberLayout"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:hint="@string/email"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            app:boxCornerRadiusBottomEnd="13dp"
+            app:boxCornerRadiusBottomStart="13dp"
+            app:boxCornerRadiusTopEnd="13dp"
+            app:boxCornerRadiusTopStart="13dp"
+            app:boxStrokeColor="@color/blue"
+            app:hintTextColor="@color/blue">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userLogInEmail"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userLogInPasswordLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userLogInEmailLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:hint="@string/Пароль"
@@ -93,17 +119,17 @@
             app:hintTextColor="@color/blue">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userPassword"
+                android:id="@+id/userLogInPassword"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnCallback"
+            android:id="@+id/btnLogIn"
             android:layout_width="320dp"
             android:layout_height="68dp"
-            android:layout_below="@+id/userPasswordLayout"
+            android:layout_below="@+id/userLogInPasswordLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:text="@string/Войти"
@@ -116,7 +142,7 @@
             android:id="@+id/forgot_you_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnCallback"
+            android:layout_below="@+id/btnLogIn"
             android:layout_centerHorizontal="true"
             android:background="#00FFFFFF"
             android:padding="3dp"

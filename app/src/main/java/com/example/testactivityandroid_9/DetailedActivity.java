@@ -22,6 +22,8 @@ public class DetailedActivity extends AppCompatActivity {
     TextView item_descr;
     @BindView(R.id.item_name)
     TextView item_name;
+    @BindView(R.id.btnBack)
+    ImageView btnBack;
 
     PPpizzaModel pPpizzaModel = null;
     @Override
@@ -31,6 +33,12 @@ public class DetailedActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        btnBack.setOnClickListener(v -> finish());
+
+        getItemsFromFirebase();
+    }
+
+    private void getItemsFromFirebase() {
         final Object object = getIntent().getSerializableExtra("details");
         if (object instanceof PPpizzaModel) {
             pPpizzaModel = (PPpizzaModel) object;

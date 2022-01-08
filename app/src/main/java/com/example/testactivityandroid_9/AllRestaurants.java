@@ -23,13 +23,17 @@ import com.example.testactivityandroid_9.listener.IPPpizzaLoadListener;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.example.testactivityandroid_9.utils.SpaceItemDeconstration;
+import com.example.testactivityandroid_9.ui.login.LogInActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -56,7 +60,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadListener, ICartLoadListener  {
-
+    private static final String TAG = "MyActivity";
     @BindView(R.id.resview)
     RecyclerView resview;
     @BindView(R.id.mainLayout)
@@ -71,6 +75,7 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     ICartLoadListener cartLoadListener;
 
     FirebaseAuth firebaseAuth;
+    LogInActivity logInActivity;
 
     @Override
     protected void onStart() {
@@ -200,37 +205,43 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     }
 
     private void loadPizzaFromFirebase() {
-        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+/*        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
         FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
             loadMenuPodkrePizza(ppizzaModels, "Pizza");
-        });
+        });*/
+                List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+       /* String UserEmail = logInActivity.get_Email();
+        String UserPassword = logInActivity.get_Password();
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(UserEmail, UserPassword).addOnCompleteListener((Task<AuthResult> task) -> {*/
+            loadMenuPodkrePizza(ppizzaModels, "Pizza");
+        /*});*/
     }
     private void loadBurgerFromFirebase() {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+        /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
             loadMenuPodkrePizza(ppizzaModels, "Burger");
-        });
+        /*});*/
     }
 
     private void loadRollsFromFirebase() {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+        /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
             loadMenuPodkrePizza(ppizzaModels, "Rolls");
-        });
+        /*});*/
     }
 
     private void loadDesertiFromFirebase() {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+        /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
             loadMenuPodkrePizza(ppizzaModels, "Deserti");
-        });
+        /*});*/
     }
 
     private void loadNapitkiFromFirebase() {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+        /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
             loadMenuPodkrePizza(ppizzaModels, "Napitki");
-        });
+        /*});*/
     }
 
     private void init() {

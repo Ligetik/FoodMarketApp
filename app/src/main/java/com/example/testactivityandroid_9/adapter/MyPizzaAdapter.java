@@ -345,7 +345,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                     //new5_2    РАБОТАЕТ
 
         try {
-            FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+            /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
                 FirebaseFirestore.getInstance()
                         .collection("Users_Cart")
                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -364,7 +364,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                     updateData.put("quantity", cartModel.getQuantity());
                                     updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
 
-                                    FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+                                   /* FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
                                         FirebaseFirestore.getInstance()
                                                 .collection("Users_Cart")
                                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -376,7 +376,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                                     iCartLoadListener.OnCartloadFailed("Добавлено");
                                                 })
                                                 .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
-                                    });
+                                    /*});*/
                                 }
                                 else // если в корзине нет предмета, то добавить новый
                                 {
@@ -389,7 +389,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                     cartModel.setQuantity(1);
                                     cartModel.setTotalPrice(pPpizzaModel.getItem_cost());
 
-                                    FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+                                    /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
                                         FirebaseFirestore.getInstance()
                                                 .collection("Users_Cart")
                                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -400,13 +400,13 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                                     iCartLoadListener.OnCartloadFailed("Добавлено");
                                                 })
                                                 .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
-                                    });
+                                    /*});*/
                                 }
                                 EventBus.getDefault().postSticky(new MyUpdateCartEvent());
 
                             }
                         });
-            });
+            /*});*/
         } catch (Exception e) {
             FirebaseCrashlytics.getInstance().recordException(e);
         }

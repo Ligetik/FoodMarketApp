@@ -135,7 +135,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
     }
 
     private void deleteFromFirebase(CartModel cartModel) {
-        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+       /* FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
             FirebaseFirestore.getInstance()
                     .collection("Users_Cart")
                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -143,7 +143,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
                     .document(cartModel.getKey())
                     .delete()
                     .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
-        });
+        /*});*/
 
 
                 //old
@@ -177,7 +177,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
     }
 
     private void updateFirebase(CartModel cartModel) {
-        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+       /* FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
             FirebaseFirestore.getInstance()
                     .collection("Users_Cart")
                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -185,7 +185,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
                     .document(cartModel.getKey())
                     .set(cartModel)
                     .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
-        });
+        /*});*/
 
                 //old
         /*FirebaseDatabase.getInstance()

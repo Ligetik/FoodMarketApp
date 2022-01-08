@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/blue"
+    android:background="@drawable/gradient_background_blue"
     tools:context=".CartOrderingActivity">
 
 
@@ -14,7 +14,7 @@
         android:id="@+id/panel"
         android:layout_width="0dp"
         android:layout_height="?actionBarSize"
-        android:background="@color/blue"
+        android:background="@android:color/transparent"
         android:orientation="horizontal"
         android:weightSum="16"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,6 +26,7 @@
             android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:gravity="center"
             android:text="@string/ordering"
             android:textAlignment="center"
@@ -37,14 +38,14 @@
             android:layout_width="35dp"
             android:layout_height="50dp"
             android:layout_marginTop="4dp"
-            android:background="@color/blue"
+            android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_arrow_back" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +69,9 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/textView4"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/name"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
@@ -77,8 +79,8 @@
             app:boxCornerRadiusBottomStart="13dp"
             app:boxCornerRadiusTopEnd="13dp"
             app:boxCornerRadiusTopStart="13dp"
-            app:boxStrokeColor="@color/blue"
-            app:hintTextColor="@color/blue">
+            app:boxStrokeColor="@color/orange"
+            app:hintTextColor="@color/orange">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/orderName"
@@ -102,8 +104,8 @@
             app:boxCornerRadiusBottomStart="13dp"
             app:boxCornerRadiusTopEnd="13dp"
             app:boxCornerRadiusTopStart="13dp"
-            app:boxStrokeColor="@color/blue"
-            app:hintTextColor="@color/blue"
+            app:boxStrokeColor="@color/orange"
+            app:hintTextColor="@color/orange"
             app:prefixText="+7">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -119,114 +121,78 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/orderNameLayout"
+            android:layout_below="@+id/orderNumberLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:hint="@string/email"
+            android:hint="Адрес доставки"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             app:boxCornerRadiusBottomEnd="13dp"
             app:boxCornerRadiusBottomStart="13dp"
             app:boxCornerRadiusTopEnd="13dp"
             app:boxCornerRadiusTopStart="13dp"
-            app:boxStrokeColor="@color/blue"
-            app:hintTextColor="@color/blue">
+            app:boxStrokeColor="@color/orange"
+            app:hintTextColor="@color/orange">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/orderAddress"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:inputType="textEmailAddress" />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <EditText
-            android:id="@+id/userName"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView4"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/rounded_corner"
-            android:hint="@string/user_name"
-            android:padding="5dp" />
-
-        <EditText
-            android:id="@+id/userNumber"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/userName"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_corner"
-            android:hint="@string/_7_000_000_00_00"
-            android:padding="5dp" />
-
-        <EditText
-            android:id="@+id/address"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/userNumber"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_corner"
-            android:hint="@string/address"
-            android:padding="5dp" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/address"
+            android:layout_below="@+id/orderAddressLayout"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:text="@string/payment_method"
             android:textAlignment="center"
             android:textColor="@color/orange"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
 
         <RadioGroup
-            android:id="@+id/ordering__payment_method"
+            android:id="@+id/orderPayment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView5"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radioButton"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/orange"
-                android:text="@string/ordering_cash"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:layout_margin="10dp"
+                android:text="RadioButton" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/orange"
-                android:text="@string/ordering_card"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:layout_margin="10dp"
+                android:text="RadioButton" />
         </RadioGroup>
 
         <EditText
             android:id="@+id/commentary"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ordering__payment_method"
+            android:layout_below="@+id/toggleButton"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
             android:background="@drawable/rounded_corner"
             android:hint="@string/commentary"
-            android:layout_marginTop="50dp"
             android:padding="5dp" />
 
         <Button
             android:id="@+id/btnSignUp"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
+            android:layout_width="320dp"
+            android:layout_height="68dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:text="@string/order_btn"

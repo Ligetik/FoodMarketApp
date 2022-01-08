@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/panel">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/orderNumberLayout"
+            android:id="@+id/userNumberLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -78,11 +78,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/orderNameLayout"
+            android:id="@+id/userNameLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/orderNumberLayout"
+            android:layout_below="@+id/userNumberLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:hint="@string/name"
@@ -103,11 +103,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/orderAddressLayout"
+            android:id="@+id/userEmailNumberLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/orderNameLayout"
+            android:layout_below="@+id/userNameLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:hint="@string/email"
@@ -121,7 +121,7 @@
             app:hintTextColor="@color/blue">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/orderAddress"
+                android:id="@+id/userEmail"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:inputType="textEmailAddress" />
@@ -132,7 +132,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/orderAddressLayout"
+            android:layout_below="@+id/userEmailNumberLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:hint="@string/Пароль"

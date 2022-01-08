@@ -42,7 +42,7 @@ public class Login_SignupActivity extends AppCompatActivity {
     EditText userNumber;
     @BindView(R.id.userName)
     EditText userName;
-    @BindView(R.id.orderAddress)
+    @BindView(R.id.userEmail)
     EditText userEmail;
     @BindView(R.id.userPassword)
     EditText userPassword;
