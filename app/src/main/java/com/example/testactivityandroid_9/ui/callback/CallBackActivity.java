@@ -21,7 +21,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,55 +50,50 @@ public class CallBackActivity extends AppCompatActivity {
 
         clickBtnBack();
 
-       /* btnCallback.setOnClickListener(new View.OnClickListener() {
+        btnCallback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String UserNumber = callbackName.getText().toString().trim();
-                final String UserName = callbackNumber.getText().toString();
+                final String UserName = callbackName.getText().toString();
+                final String UserNumber = callbackNumber.getText().toString().trim();
 
+                if (TextUtils.isEmpty(UserName)) {
+                    callbackName.setError("Не указано Ваше имя");
+                    return;
+                }
                 if (TextUtils.isEmpty(UserNumber)) {
-                    userEmail.setError("Не указан электронный адрес");
+                    callbackNumber.setError("Не указан номер телефона");
                     return;
                 }
-                if (TextUtils.isEmpty(UserPassword)) {
-                    userPassword.setError("Не указан пароль");
-                    return;
-                }
-                if (UserPassword.length() < 6) {
-                    userPassword.setError("Пароль должен состоять как минимум из 6 символов");
+                if (UserNumber.length() < 10) {
+                    callbackNumber.setError("Неккоректный номер телефона");
                     return;
                 }
 
-                firebaseAuth.createUserWithEmailAndPassword(UserEmail, UserPassword).addOnCompleteListener((Task<AuthResult> task) -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(Login_SignupActivity.this, "User created", Toast.LENGTH_SHORT).show();
-                        userID = firebaseAuth.getCurrentUser().getUid();
-                        DocumentReference documentReference = db.collection("user").document(userID);
+                Map<String, Object> user = new HashMap<>();
+                user.put("Имя", UserName);
+                user.put("Номер телефона", "+7" + UserNumber);
 
-                        Map<String, Object> user = new HashMap<>();
-                        user.put("Имя", UserName);
-                        user.put("Номер телефона", "+7" + UserNumber);
-                        user.put("Пароль", UserPassword);
-                        user.put("Почта", UserEmail);
-
-                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                FirebaseFirestore.getInstance()
+                        .collection("Users_Cart")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .collection("Данные обратной связи")
+                        .add(user)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d(TAG, "OnSuccess" + userID);
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(getApplicationContext(), "Заявка отправлена!",Toast.LENGTH_SHORT).show();
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.d(TAG, "OnFailure" + e.toString());
+                                String error = e.getMessage();
+                                Toast.makeText(getApplicationContext(), "Ошибка: " + error,Toast.LENGTH_SHORT).show();
                             }
                         });
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    }else {
-                        Toast.makeText(Login_SignupActivity.this, "Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
-        });*/
+        });
     }
 
     private void clickBtnBack() {
