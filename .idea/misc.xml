@@ -49,6 +49,7 @@
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_login_signup.xml" value="0.2264151024877837" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_order_placed.xml" value="0.1" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_promotion.xml" value="0.1598360655737705" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_restaurants.xml" value="0.10867924919413617" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_splash.xml" value="0.18385416666666668" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/app_bar_main.xml" value="0.16301887379120425" />
@@ -58,7 +59,8 @@
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_logout.xml" value="0.1" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_slideshow.xml" value="0.18177083333333333" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/nav_header_main.xml" value="0.2543352601156069" />
-        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/tovar_item.xml" value="0.4528302049755674" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/promotion_item.xml" value="0.11890243902439024" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/tovar_item.xml" value="0.2985685071574642" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/tovar_item_cart.xml" value="0.5384615384615384" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/menu/activity_main_drawer.xml" value="0.2988679352838745" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/menu/main.xml" value="0.6115879828326181" />

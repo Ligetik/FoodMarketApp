@@ -52,7 +52,7 @@
 
                 <item android:title="@string/stock"
                     android:icon="@drawable/stock"
-                    android:id="@+id/stock"/>
+                    android:id="@+id/nav_promotion"/>
 
                 <item android:title="@string/cafe"
                     android:icon="@drawable/cafe"

@@ -38,6 +38,11 @@
         android:name="com.example.testactivityandroid_9.ui.login.LogInActivity"
         android:label="login"
         tools:layout="@layout/activity_login" />
+    <activity
+        android:id="@+id/nav_promotion"
+        android:name="com.example.testactivityandroid_9.ui.promotion.PromotionActivity"
+        android:label="promotion"
+        tools:layout="@layout/activity_promotion" />
 <!--    <activity
         android:id="@+id/nav_restaurants"
         android:name="com.example.testactivityandroid_9.ui.restaurants.RestaurantsActivity"
