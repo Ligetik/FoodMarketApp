@@ -82,6 +82,10 @@ public class Login_SignupActivity extends AppCompatActivity {
                     userNumber.setError("Неккоректный номер телефона");
                     return;
                 }
+                if (TextUtils.isEmpty(UserName)) {
+                    userName.setError("Не указано Ваше имя");
+                    return;
+                }
                 if (TextUtils.isEmpty(UserEmail)) {
                     userEmail.setError("Не указан электронный адрес");
                     return;

@@ -48,10 +48,10 @@ public class CallBackActivity extends AppCompatActivity {
 
         clickBtnBack();
 
-        btnCallback.setOnClickListener(new View.OnClickListener() {
+       /* btnCallback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*final String UserNumber = callbackName.getText().toString().trim();
+                final String UserNumber = callbackName.getText().toString().trim();
                 final String UserName = callbackNumber.getText().toString();
 
                 if (TextUtils.isEmpty(UserNumber)) {
@@ -94,9 +94,9 @@ public class CallBackActivity extends AppCompatActivity {
                     }else {
                         Toast.makeText(Login_SignupActivity.this, "Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                });*/
+                });
             }
-        });
+        });*/
     }
 
     private void clickBtnBack() {
