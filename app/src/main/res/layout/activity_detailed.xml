@@ -49,7 +49,7 @@
         <RelativeLayout
             android:id="@+id/panelImg"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="270dp"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
             android:background="@drawable/detailed_activity_background">
@@ -84,8 +84,7 @@
             android:layout_marginTop="15dp"
             android:orientation="vertical"
             android:paddingLeft="50dp"
-            android:paddingEnd="50dp"
-            android:paddingBottom="50dp">
+            android:paddingEnd="50dp">
 
             <LinearLayout
                 android:id="@+id/item_topping1"

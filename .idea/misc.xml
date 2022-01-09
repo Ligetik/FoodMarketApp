@@ -24,6 +24,10 @@
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.20104166666666667" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.20104166666666667" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/radio_normal_orange.xml" value="0.33489583333333334" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/radio_selected_orange.xml" value="0.33489583333333334" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/radio_selector_orange.xml" value="0.33489583333333334" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/radio_textColor_orange.xml" value="0.33489583333333334" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/radio_textcolor_orange.xml" value="0.2869791666666667" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/rounded_corner.xml" value="0.3015625" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/side_nav_bar.xml" value="0.1814814814814815" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/splashscreen.xml" value="0.2390625" />
@@ -32,14 +36,15 @@
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/stock.xml" value="0.35052083333333334" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/font/montserrat.xml" value="0.178125" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_all_restaurants.xml" value="0.2988679352838745" />
-        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_callback.xml" value="0.21862348178137653" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_callback.xml" value="0.2988679352838745" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_cart.xml" value="0.2267080745341615" />
-        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_cart_ordering.xml" value="0.2988679352838745" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_cart_ordering.xml" value="0.29523809523809524" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_custom.xml" value="0.17177914110429449" />
-        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_detailed.xml" value="0.18113208199022698" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_detailed.xml" value="0.2988679352838745" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_login.xml" value="0.23728813559322035" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_login_signup.xml" value="0.2264151024877837" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_order_placed.xml" value="0.1" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_restaurants.xml" value="0.10867924919413617" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_splash.xml" value="0.18385416666666668" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/app_bar_main.xml" value="0.16301887379120425" />

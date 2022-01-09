@@ -12,7 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestActivityAndroid_9">
         <activity
+            android:name=".OrderPlacedActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartOrderingActivity"
             android:exported="false" />
         <activity
             android:name=".CartActivity"

@@ -62,7 +62,7 @@
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/orderNameLayout"
+            android:id="@+id/callbackNameLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -80,18 +80,18 @@
             app:hintTextColor="@color/blue">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userName"
+                android:id="@+id/callbackName"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/userLogInNumberLayout"
+            android:id="@+id/callbackNumberLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/orderNameLayout"
+            android:layout_below="@+id/callbackNameLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:hint="@string/_7_000_000_00_00"
@@ -104,7 +104,7 @@
             app:prefixText="+7">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userNumber"
+                android:id="@+id/callbackNumber"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:inputType="phone"
@@ -115,12 +115,13 @@
             android:id="@+id/btnCallback"
             android:layout_width="320dp"
             android:layout_height="68dp"
-            android:layout_below="@+id/userLogInNumberLayout"
+            android:layout_below="@+id/callbackNumberLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:text="Отправить заявку"
             android:textAllCaps="false"
             android:textSize="25sp"
+            android:textStyle="bold"
             app:backgroundTint="@color/blue" />
 
         <!--        <EditText

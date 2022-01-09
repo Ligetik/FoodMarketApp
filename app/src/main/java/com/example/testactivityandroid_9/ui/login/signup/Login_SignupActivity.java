@@ -74,6 +74,14 @@ public class Login_SignupActivity extends AppCompatActivity {
                 final String UserEmail = userEmail.getText().toString();
                 String UserPassword = userPassword.getText().toString().trim();
 
+                if (TextUtils.isEmpty(UserNumber)) {
+                    userNumber.setError("Не указан номер телефона");
+                    return;
+                }
+                if (UserNumber.length() < 10) {
+                    userNumber.setError("Неккоректный номер телефона");
+                    return;
+                }
                 if (TextUtils.isEmpty(UserEmail)) {
                     userEmail.setError("Не указан электронный адрес");
                     return;

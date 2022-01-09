@@ -1,6 +1,8 @@
 package com.example.testactivityandroid_9.model;
 
-public class CartModel {
+import java.io.Serializable;
+
+public class CartModel implements Serializable {
     private  String key,item_name,item_image, item_details;
     private int quantity, item_cost, totalPrice;
 

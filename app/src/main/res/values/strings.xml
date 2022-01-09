@@ -71,4 +71,5 @@
     <string name="submit_request">Оставить заявку</string>
     <string name="pizza">Пицца</string>
     <string name="order_byCard">Перевод через СберБанк\nонлайн курьеру</string>
+    <string name="order_byCash">Наличными\nкурьеру</string>
 </resources>

@@ -45,14 +45,13 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/panel"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/panel">
 
         <TextView
             android:id="@+id/textView4"
@@ -161,36 +160,63 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView5"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="RadioButton" />
+                android:layout_width="180dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/radio_selector_orange"
+                android:button="@android:color/transparent"
+                android:text="@string/order_byCash"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_textcolor_orange" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="RadioButton" />
+                android:layout_width="180dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/radio_selector_orange"
+                android:button="@android:color/transparent"
+                android:text="@string/order_byCard"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_textcolor_orange" />
         </RadioGroup>
 
-        <EditText
-            android:id="@+id/commentary"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/orderCommentaryLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toggleButton"
+            android:layout_above="@+id/btnOrder"
+            android:layout_below="@+id/orderPayment"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/rounded_corner"
-            android:hint="@string/commentary"
-            android:padding="5dp" />
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:hint="Ваш комментарий к заказу"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            app:boxCornerRadiusBottomEnd="13dp"
+            app:boxCornerRadiusBottomStart="13dp"
+            app:boxCornerRadiusTopEnd="13dp"
+            app:boxCornerRadiusTopStart="13dp"
+            app:boxStrokeColor="@color/orange"
+            app:hintTextColor="@color/orange">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/orderCommentary"
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                android:gravity="start|top"
+                android:inputType="textMultiLine|text"
+                android:textAlignment="viewStart" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnSignUp"
+            android:id="@+id/btnOrder"
             android:layout_width="320dp"
             android:layout_height="68dp"
             android:layout_alignParentBottom="true"
@@ -198,6 +224,7 @@
             android:text="@string/order_btn"
             android:textAllCaps="false"
             android:textSize="25sp"
+            android:textStyle="bold"
             app:backgroundTint="@color/orange" />
 
     </RelativeLayout>

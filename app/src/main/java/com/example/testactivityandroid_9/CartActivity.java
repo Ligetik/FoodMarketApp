@@ -1,11 +1,16 @@
 package com.example.testactivityandroid_9;
 
+import android.content.Intent;
 import android.mtp.MtpConstants;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +23,7 @@ import com.example.testactivityandroid_9.adapter.MyCartAdapter;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.listener.ICartLoadListener;
 import com.example.testactivityandroid_9.model.CartModel;
+import com.example.testactivityandroid_9.ui.login.LogInActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -38,6 +44,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,8 +61,13 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     ImageView btnBack;
     @BindView(R.id.txtTotal)
     TextView txtTotal;
+    @BindView(R.id.btnToOrder)
+    Button btnToOrder;
 
     ICartLoadListener cartLoadListener;
+
+    /*List<CartModel> cartModel;*/
+    List<CartModel> cartModels = new ArrayList<>(); // УДАЛИТЬ
 
     @Override
     protected void onStart() {
@@ -90,7 +102,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
 
             //new 2_1
-        List<CartModel> cartModels = new ArrayList<>();
+        /*List<CartModel> cartModels = new ArrayList<>();*/ //ВЕРНУТЬ
         /*MyCartAdapter cartAdapter = new MyCartAdapter (this,cartModels);*/
         /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
             FirebaseFirestore.getInstance()
@@ -244,6 +256,41 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         recyclerCart.addItemDecoration(new DividerItemDecoration(this,linearLayoutManager.getOrientation()));
 
         btnBack.setOnClickListener(v -> finish());
+
+
+        btnToOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Проверяет есть ли в корзине товар
+                FirebaseFirestore.getInstance()
+                        .collection("Users_Cart")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .collection("Корзина")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    if(task.getResult().size() > 0) {
+                                        for (DocumentSnapshot document : task.getResult()) {
+
+                                        }
+                                            Intent intent = new Intent(getApplicationContext(), CartOrderingActivity.class);
+                                            intent.putExtra("itemList", (Serializable) cartModels);
+                                            startActivity(intent);
+
+                                        /*startActivity(new Intent(getApplicationContext(), CartOrderingActivity.class));*/
+                                    } else {
+                                        Toast toast = Toast.makeText(CartActivity.this, "Корзина пуста!", Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.TOP, 0, 0);
+                                        toast.show();
+                                    }
+                                }
+                            }
+                        });
+
+            }
+        });
     }
 
     @Override
