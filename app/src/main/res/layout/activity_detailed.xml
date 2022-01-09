@@ -76,11 +76,57 @@
             android:textSize="17sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_descr"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Выбрать размер"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/item_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="120dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/radio_selector_blue"
+                android:button="@android:color/transparent"
+                android:text="32 см"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_textcolor_blue" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="120dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/radio_selector_blue"
+                android:button="@android:color/transparent"
+                android:text="40 см"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_textcolor_blue" />
+        </RadioGroup>
+
         <RelativeLayout
             android:id="@+id/orderPayment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toggleButton"
+            android:layout_below="@+id/item_size"
             android:layout_marginTop="15dp"
             android:orientation="vertical"
             android:paddingLeft="50dp"
@@ -310,49 +356,6 @@
 
         </RelativeLayout>
 
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/toggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/button1"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="32 см"
-                android:textColor="@color/blue"
-                app:rippleColor="@color/white"
-                app:strokeColor="@color/blue" />
-
-            <Button
-                android:id="@+id/button2"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="40 см"
-                android:textColor="@color/blue"
-                app:rippleColor="@color/white"
-                app:strokeColor="@color/blue" />
-        </com.google.android.material.button.MaterialButtonToggleGroup>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/item_descr"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:text="Выбрать размер"
-            android:textColor="@color/blue"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
     </RelativeLayout>
 
