@@ -31,7 +31,6 @@ import butterknife.Unbinder;
 
 public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartViewHolder> {
 
-
     private Context context;
     private List<CartModel> cartModelList;
 

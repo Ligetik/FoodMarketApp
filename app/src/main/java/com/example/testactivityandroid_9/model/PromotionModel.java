@@ -3,10 +3,12 @@ package com.example.testactivityandroid_9.model;
 public class PromotionModel {
     private String item_image, item_name;
 
-    public PromotionModel(String item_image, String item_name) {
+    public PromotionModel() {
+    }
+/*    public PromotionModel(String item_image, String item_name) {
         this.item_image = item_image;
         this.item_name = item_name;
-    }
+    }*/
 
     public String getItem_image() {
         return item_image;

@@ -67,7 +67,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     ICartLoadListener cartLoadListener;
 
     /*List<CartModel> cartModel;*/
-    List<CartModel> cartModels = new ArrayList<>(); // УДАЛИТЬ
+    List<CartModel> cartModel2 = new ArrayList<>(); // УДАЛИТЬ
 
     @Override
     protected void onStart() {
@@ -98,12 +98,11 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         loadCartFromFribase();
     }
 
-    private void loadCartFromFribase() {
-
+    public void loadCartFromFribase() {
 
             //new 2_1
-        /*List<CartModel> cartModels = new ArrayList<>();*/ //ВЕРНУТЬ
-        /*MyCartAdapter cartAdapter = new MyCartAdapter (this,cartModels);*/
+        List<CartModel> cartModels = new ArrayList<>(); //ВЕРНУТЬ
+        cartModel2 = cartModels;
         /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
             FirebaseFirestore.getInstance()
                     .collection("Users_Cart")
@@ -129,7 +128,8 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                 cartLoadListener.OnCartloadSuccess(cartModels);
                             }
                         }
-                    });
+                    })
+                    .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));;
         /*});*/
 
 
@@ -276,7 +276,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
                                         }
                                             Intent intent = new Intent(getApplicationContext(), CartOrderingActivity.class);
-                                            intent.putExtra("itemList", (Serializable) cartModels);
+                                            intent.putExtra("itemList", (Serializable) cartModel2);
                                             startActivity(intent);
 
                                         /*startActivity(new Intent(getApplicationContext(), CartOrderingActivity.class));*/

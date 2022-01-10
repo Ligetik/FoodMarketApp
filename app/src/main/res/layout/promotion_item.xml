@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="210dp"
     android:layout_marginLeft="0dp"
     android:layout_marginRight="0dp"
     android:layout_marginBottom="20dp">
@@ -27,24 +27,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="10dp">
 
-            <!--            <ImageView
-                android:id="@+id/imagetovar"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="left"
-                android:layout_marginRight="10dp"
-                android:contentDescription="@string/todo" />-->
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/promotion_img"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 app:shapeAppearanceOverlay="@style/ShapeableImageView.Corner" />
+
+            <TextView
+                android:id="@+id/promotion_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:textColor="@color/blue"
+                android:textSize="20sp" />
 
         </LinearLayout>
 

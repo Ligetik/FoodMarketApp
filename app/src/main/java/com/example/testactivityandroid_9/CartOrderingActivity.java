@@ -71,7 +71,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                         cartMap.put("item_image", model.getItem_image());
                         cartMap.put("item_details", model.getItem_details());
                         cartMap.put("key", model.getKey());
-                        cartMap.put("totalPrice", model.getItem_cost());
+                        /*cartMap.put("totalPrice", model.getItem_cost());*/
                         cartMap.put("quantity", model.getQuantity());
                         cartMap.put("details", model.getItem_details());
 
@@ -88,6 +88,21 @@ public class CartOrderingActivity extends AppCompatActivity {
                         });
                     }
                 }
+
+
+                /*final HashMap<String, Object> cartMap2 = new HashMap<>();
+                cartMap2.put("totalPrice", cagetItem_cost());
+                FirebaseFirestore.getInstance()
+                        .collection("Users_Cart")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .collection("Оформление заказа")
+                        .add(cartMap2).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        Toast.makeText(CartOrderingActivity.this, "Заказ оформлен" , Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });*/
             }
         });
 
