@@ -1,10 +1,14 @@
 package com.example.testactivityandroid_9.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class CartModel implements Serializable {
     private  String key,item_name,item_image, item_details;
     private int quantity, item_cost, totalPrice;
+    /*private ArrayList<String> details;*/
 
     public CartModel() {
     }
@@ -65,6 +69,13 @@ public class CartModel implements Serializable {
         this.item_details = item_details;
     }
 
+/*    public ArrayList<String> getDetails() {
+        return details;
+    }
+
+    public void setDetails(ArrayList<String> details) {
+        this.details = details;
+    }*/
 /*    public String getKey() {
         return key;
     }

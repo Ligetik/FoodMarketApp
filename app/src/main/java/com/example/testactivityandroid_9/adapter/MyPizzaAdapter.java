@@ -37,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -220,7 +221,6 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                     //говной
 
        /* try {
-            FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
                 FirebaseFirestore.getInstance()
                         .collection("Users_Cart")
                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -230,12 +230,12 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-*//*                             if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
+                               *//* if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
                                 { // Обновляет количество и общую цену
                                     CartModel cartModel = documentSnapshot.toObject(CartModel.class);
 
-                                    cartModel.setQuantity(cartModel.getQuantity()+1);
-                                    Map<String,Object> updateData = new HashMap<>();
+                                    cartModel.setQuantity(cartModel.getQuantity() + 1);
+                                    Map<String, Object> updateData = new HashMap<>();
                                     updateData.put("quantity", cartModel.getQuantity());
                                     updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
 
@@ -252,13 +252,11 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                                 })
                                                 .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
                                     });
-                                }*//*
-
-*//*                             else // если в корзине нет предмета, то добавить новый
+                                } else // если в корзине нет предмета, то добавить новый
                                 {*//*
 
 
-*//*final HashMap<String, Object> cartMap = new HashMap<>();
+*//*                                    final HashMap<String, Object> cartMap = new HashMap<>();
 
                                     cartMap.put("item_name", pPpizzaModel.getItem_name());
                                     cartMap.put("item_cost", pPpizzaModel.getItem_cost());
@@ -270,7 +268,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                     cartMap.put("details", pPpizzaModel.getDetails());*//*
 
 
-*//*            final HashMap<String, Object> details = new HashMap<>();
+           *//*                     final HashMap<String, Object> details = new HashMap<>();
 
 
                                 String[] array = {"One", "Two", "Three"};
@@ -280,61 +278,83 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                 List<String> list = Arrays.asList(names);
                                 names[0] = "John";
 
-                                List<String> newList = new ArrayList<>(list);*//*
-
-
-
-
-                                Map<String,Object> dummyHashMap = new HashMap<String,Object>() {{
-
-                                }};
+                                    List<String> newList = new ArrayList<>(list);
 
                                 for (Map.Entry entry: dummyHashMap.entrySet()) {
 
-*//*                                    dummyHashMap.put("item_name", pPpizzaModel.getItem_name());
+                                    dummyHashMap.put("item_name", pPpizzaModel.getItem_name());
                                     dummyHashMap.put("item_cost", pPpizzaModel.getItem_cost());
                                     dummyHashMap.put("item_image", pPpizzaModel.getItem_image());
                                     dummyHashMap.put("item_details", pPpizzaModel.getItem_details());
-                                    dummyHashMap.put("quantity", 1);*//*
+                                    dummyHashMap.put("quantity", 1);
 
-                                }
+                                }*//*
 
-*//*                                DocumentSnapshot document = documentSnapshot;
-                                Map<String, Object> dummyHashMap = document.getData();*//*
+                                *//*DocumentSnapshot document = documentSnapshot;
+                                Map<String, Object> dummyHashMap = document.getData();
 
-*//*                                for (Object x: dummyHashMap.values()) {
+                                for (Object x: dummyHashMap.values()) {
                                     for (Object value: ((Map<String, Object>)x).values()){
                                         dummyHashMap.get(value);
                                     }
                                 }*//*
 
-                                final HashMap<String, Object> cartMap = new HashMap<>();
-                                cartMap.put("totalPrice", pPpizzaModel.getItem_cost());
-                                cartMap.put("details",Arrays.asList(dummyHashMap));
+*//*                                List<PPpizzaModel> pPpizzaModels = new ArrayList<>();
+                                final HashMap<String, Object> dummyHashMap = new HashMap<>();
+                                if (pPpizzaModels != null && pPpizzaModels.size() > 0) {
+                                    for (PPpizzaModel model : pPpizzaModels) {
+                                        dummyHashMap.put("item_name", model.getItem_name());
+                                        dummyHashMap.put("item_cost", model.getItem_cost());
+                                    }
+                                }*//*
+*//*                                List<PPpizzaModel> list = new ArrayList<>();
+                                final HashMap<String, Object> dummyHashMap = new HashMap<>();
+*//**//*                                if (list != null && list.size() > 0) {*//**//*
+                                    for (PPpizzaModel model : list) {
+                                        dummyHashMap.put("item_name", model.getItem_name());
+                                        dummyHashMap.put("item_cost", model.getItem_cost());
+                                    *//**//*}*//**//*
+                                }*//*
+                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
 
-                                FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
-                                    FirebaseFirestore.getInstance()
-                                            .collection("Users_Cart")
-                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .collection("Корзина")
-                                            .add(cartMap)
-                                            .addOnSuccessListener(aVoid -> {
-                                                iCartLoadListener.OnCartloadFailed("Добавлено");
-                                            })
-                                            .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
-                                });
+*//*                                        final HashMap<String, Object> cartMap = new HashMap<>();
+                                        cartMap.put("totalPrice", pPpizzaModel.getItem_cost());
+                                        cartMap.put("item_image", pPpizzaModel.getItem_image());
+                                        cartMap.put("details", *//**//*Arrays.asList*//**//*FieldValue.arrayUnion(dummyHashMap));*//*
 
-                *//*}*//*
+*//*                                CartModel cartModel = new CartModel();
+                                cartModel.setItem_name(pPpizzaModel.getItem_name());
+                                cartModel.setItem_image(pPpizzaModel.getItem_image());
+                                cartModel.setDetails(ArrayList<String> cartMap);*//*
 
-                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                for (DocumentSnapshot dc : documentSnapshot) {
 
-                            }
+                                    PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                                    ppizzaModel.setKey(documentSnapshot.getId());
+                                    ppizzaModels.add(ppizzaModel);
+                                }
+                                        FirebaseFirestore.getInstance()
+                                                .collection("Users_Cart")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .collection("Корзина")
+*//*                                                .document(pPpizzaModel.getKey())
+                                                .set(cartMap)*//*
+                                                .add(cartMap)
+                                                .addOnSuccessListener(aVoid -> {
+                                                    iCartLoadListener.OnCartloadFailed("Добавлено");
+                                                })
+                                                .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
+
+                               }
+
+                                    *//*EventBus.getDefault().postSticky(new MyUpdateCartEvent());*//*
+
+                            *//*}*//*
                         });
-            });
         } catch (Exception e) {
             FirebaseCrashlytics.getInstance().recordException(e);
-        }*/
-
+        }
+*/
 
 
 
@@ -345,7 +365,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                     //new5_2    РАБОТАЕТ
 
         try {
-            /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
+            FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
                 FirebaseFirestore.getInstance()
                         .collection("Users_Cart")
                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -364,7 +384,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                     updateData.put("quantity", cartModel.getQuantity());
                                     updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
 
-                                   /* FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
+                                    FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
                                         FirebaseFirestore.getInstance()
                                                 .collection("Users_Cart")
                                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -376,7 +396,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                                     iCartLoadListener.OnCartloadFailed("Добавлено");
                                                 })
                                                 .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
-                                    /*});*/
+                                    });
                                 }
                                 else // если в корзине нет предмета, то добавить новый
                                 {
@@ -389,7 +409,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                     cartModel.setQuantity(1);
                                     cartModel.setTotalPrice(pPpizzaModel.getItem_cost());
 
-                                    /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
+                                    FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
                                         FirebaseFirestore.getInstance()
                                                 .collection("Users_Cart")
                                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -400,20 +420,20 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                                     iCartLoadListener.OnCartloadFailed("Добавлено");
                                                 })
                                                 .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
-                                    /*});*/
+                                    });
                                 }
                                 EventBus.getDefault().postSticky(new MyUpdateCartEvent());
 
                             }
                         });
-            /*});*/
+            });
         } catch (Exception e) {
             FirebaseCrashlytics.getInstance().recordException(e);
         }
 
 
                 //new 5_1 рабочий, но сломана считалка кол-ва
-       /* try {
+        /*try {
             FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
                 FirebaseFirestore.getInstance()
                         .collection("Users_Cart")
@@ -427,7 +447,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                 { // Обновляет количество и общую цену
                                     CartModel cartModel = value.toObject(CartModel.class);
 
-                                    *//*cartModel.setQuantity(cartModel.getQuantity()+1);*//*
+                                    cartModel.setQuantity(cartModel.getQuantity()+1);
                                     Map<String,Object> updateData = new HashMap<>();
                                     updateData.put("quantity", cartModel.getQuantity());
                                     updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
@@ -475,8 +495,8 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
             });
         } catch (Exception e) {
             FirebaseCrashlytics.getInstance().recordException(e);
-        }*/
-
+        }
+*/
 
 
         //new5 Добавлен key работает +-

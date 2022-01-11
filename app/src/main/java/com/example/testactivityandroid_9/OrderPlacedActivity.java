@@ -24,34 +24,6 @@ public class OrderPlacedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_placed);
 
-       /* List<CartModel> list = (ArrayList<CartModel>)
-                getIntent().getSerializableExtra("itemList");
 
-        if (list != null && list.size() > 0) {
-            for (CartModel model : list) {
-
-                final HashMap<String, Object> cartMap = new HashMap<>();
-                cartMap.put("item_name", model.getItem_name());
-                cartMap.put("item_cost", model.getItem_cost());
-                cartMap.put("item_image", model.getItem_image());
-                cartMap.put("item_details", model.getItem_details());
-                cartMap.put("key", model.getKey());
-                cartMap.put("totalPrice", model.getItem_cost());
-                cartMap.put("quantity", model.getQuantity());
-                cartMap.put("details", model.getItem_details());
-
-                FirebaseFirestore.getInstance()
-                        .collection("Users_Cart")
-                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .collection("Заказы")
-                        .add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        Toast.makeText(OrderPlacedActivity.this, "Заказ оформлен" , Toast.LENGTH_SHORT).show();
-                        *//*finish();*//*
-                    }
-                });
-            }
-        }*/
     }
 }
