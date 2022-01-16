@@ -54,7 +54,17 @@ public class MainActivity extends AppCompatActivity /*implements CheckLogInListe
         NavigationUI.setupWithNavController(navigationView, navController);
 
         Menu menu = navigationView.getMenu();
-        menu.findItem(R.id.nav_profile).setTitle(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+
+        if(FirebaseAuth.getInstance().getCurrentUser().isAnonymous()) {
+            menu.findItem(R.id.nav_login).setVisible(true);
+            menu.findItem(R.id.nav_profile).setVisible(false);
+        }
+        else {
+                menu.findItem(R.id.nav_profile).setVisible(true);
+                menu.findItem(R.id.nav_profile).setTitle(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                menu.findItem(R.id.nav_login).setVisible(false);
+        }
+
 
 /*        menu.findItem(R.id.nav_profile).setVisible(false);*/
 

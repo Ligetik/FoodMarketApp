@@ -88,6 +88,17 @@ public class LogInActivity extends AppCompatActivity {
                 final String UserEmail = userLogInEmail.getText().toString();
                 String UserPassword = userLogInPassword.getText().toString().trim();
 
+/*                AuthCredential credential = EmailAuthProvider.getCredential(UserEmail, UserPassword);
+
+                mAuth.getCurrentUser().linkWithCredential(credential)
+                        .addOnCompleteListener((Task<AuthResult> task) -> {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(LogInActivity.this, "Link ", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(LogInActivity.this, "Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });*/
+
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(UserEmail, UserPassword).addOnCompleteListener((Task<AuthResult> task) -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(LogInActivity.this, "Вы успешно вошли в аккаунт", Toast.LENGTH_SHORT).show();
