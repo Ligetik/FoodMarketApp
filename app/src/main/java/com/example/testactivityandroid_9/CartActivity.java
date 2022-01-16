@@ -61,6 +61,8 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     ImageView btnBack;
     @BindView(R.id.txtTotal)
     TextView txtTotal;
+    @BindView(R.id.txtFreeDelivery)
+    TextView txtFreeDelivery;
     @BindView(R.id.btnToOrder)
     Button btnToOrder;
 
@@ -296,12 +298,26 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     @Override
     public void OnCartloadSuccess(List<CartModel> cartModelList) {
         int sum = 0;
+        int price2 = 800;
         for (CartModel cartModel : cartModelList)
         {
             sum+=cartModel.getTotalPrice();
+
+            int price = cartModel.getTotalPrice();
+            price2 -= price;
+        }
+
+        if (price2 < 0) {
+            txtFreeDelivery.setText("Бесплатная доставка");
+        }
+        else {
+            txtFreeDelivery.setText(price2 + " ₽");
         }
 
         txtTotal.setText(sum + " ₽");
+
+
+
         MyCartAdapter adapter = new MyCartAdapter (this,cartModelList);
         recyclerCart.setAdapter(adapter);
     }

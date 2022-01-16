@@ -365,67 +365,64 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                     //new5_2    РАБОТАЕТ
 
         try {
-            FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
-                FirebaseFirestore.getInstance()
-                        .collection("Users_Cart")
-                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .collection("Корзина")
-                        .document(pPpizzaModel.getKey())
-                        .get()
-                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
-                                { // Обновляет количество и общую цену
-                                    CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+            FirebaseFirestore.getInstance()
+                    .collection("Users_Cart")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .collection("Корзина")
+                    .document(pPpizzaModel.getKey())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
+                            { // Обновляет количество и общую цену
+                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
 
-                                    cartModel.setQuantity(cartModel.getQuantity()+1);
-                                    Map<String,Object> updateData = new HashMap<>();
-                                    updateData.put("quantity", cartModel.getQuantity());
-                                    updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
+                                cartModel.setQuantity(cartModel.getQuantity()+1);
+                                Map<String,Object> updateData = new HashMap<>();
+                                updateData.put("quantity", cartModel.getQuantity());
+                                updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
 
-                                    FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
-                                        FirebaseFirestore.getInstance()
-                                                .collection("Users_Cart")
-                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .collection("Корзина")
-                                                .document(pPpizzaModel.getKey())
-                                                .update(updateData)
-                                                .addOnSuccessListener(aVoid -> {
+                                FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
+                                    FirebaseFirestore.getInstance()
+                                            .collection("Users_Cart")
+                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .collection("Корзина")
+                                            .document(pPpizzaModel.getKey())
+                                            .update(updateData)
+                                            .addOnSuccessListener(aVoid -> {
 
-                                                    iCartLoadListener.OnCartloadFailed("Добавлено");
-                                                })
-                                                .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
-                                    });
-                                }
-                                else // если в корзине нет предмета, то добавить новый
-                                {
-                                    CartModel cartModel = new CartModel();
-                                    cartModel.setItem_name(pPpizzaModel.getItem_name());
-                                    cartModel.setItem_image(pPpizzaModel.getItem_image());
-                                    cartModel.setItem_details(pPpizzaModel.getItem_details());
-                                    cartModel.setKey(pPpizzaModel.getKey());
-                                    cartModel.setItem_cost(pPpizzaModel.getItem_cost());
-                                    cartModel.setQuantity(1);
-                                    cartModel.setTotalPrice(pPpizzaModel.getItem_cost());
-
-                                    FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
-                                        FirebaseFirestore.getInstance()
-                                                .collection("Users_Cart")
-                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .collection("Корзина")
-                                                .document(pPpizzaModel.getKey())
-                                                .set(cartModel)
-                                                .addOnSuccessListener(aVoid -> {
-                                                    iCartLoadListener.OnCartloadFailed("Добавлено");
-                                                })
-                                                .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
-                                    });
-                                }
-                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
-
+                                                iCartLoadListener.OnCartloadFailed("Добавлено");
+                                            })
+                                            .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
+                                });
                             }
-                        });
+                            else // если в корзине нет предмета, то добавить новый
+                            {
+                                CartModel cartModel = new CartModel();
+                                cartModel.setItem_name(pPpizzaModel.getItem_name());
+                                cartModel.setItem_image(pPpizzaModel.getItem_image());
+                                cartModel.setItem_details(pPpizzaModel.getItem_details());
+                                cartModel.setKey(pPpizzaModel.getKey());
+                                cartModel.setItem_cost(pPpizzaModel.getItem_cost());
+                                cartModel.setQuantity(1);
+                                cartModel.setTotalPrice(pPpizzaModel.getItem_cost());
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(pPpizzaModel.getKey())
+                                        .set(cartModel)
+                                        .addOnSuccessListener(aVoid -> {
+                                            iCartLoadListener.OnCartloadFailed("Добавлено");
+                                        })
+                                        .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
+                            }
+                            EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+
+                        }
+
             });
         } catch (Exception e) {
             FirebaseCrashlytics.getInstance().recordException(e);

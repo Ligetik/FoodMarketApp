@@ -50,6 +50,11 @@
                     android:icon="@drawable/enrtance"
                     android:title="@string/log_in" />
 
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/enrtance"
+                    android:title="@string/username" />
+
                 <item android:title="@string/stock"
                     android:icon="@drawable/stock"
                     android:id="@+id/nav_promotion"/>
@@ -68,7 +73,7 @@
 
                 <item android:title="@string/history"
                     android:icon="@drawable/history"
-                    android:id="@+id/history"/>
+                    android:id="@+id/nav_history"/>
 
                 <item android:title="@string/callback"
                     android:icon="@drawable/call"

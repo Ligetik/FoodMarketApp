@@ -13,6 +13,7 @@
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.35052083333333334" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/ic_baseline_add_box_24_blue.xml" value="0.35052083333333334" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/ic_baseline_arrow_back.xml" value="0.2" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/ic_baseline_check_circle_outline_24.xml" value="0.35052083333333334" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/ic_baseline_chevron_left.xml" value="0.9056604099511348" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/ic_baseline_chevron_left_24.xml" value="0.27708333333333335" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.35052083333333334" />
@@ -40,15 +41,17 @@
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/drawable/stock.xml" value="0.35052083333333334" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/font/montserrat.xml" value="0.178125" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_all_restaurants.xml" value="0.2988679352838745" />
-        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_callback.xml" value="0.2988679352838745" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_callback.xml" value="0.23220973782771537" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_cart.xml" value="0.2267080745341615" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_cart_ordering.xml" value="0.29523809523809524" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_custom.xml" value="0.17177914110429449" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_detailed.xml" value="0.2988679352838745" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_history_order.xml" value="0.2988679352838745" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_login.xml" value="0.23728813559322035" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_login_signup.xml" value="0.2264151024877837" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_order_placed.xml" value="0.1" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_order_placed.xml" value="0.16301887379120425" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_profile.xml" value="0.19924529018924966" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_promotion.xml" value="0.2988679352838745" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_restaurants.xml" value="0.10867924919413617" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_splash.xml" value="0.18385416666666668" />
@@ -58,6 +61,7 @@
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_home.xml" value="0.4528302049755674" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_logout.xml" value="0.1" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_slideshow.xml" value="0.18177083333333333" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/history_order_item.xml" value="0.28958333333333336" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/nav_header_main.xml" value="0.2543352601156069" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/promotion_item.xml" value="0.2988679352838745" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/tovar_item.xml" value="0.2985685071574642" />

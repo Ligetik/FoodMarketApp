@@ -22,6 +22,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = new Intent(this, MainActivity.class);
+
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null) {
             Toast.makeText(SplashActivity.this, "Вошёл в акк" , Toast.LENGTH_SHORT).show();

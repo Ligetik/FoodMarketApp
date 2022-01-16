@@ -3,7 +3,6 @@ package com.example.testactivityandroid_9.ui.callback;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,12 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.testactivityandroid_9.MainActivity;
 import com.example.testactivityandroid_9.R;
-import com.example.testactivityandroid_9.ui.login.signup.Login_SignupActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,7 +36,8 @@ public class CallBackActivity extends AppCompatActivity {
     @BindView(R.id.btnCallback)
     Button btnCallback;
 
-
+    NavigationView navigationView;
+    MainActivity mainActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +79,34 @@ public class CallBackActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(getApplicationContext(), "Заявка отправлена!",Toast.LENGTH_SHORT).show();
+
+
+                                /*Resources res = getResources();
+                                String text2 = "ddddd"*/;
+                                /*String text3 = getString("");*/
+                                /*String.format(res.getString(R.string.username), text2);*/
+                                /*getString(R.string.username, text2);*/
+
+                                /*navigationView = (NavigationView) findViewById(R.id.nav_view);*/
+                             /*   Menu nav_Menu = navigationView.getMenu();
+                                nav_Menu.findItem(R.id.nav_profile).setVisible(false);*/
+
+
+
+
+/*                                Menu menu = navigationView.getMenu();
+
+                                *//*menu.findItem(R.id.nav_profile).setTitle("My Account");
+                                menu.findItem(R.id.nav_profile).setVisible(false);*//*
+
+
+                                menu.findItem(R.id.nav_profile).setTitle("My Account");*/
+
+                                /*MainActivity activity=(MainActivity)mainActivity;*/
+
+
+//                                MainActivity mActivity= new MainActivity();
+                                /*mActivity.extracted(navigationView);*/
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

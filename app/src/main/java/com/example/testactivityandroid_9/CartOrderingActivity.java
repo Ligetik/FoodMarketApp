@@ -12,12 +12,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -82,11 +85,20 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 .add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentReference> task) {
-                                Toast.makeText(CartOrderingActivity.this, "Заказ оформлен" , Toast.LENGTH_SHORT).show();
-                                finish();
+/*                                Toast.makeText(CartOrderingActivity.this, "Заказ оформлен" , Toast.LENGTH_SHORT).show();
+                                finish();*/
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(model.getKey())
+                                        .delete()
+                                        .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
                             }
                         });
                     }
+                    Intent intent = new Intent(getApplicationContext(), OrderPlacedActivity.class);
+                    startActivity(intent);
                 }
 
 

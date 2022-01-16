@@ -39,10 +39,20 @@
         android:label="login"
         tools:layout="@layout/activity_login" />
     <activity
+        android:id="@+id/nav_profile"
+        android:name="com.example.testactivityandroid_9.Profile"
+        android:label="login"
+        tools:layout="@layout/activity_profile" />
+    <activity
         android:id="@+id/nav_promotion"
         android:name="com.example.testactivityandroid_9.ui.promotion.PromotionActivity"
         android:label="promotion"
         tools:layout="@layout/activity_promotion" />
+    <activity
+        android:id="@+id/nav_history"
+        android:name="com.example.testactivityandroid_9.ui.history.HistoryOrderActivity"
+        android:label="history"
+        tools:layout="@layout/activity_history_order" />
 <!--    <activity
         android:id="@+id/nav_restaurants"
         android:name="com.example.testactivityandroid_9.ui.restaurants.RestaurantsActivity"

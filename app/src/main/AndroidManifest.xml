@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestActivityAndroid_9">
         <activity
+            android:name=".ui.history.HistoryOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
             android:name=".ui.promotion.PromotionActivity"
             android:exported="false" />
         <activity

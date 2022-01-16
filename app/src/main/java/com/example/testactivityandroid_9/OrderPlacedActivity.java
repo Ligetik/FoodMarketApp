@@ -1,6 +1,10 @@
 package com.example.testactivityandroid_9;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,13 +21,37 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class OrderPlacedActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
+public class OrderPlacedActivity extends AppCompatActivity {
+    ImageButton imageButton;
+    @BindView(R.id.btnBackToMainScreen)
+    Button btnBackToMainScreen;
+    /*Intent intent = new Intent(this, MainActivity.class);*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_placed);
+        ButterKnife.bind(this);
 
+        clickBtnBack();
 
+        btnBackToMainScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
+    }
+
+    private void clickBtnBack() {
+        imageButton = (ImageButton)findViewById(R.id.back);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
     }
 }

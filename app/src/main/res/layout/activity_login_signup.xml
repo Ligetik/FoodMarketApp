@@ -39,7 +39,6 @@
             android:layout_alignParentBottom="true"
             android:background="@color/blue"
             android:src="@drawable/ic_baseline_chevron_left_24" />
-
     </RelativeLayout>
 
     <RelativeLayout

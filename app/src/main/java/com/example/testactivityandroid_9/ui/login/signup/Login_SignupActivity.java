@@ -14,11 +14,13 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import com.example.testactivityandroid_9.MainActivity;
 import com.example.testactivityandroid_9.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -115,6 +117,19 @@ public class Login_SignupActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Log.d(TAG, "OnSuccess" + userID);
+
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(UserName)
+                                        .build();
+                                firebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(Login_SignupActivity.this, "curr display name is "+firebaseAuth.getInstance().getCurrentUser().getDisplayName(), Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        });
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

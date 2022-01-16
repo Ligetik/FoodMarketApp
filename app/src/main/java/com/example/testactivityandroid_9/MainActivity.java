@@ -1,16 +1,13 @@
 package com.example.testactivityandroid_9;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.testactivityandroid_9.listener.CheckLogInListener;
+import com.example.testactivityandroid_9.ui.login.LogInActivity;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -19,16 +16,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.testactivityandroid_9.databinding.ActivityMainBinding;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity /*implements CheckLogInListener*/ {
     private static final String TAG = "MyActivity";
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,28 +46,41 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_login, /*R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_logout,*/ R.id.nav_callback)
+                R.id.nav_home, R.id.nav_login,R.id.nav_profile, /*R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_logout,*/ R.id.nav_callback)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-/*FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(currentUser != null) {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        } else {
-            FirebaseAuth.getInstance().signInAnonymously()
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            }
-                        }
-                    });
+        Menu menu = navigationView.getMenu();
+        menu.findItem(R.id.nav_profile).setTitle(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+
+/*        menu.findItem(R.id.nav_profile).setVisible(false);*/
+
+/*        if (menu.findItem(R.id.nav_profile).setVisible(true)) {
+            LogInActivity logInActivity= new LogInActivity();
+            logInActivity.extracted();
         }*/
+
+
+
+
+
+
+        //menu.findItem(R.id.nav_profile).setTitle("My Account");
+        /*extracted(menu);*/
+        /*menu.findItem(R.id.nav_profile).setVisible(false);*/
+
+        /*navigationView.setNavigationItemSelectedListener(this);*/
+        /*extracted(navigationView);*/
+
     }
+/*    public static void extracted(NavigationView navigationView) {
+        Menu menu = navigationView.getMenu();
+        menu.findItem(R.id.nav_profile).setTitle("My Account");
+    }*/
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,4 +95,12 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
+   /* @Override
+        public void onReceive(String str) {
+           *//* Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();*//*
+        Menu menu = navigationView.getMenu();
+        menu.findItem(R.id.nav_profile).setTitle(str);
+    }*/
 }

@@ -72,4 +72,8 @@
     <string name="pizza">Пицца</string>
     <string name="order_byCard">Перевод через СберБанк\nонлайн курьеру</string>
     <string name="order_byCash">Наличными\nкурьеру</string>
+    <string name="OrderPlaced">Заказ оформлен</string>
+    <string name="username">Имя</string>
+    <string name="Order_placed">Заказ принят и успешно отправлен в заведение</string>
+    <string name="bonuses_15"><u>15 бонусов</u></string>
 </resources>
