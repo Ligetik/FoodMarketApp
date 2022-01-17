@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.signup.Login_Signup_AgreementActivity">
+
+    <RelativeLayout
+        android:id="@+id/panel"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:orientation="horizontal"
+        android:weightSum="16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/back"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:text="Пользовательское соглашение"
+            android:textAlignment="viewStart"
+            android:textColor="@color/orange"
+            android:textSize="23sp" />
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="45dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/blue"
+            android:src="@drawable/ic_baseline_chevron_left_24" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textViewAgreement"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:scrollbars="vertical"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo magna dui, a consectetur est venenatis id. Fusce a faucibus dui, nec tempor ante. Aliquam erat volutpat. Vestibulum volutpat pulvinar ultrices. Nullam nec pretium eros. Integer tempus eros nec enim pellentesque, non sollicitudin nisl pharetra. In ut purus tortor. Sed vitae eros ultricies, suscipit tortor ac, ullamcorper risus. In vulputate placerat molestie. Pellentesque efficitur aliquet scelerisque. Praesent ac orci placerat, auctor arcu ac, finibus purus. Sed id ullamcorper risus. Nam vestibulum mattis nunc.  Integer molestie, nulla nec ultrices feugiat, risus quam rhoncus ipsum, sit amet tempor nulla odio ac lacus. Proin arcu est, gravida id volutpat a, ornare a quam. In risus odio, luctus vel augue quis, sollicitudin accumsan augue. Praesent laoreet nisi at pharetra tristique. Nulla nibh dui, dictum eu sem faucibus, rhoncus blandit purus. Suspendisse non purus egestas, blandit lorem vitae, fringilla sem. Aenean non ante risus.  Donec quis dolor dictum tellus scelerisque consectetur. Mauris viverra consequat nibh ac interdum. Phasellus maximus, odio in lobortis feugiat, neque ante fermentum eros, at porta ante risus at est. Integer vestibulum est non porta aliquam. Nam tempus libero eget nibh semper scelerisque. Etiam blandit rutrum lacus iaculis vehicula. In hac habitasse platea dictumst. Integer eu nisi vitae nisi consectetur varius at eu sem. Maecenas nulla turpis, mollis eget feugiat vitae, dictum sit amet tortor. Nam velit felis, venenatis ut semper nec, dapibus sit amet ipsum. Sed a odio sem.  Quisque ullamcorper at dui eget vestibulum. Phasellus non ligula leo. Sed commodo massa quam. Vivamus sagittis justo vestibulum lacinia posuere. Ut molestie arcu quis malesuada porta. Cras sed posuere nulla. Vestibulum et nisi purus. Integer quis pulvinar magna, at posuere mi. Nunc euismod libero non lorem facilisis, in lobortis ligula malesuada. Nam vel facilisis augue. Curabitur lacinia nisi eget lorem tristique, ac blandit nisl eleifend. Curabitur non tincidunt nunc, at rutrum neque. Suspendisse commodo, turpis non euismod porttitor, nisi leo fringilla eros, nec auctor libero justo ac eros.  Praesent sed neque eros. Nullam neque ligula, efficitur vel ullamcorper quis, luctus sed turpis. Nunc nec velit non diam tincidunt dictum. Aenean a nisi tortor. Cras sagittis placerat pulvinar. Sed quis magna at ante posuere iaculis. Vestibulum risus ligula, vestibulum et volutpat at, dapibus pharetra elit. Vivamus euismod, nulla et varius rutrum, dui elit viverra sem, vitae tempor metus enim in eros. Ut molestie sem arcu, sed imperdiet velit congue nec. Mauris vulputate enim vitae est finibus sodales. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo magna dui, a consectetur est venenatis id. Fusce a faucibus dui, nec tempor ante. Aliquam erat volutpat. Vestibulum volutpat pulvinar ultrices. Nullam nec pretium eros. Integer tempus eros nec enim pellentesque, non sollicitudin nisl pharetra. In ut purus tortor. Sed vitae eros ultricies, suscipit tortor ac, ullamcorper risus. In vulputate placerat molestie. Pellentesque efficitur aliquet scelerisque. Praesent ac orci placerat, auctor arcu ac, finibus purus. Sed id ullamcorper risus. Nam vestibulum mattis nunc.  Integer molestie, nulla nec ultrices feugiat, risus quam rhoncus ipsum, sit amet tempor nulla odio ac lacus. Proin arcu est, gravida id volutpat a, ornare a quam. In risus odio, luctus vel augue quis, sollicitudin accumsan augue. Praesent laoreet nisi at pharetra tristique. Nulla nibh dui, dictum eu sem faucibus, rhoncus blandit purus. Suspendisse non purus egestas, blandit lorem vitae, fringilla sem. Aenean non ante risus."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/panel" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.testactivityandroid_9.MainActivity;
 import com.example.testactivityandroid_9.R;
@@ -50,6 +51,8 @@ public class Login_SignupActivity extends AppCompatActivity {
     EditText userPassword;
     @BindView(R.id.btnSignUp)
     Button btnSignUp;
+    @BindView(R.id.btnAgreement)
+    TextView btnAgreement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,8 @@ public class Login_SignupActivity extends AppCompatActivity {
         clickBtnBack();
 
         ButterKnife.bind(this);
+
+        clickBtnAgreement();
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -153,6 +158,15 @@ public class Login_SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+    }
+
+    private void clickBtnAgreement() {
+        btnAgreement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Login_Signup_AgreementActivity.class));
             }
         });
     }
