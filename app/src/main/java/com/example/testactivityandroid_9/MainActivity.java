@@ -2,10 +2,7 @@ package com.example.testactivityandroid_9;
 
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.Toast;
 
-import com.example.testactivityandroid_9.listener.CheckLogInListener;
-import com.example.testactivityandroid_9.ui.login.LogInActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -18,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.testactivityandroid_9.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity /*implements CheckLogInListener*/ {
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyActivity";
 
     private AppBarConfiguration mAppBarConfiguration;
