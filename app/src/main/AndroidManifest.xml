@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestActivityAndroid_9">
         <activity
+            android:name=".ui.login.Login_ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.login.signup.Login_Signup_AgreementActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.history.HistoryOrderActivity"
             android:exported="false"

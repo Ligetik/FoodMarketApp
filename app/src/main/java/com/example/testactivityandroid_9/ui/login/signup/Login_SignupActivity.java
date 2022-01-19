@@ -15,17 +15,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.testactivityandroid_9.MainActivity;
 import com.example.testactivityandroid_9.R;
+import com.example.testactivityandroid_9.model.BonusModel;
+import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -39,7 +44,7 @@ public class Login_SignupActivity extends AppCompatActivity {
     String userID;
     FirebaseFirestore db;
     FirebaseAuth firebaseAuth;
-
+/*    List<BonusModel> BonusModelList;*/
 
     @BindView(R.id.userNumber)
     EditText userNumber;
@@ -58,7 +63,7 @@ public class Login_SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_signup);
-
+/*        this.BonusModelList = BonusModelList;*/
         clickBtnBack();
 
         ButterKnife.bind(this);
@@ -112,11 +117,17 @@ public class Login_SignupActivity extends AppCompatActivity {
                         userID = firebaseAuth.getCurrentUser().getUid();
                         DocumentReference documentReference = db.collection("user").document(userID);
 
+
+                        /*List<BonusModel> bonusModels = new ArrayList<>();*/
+
+
+                        /*BonusModel bonusModel = new BonusModel();*/
                         Map<String, Object>  user = new HashMap<>();
                         user.put("Имя", UserName);
                         user.put("Номер телефона", "+7" + UserNumber);
                         user.put("Пароль", UserPassword);
                         user.put("Почта", UserEmail);
+                        user.put("Бонусы", 0 /*bonusModel.setBonus(0)*/);
 
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -131,10 +142,16 @@ public class Login_SignupActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Toast.makeText(Login_SignupActivity.this, "curr display name is "+firebaseAuth.getInstance().getCurrentUser().getDisplayName(), Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(Login_SignupActivity.this,
+                                                            "curr display name is "+firebaseAuth.getInstance().getCurrentUser().getDisplayName(), Toast.LENGTH_LONG).show();
+                                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                                 }
                                             }
                                         });
+/*                                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                                if(currentUser != null) {
+                                    Toast.makeText(Login_SignupActivity.this, "Курент!" , Toast.LENGTH_SHORT).show();
+                                }*/
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -142,7 +159,6 @@ public class Login_SignupActivity extends AppCompatActivity {
                                 Log.d(TAG, "OnFailure" + e.toString());
                             }
                         });
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     }else {
                         Toast.makeText(Login_SignupActivity.this, "Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }

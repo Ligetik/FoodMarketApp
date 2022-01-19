@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        String displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
         Menu menu = navigationView.getMenu();
 
         if(FirebaseAuth.getInstance().getCurrentUser().isAnonymous()) {
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
                 menu.findItem(R.id.nav_profile).setVisible(true);
-                menu.findItem(R.id.nav_profile).setTitle(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                menu.findItem(R.id.nav_profile).setTitle(displayName);
                 menu.findItem(R.id.nav_login).setVisible(false);
         }
 

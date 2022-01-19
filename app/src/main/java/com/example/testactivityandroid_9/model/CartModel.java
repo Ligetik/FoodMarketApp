@@ -69,7 +69,8 @@ public class CartModel implements Serializable {
         this.item_details = item_details;
     }
 
-/*    public ArrayList<String> getDetails() {
+
+    /*    public ArrayList<String> getDetails() {
         return details;
     }
 

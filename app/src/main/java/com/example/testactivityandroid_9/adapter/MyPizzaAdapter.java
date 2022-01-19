@@ -383,19 +383,19 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                 updateData.put("quantity", cartModel.getQuantity());
                                 updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
 
-                                FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
-                                    FirebaseFirestore.getInstance()
-                                            .collection("Users_Cart")
-                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .collection("Корзина")
-                                            .document(pPpizzaModel.getKey())
-                                            .update(updateData)
-                                            .addOnSuccessListener(aVoid -> {
 
-                                                iCartLoadListener.OnCartloadFailed("Добавлено");
-                                            })
-                                            .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
-                                });
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(pPpizzaModel.getKey())
+                                        .update(updateData)
+                                        .addOnSuccessListener(aVoid -> {
+
+                                            iCartLoadListener.OnCartloadFailed("Добавлено");
+                                        })
+                                        .addOnFailureListener(e -> iCartLoadListener.OnCartloadFailed(e.getMessage()));
+
                             }
                             else // если в корзине нет предмета, то добавить новый
                             {

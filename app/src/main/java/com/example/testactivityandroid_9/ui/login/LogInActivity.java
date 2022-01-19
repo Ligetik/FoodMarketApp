@@ -30,6 +30,8 @@ public class LogInActivity extends AppCompatActivity {
 
     @BindView(R.id.btnLogIn)
     Button btnLogIn;
+    @BindView(R.id.btnForgotPassword)
+    Button btnForgotPassword;
     @BindView(R.id.userLogInNumber)
     EditText userLogInNumber;
     @BindView(R.id.userLogInEmail)
@@ -49,6 +51,8 @@ public class LogInActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         clickBtnLogIn();
+
+        btnForgotPassword();
     }
 
     private void clickBtnBack() {
@@ -75,8 +79,6 @@ public class LogInActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Toast.makeText(LogInActivity.this, "Вы успешно вошли в аккаунт", Toast.LENGTH_SHORT).show();
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     }else {
                         Toast.makeText(LogInActivity.this, "Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -92,6 +94,16 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Login_SignupActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void btnForgotPassword() {
+        btnForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Login_ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });

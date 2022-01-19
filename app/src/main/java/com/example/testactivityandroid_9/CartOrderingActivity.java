@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
+import com.example.testactivityandroid_9.model.BonusModel;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,7 +46,7 @@ public class CartOrderingActivity extends AppCompatActivity {
     @BindView(R.id.orderCommentary)
     EditText orderCommentary;
 
-    /*List<CartModel> cartModel = new ArrayList<>();*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,21 @@ public class CartOrderingActivity extends AppCompatActivity {
                             }
                         });
                     }
+
+                   /* BonusModel bonusModel = new BonusModel();
+                    int bonus = 15;
+                    bonusModel.setBonus(bonus++);
+
+                    FirebaseFirestore.getInstance()
+                            .collection("user")
+                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .set(bonusModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });*/
+
                     Intent intent = new Intent(getApplicationContext(), OrderPlacedActivity.class);
                     startActivity(intent);
                 }

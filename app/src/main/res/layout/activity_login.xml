@@ -139,7 +139,7 @@
             app:backgroundTint="@color/blue" />
 
         <Button
-            android:id="@+id/forgot_you_password"
+            android:id="@+id/btnForgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btnLogIn"
@@ -155,7 +155,7 @@
             android:id="@+id/registration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/forgot_you_password"
+            android:layout_below="@+id/btnForgotPassword"
             android:layout_centerHorizontal="true"
             android:background="#00FFFFFF"
             android:padding="3dp"
