@@ -16,9 +16,11 @@ import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.model.BonusModel;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.greenrobot.eventbus.EventBus;
@@ -98,26 +100,47 @@ public class CartOrderingActivity extends AppCompatActivity {
                             }
                         });
                     }
-
-                   /* BonusModel bonusModel = new BonusModel();
-                    int bonus = 15;
-                    bonusModel.setBonus(bonus++);
-
-                    FirebaseFirestore.getInstance()
-                            .collection("user")
-                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .set(bonusModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-
-                        }
-                    });*/
-
-                    Intent intent = new Intent(getApplicationContext(), OrderPlacedActivity.class);
-                    startActivity(intent);
                 }
+                FirebaseFirestore.getInstance()
+                        .collection("user")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists()) {
 
+                                    BonusModel bonusModel = documentSnapshot.toObject(BonusModel.class);
+                                    /*bonusModel.setBonus(bonus++);*/
+                                    bonusModel.setBonus(bonusModel.getBonus()+15);
 
+                                    Map<String,Object> bonusModelMap = new HashMap<>();
+                                    bonusModelMap.put("bonus", bonusModel.getBonus());
+
+                                    FirebaseFirestore.getInstance()
+                                            .collection("user")
+                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .update(bonusModelMap)
+                                            .addOnSuccessListener(aVoid -> {
+
+                                            });
+                                }
+                                /*else {
+                                    BonusModel bonusModel = new BonusModel();
+                                    bonusModel.setBonus(1);
+                                    FirebaseFirestore.getInstance()
+                                            .collection("user")
+                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .set(bonusModel)
+                                            .addOnSuccessListener(aVoid -> {
+
+                                            });
+                                }*/
+                            }
+                        });
+
+                Intent intent = new Intent(getApplicationContext(), OrderPlacedActivity.class);
+                startActivity(intent);
                 /*final HashMap<String, Object> cartMap2 = new HashMap<>();
                 cartMap2.put("totalPrice", cagetItem_cost());
                 FirebaseFirestore.getInstance()

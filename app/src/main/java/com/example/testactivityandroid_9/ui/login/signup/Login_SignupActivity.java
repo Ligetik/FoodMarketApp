@@ -127,7 +127,7 @@ public class Login_SignupActivity extends AppCompatActivity {
                         user.put("Номер телефона", "+7" + UserNumber);
                         user.put("Пароль", UserPassword);
                         user.put("Почта", UserEmail);
-                        user.put("Бонусы", 0 /*bonusModel.setBonus(0)*/);
+                        user.put("bonus", 0 /*bonusModel.setBonus(0)*/);
 
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
