@@ -75,21 +75,24 @@
     </RelativeLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/resview"
-        android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:layout_below="@+id/tabs"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:paddingLeft="10dp"
-        android:paddingTop="0dp"
-        android:paddingEnd="10dp"></androidx.recyclerview.widget.RecyclerView>
+    <!--    <TextView
+            android:id="@+id/titleFoodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Пицца"
+            android:textColor="@color/orange"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:visibility="gone" />-->
 
-    <SearchView
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/search"
+        style="@style/MyTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/panel"
@@ -97,21 +100,27 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp" />
+        android:layout_marginEnd="0dp"
+        android:background="@android:color/transparent"
+        android:textColorHint="@color/orange"
+        app:boxStrokeColor="@color/orange"
+        app:endIconMode="clear_text"
+        app:endIconTint="#D7FF9933"
+        app:hintEnabled="false"
+        app:startIconDrawable="@drawable/search"
+        app:startIconTint="#D7FF9933">
 
-<!--    <TextView
-        android:id="@+id/titleFoodName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/search"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="sans-serif"
-        android:gravity="center"
-        android:text="Пицца"
-        android:textColor="@color/orange"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        tools:visibility="gone" />-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchTextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@color/orange"
+            android:hint="Название блюда.."
+            android:paddingTop="15dp"
+            android:textColor="@color/orange"
+            android:textColorHint="#D7FF9933" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
@@ -122,6 +131,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="278dp"
+        android:layout_marginEnd="-2dp"
         android:background="#00FFFFFF"
         app:tabContentStart="25dp"
         app:tabIndicatorColor="@color/orange"
@@ -154,5 +166,27 @@
             android:layout_height="wrap_content"
             android:text="Напитки" />
     </com.google.android.material.tabs.TabLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/resview"
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+        android:layout_below="@+id/tabs"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="0dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="10dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search" />
 
 </RelativeLayout>

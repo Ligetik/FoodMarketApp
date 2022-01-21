@@ -73,6 +73,7 @@ public class Login_SignupActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        FirebaseAuth.getInstance().setLanguageCode("ru");
 /*        if (firebaseAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();

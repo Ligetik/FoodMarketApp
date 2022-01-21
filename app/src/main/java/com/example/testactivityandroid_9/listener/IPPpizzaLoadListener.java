@@ -8,4 +8,6 @@ public interface IPPpizzaLoadListener {
 
     void OnPPpizzaloadSuccess(List<PPpizzaModel> ppizzaModels);
     void OnPPpizzaloadFailed(String message);
+
+    void IPPpizzaLoadSearchSuccess(List<PPpizzaModel> pppizzaModeList);
 }

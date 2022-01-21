@@ -1,9 +1,13 @@
 package com.example.testactivityandroid_9;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -13,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testactivityandroid_9.adapter.MyPizzaAdapter;
@@ -20,6 +25,7 @@ import com.example.testactivityandroid_9.adapter.MyCartAdapter;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.listener.ICartLoadListener;
 import com.example.testactivityandroid_9.listener.IPPpizzaLoadListener;
+import com.example.testactivityandroid_9.listener.IPPpizzaLoadSearchListener;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.example.testactivityandroid_9.utils.SpaceItemDeconstration;
@@ -63,6 +69,8 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     private static final String TAG = "MyActivity";
     @BindView(R.id.resview)
     RecyclerView resview;
+    @BindView(R.id.searchRecycler)
+    RecyclerView searchRecycler;
     @BindView(R.id.mainLayout)
     RelativeLayout mainLayout;
     ImageButton imageButton;
@@ -70,12 +78,15 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     NotificationBadge badge;
     @BindView(R.id.cartButton)
     ImageView cartButton;
+    @BindView(R.id.searchTextInput)
+    EditText searchTextInput;
 
     IPPpizzaLoadListener ppizzaLoadListener;
     ICartLoadListener cartLoadListener;
+    IPPpizzaLoadSearchListener ppizzaLoadSearchListener;
 
-    FirebaseAuth firebaseAuth;
-    LogInActivity logInActivity;
+    private MyPizzaAdapter myPizzaAdapter;
+    private List<PPpizzaModel> ppizzaModelsList;
 
     @Override
     protected void onStart() {
@@ -191,7 +202,6 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
-
                                 PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
                                 ppizzaModel.setKey(documentSnapshot.getId());
                                 ppizzaModels.add(ppizzaModel);
@@ -205,43 +215,27 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     }
 
     private void loadPizzaFromFirebase() {
-/*        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {
-            loadMenuPodkrePizza(ppizzaModels, "Pizza");
-        });*/
-                List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-       /* String UserEmail = logInActivity.get_Email();
-        String UserPassword = logInActivity.get_Password();
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(UserEmail, UserPassword).addOnCompleteListener((Task<AuthResult> task) -> {*/
-            loadMenuPodkrePizza(ppizzaModels, "Pizza");
-        /*});*/
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        loadMenuPodkrePizza(ppizzaModels, "Pizza");
     }
     private void loadBurgerFromFirebase() {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
-            loadMenuPodkrePizza(ppizzaModels, "Burger");
-        /*});*/
+        loadMenuPodkrePizza(ppizzaModels, "Burger");
     }
 
     private void loadRollsFromFirebase() {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
-            loadMenuPodkrePizza(ppizzaModels, "Rolls");
-        /*});*/
+        loadMenuPodkrePizza(ppizzaModels, "Rolls");
     }
 
     private void loadDesertiFromFirebase() {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
-            loadMenuPodkrePizza(ppizzaModels, "Deserti");
-        /*});*/
+        loadMenuPodkrePizza(ppizzaModels, "Deserti");
     }
 
     private void loadNapitkiFromFirebase() {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
-            loadMenuPodkrePizza(ppizzaModels, "Napitki");
-        /*});*/
+        loadMenuPodkrePizza(ppizzaModels, "Napitki");
     }
 
     private void init() {
@@ -250,9 +244,15 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
         ppizzaLoadListener = this;
         cartLoadListener = this;
 
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
         resview.setLayoutManager(gridLayoutManager);
         resview.addItemDecoration(new SpaceItemDeconstration());
+
+        //search
+        GridLayoutManager gridLayoutManagerSearch = new GridLayoutManager(this,1);
+        searchRecycler.setLayoutManager(gridLayoutManagerSearch);
+        searchRecycler.addItemDecoration(new SpaceItemDeconstration());
 
 
         cartButton.setOnClickListener(v -> startActivity(new Intent(this,CartActivity.class)));
@@ -287,6 +287,64 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
             }
         });
 
+       /* myPizzaAdapter = new MyPizzaAdapter(this, ppizzaModelsList, cartLoadListener);
+        searchRecycler.setAdapter(myPizzaAdapter);
+        searchRecycler.setHasFixedSize(true);
+        searchTextInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+                *//*MyPizzaAdapter myPizzaAdapter = new MyPizzaAdapter(this, ppizzaModels, cartLoadListener);*//*
+                if (s.toString().isEmpty()) {
+                    ppizzaModels.clear();
+                    myPizzaAdapter.notifyDataSetChanged();
+                    *//*ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);*//*
+                }
+                else {
+                    searchItems(s.toString());
+                }
+            }
+        });
+    }
+
+    private void searchItems(String type) {
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        if (!type.isEmpty()) {
+            FirebaseFirestore.getInstance()
+                    .collection("Items")
+                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Pizza")
+                    .whereEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful() && task.getResult() != null){
+                                ppizzaModels.clear();
+                                myPizzaAdapter.notifyDataSetChanged();
+
+                                for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                                    PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                                    ppizzaModels.add(ppizzaModel);
+                                    myPizzaAdapter.notifyDataSetChanged();
+                                }
+                                *//*ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);*//*
+                            } *//*else {
+                                ppizzaLoadListener.OnPPpizzaloadFailed("Ошибка");
+                            }*//*
+
+                        }
+                    });
+        }*/
     }
 
     @Override
@@ -300,6 +358,11 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
         Snackbar.make(mainLayout,message,Snackbar.LENGTH_LONG).show();
     }
 
+    @Override
+    public void IPPpizzaLoadSearchSuccess(List<PPpizzaModel> pppizzaModeList) {
+       /* MyPizzaAdapter adapter = new MyPizzaAdapter(this,pppizzaModeList,cartLoadListener);
+        searchRecycler.setAdapter(adapter);*/
+    }
 
     @Override
     public void OnCartloadSuccess(List<CartModel> cartModelList) {
@@ -347,6 +410,8 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
                     }
                 });
     }
+
+
 
 
 

@@ -8,7 +8,7 @@ import java.util.List;
 public class CartModel implements Serializable {
     private  String key,item_name,item_image, item_details;
     private int quantity, item_cost, totalPrice;
-    /*private ArrayList<String> details;*/
+/*    private List<String> details;*/
 
     public CartModel() {
     }

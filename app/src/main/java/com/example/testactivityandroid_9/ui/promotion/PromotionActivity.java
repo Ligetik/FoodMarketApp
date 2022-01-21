@@ -59,10 +59,6 @@ public class PromotionActivity extends AppCompatActivity implements IPromotionLo
         recycler_promotion.addItemDecoration(new SpaceItemDeconstration());
 
 
-       /* LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recycler_promotion.setLayoutManager(linearLayoutManager);
-        recycler_promotion.addItemDecoration(new DividerItemDecoration(this,linearLayoutManager.getOrientation()));*/
-
         List<PromotionModel> promotionModels = new ArrayList<>();
         FirebaseFirestore.getInstance()
                 .collection("Items")

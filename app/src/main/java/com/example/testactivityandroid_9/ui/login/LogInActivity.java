@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,6 +54,8 @@ public class LogInActivity extends AppCompatActivity {
         clickBtnLogIn();
 
         btnForgotPassword();
+
+
     }
 
     private void clickBtnBack() {
@@ -75,7 +78,29 @@ public class LogInActivity extends AppCompatActivity {
                 final String UserEmail = userLogInEmail.getText().toString();
                 String UserPassword = userLogInPassword.getText().toString().trim();
 
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(UserEmail, UserPassword).addOnCompleteListener((Task<AuthResult> task) -> {
+                if (TextUtils.isEmpty(UserNumber)) {
+                    userLogInNumber.setError("Не указан номер телефона");
+                    return;
+                }
+                if (UserNumber.length() < 10) {
+                    userLogInNumber.setError("Неккоректный номер телефона");
+                    return;
+                }
+                if (TextUtils.isEmpty(UserEmail)) {
+                    userLogInEmail.setError("Не указан электронный адрес");
+                    return;
+                }
+                if (TextUtils.isEmpty(UserPassword)) {
+                    userLogInPassword.setError("Не указан пароль");
+                    return;
+                }
+                if (UserPassword.length() < 6) {
+                    userLogInPassword.setError("Пароль должен состоять как минимум из 6 символов");
+                    return;
+                }
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.setLanguageCode("ru");
+                auth.signInWithEmailAndPassword(UserEmail, UserPassword).addOnCompleteListener((Task<AuthResult> task) -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(LogInActivity.this, "Вы успешно вошли в аккаунт", Toast.LENGTH_SHORT).show();
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
