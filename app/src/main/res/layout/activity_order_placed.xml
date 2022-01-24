@@ -98,5 +98,18 @@
             android:layout_alignParentBottom="true"
             android:background="@color/blue"
             android:src="@drawable/ic_baseline_chevron_left_24" />
-    </RelativeLayout>
+    </RelativeLayout><![CDATA[
+
+    SeekBar
+        android:id="@+id/seekBar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="252dp"
+        android:layout_height="17dp"
+        android:max="10"
+        android:progress="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="125dp" />
+
+    ]]>
 </androidx.constraintlayout.widget.ConstraintLayout>

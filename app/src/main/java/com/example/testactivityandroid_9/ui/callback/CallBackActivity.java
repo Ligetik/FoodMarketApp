@@ -18,10 +18,15 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -66,9 +71,17 @@ public class CallBackActivity extends AppCompatActivity {
                     return;
                 }
 
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd в HH:mm");
+                Date date = new Date();
+                String strDate = dateFormat.format(date).toString();
+
                 Map<String, Object> user = new HashMap<>();
                 user.put("Имя", UserName);
                 user.put("Номер телефона", "+7" + UserNumber);
+                user.put("Дата и время",  strDate);
+
+
 
                 FirebaseFirestore.getInstance()
                         .collection("Users_Cart")
