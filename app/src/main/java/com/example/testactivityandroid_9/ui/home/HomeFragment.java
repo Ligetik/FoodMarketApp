@@ -2,32 +2,19 @@ package com.example.testactivityandroid_9.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.testactivityandroid_9.AllRestaurants;
+import com.example.testactivityandroid_9.DjoActivity;
+import com.example.testactivityandroid_9.PpizzaActivity;
 import com.example.testactivityandroid_9.R;
 import com.example.testactivityandroid_9.databinding.FragmentHomeBinding;
-import com.example.testactivityandroid_9.ui.restaurants.RestaurantsActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.concurrent.Executor;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "MyActivity";
@@ -35,6 +22,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
     ImageButton podkrepizza_imagebutton;
+    ImageButton djo_imagebutton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,11 +36,19 @@ public class HomeFragment extends Fragment {
         podkrepizza_imagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), AllRestaurants.class);
+                Intent intent = new Intent(getContext(), PpizzaActivity.class);
                 startActivity(intent);
             }
         });
 
+        djo_imagebutton = (ImageButton)root.findViewById(R.id.djo_imagebutton);
+        djo_imagebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DjoActivity.class);
+                startActivity(intent);
+            }
+        });
 
 /*        final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

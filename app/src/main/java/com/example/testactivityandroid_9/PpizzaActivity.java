@@ -1,27 +1,19 @@
 package com.example.testactivityandroid_9;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testactivityandroid_9.adapter.MyPizzaAdapter;
-import com.example.testactivityandroid_9.adapter.MyCartAdapter;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.listener.ICartLoadListener;
 import com.example.testactivityandroid_9.listener.IPPpizzaLoadListener;
@@ -29,28 +21,13 @@ import com.example.testactivityandroid_9.listener.IPPpizzaLoadSearchListener;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.example.testactivityandroid_9.utils.SpaceItemDeconstration;
-import com.example.testactivityandroid_9.ui.login.LogInActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.nex3z.notificationbadge.NotificationBadge;
 
@@ -59,13 +36,12 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadListener, ICartLoadListener  {
+public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadListener, ICartLoadListener  {
     private static final String TAG = "MyActivity";
     @BindView(R.id.resview)
     RecyclerView resview;
@@ -113,7 +89,7 @@ public class AllRestaurants extends AppCompatActivity implements IPPpizzaLoadLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_restaurants);
+        setContentView(R.layout.activity_ppizza);
 
         init();
         loadPizzaFromFirebase();

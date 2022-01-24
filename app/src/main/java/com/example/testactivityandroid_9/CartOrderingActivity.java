@@ -144,6 +144,31 @@ public class CartOrderingActivity extends AppCompatActivity {
 
                             }
                         }
+
+
+                        if (list != null && list.size() > 0) {
+                            for (CartModel model : list) {
+
+                                cartMap.put("Название", model.getItem_name());
+                                cartMap.put("item_cost", model.getItem_cost());
+                                cartMap.put("item_image", model.getItem_image());
+                                cartMap.put("item_details", model.getItem_details());
+                                cartMap.put("quantity", model.getQuantity());
+
+                                totalPrice += model.getTotalPrice();
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Заказы")
+                                        .document(idDocument)
+                                        .update("items2", FieldValue.arrayUnion(cartMap));
+
+                            }
+                        }
+
+
+
                         //считалка итог. суммы
                         itemMap.put("totalPrice", totalPrice/* model.getItem_cost()*/) ;
                         FirebaseFirestore.getInstance()
