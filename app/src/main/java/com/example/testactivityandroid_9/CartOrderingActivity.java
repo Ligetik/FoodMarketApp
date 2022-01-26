@@ -125,6 +125,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                         if (list != null && list.size() > 0) {
                             for (CartModel model : list) {
 
+
                                 cartMap.put("Название", model.getItem_name());
                                 cartMap.put("item_cost", model.getItem_cost());
                                 cartMap.put("item_image", model.getItem_image());
@@ -133,18 +134,73 @@ public class CartOrderingActivity extends AppCompatActivity {
 
                                 totalPrice += model.getTotalPrice();
 
-                                FirebaseFirestore.getInstance()
-                                        .collection("Users_Cart")
-                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .collection("Заказы")
-                                        .document(idDocument)
-                                        .update("items", FieldValue.arrayUnion(cartMap));
 
-                                DeleteCart(model);
+                                if (model.getQuantity() == 1){
+                                    FirebaseFirestore.getInstance()
+                                            .collection("Users_Cart")
+                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .collection("Заказы")
+                                            .document(idDocument)
+                                            .update("items2", FieldValue.arrayUnion(cartMap));
+                                } else {
+                                    FirebaseFirestore.getInstance()
+                                            .collection("Users_Cart")
+                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .collection("Заказы")
+                                            .document(idDocument)
+                                            .update("items", FieldValue.arrayUnion(cartMap));
+                                }
+
+
+                                /*DeleteCart(model);*/
 
                             }
                         }
 
+
+
+                        //считалка итог. суммы
+                        itemMap.put("totalPrice", totalPrice /*model.getItem_cost()*/) ;
+                        FirebaseFirestore.getInstance()
+                                .collection("Users_Cart")
+                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .collection("Заказы")
+                                .document(idDocument)
+                                .update(itemMap);
+
+                        //История заказов
+                        OrderHistory(totalPrice, OrderName, OrderNumber, OrderAddress, strDate, OrderCommentary);
+
+                    }
+
+                    /*//очистка корзины
+                    private void DeleteCart(CartModel model) {
+                        FirebaseFirestore.getInstance()
+                                .collection("Users_Cart")
+                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .collection("Корзина")
+                                .document(model.getKey())
+                                .delete()
+                                .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
+                    }*/
+                });
+/*
+
+
+                CollectionReference dbRef2 = FirebaseFirestore.getInstance()
+                        .collection("Users_Cart")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .collection("Заказы");
+
+                dbRef2.add(itemMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        String idDocument = documentReference.getId();
+
+                        List<CartModel> list = (ArrayList<CartModel>)
+                                getIntent().getSerializableExtra("itemList");
+
+                        int totalPrice = 0;
 
                         if (list != null && list.size() > 0) {
                             for (CartModel model : list) {
@@ -164,13 +220,22 @@ public class CartOrderingActivity extends AppCompatActivity {
                                         .document(idDocument)
                                         .update("items2", FieldValue.arrayUnion(cartMap));
 
+                                */
+/*DeleteCart(model);*//*
+
+
                             }
                         }
 
 
 
-                        //считалка итог. суммы
-                        itemMap.put("totalPrice", totalPrice/* model.getItem_cost()*/) ;
+                       */
+/* //считалка итог. суммы
+                        itemMap.put("totalPrice", totalPrice*//*
+*/
+/* model.getItem_cost()*//*
+*/
+/*) ;
                         FirebaseFirestore.getInstance()
                                 .collection("Users_Cart")
                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -179,10 +244,91 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 .update(itemMap);
 
                         //История заказов
-                        OrderHistory(totalPrice, OrderName, OrderNumber, OrderAddress, strDate, OrderCommentary);
+                        OrderHistory(totalPrice, OrderName, OrderNumber, OrderAddress, strDate, OrderCommentary);*//*
+
 
                     }
 
+                    */
+/*//*
+/очистка корзины
+                    private void DeleteCart(CartModel model) {
+                        FirebaseFirestore.getInstance()
+                                .collection("Users_Cart")
+                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .collection("Корзина")
+                                .document(model.getKey())
+                                .delete()
+                                .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
+                    }*//*
+
+
+                });
+
+
+*/
+
+
+
+
+
+
+
+
+                /**CollectionReference dbRef = FirebaseFirestore.getInstance()
+                        .collection("Users_Cart")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .collection("Заказы");
+
+                dbRef.add(itemMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        String idDocument = documentReference.getId();
+
+                        List<CartModel> list = (ArrayList<CartModel>)
+                                getIntent().getSerializableExtra("itemList");
+
+                        int totalPrice = 0;
+
+                        if (list != null && list.size() > 0) {
+                            for (CartModel model : list) {
+
+                                cartMap.put("Название", model.getItem_name());
+                                cartMap.put("item_cost", model.getItem_cost());
+                                cartMap.put("item_image", model.getItem_image());
+                                cartMap.put("item_details", model.getItem_details());
+                                cartMap.put("quantity", model.getQuantity());
+
+                                totalPrice += model.getTotalPrice();
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Заказы")
+                                        .document(idDocument)
+                                        .update("items", FieldValue.arrayUnion(cartMap));
+
+                                *//*DeleteCart(model);*//*
+
+                            }
+                        }
+
+*//*
+
+                        //считалка итог. суммы
+                        itemMap.put("totalPrice", totalPrice model.getItem_cost()) ;
+                        FirebaseFirestore.getInstance()
+                                .collection("Users_Cart")
+                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .collection("Заказы")
+                                .document(idDocument)
+                                .update(itemMap);
+
+                        //История заказов
+                        OrderHistory(totalPrice, OrderName, OrderNumber, OrderAddress, strDate, OrderCommentary);*//*
+
+                    }
+*//*
                     //очистка корзины
                     private void DeleteCart(CartModel model) {
                         FirebaseFirestore.getInstance()
@@ -192,8 +338,11 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 .document(model.getKey())
                                 .delete()
                                 .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
-                    }
-                });
+                    }*//*
+                });*/
+
+
+
 
                 //Начисление бонусов пользователю
                 UserBonusCounter();
@@ -251,17 +400,17 @@ public class CartOrderingActivity extends AppCompatActivity {
 
                                     Map<String, Object>  orderHistoryMap = new HashMap<>();
                                     orderHistoryMap.put("Имя", OrderName);
-                                    orderHistoryMap.put("Номер телефона", "+7" + OrderNumber);
-                                    orderHistoryMap.put("Адрес доставки", OrderAddress);
-                                    orderHistoryMap.put("Дата и время", strDate);
+                                    orderHistoryMap.put("Номер_телефона", "+7" + OrderNumber);
+                                    orderHistoryMap.put("Адрес_доставки", OrderAddress);
+                                    orderHistoryMap.put("Дата_и_время", strDate);
                                     orderHistoryMap.put("Комментарий", OrderCommentary);
-                                    orderHistoryMap.put("Сумма заказа", totalPriceHistory);
-                                    orderHistoryMap.put("Номер заказа", orderNumberCount);
+                                    orderHistoryMap.put("Сумма_заказа", totalPriceHistory);
+                                    orderHistoryMap.put("Номер_заказа", orderNumberCount);
 
                                     if (orderPayment.getCheckedRadioButtonId() == R.id.radioButtonCash){
-                                        orderHistoryMap.put("Способ оплаты курьеру", "Наличными курьеру");
+                                        orderHistoryMap.put("Способ_оплаты_курьеру", "Наличными курьеру");
                                     } else {
-                                        orderHistoryMap.put("Способ оплаты курьеру", "Картой курьеру");
+                                        orderHistoryMap.put("Способ_оплаты_курьеру", "Картой курьеру");
                                     }
 
                                     FirebaseFirestore.getInstance()

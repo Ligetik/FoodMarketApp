@@ -13,12 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.testactivityandroid_9.adapter.DjoAdapter;
 import com.example.testactivityandroid_9.adapter.MyPizzaAdapter;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.listener.ICartLoadListener;
+import com.example.testactivityandroid_9.listener.IDjoLoadListener;
 import com.example.testactivityandroid_9.listener.IPPpizzaLoadListener;
 import com.example.testactivityandroid_9.listener.IPPpizzaLoadSearchListener;
 import com.example.testactivityandroid_9.model.CartModel;
+import com.example.testactivityandroid_9.model.DjoModel;
 import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.example.testactivityandroid_9.utils.SpaceItemDeconstration;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,7 +44,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DjoActivity extends AppCompatActivity implements IPPpizzaLoadListener, ICartLoadListener  {
+public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, ICartLoadListener  {
     private static final String TAG = "MyActivity";
     @BindView(R.id.resview)
     RecyclerView resview;
@@ -57,7 +60,7 @@ public class DjoActivity extends AppCompatActivity implements IPPpizzaLoadListen
     @BindView(R.id.searchTextInput)
     EditText searchTextInput;
 
-    IPPpizzaLoadListener ppizzaLoadListener;
+    IDjoLoadListener djoLoadListener;
     ICartLoadListener cartLoadListener;
     IPPpizzaLoadSearchListener ppizzaLoadSearchListener;
 
@@ -167,7 +170,7 @@ public class DjoActivity extends AppCompatActivity implements IPPpizzaLoadListen
 
 
     @NonNull
-    private Task<QuerySnapshot> loadMenuPodkrePizza(List<PPpizzaModel> ppizzaModels, String pizza) {
+    private Task<QuerySnapshot> loadMenuPodkrePizza(List<DjoModel> djoModels, String pizza) {
         return FirebaseFirestore.getInstance()
                 .collection("Items3")
                 .document("MYHsl3omNB5RYatTPibp")
@@ -178,21 +181,21 @@ public class DjoActivity extends AppCompatActivity implements IPPpizzaLoadListen
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
-                                PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
-                                ppizzaModel.setKey(documentSnapshot.getId());
-                                ppizzaModels.add(ppizzaModel);
+                                DjoModel djoModel = documentSnapshot.toObject(DjoModel.class);
+                                djoModel.setKey(documentSnapshot.getId());
+                                djoModels.add(djoModel);
                             }
-                            ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);
+                            djoLoadListener.OnDjoloadSuccess(djoModels);
                         } else {
-                            ppizzaLoadListener.OnPPpizzaloadFailed("Ошибка");
+                            djoLoadListener.OnDjoloadFailed("Ошибка");
                         }
                     }
                 });
     }
 
     private void loadPizzaFromFirebase() {
-        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        loadMenuPodkrePizza(ppizzaModels, "Seti");
+        List<DjoModel> djoModels = new ArrayList<>();
+        loadMenuPodkrePizza(djoModels, "Seti");
     }
 /*    private void loadBurgerFromFirebase() {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
@@ -217,7 +220,7 @@ public class DjoActivity extends AppCompatActivity implements IPPpizzaLoadListen
     private void init() {
         ButterKnife.bind(this);
 
-        ppizzaLoadListener = this;
+        djoLoadListener = this;
         cartLoadListener = this;
 
 
@@ -324,21 +327,21 @@ public class DjoActivity extends AppCompatActivity implements IPPpizzaLoadListen
     }
 
     @Override
-    public void OnPPpizzaloadSuccess(List<PPpizzaModel> pppizzaModeList) {
-        MyPizzaAdapter adapter = new MyPizzaAdapter(this,pppizzaModeList,cartLoadListener);
+    public void OnDjoloadSuccess(List<DjoModel> djoModeList) {
+        DjoAdapter adapter = new DjoAdapter(this,djoModeList,cartLoadListener);
         resview.setAdapter(adapter);
     }
 
     @Override
-    public void OnPPpizzaloadFailed(String message) {
+    public void OnDjoloadFailed(String message) {
         Snackbar.make(mainLayout,message,Snackbar.LENGTH_LONG).show();
     }
 
-    @Override
+/*    @Override
     public void IPPpizzaLoadSearchSuccess(List<PPpizzaModel> pppizzaModeList) {
-       /* MyPizzaAdapter adapter = new MyPizzaAdapter(this,pppizzaModeList,cartLoadListener);
-        searchRecycler.setAdapter(adapter);*/
-    }
+       *//* MyPizzaAdapter adapter = new MyPizzaAdapter(this,pppizzaModeList,cartLoadListener);
+        searchRecycler.setAdapter(adapter);*//*
+    }*/
 
     @Override
     public void OnCartloadSuccess(List<CartModel> cartModelList) {

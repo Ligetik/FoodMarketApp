@@ -188,6 +188,8 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                         }
                     }
                 });
+
+
     }
 
     private void loadPizzaFromFirebase() {

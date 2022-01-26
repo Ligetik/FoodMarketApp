@@ -101,11 +101,72 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     }
 
     public void loadCartFromFribase() {
-
-            //new 2_1
         List<CartModel> cartModels = new ArrayList<>(); //ВЕРНУТЬ
         cartModel2 = cartModels;
         /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
+        FirebaseFirestore.getInstance()
+                .collection("Users_Cart")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .collection("Корзина")
+                .document("Restaurants")
+                .collection("PodkrePizza")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+
+                                /*String documentId = documentSnapshot.getId();*/
+
+                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+
+                                /*cartModel.setDocumentId(documentId);*/
+                                cartModel.setKey(documentSnapshot.getId());
+
+                                cartModels.add(cartModel);
+                                /*cartAdapter.notifyDataSetChanged();*/
+                            }
+                            cartLoadListener.OnCartloadSuccess(cartModels);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));;
+
+        FirebaseFirestore.getInstance()
+                .collection("Users_Cart")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .collection("Корзина")
+                .document("Restaurants")
+                .collection("Djo")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+
+                                /*String documentId = documentSnapshot.getId();*/
+
+                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+
+                                /*cartModel.setDocumentId(documentId);*/
+                                cartModel.setKey(documentSnapshot.getId());
+
+                                cartModels.add(cartModel);
+                                /*cartAdapter.notifyDataSetChanged();*/
+                            }
+                            cartLoadListener.OnCartloadSuccess(cartModels);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
+
+
+            //new 2_1
+/*        List<CartModel> cartModels = new ArrayList<>(); //ВЕРНУТЬ
+        cartModel2 = cartModels;
+        *//*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*//*
             FirebaseFirestore.getInstance()
                     .collection("Users_Cart")
                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -117,21 +178,21 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                             if (task.isSuccessful()) {
                                 for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
 
-                                    /*String documentId = documentSnapshot.getId();*/
+                                    *//*String documentId = documentSnapshot.getId();*//*
 
                                     CartModel cartModel = documentSnapshot.toObject(CartModel.class);
 
-                                    /*cartModel.setDocumentId(documentId);*/
+                                    *//*cartModel.setDocumentId(documentId);*//*
                                     cartModel.setKey(documentSnapshot.getId());
 
                                     cartModels.add(cartModel);
-                                    /*cartAdapter.notifyDataSetChanged();*/
+                                    *//*cartAdapter.notifyDataSetChanged();*//*
                                 }
                                 cartLoadListener.OnCartloadSuccess(cartModels);
                             }
                         }
                     })
-                    .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));;
+                    .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));;*/
         /*});*/
 
 
@@ -263,6 +324,17 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         btnToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                                        Intent intent = new Intent(getApplicationContext(), CartOrderingActivity.class);
+                                        intent.putExtra("itemList", (Serializable) cartModel2);
+                                        startActivity(intent);
+
+            }
+        });
+
+/**        btnToOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 //Проверяет есть ли в корзине товар
                 FirebaseFirestore.getInstance()
                         .collection("Users_Cart")
@@ -281,7 +353,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                             intent.putExtra("itemList", (Serializable) cartModel2);
                                             startActivity(intent);
 
-                                        /*startActivity(new Intent(getApplicationContext(), CartOrderingActivity.class));*/
+                                        *//*startActivity(new Intent(getApplicationContext(), CartOrderingActivity.class));*//*
                                     } else {
                                         Toast toast = Toast.makeText(CartActivity.this, "Корзина пуста!", Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.TOP, 0, 0);
@@ -290,17 +362,15 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                 }
                             }
                         });
-
             }
-        });
+        });*/
     }
 
     @Override
     public void OnCartloadSuccess(List<CartModel> cartModelList) {
         int sum = 0;
         int price2 = 800;
-        for (CartModel cartModel : cartModelList)
-        {
+        for (CartModel cartModel : cartModelList) {
             sum+=cartModel.getTotalPrice();
 
             int price = cartModel.getTotalPrice();

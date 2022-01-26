@@ -3,23 +3,16 @@ package com.example.testactivityandroid_9.ui.promotion;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testactivityandroid_9.R;
-import com.example.testactivityandroid_9.adapter.MyCartAdapter;
-import com.example.testactivityandroid_9.adapter.MyPizzaAdapter;
 import com.example.testactivityandroid_9.adapter.PromotionAdapter;
-import com.example.testactivityandroid_9.listener.IPPpizzaLoadListener;
 import com.example.testactivityandroid_9.listener.IPromotionLoadListener;
-import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.example.testactivityandroid_9.model.PromotionModel;
 import com.example.testactivityandroid_9.utils.SpaceItemDeconstration;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,6 +41,7 @@ public class PromotionActivity extends AppCompatActivity implements IPromotionLo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promotion);
+
         ButterKnife.bind(this);
 
         clickBtnBack();
