@@ -135,7 +135,6 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                 updateData.put("quantity", cartModel.getQuantity());
                                 updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
 
-
                                 FirebaseFirestore.getInstance()
                                         .collection("Users_Cart")
                                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())

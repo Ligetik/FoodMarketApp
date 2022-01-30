@@ -1,19 +1,20 @@
 package com.example.testactivityandroid_9;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.mtp.MtpConstants;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.method.DigitsKeyListener;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,21 +24,15 @@ import com.example.testactivityandroid_9.adapter.MyCartAdapter;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.listener.ICartLoadListener;
 import com.example.testactivityandroid_9.model.CartModel;
-import com.example.testactivityandroid_9.ui.login.LogInActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.greenrobot.eventbus.EventBus;
@@ -63,13 +58,26 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     TextView txtTotal;
     @BindView(R.id.txtFreeDelivery)
     TextView txtFreeDelivery;
+    @BindView(R.id.orderBonus)
+    TextView orderBonus;
+    @BindView(R.id.orderBonusTitleCount)
+    TextView orderBonusTitleCount;
+    @BindView(R.id.orderBonusTitleText)
+    TextView orderBonusTitleText;
     @BindView(R.id.btnToOrder)
     Button btnToOrder;
+    @BindView(R.id.btnGetBonus)
+    Button btnGetBonus;
+    @BindView(R.id.sliderBonus)
+    Slider sliderBonus;
+    @BindView(R.id.orderBonusEditText)
+    EditText orderBonusEditText;
 
     ICartLoadListener cartLoadListener;
 
     /*List<CartModel> cartModel;*/
     List<CartModel> cartModel2 = new ArrayList<>(); // УДАЛИТЬ
+    private int bonus;
 
     @Override
     protected void onStart() {
@@ -98,18 +106,171 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
         init();
         loadCartFromFribase();
+
+        LoadBonuses();
+
+        orderBonusEditText.setTransformationMethod(null);
+
+        FirebaseFirestore.getInstance()
+                .collection("user")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                        bonus = documentSnapshot.getLong("bonus").intValue();
+
+                        orderBonus.setText(bonus + "");
+
+                        orderBonusEditText.setText(bonus + "");
+
+                        sliderBonus.setValueTo(bonus);
+                        sliderBonus.setValue(bonus);
+
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CartActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+        sliderBonus.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onStartTrackingTouch(@NonNull Slider slider) {
+
+            }
+
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onStopTrackingTouch(@NonNull Slider slider) {
+                String sliderBonusValue = String.valueOf((int) sliderBonus.getValue());
+                orderBonusEditText.setText(sliderBonusValue);
+            }
+        });
+
+        btnGetBonus.setOnClickListener(v -> {
+            String buttonText = btnGetBonus.getText().toString();
+            String a = String.valueOf(orderBonusEditText.getText());
+
+            if (buttonText.equals("Списать")) {
+                btnGetBonus.setText("Сбросить");
+                sliderBonus.setValue(Float.parseFloat(a));
+
+                orderBonusTitleText.setText("Оплата доставки бонусами");
+                orderBonusTitleCount.setText("-" + a + " ₽");
+            }
+            else {
+                btnGetBonus.setText("Списать");
+
+                orderBonusTitleText.setText("");
+                orderBonusTitleCount.setText("");
+            }
+        });
+
+
+
+            /*orderBonusEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String value = s.toString();
+                if (s.toString().length() > 0) {
+                    String sliderBonusValue = String.valueOf(sliderBonus.getValue());
+                    orderBonusEditText.setText(sliderBonusValue);
+                }
+            }
+        });*/
+
+    }
+
+
+
+    private void LoadBonuses() {
+
     }
 
     public void loadCartFromFribase() {
-        List<CartModel> cartModels = new ArrayList<>(); //ВЕРНУТЬ
+        List<CartModel> cartModels = new ArrayList<>();
         cartModel2 = cartModels;
-        /*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
+
+
+        FirebaseFirestore.getInstance()
+                .collection("Items")
+                .document("hYBO9afiXVTS9vzx73w9")
+                .collection("Promotion")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+
+                                /*String documentId = documentSnapshot.getId();*/
+
+                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+
+                                /*cartModel.setDocumentId(documentId);*/
+                                cartModel.setKey(documentSnapshot.getId());
+
+                                cartModels.add(cartModel);
+                                /*cartAdapter.notifyDataSetChanged();*/
+                            }
+                            cartLoadListener.OnCartloadSuccess(cartModels);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));;
+
+
+
         FirebaseFirestore.getInstance()
                 .collection("Users_Cart")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .collection("Корзина")
                 .document("Restaurants")
                 .collection("PodkrePizza")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+
+                                /*String documentId = documentSnapshot.getId();*/
+
+                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+
+                                /*cartModel.setDocumentId(documentId);*/
+                                cartModel.setKey(documentSnapshot.getId());
+
+                                cartModels.add(cartModel);
+                                /*cartAdapter.notifyDataSetChanged();*/
+                            }
+                            cartLoadListener.OnCartloadSuccess(cartModels);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));;
+
+        FirebaseFirestore.getInstance()
+                .collection("Items")
+                .document("hYBO9afiXVTS9vzx73w9")
+                .collection("Promotion")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -321,7 +482,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         btnBack.setOnClickListener(v -> finish());
 
 
-        btnToOrder.setOnClickListener(new View.OnClickListener() {
+/*        btnToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -330,9 +491,9 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                         startActivity(intent);
 
             }
-        });
+        });*/
 
-/**        btnToOrder.setOnClickListener(new View.OnClickListener() {
+        btnToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Проверяет есть ли в корзине товар
@@ -353,7 +514,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                             intent.putExtra("itemList", (Serializable) cartModel2);
                                             startActivity(intent);
 
-                                        *//*startActivity(new Intent(getApplicationContext(), CartOrderingActivity.class));*//*
+                                       /* startActivity(new Intent(getApplicationContext(), CartOrderingActivity.class));*/
                                     } else {
                                         Toast toast = Toast.makeText(CartActivity.this, "Корзина пуста!", Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.TOP, 0, 0);
@@ -363,7 +524,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                             }
                         });
             }
-        });*/
+        });
     }
 
     @Override

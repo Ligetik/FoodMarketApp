@@ -15,8 +15,6 @@ import com.bumptech.glide.Glide;
 import com.example.testactivityandroid_9.R;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.model.CartModel;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -64,6 +62,8 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
         holder.btnPlus.setOnClickListener(v -> {
            plusCartItem(holder,cartModelList.get(position));
         });
+
+
 
         //new1  РАБОЧИЙ
 

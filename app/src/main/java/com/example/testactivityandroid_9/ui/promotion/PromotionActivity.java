@@ -51,8 +51,6 @@ public class PromotionActivity extends AppCompatActivity implements IPromotionLo
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
         recycler_promotion.setLayoutManager(gridLayoutManager);
         recycler_promotion.addItemDecoration(new SpaceItemDeconstration());
-
-
         List<PromotionModel> promotionModels = new ArrayList<>();
         FirebaseFirestore.getInstance()
                 .collection("Items")

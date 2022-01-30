@@ -59,13 +59,13 @@
                     android:icon="@drawable/stock"
                     android:id="@+id/nav_promotion"/>
 
-                <item android:title="@string/cafe"
+<!--                <item android:title="@string/cafe"
                     android:icon="@drawable/cafe"
                     android:id="@+id/nav_home"/>
 
                 <item android:title="@string/search"
                     android:icon="@drawable/search"
-                    android:id="@+id/search"/>
+                    android:id="@+id/search"/>-->
 
                 <item android:title="@string/basket"
                     android:icon="@drawable/basket"

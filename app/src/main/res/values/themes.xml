@@ -41,6 +41,12 @@
         <item name="color">@color/white</item>
     </style>
 
+    <style name="TextViewBonus" parent="">
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorControlActivated">#c5c5c5</item>
+        <item name="colorControlHighlight">#c5c5c5</item>
+    </style>
+
     <!--TabLayout-->
     <style name="MyTabLayout" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="tabTextAppearance">@style/MyTabTextAppearance</item>
