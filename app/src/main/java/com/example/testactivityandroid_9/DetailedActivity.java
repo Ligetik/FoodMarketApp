@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.testactivityandroid_9.model.DjoModel;
 import com.example.testactivityandroid_9.model.PPpizzaModel;
 
 import butterknife.BindView;
@@ -26,6 +27,7 @@ public class DetailedActivity extends AppCompatActivity {
     ImageView btnBack;
 
     PPpizzaModel pPpizzaModel = null;
+    DjoModel djoModel = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,7 @@ public class DetailedActivity extends AppCompatActivity {
 
     private void getItemsFromFirebase() {
         final Object object = getIntent().getSerializableExtra("details");
+
         if (object instanceof PPpizzaModel) {
             pPpizzaModel = (PPpizzaModel) object;
         }
@@ -48,6 +51,17 @@ public class DetailedActivity extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(pPpizzaModel.getItem_image()).into(item_image);
             item_descr.setText(pPpizzaModel.getItem_details());
             item_name.setText(pPpizzaModel.getItem_name());
+        }
+
+
+        if (object instanceof DjoModel) {
+            djoModel = (DjoModel) object;
+        }
+
+        if (djoModel != null) {
+            Glide.with(getApplicationContext()).load(djoModel.getItem_image()).into(item_image);
+            item_descr.setText(djoModel.getItem_details());
+            item_name.setText(djoModel.getItem_name());
         }
     }
 }

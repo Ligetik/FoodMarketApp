@@ -135,20 +135,20 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 totalPrice += model.getTotalPrice();
 
 
-                                if (model.getQuantity() == 1){
+                                if (model.getId() == 1){
                                     FirebaseFirestore.getInstance()
                                             .collection("Users_Cart")
                                             .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                             .collection("Заказы")
                                             .document(idDocument)
-                                            .update("items2", FieldValue.arrayUnion(cartMap));
-                                } else {
+                                            .update("PodkrePizza", FieldValue.arrayUnion(cartMap));
+                                } else if (model.getId() == 3){
                                     FirebaseFirestore.getInstance()
                                             .collection("Users_Cart")
                                             .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                             .collection("Заказы")
                                             .document(idDocument)
-                                            .update("items", FieldValue.arrayUnion(cartMap));
+                                            .update("Djo", FieldValue.arrayUnion(cartMap));
                                 }
 
 

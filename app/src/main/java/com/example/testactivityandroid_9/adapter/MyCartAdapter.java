@@ -16,6 +16,8 @@ import com.example.testactivityandroid_9.R;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.greenrobot.eventbus.EventBus;
@@ -134,24 +136,38 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
     }
 
     private void deleteFromFirebase(CartModel cartModel) {
-       /* FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
-            FirebaseFirestore.getInstance()
-                    .collection("Users_Cart")
-                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .collection("Корзина")
+/*        DocumentReference db = FirebaseFirestore.getInstance()
+                .collection("Users_Cart")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .collection("Корзина")
+                .document("Restaurants");
+
+        switch (cartModel.getId()) {
+            case 1:
+                db
+                    .collection("PodkrePizza")
                     .document(cartModel.getKey())
                     .delete()
                     .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
-        /*});*/
+                break;
+            case 3:
+                db
+                    .collection("Djo")
+                    .document(cartModel.getKey())
+                    .delete()
+                    .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
+                break;
+        }*/
 
 
-                //old
-           /*FirebaseDatabase.getInstance()
-                .getReference("Cart")
-                .child("UNIQUE_USER_ID")
-                .child(cartModel.getKey())
-                .removeValue()
-                .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));*/
+
+        FirebaseFirestore.getInstance()
+                .collection("Users_Cart")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .collection("Корзина")
+                .document(cartModel.getKey())
+                .delete()
+                .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
 
     }
 
@@ -176,15 +192,39 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
     }
 
     private void updateFirebase(CartModel cartModel) {
-       /* FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*/
-            FirebaseFirestore.getInstance()
-                    .collection("Users_Cart")
-                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .collection("Корзина")
-                    .document(cartModel.getKey())
-                    .set(cartModel)
-                    .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
-        /*});*/
+
+/*        DocumentReference db = FirebaseFirestore.getInstance()
+                .collection("Users_Cart")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .collection("Корзина")
+                .document("Restaurants");
+
+        switch (cartModel.getId()) {
+            case 1:
+                db
+                        .collection("PodkrePizza")
+                        .document(cartModel.getKey())
+                        .set(cartModel)
+                        .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
+                break;
+            case 3:
+                db
+                        .collection("Djo")
+                        .document(cartModel.getKey())
+                        .set(cartModel)
+                        .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
+                break;
+        }*/
+
+
+        FirebaseFirestore.getInstance()
+                .collection("Users_Cart")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .collection("Корзина")
+                .document(cartModel.getKey())
+                .set(cartModel)
+                .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
+
 
                 //old
         /*FirebaseDatabase.getInstance()

@@ -119,8 +119,8 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                     .collection("Users_Cart")
                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .collection("Корзина")
-                    .document("Restaurants")
-                    .collection("PodkrePizza")
+/*                    .document("Restaurants")
+                    .collection("PodkrePizza")*/
                     .document(pPpizzaModel.getKey())
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -139,8 +139,8 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                         .collection("Users_Cart")
                                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .collection("Корзина")
-                                        .document("Restaurants")
-                                        .collection("PodkrePizza")
+/*                                        .document("Restaurants")
+                                        .collection("PodkrePizza")*/
                                         .document(pPpizzaModel.getKey())
                                         .update(updateData)
                                         .addOnSuccessListener(aVoid -> {
@@ -160,13 +160,14 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                 cartModel.setItem_cost(pPpizzaModel.getItem_cost());
                                 cartModel.setQuantity(1);
                                 cartModel.setTotalPrice(pPpizzaModel.getItem_cost());
+                                cartModel.setId(pPpizzaModel.getId());
 
                                 FirebaseFirestore.getInstance()
                                         .collection("Users_Cart")
                                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .collection("Корзина")
-                                        .document("Restaurants")
-                                        .collection("PodkrePizza")
+/*                                        .document("Restaurants")
+                                        .collection("PodkrePizza")*/
                                         .document(pPpizzaModel.getKey())
                                         .set(cartModel)
                                         .addOnSuccessListener(aVoid -> {

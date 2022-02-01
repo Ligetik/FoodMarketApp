@@ -49,7 +49,7 @@
     <RelativeLayout
         android:id="@+id/orderPayment"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="330dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="100"
+                android:text="0"
                 android:textColor="@color/orange"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -217,10 +217,10 @@
 
             <TextView
                 android:id="@+id/titleFreeDelivery"
-                android:layout_width="250dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:text="До бесплатной доставки осталось"
+                android:text="До минимальной суммы заказа"
                 android:textColor="@color/orange"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -237,12 +237,40 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/orderTotal"
+            android:id="@+id/orderTotalDelivery"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/orderFreeDelivery"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="23dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/titleTotalDelivery"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="Доставка"
+                android:textColor="@color/orange"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtTotalDelivery"
+                android:layout_width="142dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:textColor="@color/orange"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/orderTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/orderTotalDelivery"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <TextView

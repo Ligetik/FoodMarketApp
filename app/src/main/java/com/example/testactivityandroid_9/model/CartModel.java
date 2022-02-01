@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CartModel implements Serializable {
     private  String key,item_name,item_image, item_details;
-    private int quantity, item_cost, totalPrice;
+    private int quantity, item_cost, totalPrice, id;
 /*    private List<String> details;*/
 
     public CartModel() {
@@ -67,6 +67,14 @@ public class CartModel implements Serializable {
 
     public void setItem_details(String item_details) {
         this.item_details = item_details;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 

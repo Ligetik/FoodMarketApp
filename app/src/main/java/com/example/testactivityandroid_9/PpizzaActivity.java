@@ -368,6 +368,7 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
     }
 
     private void countCartItem() {
+
         List<CartModel> cartModels = new ArrayList<>();
         FirebaseFirestore.getInstance()
                 .collection("Users_Cart")
@@ -387,6 +388,26 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                         }
                     }
                 });
+
+/*        List<CartModel> cartModels = new ArrayList<>();
+        FirebaseFirestore.getInstance()
+                .collection("Users_Cart")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .collection("Корзина")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+                                cartModel.setKey(documentSnapshot.getId());
+                                cartModels.add(cartModel);
+                            }
+                            cartLoadListener.OnCartloadSuccess(cartModels);
+                        }
+                    }
+                });*/
     }
 
 

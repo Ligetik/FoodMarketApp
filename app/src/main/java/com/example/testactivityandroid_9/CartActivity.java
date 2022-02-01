@@ -64,6 +64,10 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     TextView orderBonusTitleCount;
     @BindView(R.id.orderBonusTitleText)
     TextView orderBonusTitleText;
+    @BindView(R.id.textView12)
+    TextView textView12;
+    @BindView(R.id.textView13)
+    TextView textView13;
     @BindView(R.id.btnToOrder)
     Button btnToOrder;
     @BindView(R.id.btnGetBonus)
@@ -111,68 +115,79 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
         orderBonusEditText.setTransformationMethod(null);
 
-        FirebaseFirestore.getInstance()
-                .collection("user")
-                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+        if (FirebaseAuth.getInstance().getCurrentUser().isAnonymous()) {
+            sliderBonus.setVisibility(View.GONE);
+            orderBonusEditText.setVisibility(View.GONE);
+            btnGetBonus.setVisibility(View.GONE);
+            orderBonus.setVisibility(View.GONE);
+            textView12.setVisibility(View.GONE);
+            textView13.setVisibility(View.GONE);
+        } else {
+            FirebaseFirestore.getInstance()
+                    .collection("user")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                        bonus = documentSnapshot.getLong("bonus").intValue();
+                            bonus = documentSnapshot.getLong("bonus").intValue();
+                            orderBonus.setText(bonus + "");
 
-                        orderBonus.setText(bonus + "");
+                            if (bonus == 0) {
+                                sliderBonus.setVisibility(View.GONE);
+                                orderBonusEditText.setVisibility(View.GONE);
+                                btnGetBonus.setVisibility(View.GONE);
+                            }
+                            else {
+                                orderBonusEditText.setText(bonus + "");
 
-                        orderBonusEditText.setText(bonus + "");
-
-                        sliderBonus.setValueTo(bonus);
-                        sliderBonus.setValue(bonus);
-
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(CartActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                                sliderBonus.setValueTo(bonus);
+                                sliderBonus.setValue(bonus);
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(CartActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
 
-        sliderBonus.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
-            @SuppressLint("RestrictedApi")
-            @Override
-            public void onStartTrackingTouch(@NonNull Slider slider) {
+            sliderBonus.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+                @SuppressLint("RestrictedApi")
+                @Override
+                public void onStartTrackingTouch(@NonNull Slider slider) {
 
-            }
+                }
 
-            @SuppressLint("RestrictedApi")
-            @Override
-            public void onStopTrackingTouch(@NonNull Slider slider) {
-                String sliderBonusValue = String.valueOf((int) sliderBonus.getValue());
-                orderBonusEditText.setText(sliderBonusValue);
-            }
-        });
+                @SuppressLint("RestrictedApi")
+                @Override
+                public void onStopTrackingTouch(@NonNull Slider slider) {
+                    String sliderBonusValue = String.valueOf((int) sliderBonus.getValue());
+                    orderBonusEditText.setText(sliderBonusValue);
+                }
+            });
 
-        btnGetBonus.setOnClickListener(v -> {
-            String buttonText = btnGetBonus.getText().toString();
-            String a = String.valueOf(orderBonusEditText.getText());
+            btnGetBonus.setOnClickListener(v -> {
+                String buttonText = btnGetBonus.getText().toString();
+                String bonusCount = String.valueOf(orderBonusEditText.getText());
 
-            if (buttonText.equals("Списать")) {
-                btnGetBonus.setText("Сбросить");
-                sliderBonus.setValue(Float.parseFloat(a));
+                if (buttonText.equals("Списать")) {
+                    btnGetBonus.setText("Сбросить");
+                    sliderBonus.setValue(Float.parseFloat(bonusCount));
 
-                orderBonusTitleText.setText("Оплата доставки бонусами");
-                orderBonusTitleCount.setText("-" + a + " ₽");
-            }
-            else {
-                btnGetBonus.setText("Списать");
+                    orderBonusTitleText.setText("Оплата доставки бонусами");
+                    orderBonusTitleCount.setText("-" + bonusCount + " ₽");
+                } else {
+                    btnGetBonus.setText("Списать");
 
-                orderBonusTitleText.setText("");
-                orderBonusTitleCount.setText("");
-            }
-        });
-
+                    orderBonusTitleText.setText("");
+                    orderBonusTitleCount.setText("");
+                }
+            });
+        }
 
 
             /*orderBonusEditText.addTextChangedListener(new TextWatcher() {
@@ -205,40 +220,10 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     }
 
     public void loadCartFromFribase() {
-        List<CartModel> cartModels = new ArrayList<>();
-        cartModel2 = cartModels;
+/*        List<CartModel> cartModels = new ArrayList<>();
+        cartModel2 = cartModels;*/
 
-
-        FirebaseFirestore.getInstance()
-                .collection("Items")
-                .document("hYBO9afiXVTS9vzx73w9")
-                .collection("Promotion")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
-
-                                /*String documentId = documentSnapshot.getId();*/
-
-                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
-
-                                /*cartModel.setDocumentId(documentId);*/
-                                cartModel.setKey(documentSnapshot.getId());
-
-                                cartModels.add(cartModel);
-                                /*cartAdapter.notifyDataSetChanged();*/
-                            }
-                            cartLoadListener.OnCartloadSuccess(cartModels);
-                        }
-                    }
-                })
-                .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));;
-
-
-
-        FirebaseFirestore.getInstance()
+        /*FirebaseFirestore.getInstance()
                 .collection("Users_Cart")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .collection("Корзина")
@@ -251,42 +236,15 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
 
-                                /*String documentId = documentSnapshot.getId();*/
+                                *//*String documentId = documentSnapshot.getId();*//*
 
                                 CartModel cartModel = documentSnapshot.toObject(CartModel.class);
 
-                                /*cartModel.setDocumentId(documentId);*/
+                                *//*cartModel.setDocumentId(documentId);*//*
                                 cartModel.setKey(documentSnapshot.getId());
 
                                 cartModels.add(cartModel);
-                                /*cartAdapter.notifyDataSetChanged();*/
-                            }
-                            cartLoadListener.OnCartloadSuccess(cartModels);
-                        }
-                    }
-                })
-                .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));;
-
-        FirebaseFirestore.getInstance()
-                .collection("Items")
-                .document("hYBO9afiXVTS9vzx73w9")
-                .collection("Promotion")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
-
-                                /*String documentId = documentSnapshot.getId();*/
-
-                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
-
-                                /*cartModel.setDocumentId(documentId);*/
-                                cartModel.setKey(documentSnapshot.getId());
-
-                                cartModels.add(cartModel);
-                                /*cartAdapter.notifyDataSetChanged();*/
+                                *//*cartAdapter.notifyDataSetChanged();*//*
                             }
                             cartLoadListener.OnCartloadSuccess(cartModels);
                         }
@@ -307,54 +265,51 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
 
-                                /*String documentId = documentSnapshot.getId();*/
+                                *//*String documentId = documentSnapshot.getId();*//*
 
                                 CartModel cartModel = documentSnapshot.toObject(CartModel.class);
 
-                                /*cartModel.setDocumentId(documentId);*/
+                                *//*cartModel.setDocumentId(documentId);*//*
                                 cartModel.setKey(documentSnapshot.getId());
 
                                 cartModels.add(cartModel);
-                                /*cartAdapter.notifyDataSetChanged();*/
+                                *//*cartAdapter.notifyDataSetChanged();*//*
+                            }
+                            cartLoadListener.OnCartloadSuccess(cartModels);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));*/
+
+
+            //new 2_1
+        List<CartModel> cartModels = new ArrayList<>(); //ВЕРНУТЬ
+        cartModel2 = cartModels;
+
+        FirebaseFirestore.getInstance()
+                .collection("Users_Cart")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .collection("Корзина")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+
+                                String documentId = documentSnapshot.getId();
+
+                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+
+                                cartModel.setKey(documentSnapshot.getId());
+
+                                cartModels.add(cartModel);
                             }
                             cartLoadListener.OnCartloadSuccess(cartModels);
                         }
                     }
                 })
                 .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
-
-
-            //new 2_1
-/*        List<CartModel> cartModels = new ArrayList<>(); //ВЕРНУТЬ
-        cartModel2 = cartModels;
-        *//*FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener((Task<AuthResult> task) -> {*//*
-            FirebaseFirestore.getInstance()
-                    .collection("Users_Cart")
-                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .collection("Корзина")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
-
-                                    *//*String documentId = documentSnapshot.getId();*//*
-
-                                    CartModel cartModel = documentSnapshot.toObject(CartModel.class);
-
-                                    *//*cartModel.setDocumentId(documentId);*//*
-                                    cartModel.setKey(documentSnapshot.getId());
-
-                                    cartModels.add(cartModel);
-                                    *//*cartAdapter.notifyDataSetChanged();*//*
-                                }
-                                cartLoadListener.OnCartloadSuccess(cartModels);
-                            }
-                        }
-                    })
-                    .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));;*/
-        /*});*/
 
 
 /*               //new3
@@ -514,7 +469,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                             intent.putExtra("itemList", (Serializable) cartModel2);
                                             startActivity(intent);
 
-                                       /* startActivity(new Intent(getApplicationContext(), CartOrderingActivity.class));*/
+                                            /*startActivity(new Intent(getApplicationContext(), CartOrderingActivity.class));*/
                                     } else {
                                         Toast toast = Toast.makeText(CartActivity.this, "Корзина пуста!", Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.TOP, 0, 0);

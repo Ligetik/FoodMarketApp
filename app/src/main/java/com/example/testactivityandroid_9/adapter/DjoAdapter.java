@@ -92,8 +92,8 @@ public class DjoAdapter extends RecyclerView.Adapter<DjoAdapter.MyPizzaViewHolde
                     .collection("Users_Cart")
                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .collection("Корзина")
-                    .document("Restaurants")
-                    .collection("Djo")
+/*                    .document("Restaurants")
+                    .collection("Djo")*/
                     .document(djoModel.getKey())
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -134,13 +134,14 @@ public class DjoAdapter extends RecyclerView.Adapter<DjoAdapter.MyPizzaViewHolde
                                 cartModel.setItem_cost(djoModel.getItem_cost());
                                 cartModel.setQuantity(1);
                                 cartModel.setTotalPrice(djoModel.getItem_cost());
+                                cartModel.setId(djoModel.getId());
 
                                 FirebaseFirestore.getInstance()
                                         .collection("Users_Cart")
                                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .collection("Корзина")
-                                        .document("Restaurants")
-                                        .collection("Djo")
+/*                                        .document("Restaurants")
+                                        .collection("Djo")*/
                                         .document(djoModel.getKey())
                                         .set(cartModel)
                                         .addOnSuccessListener(aVoid -> {

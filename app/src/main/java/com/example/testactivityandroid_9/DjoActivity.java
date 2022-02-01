@@ -18,7 +18,6 @@ import com.example.testactivityandroid_9.adapter.MyPizzaAdapter;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.listener.ICartLoadListener;
 import com.example.testactivityandroid_9.listener.IDjoLoadListener;
-import com.example.testactivityandroid_9.listener.IPPpizzaLoadListener;
 import com.example.testactivityandroid_9.listener.IPPpizzaLoadSearchListener;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.example.testactivityandroid_9.model.DjoModel;
@@ -95,7 +94,7 @@ public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, 
         setContentView(R.layout.activity_djo);
 
         init();
-        loadPizzaFromFirebase();
+        loadFritureFromFirebase();
         countCartItem();
 
         imageButton = (ImageButton)findViewById(R.id.back);
@@ -108,9 +107,6 @@ public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, 
 
 
     }
-
-
-
 
 
                 //new1 РАБОЧИЙ
@@ -170,7 +166,7 @@ public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, 
 
 
     @NonNull
-    private Task<QuerySnapshot> loadMenuPodkrePizza(List<DjoModel> djoModels, String pizza) {
+    private Task<QuerySnapshot> loadMenuDjo(List<DjoModel> djoModels, String pizza) {
         return FirebaseFirestore.getInstance()
                 .collection("Items3")
                 .document("MYHsl3omNB5RYatTPibp")
@@ -193,29 +189,25 @@ public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, 
                 });
     }
 
+    private void loadFritureFromFirebase() {
+        List<DjoModel> djoModels = new ArrayList<>();
+        loadMenuDjo(djoModels, "Friture");
+    }
     private void loadPizzaFromFirebase() {
         List<DjoModel> djoModels = new ArrayList<>();
-        loadMenuPodkrePizza(djoModels, "Seti");
-    }
-/*    private void loadBurgerFromFirebase() {
-        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        loadMenuPodkrePizza(ppizzaModels, "Burger");
+        loadMenuDjo(djoModels, "Pizza");
     }
 
-    private void loadRollsFromFirebase() {
-        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        loadMenuPodkrePizza(ppizzaModels, "Rolls");
+    private void loadSetiFromFirebase() {
+        List<DjoModel> djoModels = new ArrayList<>();
+        loadMenuDjo(djoModels, "Seti");
     }
 
-    private void loadDesertiFromFirebase() {
-        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        loadMenuPodkrePizza(ppizzaModels, "Deserti");
+    private void loadDopolnenieFromFirebase() {
+        List<DjoModel> djoModels = new ArrayList<>();
+        loadMenuDjo(djoModels, "Dopolnenie");
     }
 
-    private void loadNapitkiFromFirebase() {
-        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        loadMenuPodkrePizza(ppizzaModels, "Napitki");
-    }*/
 
     private void init() {
         ButterKnife.bind(this);
@@ -241,20 +233,17 @@ public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
+                    loadFritureFromFirebase();
+                }
+                if (tab.getPosition() == 1) {
                     loadPizzaFromFirebase();
                 }
-               /* if (tab.getPosition() == 1) {
-                    loadBurgerFromFirebase();
-                }
                 if (tab.getPosition() == 2) {
-                    loadRollsFromFirebase();
+                    loadSetiFromFirebase();
                 }
                 if (tab.getPosition() == 3) {
-                    loadDesertiFromFirebase();
+                    loadDopolnenieFromFirebase();
                 }
-                if (tab.getPosition() == 4) {
-                    loadNapitkiFromFirebase();
-                }*/
             }
 
             @Override
