@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.testactivityandroid_9.AvocadoActivity;
 import com.example.testactivityandroid_9.DjoActivity;
 import com.example.testactivityandroid_9.PpizzaActivity;
 import com.example.testactivityandroid_9.R;
@@ -23,6 +24,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     ImageButton podkrepizza_imagebutton;
     ImageButton djo_imagebutton;
+    ImageButton avocado_imagebutton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +48,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), DjoActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        avocado_imagebutton = (ImageButton)root.findViewById(R.id.avocado_imagebutton);
+        avocado_imagebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AvocadoActivity.class);
                 startActivity(intent);
             }
         });

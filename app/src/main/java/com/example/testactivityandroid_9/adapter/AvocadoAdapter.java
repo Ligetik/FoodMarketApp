@@ -17,9 +17,8 @@ import com.example.testactivityandroid_9.R;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.listener.ICartLoadListener;
 import com.example.testactivityandroid_9.listener.IRecyclerViewClickListener;
+import com.example.testactivityandroid_9.model.AvocadoModel;
 import com.example.testactivityandroid_9.model.CartModel;
-import com.example.testactivityandroid_9.model.DjoModel;
-import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
@@ -37,18 +36,18 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class DjoAdapter extends RecyclerView.Adapter<DjoAdapter.MyPizzaViewHolder> {
+public class AvocadoAdapter extends RecyclerView.Adapter<AvocadoAdapter.MyPizzaViewHolder> {
 
     private Context context;
-    private List<DjoModel> djoModelList;
+    private List<AvocadoModel> avocadoModelList;
     private ICartLoadListener iCartLoadListener;
     private List<CartModel> cartModelList;
     private  FirebaseFirestore db;
     private static final String TAG = "MyActivity";
 
-    public DjoAdapter(Context context, List<DjoModel> djoModelList, ICartLoadListener iCartLoadListener) {
+    public AvocadoAdapter(Context context, List<AvocadoModel> avocadoModelList, ICartLoadListener iCartLoadListener) {
         this.context = context;
-        this.djoModelList = djoModelList;
+        this.avocadoModelList = avocadoModelList;
         this.iCartLoadListener = iCartLoadListener;
 
     }
@@ -63,29 +62,29 @@ public class DjoAdapter extends RecyclerView.Adapter<DjoAdapter.MyPizzaViewHolde
     @Override
     public void onBindViewHolder(@NonNull MyPizzaViewHolder holder, int position) {
         Glide.with(context)
-                .load(djoModelList.get(position).getItem_image())
+                .load(avocadoModelList.get(position).getItem_image())
                 .into(holder.imagetovar);
 
-        holder.textMoney.setText(new StringBuilder().append(djoModelList.get(position).getItem_cost()));
-        holder.textName.setText(new StringBuilder().append(djoModelList.get(position).getItem_name()));
-        holder.descrName.setText(new StringBuilder().append(djoModelList.get(position).getItem_details()));
-        holder.titleWeight.setText(new StringBuilder().append(djoModelList.get(position).getItem_weight()));
+        holder.textMoney.setText(new StringBuilder().append(avocadoModelList.get(position).getItem_cost()));
+        holder.textName.setText(new StringBuilder().append(avocadoModelList.get(position).getItem_name()));
+        holder.descrName.setText(new StringBuilder().append(avocadoModelList.get(position).getItem_details()));
+        holder.titleWeight.setText(new StringBuilder().append(avocadoModelList.get(position).getItem_weight()));
 
         holder.btnAddToCart.setOnClickListener(v -> {
-            addToCart(djoModelList.get(position));
+            addToCart(avocadoModelList.get(position));
         });
 
         holder.setListener((view, adapterPosition) -> {
 
             Intent intent = new Intent(context, DetailedActivity.class);
-            intent.putExtra("details", djoModelList.get(position));
+            intent.putExtra("details", avocadoModelList.get(position));
             context.startActivity(intent);
 
         });
 
     }
 
-    private void addToCart(DjoModel djoModel) {
+    private void addToCart(AvocadoModel avocadoModel) {
 
         try {
             FirebaseFirestore.getInstance()
@@ -94,7 +93,7 @@ public class DjoAdapter extends RecyclerView.Adapter<DjoAdapter.MyPizzaViewHolde
                     .collection("Корзина")
 /*                    .document("Restaurants")
                     .collection("Djo")*/
-                    .document(djoModel.getKey())
+                    .document(avocadoModel.getKey())
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
@@ -115,7 +114,7 @@ public class DjoAdapter extends RecyclerView.Adapter<DjoAdapter.MyPizzaViewHolde
                                         .collection("Корзина")
 /*                                        .document("Restaurants")
                                         .collection("Djo")*/
-                                        .document(djoModel.getKey())
+                                        .document(avocadoModel.getKey())
                                         .update(updateData)
                                         .addOnSuccessListener(aVoid -> {
 
@@ -127,14 +126,14 @@ public class DjoAdapter extends RecyclerView.Adapter<DjoAdapter.MyPizzaViewHolde
                             else // если в корзине нет предмета, то добавить новый
                             {
                                 CartModel cartModel = new CartModel();
-                                cartModel.setItem_name(djoModel.getItem_name());
-                                cartModel.setItem_image(djoModel.getItem_image());
-                                cartModel.setItem_details(djoModel.getItem_details());
-                                cartModel.setKey(djoModel.getKey());
-                                cartModel.setItem_cost(djoModel.getItem_cost());
+                                cartModel.setItem_name(avocadoModel.getItem_name());
+                                cartModel.setItem_image(avocadoModel.getItem_image());
+                                cartModel.setItem_details(avocadoModel.getItem_details());
+                                cartModel.setKey(avocadoModel.getKey());
+                                cartModel.setItem_cost(avocadoModel.getItem_cost());
                                 cartModel.setQuantity(1);
-                                cartModel.setTotalPrice(djoModel.getItem_cost());
-                                cartModel.setId(djoModel.getId());
+                                cartModel.setTotalPrice(avocadoModel.getItem_cost());
+                                cartModel.setId(avocadoModel.getId());
 
                                 FirebaseFirestore.getInstance()
                                         .collection("Users_Cart")
@@ -142,7 +141,7 @@ public class DjoAdapter extends RecyclerView.Adapter<DjoAdapter.MyPizzaViewHolde
                                         .collection("Корзина")
 /*                                        .document("Restaurants")
                                         .collection("Djo")*/
-                                        .document(djoModel.getKey())
+                                        .document(avocadoModel.getKey())
                                         .set(cartModel)
                                         .addOnSuccessListener(aVoid -> {
                                             iCartLoadListener.OnCartloadFailed("Добавлено");
@@ -226,7 +225,7 @@ public class DjoAdapter extends RecyclerView.Adapter<DjoAdapter.MyPizzaViewHolde
 
     @Override
     public int getItemCount() {
-        return djoModelList.size();
+        return avocadoModelList.size();
     }
 
     public class MyPizzaViewHolder  extends  RecyclerView.ViewHolder implements View.OnClickListener {

@@ -13,15 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.testactivityandroid_9.adapter.DjoAdapter;
-import com.example.testactivityandroid_9.adapter.MyPizzaAdapter;
+import com.example.testactivityandroid_9.adapter.AvocadoAdapter;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
+import com.example.testactivityandroid_9.listener.IAvocadoLoadListener;
 import com.example.testactivityandroid_9.listener.ICartLoadListener;
-import com.example.testactivityandroid_9.listener.IDjoLoadListener;
 import com.example.testactivityandroid_9.listener.IPPpizzaLoadSearchListener;
+import com.example.testactivityandroid_9.model.AvocadoModel;
 import com.example.testactivityandroid_9.model.CartModel;
-import com.example.testactivityandroid_9.model.DjoModel;
-import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.example.testactivityandroid_9.utils.SpaceItemDeconstration;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,12 +41,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, ICartLoadListener  {
+public class AvocadoActivity extends AppCompatActivity implements IAvocadoLoadListener, ICartLoadListener  {
     private static final String TAG = "MyActivity";
     @BindView(R.id.resview)
     RecyclerView resview;
-/*    @BindView(R.id.searchRecycler)
-    RecyclerView searchRecycler;*/
+    /*    @BindView(R.id.searchRecycler)
+        RecyclerView searchRecycler;*/
     @BindView(R.id.mainLayout)
     RelativeLayout mainLayout;
     ImageButton imageButton;
@@ -59,7 +57,7 @@ public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, 
     @BindView(R.id.searchTextInput)
     EditText searchTextInput;
 
-    IDjoLoadListener djoLoadListener;
+    IAvocadoLoadListener avocadoLoadListener;
     ICartLoadListener cartLoadListener;
     IPPpizzaLoadSearchListener ppizzaLoadSearchListener;
 
@@ -88,10 +86,10 @@ public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_djo);
+        setContentView(R.layout.activity_avocado);
 
         init();
-        loadFritureFromFirebase();
+        loadPizzaFromFirebase();
         countCartItem();
 
         imageButton = (ImageButton)findViewById(R.id.back);
@@ -101,72 +99,14 @@ public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, 
                 onBackPressed();
             }
         });
-
-
+        
     }
 
-
-                //new1 РАБОЧИЙ
-       /* List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        FirebaseFirestore.getInstance().collection("Items")
-                .document("hYBO9afiXVTS9vzx73w9")
-                .collection("Pizza")
-                .orderBy("item_cost", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-                        if (error != null) {
-                            Log.e("Firestore error", error.getMessage());
-                            return;
-                        }
-                        for (DocumentChange dc : value.getDocumentChanges()) {
-
-                            if (dc.getType() == DocumentChange.Type.ADDED) {
-
-                                ppizzaModels.add(dc.getDocument().toObject(PPpizzaModel.class));
-                            }
-                        }
-                        ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);
-                    }
-                });*/
-
-
-        //old
-/*        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        FirebaseFirestore.getInstance()
-                .getReference("Item")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()){
-                            for (DataSnapshot pizzaSnapshot:snapshot.getChildren())
-                            {
-                                PPpizzaModel ppizzaModel = pizzaSnapshot.getValue(PPpizzaModel.class);
-                                ppizzaModel.setKey(pizzaSnapshot.getKey());
-                                ppizzaModels.add(ppizzaModel);
-                            }
-                            ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);
-
-                        }
-                        else
-                            ppizzaLoadListener.OnPPpizzaloadFailed("Что то пишет");
-                    }
-
-
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        ppizzaLoadListener.OnPPpizzaloadFailed(databaseError.getMessage());
-                    }
-                });*/
-
-
     @NonNull
-    private Task<QuerySnapshot> loadMenuDjo(List<DjoModel> djoModels, String pizza) {
+    private Task<QuerySnapshot> loadMenuAvocado(List<AvocadoModel> avocadoModels, String pizza) {
         return FirebaseFirestore.getInstance()
-                .collection("Items3")
-                .document("MYHsl3omNB5RYatTPibp")
+                .collection("Items2")
+                .document("g2oIl2f0iOKMrnZm5akC")
                 .collection(pizza)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -174,42 +114,91 @@ public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, 
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
-                                DjoModel djoModel = documentSnapshot.toObject(DjoModel.class);
-                                djoModel.setKey(documentSnapshot.getId());
-                                djoModels.add(djoModel);
+                                AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                                avocadoModel.setKey(documentSnapshot.getId());
+                                avocadoModels.add(avocadoModel);
                             }
-                            djoLoadListener.OnDjoloadSuccess(djoModels);
+                            avocadoLoadListener.OnAvocadoloadSuccess(avocadoModels);
                         } else {
-                            djoLoadListener.OnDjoloadFailed("Ошибка");
+                            avocadoLoadListener.OnAvocadoloadFailed("Ошибка");
                         }
                     }
                 });
     }
 
-    private void loadFritureFromFirebase() {
-        List<DjoModel> djoModels = new ArrayList<>();
-        loadMenuDjo(djoModels, "Friture");
-    }
     private void loadPizzaFromFirebase() {
-        List<DjoModel> djoModels = new ArrayList<>();
-        loadMenuDjo(djoModels, "Pizza");
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Pizza");
+    }
+    private void loadVokFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "BOK");
     }
 
-    private void loadSetiFromFirebase() {
-        List<DjoModel> djoModels = new ArrayList<>();
-        loadMenuDjo(djoModels, "Seti");
+    private void loadSalatiFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Salati");
     }
 
-    private void loadDopolnenieFromFirebase() {
-        List<DjoModel> djoModels = new ArrayList<>();
-        loadMenuDjo(djoModels, "Dopolnenie");
+    private void loadSupiFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Supi");
     }
 
+    private void loadZavertonFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Rolls");
+    }
+
+    private void loadSandwichFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Sandwich");
+    }
+
+    private void loadKartofelfriFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Kartofelfri");
+    }
+
+    private void loadKashaFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Kasha");
+    }
+
+    private void loadAvtorskiechaiFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Avtorskiechai");
+    }
+
+    private void loadMolochniekokteyliFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Molochniekokteyli");
+    }
+
+    private void loadNapitkiFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Napitki");
+    }
+
+    private void loadCofeFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Napitki");
+    }
+
+    private void loadDesertiFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Napitki");
+    }
+
+    private void loadDopolnitelnieingridientiFromFirebase() {
+        List<AvocadoModel> avocadoModels = new ArrayList<>();
+        loadMenuAvocado(avocadoModels, "Napitki");
+    }
 
     private void init() {
         ButterKnife.bind(this);
 
-        djoLoadListener = this;
+        avocadoLoadListener = this;
         cartLoadListener = this;
 
 
@@ -229,17 +218,49 @@ public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0) {
-                    loadFritureFromFirebase();
-                }
-                if (tab.getPosition() == 1) {
-                    loadPizzaFromFirebase();
-                }
-                if (tab.getPosition() == 2) {
-                    loadSetiFromFirebase();
-                }
-                if (tab.getPosition() == 3) {
-                    loadDopolnenieFromFirebase();
+                switch (tab.getPosition()) {
+                    case 0:
+                        loadPizzaFromFirebase();
+                        break;
+                    case 1:
+                        loadVokFromFirebase();
+                        break;
+                    case 2:
+                        loadSalatiFromFirebase();
+                        break;
+                    case 3:
+                        loadSupiFromFirebase();
+                        break;
+                    case 4:
+                        loadZavertonFromFirebase();
+                        break;
+                    case 5:
+                        loadSandwichFromFirebase();
+                        break;
+                    case 6:
+                        loadKartofelfriFromFirebase();
+                        break;
+                    case 7:
+                        loadKashaFromFirebase();
+                        break;
+                    case 8:
+                        loadAvtorskiechaiFromFirebase();
+                        break;
+                    case 9:
+                        loadMolochniekokteyliFromFirebase();
+                        break;
+                    case 10:
+                        loadNapitkiFromFirebase();
+                        break;
+                    case 11:
+                        loadCofeFromFirebase();
+                        break;
+                    case 12:
+                        loadDesertiFromFirebase();
+                        break;
+                    case 13:
+                        loadDopolnitelnieingridientiFromFirebase();
+                        break;
                 }
             }
 
@@ -313,13 +334,13 @@ public class DjoActivity extends AppCompatActivity implements IDjoLoadListener, 
     }
 
     @Override
-    public void OnDjoloadSuccess(List<DjoModel> djoModeList) {
-        DjoAdapter adapter = new DjoAdapter(this,djoModeList,cartLoadListener);
+    public void OnAvocadoloadSuccess(List<AvocadoModel> avocadoModeList) {
+        AvocadoAdapter adapter = new AvocadoAdapter(this,avocadoModeList,cartLoadListener);
         resview.setAdapter(adapter);
     }
 
     @Override
-    public void OnDjoloadFailed(String message) {
+    public void OnAvocadoloadFailed(String message) {
         Snackbar.make(mainLayout,message,Snackbar.LENGTH_LONG).show();
     }
 

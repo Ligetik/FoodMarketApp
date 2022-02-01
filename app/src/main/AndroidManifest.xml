@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestActivityAndroid_9">
         <activity
+            android:name=".AvocadoActivity"
+            android:exported="false" />
+        <activity
             android:name=".DjoActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

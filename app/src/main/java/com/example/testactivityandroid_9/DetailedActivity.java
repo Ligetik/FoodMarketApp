@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.testactivityandroid_9.model.AvocadoModel;
 import com.example.testactivityandroid_9.model.DjoModel;
 import com.example.testactivityandroid_9.model.PPpizzaModel;
 
@@ -27,6 +28,7 @@ public class DetailedActivity extends AppCompatActivity {
     ImageView btnBack;
 
     PPpizzaModel pPpizzaModel = null;
+    AvocadoModel avocadoModel = null;
     DjoModel djoModel = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,17 @@ public class DetailedActivity extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(pPpizzaModel.getItem_image()).into(item_image);
             item_descr.setText(pPpizzaModel.getItem_details());
             item_name.setText(pPpizzaModel.getItem_name());
+        }
+
+
+        if (object instanceof AvocadoModel) {
+            avocadoModel = (AvocadoModel) object;
+        }
+
+        if (avocadoModel != null) {
+            Glide.with(getApplicationContext()).load(avocadoModel.getItem_image()).into(item_image);
+            item_descr.setText(avocadoModel.getItem_details());
+            item_name.setText(avocadoModel.getItem_name());
         }
 
 

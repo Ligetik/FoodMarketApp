@@ -135,29 +135,38 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 totalPrice += model.getTotalPrice();
 
 
-                                if (model.getId() == 1){
-                                    FirebaseFirestore.getInstance()
-                                            .collection("Users_Cart")
-                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .collection("Заказы")
-                                            .document(idDocument)
-                                            .update("PodkrePizza", FieldValue.arrayUnion(cartMap));
-                                } else if (model.getId() == 3){
-                                    FirebaseFirestore.getInstance()
-                                            .collection("Users_Cart")
-                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .collection("Заказы")
-                                            .document(idDocument)
-                                            .update("Djo", FieldValue.arrayUnion(cartMap));
+                                switch (model.getId()) {
+                                    case 1:
+                                        FirebaseFirestore.getInstance()
+                                                .collection("Users_Cart")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .collection("Заказы")
+                                                .document(idDocument)
+                                                .update("PodkrePizza", FieldValue.arrayUnion(cartMap));
+                                        break;
+                                    case 2:
+                                        FirebaseFirestore.getInstance()
+                                                .collection("Users_Cart")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .collection("Заказы")
+                                                .document(idDocument)
+                                                .update("Avocado", FieldValue.arrayUnion(cartMap));
+                                        break;
+                                    case 3:
+                                        FirebaseFirestore.getInstance()
+                                                .collection("Users_Cart")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .collection("Заказы")
+                                                .document(idDocument)
+                                                .update("Djo", FieldValue.arrayUnion(cartMap));
+                                        break;
                                 }
 
 
-                                /*DeleteCart(model);*/
+                                DeleteCart(model);
 
                             }
                         }
-
-
 
                         //считалка итог. суммы
                         itemMap.put("totalPrice", totalPrice /*model.getItem_cost()*/) ;
@@ -173,7 +182,7 @@ public class CartOrderingActivity extends AppCompatActivity {
 
                     }
 
-                    /*//очистка корзины
+                    //очистка корзины
                     private void DeleteCart(CartModel model) {
                         FirebaseFirestore.getInstance()
                                 .collection("Users_Cart")
@@ -182,7 +191,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 .document(model.getKey())
                                 .delete()
                                 .addOnSuccessListener(aVoid -> EventBus.getDefault().postSticky(new MyUpdateCartEvent()));
-                    }*/
+                    }
                 });
 /*
 
