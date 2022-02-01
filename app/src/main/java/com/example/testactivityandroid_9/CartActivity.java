@@ -138,8 +138,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                 sliderBonus.setVisibility(View.GONE);
                                 orderBonusEditText.setVisibility(View.GONE);
                                 btnGetBonus.setVisibility(View.GONE);
-                            }
-                            else {
+                            } else {
                                 orderBonusEditText.setText(bonus + "");
 
                                 sliderBonus.setValueTo(bonus);

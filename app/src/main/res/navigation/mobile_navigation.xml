@@ -53,6 +53,11 @@
         android:name="com.example.testactivityandroid_9.ui.history.HistoryOrderActivity"
         android:label="history"
         tools:layout="@layout/activity_history_order" />
+    <activity
+        android:id="@+id/nav_cart"
+        android:name="com.example.testactivityandroid_9.CartActivity"
+        android:label="cart"
+        tools:layout="@layout/activity_cart"/>
 <!--    <activity
         android:id="@+id/nav_restaurants"
         android:name="com.example.testactivityandroid_9.ui.restaurants.RestaurantsActivity"

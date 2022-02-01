@@ -69,7 +69,7 @@
 
                 <item android:title="@string/basket"
                     android:icon="@drawable/basket"
-                    android:id="@+id/basket"/>
+                    android:id="@+id/nav_cart"/>
 
                 <item android:title="@string/history"
                     android:icon="@drawable/history"
