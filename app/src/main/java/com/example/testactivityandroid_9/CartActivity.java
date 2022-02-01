@@ -179,6 +179,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
                     orderBonusTitleText.setText("Оплата доставки бонусами");
                     orderBonusTitleCount.setText("-" + bonusCount + " ₽");
+
                 } else {
                     btnGetBonus.setText("Списать");
 
@@ -465,7 +466,10 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
                                         }
                                             Intent intent = new Intent(getApplicationContext(), CartOrderingActivity.class);
+
                                             intent.putExtra("itemList", (Serializable) cartModel2);
+                                            intent.putExtra("bonus", orderBonusEditText.getText().toString());
+                                            intent.putExtra("btnGetBonus", btnGetBonus.getText().toString());
                                             startActivity(intent);
 
                                             /*startActivity(new Intent(getApplicationContext(), CartOrderingActivity.class));*/

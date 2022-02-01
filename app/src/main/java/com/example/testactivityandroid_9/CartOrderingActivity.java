@@ -62,6 +62,8 @@ public class CartOrderingActivity extends AppCompatActivity {
     List<CartModel>  cartModelList;
     CartModel cartModel;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +126,6 @@ public class CartOrderingActivity extends AppCompatActivity {
 
                         if (list != null && list.size() > 0) {
                             for (CartModel model : list) {
-
 
                                 cartMap.put("Название", model.getItem_name());
                                 cartMap.put("item_cost", model.getItem_cost());
@@ -370,10 +371,18 @@ public class CartOrderingActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 if (documentSnapshot.exists()) {
+                                    int bonus = documentSnapshot.getLong("bonus").intValue();
 
                                     BonusModel bonusModel = documentSnapshot.toObject(BonusModel.class);
-                                    /*bonusModel.setBonus(bonus++);*/
-                                    bonusModel.setBonus(bonusModel.getBonus()+15);
+                                    int bonuses = Integer.parseInt(getIntent().getStringExtra("bonus"));
+                                    String buttonText = getIntent().getStringExtra("btnGetBonus");
+                                    if (buttonText.equals("Сбросить")) {
+                                        if (bonus != 0) {
+                                            bonusModel.setBonus(bonusModel.getBonus() - bonuses);
+                                        }
+                                    }
+
+                                    bonusModel.setBonus(bonusModel.getBonus() + 15);
 
                                     Map<String,Object> bonusModelMap = new HashMap<>();
                                     bonusModelMap.put("bonus", bonusModel.getBonus());

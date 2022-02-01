@@ -196,6 +196,7 @@
                 android:inputType="numberPassword"
                 android:paddingLeft="5dp"
                 android:paddingRight="3dp"
+                android:text="0"
                 android:textColor="@color/orange"
                 android:textColorHighlight="@color/orange"
                 android:textColorHint="@color/orange"
