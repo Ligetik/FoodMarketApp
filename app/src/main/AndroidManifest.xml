@@ -7,7 +7,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_logo"
-        android:label="@string/app_name"
+        android:label="FoodМаркет"
         android:roundIcon="@mipmap/ic_launcher_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestActivityAndroid_9">
