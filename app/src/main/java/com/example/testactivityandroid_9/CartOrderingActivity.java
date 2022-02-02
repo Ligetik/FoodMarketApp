@@ -163,9 +163,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                                         break;
                                 }
 
-
                                 DeleteCart(model);
-
                             }
                         }
 
@@ -277,9 +275,6 @@ public class CartOrderingActivity extends AppCompatActivity {
 
 
 */
-
-
-
 
 
 

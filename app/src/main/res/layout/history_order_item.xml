@@ -31,7 +31,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/imageView4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/enrtance" />
+                app:srcCompat="@drawable/ic_hashtag_svgrepo_com" />
 
             <TextView
                 android:id="@+id/orderItemNo"
@@ -78,7 +78,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/imageView6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView4"
-                app:srcCompat="@drawable/enrtance" />
+                app:srcCompat="@drawable/ic_baseline_currency_ruble" />
 
             <TextView
                 android:id="@+id/orderItemCost"
@@ -102,7 +102,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView5"
-                app:srcCompat="@drawable/enrtance" />
+                app:srcCompat="@drawable/call" />
 
             <TextView
                 android:id="@+id/orderItemNumber"
@@ -137,7 +137,7 @@
                     android:layout_marginTop="1dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/enrtance" />
+                    app:srcCompat="@drawable/ic_baseline_location_on_24" />
 
                 <TextView
                     android:id="@+id/orderItemAddress"
@@ -160,7 +160,7 @@
                     android:layout_marginTop="15dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView16"
-                    app:srcCompat="@drawable/enrtance" />
+                    app:srcCompat="@drawable/ic_baseline_credit_card_24" />
 
                 <TextView
                     android:id="@+id/orderItemPayMethod"
@@ -181,7 +181,7 @@
                     android:layout_marginTop="15dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView17"
-                    app:srcCompat="@drawable/enrtance" />
+                    app:srcCompat="@drawable/ic_baseline_comment_24" />
 
                 <TextView
                     android:id="@+id/orderItemCommentary"
@@ -207,7 +207,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView18"
-                    app:srcCompat="@drawable/enrtance" />
+                    app:srcCompat="@drawable/ic_baseline_access_time_24" />
 
                 <TextView
                     android:id="@+id/orderItemTime"

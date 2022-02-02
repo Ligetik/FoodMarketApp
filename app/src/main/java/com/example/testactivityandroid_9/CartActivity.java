@@ -3,13 +3,11 @@ package com.example.testactivityandroid_9;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.DigitsKeyListener;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +66,8 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     TextView textView12;
     @BindView(R.id.textView13)
     TextView textView13;
+    @BindView(R.id.txtTotalDelivery)
+    TextView txtTotalDelivery;
     @BindView(R.id.btnToOrder)
     Button btnToOrder;
     @BindView(R.id.btnGetBonus)
@@ -78,10 +78,12 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     EditText orderBonusEditText;
 
     ICartLoadListener cartLoadListener;
-
+    CartModel cartModels;
     /*List<CartModel> cartModel;*/
     List<CartModel> cartModel2 = new ArrayList<>(); // УДАЛИТЬ
     private int bonus;
+
+    int restaurantsSum;
 
     @Override
     protected void onStart() {
@@ -172,6 +174,8 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
             btnGetBonus.setOnClickListener(v -> {
                 String buttonText = btnGetBonus.getText().toString();
                 String bonusCount = String.valueOf(orderBonusEditText.getText());
+                int deliverySum = restaurantsSum;
+                int deliverySumCount = 0;
 
                 if (buttonText.equals("Списать")) {
                     btnGetBonus.setText("Сбросить");
@@ -180,12 +184,22 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                     orderBonusTitleText.setText("Оплата доставки бонусами");
                     orderBonusTitleCount.setText("-" + bonusCount + " ₽");
 
-                } else {
+                    deliverySum -= Integer.parseInt(bonusCount);
+                    deliverySumCount = deliverySum;
+
+                    /*txtTotalDelivery.setText(deliverySum + " ₽");*/
+                }
+                if (buttonText.equals("Сбросить")) {
                     btnGetBonus.setText("Списать");
 
                     orderBonusTitleText.setText("");
                     orderBonusTitleCount.setText("");
+
+                    deliverySum += deliverySumCount;
+
+                    /*txtTotalDelivery.setText(deliverySum + " ₽");*/
                 }
+                txtTotalDelivery.setText(deliverySum + " ₽");
             });
         }
 
@@ -489,25 +503,43 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     public void OnCartloadSuccess(List<CartModel> cartModelList) {
         int sum = 0;
         int price2 = 800;
+        int PodkrePizza = 0;
+        int Avocado = 0;
+        int Djo = 0;
         for (CartModel cartModel : cartModelList) {
-            sum+=cartModel.getTotalPrice();
+            sum += cartModel.getTotalPrice();
 
             int price = cartModel.getTotalPrice();
             price2 -= price;
+
+            switch (cartModel.getId()) {
+                case 1:
+                    PodkrePizza = 150;
+                    break;
+                case 2:
+                    Avocado = 150;
+                    break;
+                case 3:
+                    Djo = 150;
+                    break;
+            }
+
+
         }
 
         if (price2 < 0) {
             txtFreeDelivery.setText("Бесплатная доставка");
-        }
-        else {
+        } else {
             txtFreeDelivery.setText(price2 + " ₽");
         }
 
         txtTotal.setText(sum + " ₽");
 
+        restaurantsSum = PodkrePizza + Avocado + Djo;
+        txtTotalDelivery.setText(restaurantsSum + " ₽");
 
 
-        MyCartAdapter adapter = new MyCartAdapter (this,cartModelList);
+        MyCartAdapter adapter = new MyCartAdapter(this, cartModelList);
         recyclerCart.setAdapter(adapter);
     }
 

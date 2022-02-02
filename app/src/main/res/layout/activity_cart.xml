@@ -257,7 +257,7 @@
 
             <TextView
                 android:id="@+id/txtTotalDelivery"
-                android:layout_width="142dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
                 android:textColor="@color/orange"
