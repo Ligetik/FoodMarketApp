@@ -367,10 +367,11 @@ public class CartOrderingActivity extends AppCompatActivity {
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 if (documentSnapshot.exists()) {
                                     int bonus = documentSnapshot.getLong("bonus").intValue();
-
                                     BonusModel bonusModel = documentSnapshot.toObject(BonusModel.class);
+
                                     int bonuses = Integer.parseInt(getIntent().getStringExtra("bonus"));
                                     String buttonText = getIntent().getStringExtra("btnGetBonus");
+
                                     if (buttonText.equals("Сбросить")) {
                                         if (bonus != 0) {
                                             bonusModel.setBonus(bonusModel.getBonus() - bonuses);
@@ -395,7 +396,7 @@ public class CartOrderingActivity extends AppCompatActivity {
             }
 
             private void OrderHistory(int totalPrice, String OrderName, String OrderNumber, String OrderAddress, String strDate, String OrderCommentary) {
-                int totalPriceHistory = totalPrice;
+                /*int totalPriceHistory = totalPrice;*/
 
                 FirebaseFirestore.getInstance()
                         .collection("Users_Cart")
@@ -417,7 +418,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                                     orderHistoryMap.put("Адрес_доставки", OrderAddress);
                                     orderHistoryMap.put("Дата_и_время", strDate);
                                     orderHistoryMap.put("Комментарий", OrderCommentary);
-                                    orderHistoryMap.put("Сумма_заказа", totalPriceHistory);
+                                    orderHistoryMap.put("Сумма_заказа", getIntent().getStringExtra("totalSum") /*totalPriceHistory*/);
                                     orderHistoryMap.put("Номер_заказа", orderNumberCount);
 
                                     if (orderPayment.getCheckedRadioButtonId() == R.id.radioButtonCash){
@@ -447,6 +448,9 @@ public class CartOrderingActivity extends AppCompatActivity {
                 orderContactInfoMap.put("Адрес", OrderAddress);
                 orderContactInfoMap.put("Дата и время", strDate);
                 orderContactInfoMap.put("Комментарий", OrderCommentary);
+                orderContactInfoMap.put("Доставка", getIntent().getStringExtra("deliverySum"));
+                orderContactInfoMap.put("Итоговая сумма заказа", getIntent().getStringExtra("totalSum"));
+
 
                 if (orderPayment.getCheckedRadioButtonId() == R.id.radioButtonCash){
                     orderContactInfoMap.put("Способ оплаты курьеру", "Наличными курьеру");

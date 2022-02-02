@@ -65,7 +65,7 @@ public class HistoryOrderAdapter extends RecyclerView.Adapter<HistoryOrderAdapte
         holder.orderItemAddress.setText(new StringBuilder().append(historyOrderModelList.get(position).getАдрес_доставки()));
         holder.orderItemTime.setText(new StringBuilder().append(historyOrderModelList.get(position).getДата_и_время()));
         holder.orderItemNo.setText(new StringBuilder().append(historyOrderModelList.get(position).getНомер_заказа()));
-        holder.orderItemCost.setText(new StringBuilder().append(historyOrderModelList.get(position).getСумма_заказа()) + " ₽");
+        holder.orderItemCost.setText(new StringBuilder().append(historyOrderModelList.get(position).getСумма_заказа()) /*+ " ₽"*/);
         holder.orderItemPayMethod.setText(new StringBuilder().append(historyOrderModelList.get(position).getСпособ_оплаты_курьеру()));
         holder.orderItemName.setText(new StringBuilder().append(historyOrderModelList.get(position).getИмя()));
         holder.orderItemNumber.setText(new StringBuilder().append(historyOrderModelList.get(position).getНомер_телефона()));

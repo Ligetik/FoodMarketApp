@@ -59,6 +59,7 @@ public class HistoryOrderActivity extends AppCompatActivity implements IHistoryO
                 .collection("Users_Cart")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .collection("История заказов")
+                .orderBy("Номер_заказа")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

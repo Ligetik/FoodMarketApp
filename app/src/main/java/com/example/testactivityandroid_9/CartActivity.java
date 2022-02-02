@@ -177,53 +177,33 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                 int deliverySum = restaurantsSum;
                 int deliverySumCount = 0;
 
-                if (buttonText.equals("Списать")) {
-                    btnGetBonus.setText("Сбросить");
-                    sliderBonus.setValue(Float.parseFloat(bonusCount));
+                if (restaurantsSum > 0) {
+                    if (buttonText.equals("Списать")) {
+                        btnGetBonus.setText("Сбросить");
+                        sliderBonus.setValue(Float.parseFloat(bonusCount));
 
-                    orderBonusTitleText.setText("Оплата доставки бонусами");
-                    orderBonusTitleCount.setText("-" + bonusCount + " ₽");
+                        orderBonusTitleText.setText("Оплата доставки бонусами");
+                        orderBonusTitleCount.setText("-" + bonusCount + " ₽");
 
-                    deliverySum -= Integer.parseInt(bonusCount);
-                    deliverySumCount = deliverySum;
+                        deliverySum -= Integer.parseInt(bonusCount);
+                        deliverySumCount = deliverySum;
 
-                    /*txtTotalDelivery.setText(deliverySum + " ₽");*/
-                }
-                if (buttonText.equals("Сбросить")) {
-                    btnGetBonus.setText("Списать");
+                        /*txtTotalDelivery.setText(deliverySum + " ₽");*/
+                    }
+                    if (buttonText.equals("Сбросить")) {
+                        btnGetBonus.setText("Списать");
 
-                    orderBonusTitleText.setText("");
-                    orderBonusTitleCount.setText("");
+                        orderBonusTitleText.setText("");
+                        orderBonusTitleCount.setText("");
 
-                    deliverySum += deliverySumCount;
+                        deliverySum += deliverySumCount;
 
-                    /*txtTotalDelivery.setText(deliverySum + " ₽");*/
+                        /*txtTotalDelivery.setText(deliverySum + " ₽");*/
+                    }
                 }
                 txtTotalDelivery.setText(deliverySum + " ₽");
             });
         }
-
-
-            /*orderBonusEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String value = s.toString();
-                if (s.toString().length() > 0) {
-                    String sliderBonusValue = String.valueOf(sliderBonus.getValue());
-                    orderBonusEditText.setText(sliderBonusValue);
-                }
-            }
-        });*/
 
     }
 
@@ -304,6 +284,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                 .collection("Users_Cart")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .collection("Корзина")
+                .orderBy("id")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -484,6 +465,8 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                             intent.putExtra("itemList", (Serializable) cartModel2);
                                             intent.putExtra("bonus", orderBonusEditText.getText().toString());
                                             intent.putExtra("btnGetBonus", btnGetBonus.getText().toString());
+                                            intent.putExtra("deliverySum", txtTotalDelivery.getText().toString());
+                                            intent.putExtra("totalSum", txtTotal.getText().toString());
                                             startActivity(intent);
 
                                             /*startActivity(new Intent(getApplicationContext(), CartOrderingActivity.class));*/
@@ -523,8 +506,6 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                     Djo = 150;
                     break;
             }
-
-
         }
 
         if (price2 < 0) {
@@ -533,11 +514,11 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
             txtFreeDelivery.setText(price2 + " ₽");
         }
 
-        txtTotal.setText(sum + " ₽");
-
         restaurantsSum = PodkrePizza + Avocado + Djo;
         txtTotalDelivery.setText(restaurantsSum + " ₽");
 
+
+        txtTotal.setText(sum + restaurantsSum + " ₽");
 
         MyCartAdapter adapter = new MyCartAdapter(this, cartModelList);
         recyclerCart.setAdapter(adapter);
