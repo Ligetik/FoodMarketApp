@@ -182,17 +182,17 @@ public class AvocadoActivity extends AppCompatActivity implements IAvocadoLoadLi
 
     private void loadCofeFromFirebase() {
         List<AvocadoModel> avocadoModels = new ArrayList<>();
-        loadMenuAvocado(avocadoModels, "Napitki");
+        loadMenuAvocado(avocadoModels, "Cofe ");
     }
 
     private void loadDesertiFromFirebase() {
         List<AvocadoModel> avocadoModels = new ArrayList<>();
-        loadMenuAvocado(avocadoModels, "Napitki");
+        loadMenuAvocado(avocadoModels, "Deserti");
     }
 
     private void loadDopolnitelnieingridientiFromFirebase() {
         List<AvocadoModel> avocadoModels = new ArrayList<>();
-        loadMenuAvocado(avocadoModels, "Napitki");
+        loadMenuAvocado(avocadoModels, "Dopolnitelnieingridienti");
     }
 
     private void init() {

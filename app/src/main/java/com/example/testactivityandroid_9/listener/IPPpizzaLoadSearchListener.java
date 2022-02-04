@@ -5,5 +5,6 @@ import com.example.testactivityandroid_9.model.PPpizzaModel;
 import java.util.List;
 
 public interface IPPpizzaLoadSearchListener {
-    void IPPpizzaLoadSearchSuccess(List<PPpizzaModel> ppizzaModels);
+    void OnPPpizzaLoadSearchSuccess(List<PPpizzaModel> ppizzaModels);
+    void OnPPpizzaLoadSearchFailed(String message);
 }

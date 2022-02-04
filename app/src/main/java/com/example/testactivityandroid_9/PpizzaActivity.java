@@ -2,6 +2,8 @@ package com.example.testactivityandroid_9;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -41,7 +43,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadListener, ICartLoadListener  {
+public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadListener, ICartLoadListener, IPPpizzaLoadSearchListener  {
     private static final String TAG = "MyActivity";
     @BindView(R.id.resview)
     RecyclerView resview;
@@ -196,14 +198,45 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
         loadMenuPodkrePizza(ppizzaModels, "Pizza");
     }
+    private void loadRollsFromFirebase() {
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        loadMenuPodkrePizza(ppizzaModels, "Rolls");
+    }
+
+
+    private void loadSandwichFromFirebase() {
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        loadMenuPodkrePizza(ppizzaModels, "Sandwich");
+    }
+
+    private void loadSalatFromFirebase() {
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        loadMenuPodkrePizza(ppizzaModels, "Salat");
+    }
+
+    private void loadSupiFromFirebase() {
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        loadMenuPodkrePizza(ppizzaModels, "Supi");
+    }
+
     private void loadBurgerFromFirebase() {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
         loadMenuPodkrePizza(ppizzaModels, "Burger");
     }
 
-    private void loadRollsFromFirebase() {
+    private void loadSetiFromFirebase() {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        loadMenuPodkrePizza(ppizzaModels, "Rolls");
+        loadMenuPodkrePizza(ppizzaModels, "Seti");
+    }
+
+    private void loadFritureFromFirebase() {
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        loadMenuPodkrePizza(ppizzaModels, "Friture");
+    }
+
+    private void loadNapitkiFromFirebase() {
+        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        loadMenuPodkrePizza(ppizzaModels, "Napitki");
     }
 
     private void loadDesertiFromFirebase() {
@@ -211,10 +244,7 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
         loadMenuPodkrePizza(ppizzaModels, "Deserti");
     }
 
-    private void loadNapitkiFromFirebase() {
-        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-        loadMenuPodkrePizza(ppizzaModels, "Napitki");
-    }
+
 
     private void init() {
         ButterKnife.bind(this);
@@ -239,20 +269,37 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0) {
-                    loadPizzaFromFirebase();
-                }
-                if (tab.getPosition() == 1) {
-                    loadBurgerFromFirebase();
-                }
-                if (tab.getPosition() == 2) {
-                    loadRollsFromFirebase();
-                }
-                if (tab.getPosition() == 3) {
-                    loadDesertiFromFirebase();
-                }
-                if (tab.getPosition() == 4) {
-                    loadNapitkiFromFirebase();
+                switch (tab.getPosition()) {
+                    case 0:
+                        loadPizzaFromFirebase();
+                        break;
+                    case 1:
+                        loadRollsFromFirebase();
+                        break;
+                    case 2:
+                        loadSandwichFromFirebase();
+                        break;
+                    case 3:
+                        loadSalatFromFirebase();
+                        break;
+                    case 4:
+                        loadSupiFromFirebase();
+                        break;
+                    case 5:
+                        loadBurgerFromFirebase();
+                        break;
+                    case 6:
+                        loadSetiFromFirebase();
+                        break;
+                    case 7:
+                        loadFritureFromFirebase();
+                        break;
+                    case 8:
+                        loadNapitkiFromFirebase();
+                        break;
+                    case 9:
+                        loadDesertiFromFirebase();
+                        break;
                 }
             }
 
@@ -265,7 +312,11 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
             }
         });
 
-       /* myPizzaAdapter = new MyPizzaAdapter(this, ppizzaModelsList, cartLoadListener);
+
+
+
+        ppizzaModelsList = new ArrayList<>();
+        myPizzaAdapter = new MyPizzaAdapter(this, ppizzaModelsList, cartLoadListener);
         searchRecycler.setAdapter(myPizzaAdapter);
         searchRecycler.setHasFixedSize(true);
         searchTextInput.addTextChangedListener(new TextWatcher() {
@@ -281,44 +332,286 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
 
             @Override
             public void afterTextChanged(Editable s) {
-                List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-                *//*MyPizzaAdapter myPizzaAdapter = new MyPizzaAdapter(this, ppizzaModels, cartLoadListener);*//*
+                /*List<PPpizzaModel> ppizzaModels = new ArrayList<>();*/
+                /*MyPizzaAdapter myPizzaAdapter = new MyPizzaAdapter(PpizzaActivity.this, ppizzaModels, cartLoadListener);*/
                 if (s.toString().isEmpty()) {
-                    ppizzaModels.clear();
+                    ppizzaModelsList.clear();
                     myPizzaAdapter.notifyDataSetChanged();
-                    *//*ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);*//*
                 }
                 else {
                     searchItems(s.toString());
                 }
             }
         });
+
+
+
+
+/*
+*//*        myPizzaAdapter = new MyPizzaAdapter(this, ppizzaModelsList, cartLoadListener);
+        searchRecycler.setAdapter(myPizzaAdapter);*//*
+        searchRecycler.setHasFixedSize(true);
+        searchTextInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+                MyPizzaAdapter myPizzaAdapter = new MyPizzaAdapter(PpizzaActivity.this, ppizzaModels, cartLoadListener);
+                if (s.toString().isEmpty()) {
+                    *//*ppizzaModels.clear();*//*
+                    *//*myPizzaAdapter.notifyDataSetChanged();*//*
+                    ppizzaLoadSearchListener.OnPPpizzaLoadSearchSuccess(ppizzaModels);
+                }
+                else {
+                    searchItems(s.toString());
+                }
+            }
+        });*/
     }
 
+
+
     private void searchItems(String type) {
+        /*List<PPpizzaModel> ppizzaModels = new ArrayList<>();*/
+        if (!type.isEmpty()) {
+            FirebaseFirestore.getInstance()
+                    .collection("Items")
+                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Pizza")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        ppizzaModelsList.clear();
+                        myPizzaAdapter.notifyDataSetChanged();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                            ppizzaModelsList.add(ppizzaModel);
+                            myPizzaAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items")
+                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Rolls")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        ppizzaModelsList.clear();
+                        myPizzaAdapter.notifyDataSetChanged();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                            ppizzaModelsList.add(ppizzaModel);
+                            myPizzaAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items")
+                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Sandwich")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        ppizzaModelsList.clear();
+                        myPizzaAdapter.notifyDataSetChanged();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                            ppizzaModelsList.add(ppizzaModel);
+                            myPizzaAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items")
+                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Salat")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        ppizzaModelsList.clear();
+                        myPizzaAdapter.notifyDataSetChanged();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                            ppizzaModelsList.add(ppizzaModel);
+                            myPizzaAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items")
+                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Supi")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        ppizzaModelsList.clear();
+                        myPizzaAdapter.notifyDataSetChanged();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                            ppizzaModelsList.add(ppizzaModel);
+                            myPizzaAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items")
+                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Burger")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        ppizzaModelsList.clear();
+                        myPizzaAdapter.notifyDataSetChanged();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                            ppizzaModelsList.add(ppizzaModel);
+                            myPizzaAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items")
+                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Seti")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        ppizzaModelsList.clear();
+                        myPizzaAdapter.notifyDataSetChanged();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                            ppizzaModelsList.add(ppizzaModel);
+                            myPizzaAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items")
+                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Friture")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        ppizzaModelsList.clear();
+                        myPizzaAdapter.notifyDataSetChanged();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                            ppizzaModelsList.add(ppizzaModel);
+                            myPizzaAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items")
+                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Napitki")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        ppizzaModelsList.clear();
+                        myPizzaAdapter.notifyDataSetChanged();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                            ppizzaModelsList.add(ppizzaModel);
+                            myPizzaAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items")
+                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Deserti")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        ppizzaModelsList.clear();
+                        myPizzaAdapter.notifyDataSetChanged();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
+                            ppizzaModelsList.add(ppizzaModel);
+                            myPizzaAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+        }
+
+
+
+
+
+/*    private void searchItems(String type) {
         List<PPpizzaModel> ppizzaModels = new ArrayList<>();
         if (!type.isEmpty()) {
             FirebaseFirestore.getInstance()
                     .collection("Items")
                     .document("hYBO9afiXVTS9vzx73w9")
                     .collection("Pizza")
-                    .whereEqualTo("item_name", type)
+                    *//*.whereEqualTo("item_name", type)*//*
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful() && task.getResult() != null){
-                                ppizzaModels.clear();
-                                myPizzaAdapter.notifyDataSetChanged();
-
+                                *//*ppizzaModels.clear();*//*
+                                *//*myPizzaAdapter.notifyDataSetChanged();*//*
                                 for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                                     PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
                                     ppizzaModels.add(ppizzaModel);
-                                    myPizzaAdapter.notifyDataSetChanged();
+                                    *//*myPizzaAdapter.notifyDataSetChanged();*//*
                                 }
-                                *//*ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);*//*
-                            } *//*else {
-                                ppizzaLoadListener.OnPPpizzaloadFailed("Ошибка");
-                            }*//*
+                                ppizzaLoadSearchListener.OnPPpizzaLoadSearchSuccess(ppizzaModels);
+                            } else {
+                                ppizzaLoadSearchListener.OnPPpizzaLoadSearchFailed("Ошибка");
+                            }
 
                         }
                     });
@@ -336,10 +629,16 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
         Snackbar.make(mainLayout,message,Snackbar.LENGTH_LONG).show();
     }
 
+
     @Override
-    public void IPPpizzaLoadSearchSuccess(List<PPpizzaModel> pppizzaModeList) {
-       /* MyPizzaAdapter adapter = new MyPizzaAdapter(this,pppizzaModeList,cartLoadListener);
-        searchRecycler.setAdapter(adapter);*/
+    public void OnPPpizzaLoadSearchSuccess(List<PPpizzaModel> ppizzaModels) {
+        MyPizzaAdapter adapter = new MyPizzaAdapter(this,ppizzaModels,cartLoadListener);
+        searchRecycler.setAdapter(adapter);
+    }
+
+    @Override
+    public void OnPPpizzaLoadSearchFailed(String message) {
+        Snackbar.make(mainLayout,message,Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -409,10 +708,6 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                     }
                 });*/
     }
-
-
-
-
 
 }
 

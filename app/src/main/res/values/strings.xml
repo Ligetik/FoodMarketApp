@@ -76,4 +76,13 @@
     <string name="username">Имя</string>
     <string name="Order_placed">Заказ принят и успешно отправлен в заведение</string>
     <string name="bonuses_15"><u>15 бонусов</u></string>
+    <string name="rolls">Роллы</string>
+    <string name="burgers">Бургеры</string>
+    <string name="Sandwich">Сэндвичи</string>
+    <string name="desserts">Десерты</string>
+    <string name="drinks">Напитки</string>
+    <string name="salats">Салаты</string>
+    <string name="soups">Супы</string>
+    <string name="fries">Фритюр</string>
+    <string name="sets">Сеты</string>
 </resources>
