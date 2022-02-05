@@ -114,7 +114,6 @@ public class Login_SignupActivity extends AppCompatActivity {
 
                 firebaseAuth.createUserWithEmailAndPassword(UserEmail, UserPassword).addOnCompleteListener((Task<AuthResult> task) -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(Login_SignupActivity.this, "User created", Toast.LENGTH_SHORT).show();
                         userID = firebaseAuth.getCurrentUser().getUid();
                         DocumentReference documentReference = db.collection("user").document(userID);
 
@@ -143,8 +142,6 @@ public class Login_SignupActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Toast.makeText(Login_SignupActivity.this,
-                                                            "curr display name is "+firebaseAuth.getInstance().getCurrentUser().getDisplayName(), Toast.LENGTH_LONG).show();
                                                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                                 }
                                             }

@@ -2,6 +2,8 @@ package com.example.testactivityandroid_9;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,12 +16,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testactivityandroid_9.adapter.AvocadoAdapter;
+import com.example.testactivityandroid_9.adapter.MyPizzaAdapter;
 import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.listener.IAvocadoLoadListener;
 import com.example.testactivityandroid_9.listener.ICartLoadListener;
 import com.example.testactivityandroid_9.listener.IPPpizzaLoadSearchListener;
 import com.example.testactivityandroid_9.model.AvocadoModel;
 import com.example.testactivityandroid_9.model.CartModel;
+import com.example.testactivityandroid_9.model.PPpizzaModel;
 import com.example.testactivityandroid_9.utils.SpaceItemDeconstration;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,8 +49,8 @@ public class AvocadoActivity extends AppCompatActivity implements IAvocadoLoadLi
     private static final String TAG = "MyActivity";
     @BindView(R.id.resview)
     RecyclerView resview;
-    /*    @BindView(R.id.searchRecycler)
-        RecyclerView searchRecycler;*/
+    @BindView(R.id.searchRecycler)
+    RecyclerView searchRecycler;
     @BindView(R.id.mainLayout)
     RelativeLayout mainLayout;
     ImageButton imageButton;
@@ -60,6 +64,9 @@ public class AvocadoActivity extends AppCompatActivity implements IAvocadoLoadLi
     IAvocadoLoadListener avocadoLoadListener;
     ICartLoadListener cartLoadListener;
     IPPpizzaLoadSearchListener ppizzaLoadSearchListener;
+
+    private AvocadoAdapter avocadoAdapter;
+    private List<AvocadoModel> avocadoModelList;
 
     @Override
     protected void onStart() {
@@ -207,9 +214,9 @@ public class AvocadoActivity extends AppCompatActivity implements IAvocadoLoadLi
         resview.addItemDecoration(new SpaceItemDeconstration());
 
         //search
-/*        GridLayoutManager gridLayoutManagerSearch = new GridLayoutManager(this,1);
+        GridLayoutManager gridLayoutManagerSearch = new GridLayoutManager(this,1);
         searchRecycler.setLayoutManager(gridLayoutManagerSearch);
-        searchRecycler.addItemDecoration(new SpaceItemDeconstration());*/
+        searchRecycler.addItemDecoration(new SpaceItemDeconstration());
 
 
         cartButton.setOnClickListener(v -> startActivity(new Intent(this,CartActivity.class)));
@@ -273,8 +280,9 @@ public class AvocadoActivity extends AppCompatActivity implements IAvocadoLoadLi
             }
         });
 
-       /* myPizzaAdapter = new MyPizzaAdapter(this, ppizzaModelsList, cartLoadListener);
-        searchRecycler.setAdapter(myPizzaAdapter);
+        avocadoModelList = new ArrayList<>();
+        avocadoAdapter = new AvocadoAdapter(this, avocadoModelList, cartLoadListener);
+        searchRecycler.setAdapter(avocadoAdapter);
         searchRecycler.setHasFixedSize(true);
         searchTextInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -289,48 +297,309 @@ public class AvocadoActivity extends AppCompatActivity implements IAvocadoLoadLi
 
             @Override
             public void afterTextChanged(Editable s) {
-                List<PPpizzaModel> ppizzaModels = new ArrayList<>();
-                *//*MyPizzaAdapter myPizzaAdapter = new MyPizzaAdapter(this, ppizzaModels, cartLoadListener);*//*
                 if (s.toString().isEmpty()) {
-                    ppizzaModels.clear();
-                    myPizzaAdapter.notifyDataSetChanged();
-                    *//*ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);*//*
+                    avocadoModelList.clear();
+                    avocadoAdapter.notifyDataSetChanged();
                 }
                 else {
                     searchItems(s.toString());
                 }
             }
         });
+
     }
 
     private void searchItems(String type) {
-        List<PPpizzaModel> ppizzaModels = new ArrayList<>();
+        /*List<PPpizzaModel> ppizzaModels = new ArrayList<>();*/
         if (!type.isEmpty()) {
             FirebaseFirestore.getInstance()
-                    .collection("Items")
-                    .document("hYBO9afiXVTS9vzx73w9")
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
                     .collection("Pizza")
-                    .whereEqualTo("item_name", type)
+                    .orderBy("item_name")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful() && task.getResult() != null){
-                                ppizzaModels.clear();
-                                myPizzaAdapter.notifyDataSetChanged();
-
-                                for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
-                                    PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
-                                    ppizzaModels.add(ppizzaModel);
-                                    myPizzaAdapter.notifyDataSetChanged();
-                                }
-                                *//*ppizzaLoadListener.OnPPpizzaloadSuccess(ppizzaModels);*//*
-                            } *//*else {
-                                ppizzaLoadListener.OnPPpizzaloadFailed("Ошибка");
-                            }*//*
-
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
                         }
-                    });
-        }*/
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("Rolls")
+                    .orderBy("item_name")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("Sandwich")
+                    .orderBy("item_name")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("Salati")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("Supi")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("BOK")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("Avtorskiechai")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("Cofe")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("Napitki")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("Deserti")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("Dopolnitelnieingridienti")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("Kartofelfri")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("Kasha")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+            FirebaseFirestore.getInstance()
+                    .collection("Items2")
+                    .document("g2oIl2f0iOKMrnZm5akC")
+                    .collection("Molochniekokteyli")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        avocadoModelList.clear();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            AvocadoModel avocadoModel = documentSnapshot.toObject(AvocadoModel.class);
+                            avocadoModelList.add(avocadoModel);
+                            avocadoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+        }
+
     }
 
     @Override
@@ -343,12 +612,6 @@ public class AvocadoActivity extends AppCompatActivity implements IAvocadoLoadLi
     public void OnAvocadoloadFailed(String message) {
         Snackbar.make(mainLayout,message,Snackbar.LENGTH_LONG).show();
     }
-
-/*    @Override
-    public void IPPpizzaLoadSearchSuccess(List<PPpizzaModel> pppizzaModeList) {
-       *//* MyPizzaAdapter adapter = new MyPizzaAdapter(this,pppizzaModeList,cartLoadListener);
-        searchRecycler.setAdapter(adapter);*//*
-    }*/
 
     @Override
     public void OnCartloadSuccess(List<CartModel> cartModelList) {

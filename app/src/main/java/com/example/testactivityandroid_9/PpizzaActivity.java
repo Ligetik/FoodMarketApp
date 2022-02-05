@@ -43,7 +43,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadListener, ICartLoadListener, IPPpizzaLoadSearchListener  {
+public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadListener, ICartLoadListener/*, IPPpizzaLoadSearchListener*/  {
     private static final String TAG = "MyActivity";
     @BindView(R.id.resview)
     RecyclerView resview;
@@ -313,8 +313,6 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
         });
 
 
-
-
         ppizzaModelsList = new ArrayList<>();
         myPizzaAdapter = new MyPizzaAdapter(this, ppizzaModelsList, cartLoadListener);
         searchRecycler.setAdapter(myPizzaAdapter);
@@ -387,13 +385,17 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                     .collection("Items")
                     .document("hYBO9afiXVTS9vzx73w9")
                     .collection("Pizza")
+                    .orderBy("item_name")
                     .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+
+                    /*.*//*whereGreaterThanOrEqualTo*//*whereEqualTo("item_name", type)*/
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful() && task.getResult() != null){
                         ppizzaModelsList.clear();
-                        myPizzaAdapter.notifyDataSetChanged();
+                        /*myPizzaAdapter.notifyDataSetChanged();*/
                         for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                             PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
                             ppizzaModelsList.add(ppizzaModel);
@@ -407,13 +409,16 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                     .collection("Items")
                     .document("hYBO9afiXVTS9vzx73w9")
                     .collection("Rolls")
+                    .orderBy("item_name")
                     .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    /*.*//*whereGreaterThanOrEqualTo*//*whereEqualTo("item_name", type)*/
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful() && task.getResult() != null){
                         ppizzaModelsList.clear();
-                        myPizzaAdapter.notifyDataSetChanged();
+                        /*myPizzaAdapter.notifyDataSetChanged();*/
                         for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                             PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
                             ppizzaModelsList.add(ppizzaModel);
@@ -427,13 +432,16 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                     .collection("Items")
                     .document("hYBO9afiXVTS9vzx73w9")
                     .collection("Sandwich")
+                    .orderBy("item_name")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
                     .whereGreaterThanOrEqualTo("item_name", type)
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful() && task.getResult() != null){
                         ppizzaModelsList.clear();
-                        myPizzaAdapter.notifyDataSetChanged();
+                        /*myPizzaAdapter.notifyDataSetChanged();*/
                         for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                             PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
                             ppizzaModelsList.add(ppizzaModel);
@@ -448,12 +456,15 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                     .document("hYBO9afiXVTS9vzx73w9")
                     .collection("Salat")
                     .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .whereGreaterThanOrEqualTo("item_name", type)
+                    /*.whereGreaterThanOrEqualTo("item_name", type)*/
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful() && task.getResult() != null){
                         ppizzaModelsList.clear();
-                        myPizzaAdapter.notifyDataSetChanged();
+                        /*myPizzaAdapter.notifyDataSetChanged();*/
                         for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                             PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
                             ppizzaModelsList.add(ppizzaModel);
@@ -468,12 +479,14 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                     .document("hYBO9afiXVTS9vzx73w9")
                     .collection("Supi")
                     .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .whereGreaterThanOrEqualTo("item_name", type)
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful() && task.getResult() != null){
                         ppizzaModelsList.clear();
-                        myPizzaAdapter.notifyDataSetChanged();
+                        /*myPizzaAdapter.notifyDataSetChanged();*/
                         for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                             PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
                             ppizzaModelsList.add(ppizzaModel);
@@ -488,12 +501,14 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                     .document("hYBO9afiXVTS9vzx73w9")
                     .collection("Burger")
                     .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .whereGreaterThanOrEqualTo("item_name", type)
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful() && task.getResult() != null){
                         ppizzaModelsList.clear();
-                        myPizzaAdapter.notifyDataSetChanged();
+                        /*myPizzaAdapter.notifyDataSetChanged();*/
                         for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                             PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
                             ppizzaModelsList.add(ppizzaModel);
@@ -508,12 +523,14 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                     .document("hYBO9afiXVTS9vzx73w9")
                     .collection("Seti")
                     .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .whereGreaterThanOrEqualTo("item_name", type)
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful() && task.getResult() != null){
                         ppizzaModelsList.clear();
-                        myPizzaAdapter.notifyDataSetChanged();
+                        /*myPizzaAdapter.notifyDataSetChanged();*/
                         for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                             PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
                             ppizzaModelsList.add(ppizzaModel);
@@ -528,12 +545,14 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                     .document("hYBO9afiXVTS9vzx73w9")
                     .collection("Friture")
                     .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .whereGreaterThanOrEqualTo("item_name", type)
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful() && task.getResult() != null){
                         ppizzaModelsList.clear();
-                        myPizzaAdapter.notifyDataSetChanged();
+                        /*myPizzaAdapter.notifyDataSetChanged();*/
                         for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                             PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
                             ppizzaModelsList.add(ppizzaModel);
@@ -548,12 +567,14 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                     .document("hYBO9afiXVTS9vzx73w9")
                     .collection("Napitki")
                     .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .whereGreaterThanOrEqualTo("item_name", type)
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful() && task.getResult() != null){
                         ppizzaModelsList.clear();
-                        myPizzaAdapter.notifyDataSetChanged();
+                        /*myPizzaAdapter.notifyDataSetChanged();*/
                         for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                             PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
                             ppizzaModelsList.add(ppizzaModel);
@@ -568,12 +589,14 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
                     .document("hYBO9afiXVTS9vzx73w9")
                     .collection("Deserti")
                     .whereGreaterThanOrEqualTo("item_name", type)
+                    .whereLessThanOrEqualTo("item_name", type + "\uf8ff")
+                    .whereGreaterThanOrEqualTo("item_name", type)
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful() && task.getResult() != null){
                         ppizzaModelsList.clear();
-                        myPizzaAdapter.notifyDataSetChanged();
+                       /* myPizzaAdapter.notifyDataSetChanged();*/
                         for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                             PPpizzaModel ppizzaModel = documentSnapshot.toObject(PPpizzaModel.class);
                             ppizzaModelsList.add(ppizzaModel);
@@ -630,7 +653,7 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
     }
 
 
-    @Override
+/*    @Override
     public void OnPPpizzaLoadSearchSuccess(List<PPpizzaModel> ppizzaModels) {
         MyPizzaAdapter adapter = new MyPizzaAdapter(this,ppizzaModels,cartLoadListener);
         searchRecycler.setAdapter(adapter);
@@ -639,7 +662,7 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
     @Override
     public void OnPPpizzaLoadSearchFailed(String message) {
         Snackbar.make(mainLayout,message,Snackbar.LENGTH_LONG).show();
-    }
+    }*/
 
     @Override
     public void OnCartloadSuccess(List<CartModel> cartModelList) {

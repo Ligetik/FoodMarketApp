@@ -123,6 +123,15 @@
             android:textColorHint="#D7FF9933" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search"
+        android:paddingLeft="10dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="10dp" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         style="@style/MyTabLayout"
@@ -208,11 +217,5 @@
         android:paddingEnd="10dp">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/search" />
 
 </RelativeLayout>

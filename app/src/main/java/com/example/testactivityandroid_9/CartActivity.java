@@ -84,6 +84,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     private int bonus;
 
     int restaurantsSum;
+    int sum = 0;
 
     @Override
     protected void onStart() {
@@ -201,7 +202,9 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                         /*txtTotalDelivery.setText(deliverySum + " ₽");*/
                     }
                 }
+
                 txtTotalDelivery.setText(deliverySum + " ₽");
+                txtTotal.setText(sum + deliverySum  + " ₽");
             });
         }
 
@@ -484,7 +487,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
     @Override
     public void OnCartloadSuccess(List<CartModel> cartModelList) {
-        int sum = 0;
+        /*int sum = 0;*/
         int price2 = 800;
         int PodkrePizza = 0;
         int Avocado = 0;
@@ -518,7 +521,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         txtTotalDelivery.setText(restaurantsSum + " ₽");
 
 
-        txtTotal.setText(sum + restaurantsSum + " ₽");
+        txtTotal.setText(sum + restaurantsSum  + " ₽");
 
         MyCartAdapter adapter = new MyCartAdapter(this, cartModelList);
         recyclerCart.setAdapter(adapter);

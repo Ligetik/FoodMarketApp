@@ -18,6 +18,7 @@ import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.model.BonusModel;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -179,7 +180,50 @@ public class CartOrderingActivity extends AppCompatActivity {
                         //История заказов
                         OrderHistory(totalPrice, OrderName, OrderNumber, OrderAddress, strDate, OrderCommentary);
 
+/*                        Map<String,Object> data = new HashMap<>();
+                        data.put("aaa", "napitki");
+                        data.put("bbb", "deserti");
+
+                        Map<String,Object> name = new HashMap<>();
+                        name.put("name", "ppizza");
+                        name.put("data", data);
+
+*//*                        Map<String,Object> message = new HashMap<>();
+                        message.put("subject", "Hello from Firebase!");
+                        message.put("template", *//**//*"This is an <code>HTML</code> email body."*//**//* name);*//*
+
+                        Map<String,Object> mail = new HashMap<>();
+                        mail.put("to", "shevru02@mail.ru");
+                        *//*mail.put("message", message);*//*
+                        mail.put("template", name);
+
+                        FirebaseFirestore.getInstance()
+                                .collection("mail")
+                                .add(mail);*/
+
                     }
+
+/*                    public void moveFirestoreDocument(DocumentReference fromPath, final DocumentReference toPath) {
+                        fromPath.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document != null) {
+                                        toPath.set(document.getData())
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                    }
+                                                });
+                                    }
+                                });
+                            }*/
 
                     //очистка корзины
                     private void DeleteCart(CartModel model) {
