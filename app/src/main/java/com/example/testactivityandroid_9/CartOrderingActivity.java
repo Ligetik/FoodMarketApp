@@ -262,7 +262,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 orderContactInfoMap.toString());
 
                         Map<String,Object> mail = new HashMap<>();
-                        mail.put("to", "skyendofmind@gmail.com");
+                        mail.put("to", "dasha.gubar.23@inbox.ru");
                         mail.put("message", message);
 
                         FirebaseFirestore.getInstance()
