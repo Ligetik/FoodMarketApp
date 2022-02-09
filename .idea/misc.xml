@@ -48,16 +48,16 @@
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_all_restaurants.xml" value="0.2988679352838745" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_avocado.xml" value="0.1901886860897383" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_callback.xml" value="0.23220973782771537" />
-        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_cart.xml" value="0.2988679352838745" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_cart.xml" value="0.2264151024877837" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_cart_ordering.xml" value="0.29523809523809524" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_custom.xml" value="0.17177914110429449" />
-        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_detailed.xml" value="0.2988679352838745" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_detailed.xml" value="0.2264151024877837" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_djo.xml" value="0.2988679352838745" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_history_order.xml" value="0.2988679352838745" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_login.xml" value="0.23728813559322035" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_login_forgot_password.xml" value="0.2264151024877837" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_login_signup.xml" value="0.2264151024877837" />
-        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_login_signup_agreement.xml" value="0.2988679352838745" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_login_signup_agreement.xml" value="0.20905923344947736" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_order_placed.xml" value="0.2264151024877837" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_ppizza.xml" value="0.2988679352838745" />
@@ -67,6 +67,7 @@
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/activity_splash.xml" value="0.18385416666666668" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/app_bar_main.xml" value="0.16301887379120425" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/content_main.xml" value="0.18823529411764706" />
+        <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/ddddd.xml" value="0.2264151024877837" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_gallery.xml" value="0.18072916666666666" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_home.xml" value="0.42442748091603055" />
         <entry key="..\:/Projects/TestActivityAndroid_9/app/src/main/res/layout/fragment_logout.xml" value="0.1" />

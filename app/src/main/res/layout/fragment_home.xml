@@ -35,7 +35,7 @@
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/podkrepizza_img"
+                    android:src="@drawable/ppizza__1_"
                     android:textAlignment="center" />
 
                 <ImageButton
@@ -51,7 +51,7 @@
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/avocado_img"
+                    android:src="@drawable/avocado__1_"
                     android:textAlignment="center" />
 
                 <ImageButton
@@ -67,7 +67,7 @@
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/djo_img"
+                    android:src="@drawable/djo__1_"
                     android:textAlignment="center" />
 
             </RelativeLayout>

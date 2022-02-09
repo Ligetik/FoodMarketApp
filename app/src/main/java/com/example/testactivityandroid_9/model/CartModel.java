@@ -77,7 +77,33 @@ public class CartModel implements Serializable {
         this.id = id;
     }
 
-
+    @Override
+    public String toString() {
+        switch (id) {
+            case 1:
+                return "<h3><p><b><u>PodkrePizza</u></b></h3> Позиция " + key + "<br>[" +
+                        "<br>Название: " + item_name +
+                        ", <br>Количество: " + "<b>" + quantity + "</b>" +
+                        ", <br>Цена: " + item_cost +
+                        ", <br>Описание: " + item_details +
+                        "<br>]</p>";
+            case 2:
+                return "<h3><p><b><u>Avocado</u></b></h3> Позиция " + key + "<br>[" +
+                        "<br>Название: " + item_name +
+                        ", <br>Количество: " + "<b>" + quantity + "</b>" +
+                        ", <br>Цена: " + item_cost +
+                        ", <br>Описание: " + item_details +
+                        "<br>]</p>";
+            case 3:
+                return "<h3><p><b><u>Джо</u></b></h3> Позиция " + key + "<br>[" +
+                        "<br>Название: " + item_name +
+                        ", <br>Количество: " + "<b>" + quantity + "</b>" +
+                        ", <br>Цена: " + item_cost +
+                        ", <br>Описание: " + item_details +
+                        "<br>]</p>";
+        }
+       return "";
+    }
     /*    public ArrayList<String> getDetails() {
         return details;
     }

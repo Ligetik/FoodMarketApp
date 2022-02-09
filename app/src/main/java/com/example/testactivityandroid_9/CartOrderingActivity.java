@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +17,6 @@ import com.example.testactivityandroid_9.eventbus.MyUpdateCartEvent;
 import com.example.testactivityandroid_9.model.BonusModel;
 import com.example.testactivityandroid_9.model.CartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,8 +60,8 @@ public class CartOrderingActivity extends AppCompatActivity {
 
     List<CartModel>  cartModelList;
     CartModel cartModel;
-
-
+    List<Object> list2;
+    Map<String, Object>  orderContactInfoMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,8 +105,11 @@ public class CartOrderingActivity extends AppCompatActivity {
                 OrderContactInfo(OrderNumber, OrderName, OrderAddress, OrderCommentary, strDate);
 
                 //Заказы
+
                 final HashMap<String, Object> cartMap = new HashMap<>();
                 final HashMap<String, Object> itemMap = new HashMap<>();
+
+                final HashMap<String, Object> mailmap = new HashMap<>();
 
                 CollectionReference dbRef = FirebaseFirestore.getInstance()
                         .collection("Users_Cart")
@@ -123,19 +124,21 @@ public class CartOrderingActivity extends AppCompatActivity {
                         List<CartModel> list = (ArrayList<CartModel>)
                                 getIntent().getSerializableExtra("itemList");
 
+
                         int totalPrice = 0;
 
                         if (list != null && list.size() > 0) {
                             for (CartModel model : list) {
 
                                 cartMap.put("Название", model.getItem_name());
-                                cartMap.put("item_cost", model.getItem_cost());
-                                cartMap.put("item_image", model.getItem_image());
-                                cartMap.put("item_details", model.getItem_details());
-                                cartMap.put("quantity", model.getQuantity());
+                                cartMap.put("Цена", model.getItem_cost());
+                                /*cartMap.put("item_image", model.getItem_image());*/
+                                cartMap.put("Описание", model.getItem_details());
+                                cartMap.put("Количество", model.getQuantity());
+                                cartMap.put("Заведение", model.getId());
+
 
                                 totalPrice += model.getTotalPrice();
-
 
                                 switch (model.getId()) {
                                     case 1:
@@ -163,13 +166,35 @@ public class CartOrderingActivity extends AppCompatActivity {
                                                 .update("Djo", FieldValue.arrayUnion(cartMap));
                                         break;
                                 }
-
+                                /*str = TextUtils.join(", ", list);*/
                                 DeleteCart(model);
+                                /*str = Joiner.on("-").join(list.get(0));*/
+
+                                /*str = model.toString();*/
+
+
+                                //считалка итог. суммы
+                                itemMap.put("totalPrice", totalPrice) ;
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Заказы")
+                                        .document(idDocument)
+                                        .update(itemMap);
+
                             }
+
                         }
 
+/*                        cartModel.toString();
+                        TextUtils.join(", ", list);*/
+
+
+
+                        /*list2 = Arrays.asList(list);*/
+
                         //считалка итог. суммы
-                        itemMap.put("totalPrice", totalPrice /*model.getItem_cost()*/) ;
+                        /*itemMap.put("totalPrice", totalPrice *//*model.getItem_cost()*//*) ;
                         FirebaseFirestore.getInstance()
                                 .collection("Users_Cart")
                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -177,29 +202,91 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 .document(idDocument)
                                 .update(itemMap);
 
+
+                        try {
+                            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(CartOrderingActivity.this.openFileOutput("config.txt", Context.MODE_APPEND));
+                            outputStreamWriter.write(cartMap.toString());
+                            outputStreamWriter.close();
+                        }
+                        catch (IOException e) {
+
+                        }
+
+
+                        String ret = "";
+
+                        try {
+                            InputStream inputStream = CartOrderingActivity.this.openFileInput("config.txt");
+
+                            if ( inputStream != null ) {
+                                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                                String receiveString = "";
+                                StringBuilder stringBuilder = new StringBuilder();
+
+                                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                                    stringBuilder.append("\n").append(receiveString);
+                                }
+
+                                inputStream.close();
+                                ret = stringBuilder.toString();
+                            }
+                        }
+                        catch (FileNotFoundException e) {
+
+                        } catch (IOException e) {
+
+                        }*/
+
+
+/*                        StringBuilder sb = new StringBuilder();
+                        for(CartModel model : list) {
+                            sb.append(model);
+                        }*/
+
+
                         //История заказов
-                        OrderHistory(totalPrice, OrderName, OrderNumber, OrderAddress, strDate, OrderCommentary);
+                        OrderHistory(totalPrice,
+                                OrderName,
+                                OrderNumber,
+                                OrderAddress,
+                                strDate,
+                                OrderCommentary);
 
-/*                        Map<String,Object> data = new HashMap<>();
-                        data.put("aaa", "napitki");
-                        data.put("bbb", "deserti");
+                        String cartToMail = TextUtils.join(", ", list);
 
-                        Map<String,Object> name = new HashMap<>();
-                        name.put("name", "ppizza");
-                        name.put("data", data);
-
-*//*                        Map<String,Object> message = new HashMap<>();
-                        message.put("subject", "Hello from Firebase!");
-                        message.put("template", *//**//*"This is an <code>HTML</code> email body."*//**//* name);*//*
+                        Map<String,Object> message = new HashMap<>();
+                        message.put("subject", "Заказ №: " + idDocument);
+                        message.put("html", cartToMail + "<br>-------------<br>" +
+                                "<b>Итого: </b>" + totalPrice + " ₽" + "<br>-------------<br>" +
+                                orderContactInfoMap.toString());
 
                         Map<String,Object> mail = new HashMap<>();
-                        mail.put("to", "shevru02@mail.ru");
-                        *//*mail.put("message", message);*//*
-                        mail.put("template", name);
+                        mail.put("to", "skyendofmind@gmail.com");
+                        mail.put("message", message);
 
                         FirebaseFirestore.getInstance()
                                 .collection("mail")
-                                .add(mail);*/
+                                .add(mail);
+
+/*                        String str = list.toString();
+                        str = str.replaceAll("[\\[\\]]", "");*/
+
+/*                        String ss = cartModel.toString();*/
+
+
+
+/*                        StringBuilder sb = new StringBuilder();
+
+
+                        for (int i = 1; i < list.size(); i++) {
+                            ArrayList<String> oneRow = new ArrayList();
+                            oneRow.add(String.valueOf(list.get(i)));
+                            for (int j = 0; j < oneRow.size(); j++) {
+                                sb.append(oneRow.get(j));
+                            }
+                        }*/
+
 
                     }
 
@@ -485,8 +572,12 @@ public class CartOrderingActivity extends AppCompatActivity {
                         });
             }
 
-            private void OrderContactInfo(String OrderNumber, String OrderName, String OrderAddress, String OrderCommentary, String strDate) {
-                Map<String, Object>  orderContactInfoMap = new HashMap<>();
+            private void OrderContactInfo(String OrderNumber,
+                                          String OrderName,
+                                          String OrderAddress,
+                                          String OrderCommentary,
+                                          String strDate) {
+
                 orderContactInfoMap.put("Имя", OrderName);
                 orderContactInfoMap.put("Номер телефона", "+7" + OrderNumber);
                 orderContactInfoMap.put("Адрес", OrderAddress);

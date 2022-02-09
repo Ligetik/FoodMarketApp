@@ -666,14 +666,10 @@ public class PpizzaActivity extends AppCompatActivity implements IPPpizzaLoadLis
 
     @Override
     public void OnCartloadSuccess(List<CartModel> cartModelList) {
-
-
         int cartSum = 0;
         for (CartModel cartModel: cartModelList)
             cartSum += cartModel.getQuantity();
         badge.setNumber(cartSum);
-
-
     }
 
     @Override

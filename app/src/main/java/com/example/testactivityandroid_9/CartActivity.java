@@ -84,7 +84,8 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     private int bonus;
 
     int restaurantsSum;
-    int sum = 0;
+    /*int sum = 0;*/
+    int sumTotal = 0 , totalMinOrder;
 
     @Override
     protected void onStart() {
@@ -189,7 +190,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                         deliverySum -= Integer.parseInt(bonusCount);
                         deliverySumCount = deliverySum;
 
-                        /*txtTotalDelivery.setText(deliverySum + " ₽");*/
+                        txtTotalDelivery.setText(deliverySum + " ₽");
                     }
                     if (buttonText.equals("Сбросить")) {
                         btnGetBonus.setText("Списать");
@@ -199,12 +200,11 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
                         deliverySum += deliverySumCount;
 
-                        /*txtTotalDelivery.setText(deliverySum + " ₽");*/
+                        txtTotalDelivery.setText(deliverySum + " ₽");
                     }
                 }
-
                 txtTotalDelivery.setText(deliverySum + " ₽");
-                txtTotal.setText(sum + deliverySum  + " ₽");
+                txtTotal.setText(/*sum*/ sumTotal + deliverySum  + " ₽");
             });
         }
 
@@ -449,6 +449,12 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         btnToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (totalMinOrder > 0) {
+                    Toast toast = Toast.makeText(CartActivity.this, "Соберите корзину до минимального заказа", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
+                } else {
                 //Проверяет есть ли в корзине товар
                 FirebaseFirestore.getInstance()
                         .collection("Users_Cart")
@@ -481,13 +487,14 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                 }
                             }
                         });
+                }
             }
         });
     }
 
     @Override
     public void OnCartloadSuccess(List<CartModel> cartModelList) {
-        /*int sum = 0;*/
+        int sum = 0;
         int price2 = 800;
         int PodkrePizza = 0;
         int Avocado = 0;
@@ -510,18 +517,20 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                     break;
             }
         }
-
         if (price2 < 0) {
-            txtFreeDelivery.setText("Бесплатная доставка");
+            txtFreeDelivery.setText("0 ₽");
         } else {
             txtFreeDelivery.setText(price2 + " ₽");
         }
+
+       totalMinOrder = price2;
 
         restaurantsSum = PodkrePizza + Avocado + Djo;
         txtTotalDelivery.setText(restaurantsSum + " ₽");
 
 
         txtTotal.setText(sum + restaurantsSum  + " ₽");
+        sumTotal = sum;
 
         MyCartAdapter adapter = new MyCartAdapter(this, cartModelList);
         recyclerCart.setAdapter(adapter);
