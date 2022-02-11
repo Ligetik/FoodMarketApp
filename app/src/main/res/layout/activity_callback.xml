@@ -51,13 +51,16 @@
 
         <TextView
             android:id="@+id/callbackDescr"
-            android:layout_width="350dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="0dp"
-            android:text="При возникновении вопросов, оставьте
-             заявку и мы свяжемся с Вами в ближайшее время"
+            android:autoText="false"
+            android:fontFamily="sans-serif"
+            android:lines="3"
+            android:text="При возникновении вопросов, оставьте заявку и мы свяжемся с Вами в ближайшее время"
             android:textAlignment="center"
+            android:textAllCaps="false"
             android:textColor="@color/blue"
             android:textSize="16sp"
             android:textStyle="bold" />
