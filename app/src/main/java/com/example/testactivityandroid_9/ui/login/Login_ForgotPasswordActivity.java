@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.testactivityandroid_9.R;
@@ -24,6 +25,7 @@ public class Login_ForgotPasswordActivity extends AppCompatActivity {
     EditText userForgotEmail;
     @BindView(R.id.btnResetPassword)
     Button btnResetPassword;
+    ImageButton imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class Login_ForgotPasswordActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.setLanguageCode("ru");
 
-
+        clickBtnBack();
 
         btnResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,15 +56,26 @@ public class Login_ForgotPasswordActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(Login_ForgotPasswordActivity.this,
-                                        "Ccылка с восстановлением пароля отправлена на почту", Toast.LENGTH_LONG).show();
+                                        "Ccылка с восстановлением пароля отправлена на почту",
+                                        Toast.LENGTH_LONG).show();
                             }
                             else {
-                                Toast.makeText(Login_ForgotPasswordActivity.this, "Ошибка", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Login_ForgotPasswordActivity.this,
+                                        "Ошибка", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
             }
         });
+    }
 
+    private void clickBtnBack() {
+        imageButton = (ImageButton)findViewById(R.id.back);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 }
