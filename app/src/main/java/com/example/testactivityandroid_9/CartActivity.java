@@ -507,13 +507,13 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
             switch (cartModel.getId()) {
                 case 1:
-                    PodkrePizza = 150;
+                    PodkrePizza = 160;
                     break;
                 case 2:
-                    Avocado = 150;
+                    Avocado = 160;
                     break;
                 case 3:
-                    Djo = 150;
+                    Djo = 160;
                     break;
             }
         }
