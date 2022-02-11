@@ -14,7 +14,7 @@
         android:id="@+id/panel"
         android:layout_width="0dp"
         android:layout_height="?actionBarSize"
-        android:background="@android:color/transparent"
+        android:background="@color/blue"
         android:orientation="horizontal"
         android:weightSum="16"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
             android:text="@string/ordering"
             android:textAlignment="center"
             android:textColor="@color/orange"
-            android:textSize="23sp" />
+            android:textSize="20sp" />
 
         <ImageButton
             android:id="@+id/btnBack"
@@ -43,191 +43,203 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="10dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/panel">
+        app:layout_constraintTop_toBottomOf="@+id/panel"
+        app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="При оформлении заказа, зарегистрированные пользователи получают бонусы"
-            android:textAlignment="center"
-            android:textColor="@color/orange"
-            android:textSize="17sp" />
+            android:padding="10dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/orderNameLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView4"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:hint="@string/name"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            app:boxCornerRadiusBottomEnd="13dp"
-            app:boxCornerRadiusBottomStart="13dp"
-            app:boxCornerRadiusTopEnd="13dp"
-            app:boxCornerRadiusTopStart="13dp"
-            app:boxStrokeColor="@color/orange"
-            app:hintTextColor="@color/orange">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/orderName"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:inputType="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/orderNumberLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/orderNameLayout"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:hint="@string/_7_000_000_00_00"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            app:boxCornerRadiusBottomEnd="13dp"
-            app:boxCornerRadiusBottomStart="13dp"
-            app:boxCornerRadiusTopEnd="13dp"
-            app:boxCornerRadiusTopStart="13dp"
-            app:boxStrokeColor="@color/orange"
-            app:hintTextColor="@color/orange"
-            app:prefixText="+7">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/orderNumber"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:inputType="phone"
-                android:maxLength="10" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/orderAddressLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/orderNumberLayout"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:hint="Адрес доставки"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            app:boxCornerRadiusBottomEnd="13dp"
-            app:boxCornerRadiusBottomStart="13dp"
-            app:boxCornerRadiusTopEnd="13dp"
-            app:boxCornerRadiusTopStart="13dp"
-            app:boxStrokeColor="@color/orange"
-            app:hintTextColor="@color/orange">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/orderAddress"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/orderAddressLayout"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="@string/payment_method"
-            android:textAlignment="center"
-            android:textColor="@color/orange"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-
-        <RadioGroup
-            android:id="@+id/orderPayment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView5"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioButtonCash"
-                android:layout_width="180dp"
-                android:layout_height="55dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/radio_selector_orange"
-                android:button="@android:color/transparent"
-                android:checked="true"
-                android:text="@string/order_byCash"
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="При оформлении заказа, зарегистрированные пользователи получают бонусы"
                 android:textAlignment="center"
-                android:textColor="@drawable/radio_textcolor_orange" />
+                android:textColor="@color/orange"
+                android:textSize="16sp" />
 
-            <RadioButton
-                android:id="@+id/radioButtonCard"
-                android:layout_width="180dp"
-                android:layout_height="55dp"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/radio_selector_orange"
-                android:button="@android:color/transparent"
-                android:text="@string/order_byCard"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orderNameLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView4"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:hint="@string/name"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:boxCornerRadiusBottomEnd="13dp"
+                app:boxCornerRadiusBottomStart="13dp"
+                app:boxCornerRadiusTopEnd="13dp"
+                app:boxCornerRadiusTopStart="13dp"
+                app:boxStrokeColor="@color/orange"
+                app:hintTextColor="@color/orange">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orderName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orderNumberLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/orderNameLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:hint="@string/_7_000_000_00_00"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:boxCornerRadiusBottomEnd="13dp"
+                app:boxCornerRadiusBottomStart="13dp"
+                app:boxCornerRadiusTopEnd="13dp"
+                app:boxCornerRadiusTopStart="13dp"
+                app:boxStrokeColor="@color/orange"
+                app:hintTextColor="@color/orange"
+                app:prefixText="+7">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orderNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:maxLength="10" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orderAddressLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/orderNumberLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:hint="Адрес доставки"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:boxCornerRadiusBottomEnd="13dp"
+                app:boxCornerRadiusBottomStart="13dp"
+                app:boxCornerRadiusTopEnd="13dp"
+                app:boxCornerRadiusTopStart="13dp"
+                app:boxStrokeColor="@color/orange"
+                app:hintTextColor="@color/orange">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orderAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/orderAddressLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="@string/payment_method"
                 android:textAlignment="center"
-                android:textColor="@drawable/radio_textcolor_orange" />
-        </RadioGroup>
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/orderCommentaryLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/btnOrder"
-            android:layout_below="@+id/orderPayment"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
-            android:hint="Ваш комментарий к заказу"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            app:boxCornerRadiusBottomEnd="13dp"
-            app:boxCornerRadiusBottomStart="13dp"
-            app:boxCornerRadiusTopEnd="13dp"
-            app:boxCornerRadiusTopStart="13dp"
-            app:boxStrokeColor="@color/orange"
-            app:hintTextColor="@color/orange">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/orderCommentary"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="start|top"
-                android:inputType="textMultiLine|text"
-                android:textAlignment="viewStart" />
-        </com.google.android.material.textfield.TextInputLayout>
+            <RadioGroup
+                android:id="@+id/orderPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView5"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-        <Button
-            android:id="@+id/btnOrder"
-            android:layout_width="320dp"
-            android:layout_height="68dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/order_btn"
-            android:textAllCaps="false"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:backgroundTint="@color/orange" />
+                <RadioButton
+                    android:id="@+id/radioButtonCash"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_selector_orange"
+                    android:button="@android:color/transparent"
+                    android:checked="true"
+                    android:text="@string/order_byCash"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_textcolor_orange" />
 
-    </RelativeLayout>
+                <RadioButton
+                    android:id="@+id/radioButtonCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_selector_orange"
+                    android:button="@android:color/transparent"
+                    android:text="@string/order_byCard"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_textcolor_orange" />
+            </RadioGroup>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orderCommentaryLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/orderPayment"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:hint="Ваш комментарий к заказу"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:boxCornerRadiusBottomEnd="13dp"
+                app:boxCornerRadiusBottomStart="13dp"
+                app:boxCornerRadiusTopEnd="13dp"
+                app:boxCornerRadiusTopStart="13dp"
+                app:boxStrokeColor="@color/orange"
+                app:hintTextColor="@color/orange">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orderCommentary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine|text"
+                    android:lines="3"
+                    android:textAlignment="viewStart" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnOrder"
+                android:layout_width="320dp"
+                android:layout_height="68dp"
+                android:layout_below="@+id/orderCommentaryLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:text="@string/order_btn"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/orange" />
+
+        </RelativeLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
