@@ -51,9 +51,8 @@
     <style name="MyTabLayout" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="tabTextAppearance">@style/MyTabTextAppearance</item>
     </style>
-
     <style name="MyTabTextAppearance" parent="Widget.Design.TabLayout">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
     </style>
     <!--/TabLayout-->
