@@ -46,6 +46,8 @@ public class PromotionActivity extends AppCompatActivity implements IPromotionLo
 
         clickBtnBack();
 
+        recycler_promotion.stopScroll();
+
         promotionLoadListener = this;
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
