@@ -1,5 +1,7 @@
 package com.example.testactivityandroid_9;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -76,6 +78,8 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     Slider sliderBonus;
     @BindView(R.id.orderBonusEditText)
     EditText orderBonusEditText;
+    @BindView(R.id.orderPayment)
+    RelativeLayout orderPayment;
 
     ICartLoadListener cartLoadListener;
     CartModel cartModels;
@@ -126,6 +130,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
             orderBonus.setVisibility(View.GONE);
             textView12.setVisibility(View.GONE);
             textView13.setVisibility(View.GONE);
+            /*orderPayment.setLayoutParams(new RelativeLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT));*/
         } else {
             FirebaseFirestore.getInstance()
                     .collection("user")
