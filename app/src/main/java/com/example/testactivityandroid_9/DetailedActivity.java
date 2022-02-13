@@ -45,34 +45,42 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
     TextView item_name;
     @BindView(R.id.btnBack)
     ImageView btnBack;
-    @BindView(R.id.item_vetchina_plus)
-    ImageView item_vetchina_plus;
-    @BindView(R.id.item_vetchina_minus)
-    ImageView item_vetchina_minus;
-    @BindView(R.id.item_vetchina_quantity)
-    TextView item_vetchina_quantity;
-    @BindView(R.id.item_krab_plus)
-    ImageView item_krab_plus;
-    @BindView(R.id.item_krab_minus)
-    ImageView item_krab_minus;
-    @BindView(R.id.item_krab_quantity)
-    TextView item_krab_quantity;
-    @BindView(R.id.item_bekon_plus)
-    ImageView item_bekon_plus;
-    @BindView(R.id.item_bekon_minus)
-    ImageView item_bekon_minus;
-    @BindView(R.id.item_bekon_quantity)
-    TextView item_bekon_quantity;
-    @BindView(R.id.item_krevetka_plus)
-    ImageView item_krevetka_plus;
-    @BindView(R.id.item_krevetka_minus)
-    ImageView item_krevetka_minus;
-    @BindView(R.id.item_krevetka_quantity)
-    TextView item_krevetka_quantity;
+    @BindView(R.id.item_topping1_plus)
+    ImageView item_topping1_plus;
+    @BindView(R.id.item_topping1_minus)
+    ImageView item_topping1_minus;
+    @BindView(R.id.item_topping1_quantity)
+    TextView item_topping1_quantity;
+    @BindView(R.id.item_topping2_plus)
+    ImageView item_topping2_plus;
+    @BindView(R.id.item_topping2_minus)
+    ImageView item_topping2_minus;
+    @BindView(R.id.item_topping2_quantity)
+    TextView item_topping2_quantity;
+    @BindView(R.id.item_topping3_plus)
+    ImageView item_topping3_plus;
+    @BindView(R.id.item_topping3_minus)
+    ImageView item_topping3_minus;
+    @BindView(R.id.item_topping3_quantity)
+    TextView item_topping3_quantity;
+    @BindView(R.id.item_topping4_plus)
+    ImageView item_topping4_plus;
+    @BindView(R.id.item_topping4_minus)
+    ImageView item_topping4_minus;
+    @BindView(R.id.item_topping4_quantity)
+    TextView item_topping4_quantity;
     @BindView(R.id.btnAddToCart_Detailed)
     Button btnAddToCart_Detailed;
     @BindView(R.id.itemSizeRadioButton)
     RadioGroup itemSizeRadioButton;
+    @BindView(R.id.item_topping1)
+    ConstraintLayout item_topping1;
+    @BindView(R.id.item_topping2)
+    ConstraintLayout item_topping2;
+    @BindView(R.id.item_topping3)
+    ConstraintLayout item_topping3;
+    @BindView(R.id.item_topping4)
+    ConstraintLayout item_topping4;
 
     ICartLoadListener cartLoadListener;
     PPpizzaModel pPpizzaModel = null;
@@ -92,81 +100,20 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
 
         btnBack.setOnClickListener(v -> finish());
 
-        getItemsFromFirebase();
+        final Object object = getIntent().getSerializableExtra("details");
 
         ToppingsCount();
 
+        LoadPpizza(object);
+
+        LoadAvocado(object);
+
+        LoadDjo(object);
+
+
+
     }
-
-    private void ToppingsCount() {
-        item_vetchina_plus.setOnClickListener(v ->{
-
-            if (vetchinaQuantity >= 0) {
-                vetchinaQuantity++;
-                item_vetchina_quantity.setText(String.valueOf(vetchinaQuantity));
-            }
-        });
-
-        item_vetchina_minus.setOnClickListener(v ->{
-
-            if (vetchinaQuantity > 0) {
-                vetchinaQuantity--;
-                item_vetchina_quantity.setText(String.valueOf(vetchinaQuantity));
-            }
-        });
-
-        item_krab_plus.setOnClickListener(v ->{
-
-            if (krabQuantity >= 0) {
-                krabQuantity++;
-                item_krab_quantity.setText(String.valueOf(krabQuantity));
-            }
-        });
-
-        item_krab_minus.setOnClickListener(v ->{
-
-            if (krabQuantity > 0) {
-                krabQuantity--;
-                item_krab_quantity.setText(String.valueOf(krabQuantity));
-            }
-        });
-
-        item_bekon_plus.setOnClickListener(v ->{
-
-            if (bekonQuantity >= 0) {
-                bekonQuantity++;
-                item_bekon_quantity.setText(String.valueOf(bekonQuantity));
-            }
-        });
-
-        item_bekon_minus.setOnClickListener(v ->{
-
-            if (bekonQuantity > 0) {
-                bekonQuantity--;
-                item_bekon_quantity.setText(String.valueOf(bekonQuantity));
-            }
-        });
-
-        item_krevetka_plus.setOnClickListener(v ->{
-
-            if (krevetkaQuantity >= 0) {
-                krevetkaQuantity++;
-                item_krevetka_quantity.setText(String.valueOf(krevetkaQuantity));
-            }
-        });
-
-        item_krevetka_minus.setOnClickListener(v ->{
-
-            if (krevetkaQuantity > 0) {
-                krevetkaQuantity--;
-                item_krevetka_quantity.setText(String.valueOf(krevetkaQuantity));
-            }
-        });
-    }
-
-    private void getItemsFromFirebase() {
-        final Object object = getIntent().getSerializableExtra("details");
-
+    private void LoadPpizza(Object object) {
         if (object instanceof PPpizzaModel) {
             pPpizzaModel = (PPpizzaModel) object;
         }
@@ -176,110 +123,141 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
             item_descr.setText(pPpizzaModel.getItem_details());
             item_name.setText(pPpizzaModel.getItem_name());
 
-            btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        FirebaseFirestore.getInstance()
-                                .collection("Users_Cart")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .collection("Корзина")
-                                .document(pPpizzaModel.getKey())
-                                .get()
-                                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
-                                        { // Обновляет количество и общую цену
-                                            CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+            if(pPpizzaModel.getItem_category().equals("Пицца")) {
+                item_topping1.setVisibility(View.VISIBLE);
+                item_topping2.setVisibility(View.VISIBLE);
+                item_topping3.setVisibility(View.VISIBLE);
+                item_topping4.setVisibility(View.VISIBLE);
 
-                                            cartModel.setQuantity(cartModel.getQuantity()+1);
-                                            Map<String,Object> updateData = new HashMap<>();
-                                            updateData.put("quantity", cartModel.getQuantity());
-                                            updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
+                btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            FirebaseFirestore.getInstance()
+                                    .collection("Users_Cart")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .collection("Корзина")
+                                    .document(pPpizzaModel.getKey())
+                                    .get()
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                                            FirebaseFirestore.getInstance()
+                                            String id = FirebaseFirestore.getInstance()
                                                     .collection("Users_Cart")
                                                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                     .collection("Корзина")
-                                                    .document(pPpizzaModel.getKey())
-                                                    .update(updateData)
-                                                    .addOnSuccessListener(aVoid -> {
-                                                        cartLoadListener.OnCartloadFailed("Добавлено");
-                                                        finish();
-                                                    })
-                                                    .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
+                                                    .document()
+                                                    .getId();
 
-                                        }
-                                        else // если в корзине нет предмета, то добавить новый
-                                        {
-                                            CartModel cartModel = new CartModel();
-                                            cartModel.setItem_name(pPpizzaModel.getItem_name());
-                                            cartModel.setItem_image(pPpizzaModel.getItem_image());
-                                            cartModel.setItem_details(pPpizzaModel.getItem_details());
-                                            cartModel.setKey(pPpizzaModel.getKey());
-                                            cartModel.setItem_cost(pPpizzaModel.getItem_cost());
-                                            cartModel.setQuantity(1);
-                                            cartModel.setTotalPrice(pPpizzaModel.getItem_cost());
-                                            cartModel.setId(pPpizzaModel.getId());
+                                            if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
+                                            { // Обновляет количество и общую цену
+                                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
 
-                                            Map<String,Object> dopSizeMap = new HashMap<>();
+                                                cartModel.setQuantity(cartModel.getQuantity()+1);
+                                                Map<String,Object> updateData = new HashMap<>();
+                                                updateData.put("quantity", cartModel.getQuantity());
+                                                updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
 
-                                            if (itemSizeRadioButton.getCheckedRadioButtonId() == R.id.radioButton1) {
-                                                dopSizeMap.put("Доп размер", "32 см");
-                                            } else if (itemSizeRadioButton.getCheckedRadioButtonId() == R.id.radioButton2) {
-                                                dopSizeMap.put("Доп размер", "40 см");
-                                            } else {
-                                                dopSizeMap.put("Доп размер", "-");
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(pPpizzaModel.getKey())
+                                                        .update(updateData)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        })
+                                                        .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
+
                                             }
+                                            else // если в корзине нет предмета, то добавить новый
+                                            {
+                                                int toppingPizza = 0;
+                                                int VETCHINA_PRICE = 60;
+                                                int KRAB_PRICE = 80;
 
-                                            Map<String,Object> toppingsMap = new HashMap<>();
-                                            toppingsMap.put("Доп Ветчина", vetchinaQuantity);
-                                            toppingsMap.put("Доп Краб", krabQuantity);
-                                            toppingsMap.put("Доп Бек", bekonQuantity);
-                                            toppingsMap.put("Доп Краб", krevetkaQuantity);
+                                                toppingPizza = VETCHINA_PRICE * vetchinaQuantity +
+                                                        KRAB_PRICE * krabQuantity;
 
-                                            FirebaseFirestore.getInstance()
-                                                    .collection("Users_Cart")
-                                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                    .collection("Корзина")
-                                                    .document(pPpizzaModel.getKey())
-                                                    .set(cartModel)
-                                                    .addOnSuccessListener(aVoid -> {
 
-                                                        FirebaseFirestore.getInstance()
-                                                                .collection("Users_Cart")
-                                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                                .collection("Корзина")
-                                                                .document(pPpizzaModel.getKey())
-                                                                .update(dopSizeMap);
+                                                Map<String,Object> toppingsMap = new HashMap<>();
+                                                toppingsMap.put("Доп Ветчина", vetchinaQuantity);
+                                                toppingsMap.put("Доп Краб", krabQuantity);
+                                                toppingsMap.put("Доп Бекон", bekonQuantity);
+                                                toppingsMap.put("Доп Креветка", krevetkaQuantity);
 
-                                                        FirebaseFirestore.getInstance()
-                                                                .collection("Users_Cart")
-                                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                                .collection("Корзина")
-                                                                .document(pPpizzaModel.getKey())
-                                                                .update(toppingsMap);
+                                                Map<String,Object> toppingsMapArray = new HashMap<>();
+                                                toppingsMapArray.put("допы", toppingsMap);
 
-                                                        cartLoadListener.OnCartloadFailed("Добавлено");
-                                                        finish();
-                                                    })
-                                                    .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
+                                                CartModel cartModel = new CartModel();
+                                                cartModel.setItem_name(pPpizzaModel.getItem_name());
+                                                cartModel.setItem_image(pPpizzaModel.getItem_image());
+                                                cartModel.setItem_details(pPpizzaModel.getItem_details());
+                                                cartModel.setKey(pPpizzaModel.getKey());
+                                                cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza );
+                                                cartModel.setQuantity(1);
+                                                cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setId(pPpizzaModel.getId());
+                                                cartModel.setItem_category(pPpizzaModel.getItem_category());
+
+                                                Map<String,Object> dopSizeMap = new HashMap<>();
+
+                                                if (itemSizeRadioButton.getCheckedRadioButtonId() == R.id.radioButton1) {
+                                                    dopSizeMap.put("Доп размер", "32 см");
+                                                } else if (itemSizeRadioButton.getCheckedRadioButtonId() == R.id.radioButton2) {
+                                                    dopSizeMap.put("Доп размер", "40 см");
+                                                } else {
+                                                    dopSizeMap.put("Доп размер", "-");
+                                                }
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+
+                                                            FirebaseFirestore.getInstance()
+                                                                    .collection("Users_Cart")
+                                                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                                    .collection("Корзина")
+                                                                    .document(id)
+                                                                    .update(dopSizeMap);
+
+                                                            FirebaseFirestore.getInstance()
+                                                                    .collection("Users_Cart")
+                                                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                                    .collection("Корзина")
+                                                                    .document(id)
+                                                                    .update(toppingsMapArray);
+
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        })
+                                                        .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
+                                            }
+                                            EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+
                                         }
-                                        EventBus.getDefault().postSticky(new MyUpdateCartEvent());
 
-                                    }
-
-                                });
-                    } catch (Exception e) {
-                        FirebaseCrashlytics.getInstance().recordException(e);
+                                    });
+                        } catch (Exception e) {
+                            FirebaseCrashlytics.getInstance().recordException(e);
+                        }
                     }
-                }
-            });
+                });
+
+            }
+
+
 
         }
+    }
 
-
+    private void LoadAvocado(Object object) {
         if (object instanceof AvocadoModel) {
             avocadoModel = (AvocadoModel) object;
         }
@@ -370,8 +348,9 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                 }
             });
         }
+    }
 
-
+    private void LoadDjo(Object object) {
         if (object instanceof DjoModel) {
             djoModel = (DjoModel) object;
         }
@@ -381,6 +360,76 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
             item_descr.setText(djoModel.getItem_details());
             item_name.setText(djoModel.getItem_name());
         }
+    }
+
+
+
+
+
+    private void ToppingsCount() {
+        item_topping1_plus.setOnClickListener(v ->{
+
+            if (vetchinaQuantity >= 0) {
+                vetchinaQuantity++;
+                item_topping1_quantity.setText(String.valueOf(vetchinaQuantity));
+            }
+        });
+
+        item_topping1_minus.setOnClickListener(v ->{
+
+            if (vetchinaQuantity > 0) {
+                vetchinaQuantity--;
+                item_topping1_quantity.setText(String.valueOf(vetchinaQuantity));
+            }
+        });
+
+        item_topping2_plus.setOnClickListener(v ->{
+
+            if (krabQuantity >= 0) {
+                krabQuantity++;
+                item_topping2_quantity.setText(String.valueOf(krabQuantity));
+            }
+        });
+
+        item_topping2_minus.setOnClickListener(v ->{
+
+            if (krabQuantity > 0) {
+                krabQuantity--;
+                item_topping2_quantity.setText(String.valueOf(krabQuantity));
+            }
+        });
+
+        item_topping3_plus.setOnClickListener(v ->{
+
+            if (bekonQuantity >= 0) {
+                bekonQuantity++;
+                item_topping3_quantity.setText(String.valueOf(bekonQuantity));
+            }
+        });
+
+        item_topping3_minus.setOnClickListener(v ->{
+
+            if (bekonQuantity > 0) {
+                bekonQuantity--;
+                item_topping3_quantity.setText(String.valueOf(bekonQuantity));
+            }
+        });
+
+        item_topping4_plus.setOnClickListener(v ->{
+
+            if (krevetkaQuantity >= 0) {
+                krevetkaQuantity++;
+                item_topping4_quantity.setText(String.valueOf(krevetkaQuantity));
+            }
+        });
+
+        item_topping4_minus.setOnClickListener(v ->{
+
+            if (krevetkaQuantity > 0) {
+                krevetkaQuantity--;
+                item_topping4_quantity.setText(String.valueOf(krevetkaQuantity));
+            }
+        });
     }
 
     @Override

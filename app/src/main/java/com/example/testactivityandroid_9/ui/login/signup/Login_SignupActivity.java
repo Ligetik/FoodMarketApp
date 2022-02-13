@@ -84,7 +84,7 @@ public class Login_SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String UserNumber = userNumber.getText().toString().trim();
                 final String UserName = userName.getText().toString();
-                final String UserEmail = userEmail.getText().toString();
+                final String UserEmail = userEmail.getText().toString().trim();;
                 String UserPassword = userPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(UserNumber)) {

@@ -43,7 +43,7 @@ public class Login_ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final String UserEmail = userForgotEmail.getText().toString();
+                final String UserEmail = userForgotEmail.getText().toString().trim();;
 
                 if (TextUtils.isEmpty(UserEmail)) {
                     userForgotEmail.setError("Не указан электронный адрес");

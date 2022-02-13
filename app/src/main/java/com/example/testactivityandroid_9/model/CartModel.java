@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CartModel implements Serializable {
-    private  String key,item_name,item_image, item_details;
+    private String key,item_name,item_image, item_details, item_category;
+    private Map<String,Object>  допы;
     private int quantity, item_cost, totalPrice, id;
 /*    private List<String> details;*/
 
@@ -77,16 +79,33 @@ public class CartModel implements Serializable {
         this.id = id;
     }
 
+    public String getItem_category() {
+        return item_category;
+    }
+
+    public void setItem_category(String item_category) {
+        this.item_category = item_category;
+    }
+
+    public Map<String,Object>  getДопы() {
+        return допы;
+    }
+
+    public void setДопы(Map<String,Object>  допы) {
+        допы = допы;
+    }
+
     @Override
     public String toString() {
         switch (id) {
             case 1:
-                return "<h3><p><b><u>PodkrePizza</u></b></h3> Позиция " + key + "<br>[" +
+                return "<h3><p><b><u>PodkrePizza</u></b></h3>" +
                         "<br>Название: " + item_name +
                         ", <br>Количество: " + "<b>" + quantity + "</b>" +
                         ", <br>Цена: " + item_cost +
                         ", <br>Описание: " + item_details +
-                        "<br>]</p>";
+                        ", <br>Допы: " + допы +
+                        "</p>";
             case 2:
                 return "<h3><p><b><u>Avocado</u></b></h3> Позиция " + key + "<br>[" +
                         "<br>Название: " + item_name +
@@ -104,6 +123,8 @@ public class CartModel implements Serializable {
         }
        return "";
     }
+
+
     /*    public ArrayList<String> getDetails() {
         return details;
     }

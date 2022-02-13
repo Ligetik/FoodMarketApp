@@ -136,6 +136,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 cartMap.put("Описание", model.getItem_details());
                                 cartMap.put("Количество", model.getQuantity());
                                 cartMap.put("Заведение", model.getId());
+                                cartMap.put("Допы", model.getДопы());
 
 
                                 totalPrice += model.getTotalPrice();
@@ -262,7 +263,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 orderContactInfoMap.toString());
 
                         Map<String,Object> mail = new HashMap<>();
-                        mail.put("to", "dasha.gubar.23@inbox.ru");
+                        mail.put("to", "skyendofmind@gmail.com");
                         mail.put("message", message);
 
                         FirebaseFirestore.getInstance()

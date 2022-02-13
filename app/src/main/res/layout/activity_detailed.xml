@@ -367,7 +367,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/gradient_background_orange">
+            android:background="@drawable/gradient_background_orange"
+            android:paddingBottom="15dp">
 
             <RelativeLayout
                 android:id="@+id/panelImg"
@@ -456,38 +457,49 @@
                 android:layout_below="@+id/itemSizeRadioButton"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical"
-                android:paddingLeft="50dp"
-                android:paddingEnd="50dp">
+                android:paddingLeft="30dp"
+                android:paddingEnd="30dp">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/item_topping1"
-                    android:layout_width="200dp"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:orientation="horizontal">
+                    android:weightSum="3">
 
                     <TextView
                         android:id="@+id/item_topping1_name"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="1dp"
                         android:gravity="center_vertical"
                         android:text="Ветчина"
                         android:textColor="@color/blue"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
                         android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="false"
                         android:layout_alignParentBottom="false"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center"
+                        android:background="@drawable/radio_selector_blue"
+                        android:orientation="horizontal"
+                        android:padding="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.73"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="MissingConstraints">
 
                         <ImageView
-                            android:id="@+id/item_vetchina_minus"
+                            android:id="@+id/item_topping1_minus"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="right"
@@ -495,7 +507,7 @@
                             android:src="@drawable/ic_outline_remove_24_blue" />
 
                         <TextView
-                            android:id="@+id/item_vetchina_quantity"
+                            android:id="@+id/item_topping1_quantity"
                             android:layout_width="25dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -504,16 +516,30 @@
                             android:textSize="20sp" />
 
                         <ImageView
-                            android:id="@+id/item_vetchina_plus"
+                            android:id="@+id/item_topping1_plus"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="end"
                             android:layout_weight="1"
                             android:src="@drawable/ic_baseline_add_24_blue" />
                     </LinearLayout>
-                </LinearLayout>
 
-                <LinearLayout
+
+                    <TextView
+                        android:id="@+id/item_topping1_cost"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="1000 ₽"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/item_topping2"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -521,9 +547,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
+                    android:weightSum="3">
 
                     <TextView
+                        android:id="@+id/item_topping2_name"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="0dp"
@@ -532,17 +559,29 @@
                         android:text="Краб"
                         android:textColor="@color/blue"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
                         android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="false"
                         android:layout_alignParentBottom="false"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center"
+                        android:background="@drawable/radio_selector_blue"
+                        android:orientation="horizontal"
+                        android:padding="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.73"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="MissingConstraints">
 
                         <ImageView
-                            android:id="@+id/item_krab_minus"
+                            android:id="@+id/item_topping2_minus"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="right"
@@ -550,7 +589,7 @@
                             android:src="@drawable/ic_outline_remove_24_blue" />
 
                         <TextView
-                            android:id="@+id/item_krab_quantity"
+                            android:id="@+id/item_topping2_quantity"
                             android:layout_width="25dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -559,7 +598,7 @@
                             android:textSize="20sp" />
 
                         <ImageView
-                            android:id="@+id/item_krab_plus"
+                            android:id="@+id/item_topping2_plus"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="end"
@@ -569,9 +608,22 @@
 
                     </LinearLayout>
 
-                </LinearLayout>
+                    <TextView
+                        android:id="@+id/item_topping2_cost"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="1000 ₽"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <LinearLayout
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/item_topping3"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -579,9 +631,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
+                    android:weightSum="3">
 
                     <TextView
+                        android:id="@+id/item_topping3_name"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="0dp"
@@ -590,17 +643,28 @@
                         android:text="Бекон"
                         android:textColor="@color/blue"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
                         android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="false"
                         android:layout_alignParentBottom="false"
-                        android:orientation="horizontal">
+                        android:background="@drawable/radio_normal_blue"
+                        android:orientation="horizontal"
+                        android:padding="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.73"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="MissingConstraints">
 
                         <ImageView
-                            android:id="@+id/item_bekon_minus"
+                            android:id="@+id/item_topping3_minus"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="right"
@@ -608,7 +672,7 @@
                             android:src="@drawable/ic_outline_remove_24_blue" />
 
                         <TextView
-                            android:id="@+id/item_bekon_quantity"
+                            android:id="@+id/item_topping3_quantity"
                             android:layout_width="25dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -617,7 +681,7 @@
                             android:textSize="20sp" />
 
                         <ImageView
-                            android:id="@+id/item_bekon_plus"
+                            android:id="@+id/item_topping3_plus"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="end"
@@ -627,9 +691,22 @@
 
                     </LinearLayout>
 
-                </LinearLayout>
+                    <TextView
+                        android:id="@+id/item_topping3_cost"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="1000 ₽"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <LinearLayout
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/item_topping4"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -637,10 +714,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="15dp"
-                    android:orientation="horizontal"
-                    android:paddingBottom="15dp">
+                    android:weightSum="3">
 
                     <TextView
+                        android:id="@+id/item_topping4_name"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="0dp"
@@ -649,7 +726,10 @@
                         android:text="Креветка"
                         android:textColor="@color/blue"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
                         android:id="@+id/quantityLayout"
@@ -657,10 +737,19 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="false"
                         android:layout_alignParentBottom="false"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center"
+                        android:background="@drawable/radio_selector_blue"
+                        android:orientation="horizontal"
+                        android:padding="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.73"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="MissingConstraints">
 
                         <ImageView
-                            android:id="@+id/item_krevetka_minus"
+                            android:id="@+id/item_topping4_minus"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="right"
@@ -668,7 +757,7 @@
                             android:src="@drawable/ic_outline_remove_24_blue" />
 
                         <TextView
-                            android:id="@+id/item_krevetka_quantity"
+                            android:id="@+id/item_topping4_quantity"
                             android:layout_width="25dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -677,7 +766,7 @@
                             android:textSize="20sp" />
 
                         <ImageView
-                            android:id="@+id/item_krevetka_plus"
+                            android:id="@+id/item_topping4_plus"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="end"
@@ -687,7 +776,20 @@
 
                     </LinearLayout>
 
-                </LinearLayout>
+                    <TextView
+                        android:id="@+id/item_topping3_cost3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="1000 ₽"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/item_topping6"

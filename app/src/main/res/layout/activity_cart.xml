@@ -61,150 +61,165 @@
         android:padding="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/orderBonusLayout"
+            android:id="@+id/orderBonusInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true">
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="У вас"
-                android:textColor="@color/orange"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="TextContrastCheck" />
-
-            <TextView
-                android:id="@+id/orderBonus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="0"
-                android:textColor="@color/orange"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView12"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="TextContrastCheck" />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="бонусов"
-                android:textColor="@color/orange"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/orderBonus"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txtTotalBonus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textAlignment="textEnd"
-                android:textColor="@color/orange"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="gone" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.slider.Slider
-            android:id="@+id/sliderBonus"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/orderBonusLayout"
-            android:stepSize="1"
-            app:thumbColor="@color/orange"
-            app:trackColorActive="@color/orange"
-            app:trackColorInactive="#D5FF9933" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/orderBonusWriteOff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/sliderBonus">
-
-            <Button
-                android:id="@+id/btnGetBonus"
-                android:layout_width="110dp"
-                android:layout_height="0dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="8dp"
-                android:text="Списать"
-                android:textAllCaps="false"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:backgroundTint="@color/orange"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/orderBonusEditText"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:animateLayoutChanges="false">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/orderBonusLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btnGetBonus"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/orderBonusTitleText"
+                    android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="viewEnd"
+                    android:text="У вас"
                     android:textColor="@color/orange"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/orderBonus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="0"
+                    android:textColor="@color/orange"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView12"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="бонусов"
+                    android:textColor="@color/orange"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/orderBonus"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/orderBonusTitleCount"
+                    android:id="@+id/txtTotalBonus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="viewEnd"
+                    android:text=""
+                    android:textAlignment="textEnd"
                     android:textColor="@color/orange"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/orderBonusTitleText" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <EditText
-                android:id="@+id/orderBonusEditText"
-                style="@style/TextViewBonus"
-                android:layout_width="125dp"
-                android:layout_height="48dp"
-                android:background="@drawable/edittext_bonus_bg_border"
-                android:inputType="numberPassword"
-                android:paddingLeft="5dp"
-                android:paddingRight="3dp"
-                android:text="0"
-                android:textColor="@color/orange"
-                android:textColorHighlight="@color/orange"
-                android:textColorHint="@color/orange"
-                android:textColorLink="@color/orange"
-                android:textCursorDrawable="@null"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderBonus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stepSize="1"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/orderBonusLayout"
+                app:thumbColor="@color/orange"
+                app:trackColorActive="@color/orange"
+                app:trackColorInactive="#D5FF9933" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/orderBonusWriteOff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sliderBonus">
+
+                <Button
+                    android:id="@+id/btnGetBonus"
+                    android:layout_width="110dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:text="Списать"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:backgroundTint="@color/orange"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/orderBonusEditText"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnGetBonus"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/orderBonusTitleText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/orange"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/orderBonusTitleCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/orange"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/orderBonusTitleText" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <EditText
+                    android:id="@+id/orderBonusEditText"
+                    style="@style/TextViewBonus"
+                    android:layout_width="125dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/edittext_bonus_bg_border"
+                    android:inputType="numberPassword"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="3dp"
+                    android:text="0"
+                    android:textColor="@color/orange"
+                    android:textColorHighlight="@color/orange"
+                    android:textColorHint="@color/orange"
+                    android:textColorLink="@color/orange"
+                    android:textCursorDrawable="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -212,7 +227,7 @@
             android:id="@+id/orderFreeDelivery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/orderBonusWriteOff"
+            android:layout_below="@id/orderBonusInfo"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -272,6 +287,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/orderTotalDelivery"
             android:layout_marginTop="10dp"
+            android:animateLayoutChanges="false"
             android:orientation="horizontal">
 
             <TextView

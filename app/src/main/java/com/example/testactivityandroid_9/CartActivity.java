@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -80,6 +81,10 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     EditText orderBonusEditText;
     @BindView(R.id.orderPayment)
     RelativeLayout orderPayment;
+    @BindView(R.id.orderBonusInfo)
+    ConstraintLayout orderBonusInfo;
+    @BindView(R.id.orderBonusWriteOff)
+    ConstraintLayout orderBonusWriteOff;
 
     ICartLoadListener cartLoadListener;
     CartModel cartModels;
@@ -117,6 +122,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         setContentView(R.layout.activity_cart);
 
         init();
+
         loadCartFromFribase();
 
         LoadBonuses();
@@ -124,12 +130,16 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         orderBonusEditText.setTransformationMethod(null);
 
         if (FirebaseAuth.getInstance().getCurrentUser().isAnonymous()) {
-            sliderBonus.setVisibility(View.GONE);
+
+            orderBonusInfo.setVisibility(View.GONE);
+
+/*            sliderBonus.setVisibility(View.GONE);
             orderBonusEditText.setVisibility(View.GONE);
             btnGetBonus.setVisibility(View.GONE);
             orderBonus.setVisibility(View.GONE);
             textView12.setVisibility(View.GONE);
-            textView13.setVisibility(View.GONE);
+            textView13.setVisibility(View.GONE);*/
+
             /*orderPayment.setLayoutParams(new RelativeLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT));*/
         } else {
             FirebaseFirestore.getInstance()
@@ -144,9 +154,11 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                             orderBonus.setText(bonus + "");
 
                             if (bonus == 0) {
+                                orderBonusWriteOff.setVisibility(View.GONE);
+
                                 sliderBonus.setVisibility(View.GONE);
-                                orderBonusEditText.setVisibility(View.GONE);
-                                btnGetBonus.setVisibility(View.GONE);
+/*                                orderBonusEditText.setVisibility(View.GONE);
+                                btnGetBonus.setVisibility(View.GONE);*/
                             } else {
                                 orderBonusEditText.setText(bonus + "");
 
@@ -184,7 +196,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                 int deliverySum = restaurantsSum;
                 int deliverySumCount = 0;
 
-                if (restaurantsSum > 0) {
+                if (/*restaurantsSum*/ sumTotal > 0) {
                     if (buttonText.equals("Списать")) {
                         btnGetBonus.setText("Сбросить");
                         sliderBonus.setValue(Float.parseFloat(bonusCount));
@@ -196,6 +208,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                         deliverySumCount = deliverySum;
 
                         txtTotalDelivery.setText(deliverySum + " ₽");
+
                     }
                     if (buttonText.equals("Сбросить")) {
                         btnGetBonus.setText("Списать");
@@ -206,7 +219,10 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                         deliverySum += deliverySumCount;
 
                         txtTotalDelivery.setText(deliverySum + " ₽");
+
                     }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Добавьте любое блюдо в корзину",Toast.LENGTH_SHORT).show();
                 }
                 txtTotalDelivery.setText(deliverySum + " ₽");
                 txtTotal.setText(/*sum*/ sumTotal + deliverySum  + " ₽");
