@@ -83,6 +83,14 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
     ConstraintLayout item_topping3;
     @BindView(R.id.item_topping4)
     ConstraintLayout item_topping4;
+    @BindView(R.id.item_topping1_cost)
+    TextView item_topping1_cost;
+    @BindView(R.id.item_topping2_cost)
+    TextView item_topping2_cost;
+    @BindView(R.id.item_topping3_cost)
+    TextView item_topping3_cost;
+    @BindView(R.id.item_topping4_cost)
+    TextView item_topping4_cost;
 
     ICartLoadListener cartLoadListener;
     PPpizzaModel pPpizzaModel = null;
@@ -133,6 +141,19 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                     item_topping3.setVisibility(View.VISIBLE);
                     item_topping4.setVisibility(View.VISIBLE);
 
+                    int VETCHINA_PRICE = 60;
+                    item_topping1_cost.setText(VETCHINA_PRICE + " ₽");
+
+                    int KRAB_PRICE = 80;
+                    item_topping2_cost.setText(KRAB_PRICE + " ₽");
+
+                    int BEKON_PRICE = 60;
+                    item_topping3_cost.setText(BEKON_PRICE + " ₽");
+
+                    int KREVETKA_PRICE = 100;
+                    item_topping4_cost.setText(KREVETKA_PRICE + " ₽");
+                    
+
                     btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -154,7 +175,7 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                         .document()
                                                         .getId();
 
-                                                if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
+                                                /*if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
                                                 { // Обновляет количество и общую цену
                                                     CartModel cartModel = documentSnapshot.toObject(CartModel.class);
 
@@ -175,24 +196,34 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                             })
                                                             .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
 
-                                                } else // если в корзине нет предмета, то добавить новый
-                                                {
-                                                    int toppingPizza = 0;
-                                                    int VETCHINA_PRICE = 60;
-                                                    int KRAB_PRICE = 80;
-
-                                                    toppingPizza = VETCHINA_PRICE * vetchinaQuantity +
-                                                            KRAB_PRICE * krabQuantity;
+                                                } else { // если в корзине нет предмета, то добавить новый*/
 
 
-                                                    Map<String, Object> toppingsMap = new HashMap<>();
+
+/*                                                    Map<String, Object> toppingsMapArray = new HashMap<>();
+                                                    toppingsMapArray.put("Доп ингредиенты", toppingsMap);*/
+
+
+                                                int toppingPizza =
+                                                        (VETCHINA_PRICE * vetchinaQuantity) +
+                                                                (KRAB_PRICE * krabQuantity) +
+                                                                (BEKON_PRICE * bekonQuantity) +
+                                                                (KREVETKA_PRICE * krevetkaQuantity);
+
+
+                                                Map<String, Object> toppingsMap = new HashMap<>();
+                                                if (vetchinaQuantity > 0 ) {
                                                     toppingsMap.put("Доп Ветчина", vetchinaQuantity);
+                                                }
+                                                if (krabQuantity > 0) {
                                                     toppingsMap.put("Доп Краб", krabQuantity);
+                                                }
+                                                if (bekonQuantity > 0) {
                                                     toppingsMap.put("Доп Бекон", bekonQuantity);
+                                                }
+                                                if (krevetkaQuantity > 0) {
                                                     toppingsMap.put("Доп Креветка", krevetkaQuantity);
-
-                                                    Map<String, Object> toppingsMapArray = new HashMap<>();
-                                                    toppingsMapArray.put("допы", toppingsMap);
+                                                }
 
                                                     CartModel cartModel = new CartModel();
                                                     cartModel.setItem_name(pPpizzaModel.getItem_name());
@@ -203,6 +234,7 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                     cartModel.setQuantity(1);
                                                     cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
                                                     cartModel.setId(pPpizzaModel.getId());
+                                                    cartModel.setДопы(toppingsMap);
                                                     cartModel.setItem_category(pPpizzaModel.getItem_category());
 
                                                     Map<String, Object> dopSizeMap = new HashMap<>();
@@ -230,18 +262,18 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                                         .document(id)
                                                                         .update(dopSizeMap);
 
-                                                                FirebaseFirestore.getInstance()
+/*                                                                FirebaseFirestore.getInstance()
                                                                         .collection("Users_Cart")
                                                                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                                         .collection("Корзина")
                                                                         .document(id)
-                                                                        .update(toppingsMapArray);
+                                                                        .update(toppingsMapArray);*/
 
                                                                 cartLoadListener.OnCartloadFailed("Добавлено");
                                                                 finish();
                                                             })
                                                             .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
-                                                }
+                                                /*}*/
                                                 EventBus.getDefault().postSticky(new MyUpdateCartEvent());
 
                                             }

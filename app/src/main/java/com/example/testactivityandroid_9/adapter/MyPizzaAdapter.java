@@ -26,6 +26,7 @@ import com.example.testactivityandroid_9.ui.login.signup.Login_SignupActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.common.base.Joiner;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
@@ -152,6 +153,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                             }
                             else // если в корзине нет предмета, то добавить новый
                             {
+
                                 CartModel cartModel = new CartModel();
                                 cartModel.setItem_name(pPpizzaModel.getItem_name());
                                 cartModel.setItem_image(pPpizzaModel.getItem_image());
@@ -161,6 +163,7 @@ public class MyPizzaAdapter extends RecyclerView.Adapter<MyPizzaAdapter.MyPizzaV
                                 cartModel.setQuantity(1);
                                 cartModel.setTotalPrice(pPpizzaModel.getItem_cost());
                                 cartModel.setId(pPpizzaModel.getId());
+                                cartModel.setItem_category(pPpizzaModel.getItem_category());
 
                                 FirebaseFirestore.getInstance()
                                         .collection("Users_Cart")

@@ -19,6 +19,7 @@ import com.example.testactivityandroid_9.model.CartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.common.base.Joiner;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -136,7 +137,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 cartMap.put("Описание", model.getItem_details());
                                 cartMap.put("Количество", model.getQuantity());
                                 cartMap.put("Заведение", model.getId());
-                                cartMap.put("Допы", model.getДопы());
+                                cartMap.put("Доп ингредиенты", model.getДопы());
 
 
                                 totalPrice += model.getTotalPrice();
@@ -254,21 +255,8 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 strDate,
                                 OrderCommentary);
 
-                        String cartToMail = TextUtils.join(", ", list);
-
-                        Map<String,Object> message = new HashMap<>();
-                        message.put("subject", "Заказ №: " + idDocument);
-                        message.put("html", cartToMail + "<br>-------------<br>" +
-                                "<b>Итого: </b>" + totalPrice + " ₽" + "<br>-------------<br>" +
-                                orderContactInfoMap.toString());
-
-                        Map<String,Object> mail = new HashMap<>();
-                        mail.put("to", "skyendofmind@gmail.com");
-                        mail.put("message", message);
-
-                        FirebaseFirestore.getInstance()
-                                .collection("mail")
-                                .add(mail);
+                        //Отправка на почту
+                        SendToEmail(idDocument, list, totalPrice);
 
 /*                        String str = list.toString();
                         str = str.replaceAll("[\\[\\]]", "");*/
@@ -489,6 +477,26 @@ public class CartOrderingActivity extends AppCompatActivity {
 
             }
 
+            private void SendToEmail(String idDocument, List<CartModel> list, int totalPrice) {
+                String cartToMail = TextUtils.join(", ", list);
+
+                String orderContactInfoMapStr = Joiner.on("<br>").withKeyValueSeparator(" ").join(orderContactInfoMap);
+
+                Map<String,Object> message = new HashMap<>();
+                message.put("subject", "Заказ №: " + idDocument);
+                message.put("html", orderContactInfoMapStr +
+                        "<br><br>Заказанные товары:<br>" +
+                        cartToMail);
+
+                Map<String,Object> mail = new HashMap<>();
+                mail.put("to", "skyendofmind@gmail.com");
+                mail.put("message", message);
+
+                FirebaseFirestore.getInstance()
+                        .collection("mail")
+                        .add(mail);
+            }
+
             private void UserBonusCounter() {
                 FirebaseFirestore.getInstance()
                         .collection("user")
@@ -579,13 +587,13 @@ public class CartOrderingActivity extends AppCompatActivity {
                                           String OrderCommentary,
                                           String strDate) {
 
-                orderContactInfoMap.put("Имя", OrderName);
-                orderContactInfoMap.put("Номер телефона", "+7" + OrderNumber);
-                orderContactInfoMap.put("Адрес", OrderAddress);
-                orderContactInfoMap.put("Дата и время", strDate);
-                orderContactInfoMap.put("Комментарий", OrderCommentary);
-                orderContactInfoMap.put("Доставка", getIntent().getStringExtra("deliverySum"));
-                orderContactInfoMap.put("Итоговая сумма заказа", getIntent().getStringExtra("totalSum"));
+                orderContactInfoMap.put("Имя заказчика: ", OrderName);
+                orderContactInfoMap.put("Номер телефона: ", "+7" + OrderNumber);
+                orderContactInfoMap.put("Адрес: ", OrderAddress);
+                orderContactInfoMap.put("Время отправки заявки: ", strDate);
+                orderContactInfoMap.put("Комментарий заказчика: ", OrderCommentary);
+                orderContactInfoMap.put("Сумма доставка: ", getIntent().getStringExtra("deliverySum"));
+                orderContactInfoMap.put("Общая сумма заказа: ", getIntent().getStringExtra("totalSum"));
 
 
                 if (orderPayment.getCheckedRadioButtonId() == R.id.radioButtonCash){
