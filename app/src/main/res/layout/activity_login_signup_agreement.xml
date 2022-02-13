@@ -10,6 +10,7 @@
         android:id="@+id/panel"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
+        android:background="@color/blue"
         android:orientation="horizontal"
         android:weightSum="16"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,15 +18,20 @@
 
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="311dp"
+            android:layout_height="40dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/back"
             android:background="@color/blue"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:paddingEnd="25dp"
             android:text="Пользовательское соглашение"
+            android:textAlignment="center"
             android:textColor="@color/orange"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="RtlCompat" />
 
         <ImageButton
             android:id="@+id/back"
