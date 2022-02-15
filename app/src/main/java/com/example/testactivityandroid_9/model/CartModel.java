@@ -10,7 +10,7 @@ import java.util.Map;
 public class CartModel implements Serializable {
     private String key,item_name,item_image, item_details, item_category;
     private Map<String,Object>  Доп_ингредиенты;
-    private int quantity, item_cost, totalPrice, id;
+    private int quantity, item_cost, totalPrice, id/*, item_cost_var1*/;
 /*    private List<String> details;*/
 
     public CartModel() {
@@ -106,6 +106,8 @@ public class CartModel implements Serializable {
 
         switch (id) {
             case 1:
+
+                for (int i = 1; i > 1 ;i++) {
                 return "<p><b><u>PodkrePizza</u></b>" +
                         "<br>" + item_category +
                         "<br>Название: " + item_name +
@@ -114,6 +116,7 @@ public class CartModel implements Serializable {
                         ", <br>Описание: " + item_details +
                         ", <br>Доп ингредиенты: " + Доп_ингредиенты +
                         "</p>";
+                }
             case 2:
                 return "<h5><p><b><u>Avocado</u></b></h3> Позиция " + key + "<br>[" +
                         "<br>Название: " + item_name +
@@ -131,6 +134,14 @@ public class CartModel implements Serializable {
         }
        return "";
     }
+
+/*    public int getItem_cost_var1() {
+        return item_cost_var1;
+    }
+
+    public void setItem_cost_var1(int item_cost_var) {
+        this.item_cost_var1 = item_cost_var;
+    }*/
 
 
     /*    public ArrayList<String> getDetails() {

@@ -1,20 +1,19 @@
 package com.example.testactivityandroid_9.model;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PPpizzaModel implements Serializable {
     private String key, item_name, item_image, item_details, item_ratings, item_weight, item_category;
 /*    private Map<String,Object>  Допы;*/
-    private int item_cost, id;
+    private int item_cost, id, item_cost_var1;
 /*    private List<String> details;*/
 
     public PPpizzaModel() {
     }
 
     public PPpizzaModel(String key, String item_name, String item_image, int item_cost,
-                        String item_details, String item_ratings, String item_weight, String item_category, /*Map<String,Object>  Допы,*/ int id/*, List<String> details*/) {
+                        String item_details, String item_ratings, String item_weight,
+                        String item_category, /*Map<String,Object>  Допы,*/ int id,/*, List<String> details*/int item_cost_var1) {
         this.key = key;
         this.item_name = item_name;
         this.item_image = item_image;
@@ -26,6 +25,7 @@ public class PPpizzaModel implements Serializable {
         /*this.Допы = Допы;*/
         this.id = id;
 /*        this.details = details;*/
+        this.item_cost_var1 = item_cost_var1;
     }
 
     /*public String getKey() {
@@ -131,6 +131,14 @@ public class PPpizzaModel implements Serializable {
 
     public void setItem_category(String item_category) {
         this.item_category = item_category;
+    }
+
+    public int getItem_cost_var1() {
+        return item_cost_var1;
+    }
+
+    public void setItem_cost_var1(int item_cost_var1) {
+        this.item_cost_var1 = item_cost_var1;
     }
 
 /*    public Map<String,Object>  getДопы() {
