@@ -478,6 +478,7 @@ public class CartOrderingActivity extends AppCompatActivity {
             }
 
             private void SendToEmail(String idDocument, List<CartModel> list, int totalPrice) {
+
                 String cartToMail = TextUtils.join(", ", list);
 
                 String orderContactInfoMapStr = Joiner.on("<br>").withKeyValueSeparator(" ").join(orderContactInfoMap);
@@ -485,7 +486,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                 Map<String,Object> message = new HashMap<>();
                 message.put("subject", "Заказ №: " + idDocument);
                 message.put("html", orderContactInfoMapStr +
-                        "<br><br>Заказанные товары:<br>" +
+                        "<br><br>Заказанные товары:<br>" /*+ cartModel.getId() == 1 */ +
                         cartToMail);
 
                 Map<String,Object> mail = new HashMap<>();

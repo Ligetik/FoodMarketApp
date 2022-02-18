@@ -2,6 +2,7 @@ package com.example.testactivityandroid_9.ui.login.signup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.PatternsCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -100,7 +101,11 @@ public class Login_SignupActivity extends AppCompatActivity {
                     return;
                 }
                 if (TextUtils.isEmpty(UserEmail)) {
-                    userEmail.setError("Не указан электронный адрес");
+                    userEmail.setError("Не указана электронная почта");
+                    return;
+                }
+                if (!isValidEmail(UserEmail)){
+                    userEmail.setError("Неверный формат электронной почты");
                     return;
                 }
                 if (TextUtils.isEmpty(UserPassword)) {
@@ -111,6 +116,7 @@ public class Login_SignupActivity extends AppCompatActivity {
                     userPassword.setError("Пароль должен состоять как минимум из 6 символов");
                     return;
                 }
+
 
                 firebaseAuth.createUserWithEmailAndPassword(UserEmail, UserPassword).addOnCompleteListener((Task<AuthResult> task) -> {
                     if (task.isSuccessful()) {
@@ -158,12 +164,16 @@ public class Login_SignupActivity extends AppCompatActivity {
                             }
                         });
                     }else {
-                        Toast.makeText(Login_SignupActivity.this, "Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login_SignupActivity.this, "Этот адрес электронной почты уже используется. Попробуйте другой", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
 
+    }
+
+    public boolean isValidEmail(String userEmail) {
+        return (PatternsCompat.EMAIL_ADDRESS.matcher(userEmail).matches());
     }
 
     private void clickBtnBack() {

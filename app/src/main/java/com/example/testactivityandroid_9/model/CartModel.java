@@ -98,39 +98,41 @@ public class CartModel implements Serializable {
 
     @Override
     public String toString() {
+        int i = 0;
 
         //Если допы имеют null, то возвращает пустоту
         if (Доп_ингредиенты == null) {
             Доп_ингредиенты = Collections.emptyMap();
         }
 
-        switch (id) {
-            case 1:
-
-                for (int i = 1; i > 1 ;i++) {
-                return "<p><b><u>PodkrePizza</u></b>" +
-                        "<br>" + item_category +
-                        "<br>Название: " + item_name +
-                        ", <br>Количество: " + "<b>" + quantity + " шт." + "</b>" +
-                        ", <br>Цена: " + item_cost + " ₽" +
-                        ", <br>Описание: " + item_details +
-                        ", <br>Доп ингредиенты: " + Доп_ингредиенты +
-                        "</p>";
-                }
-            case 2:
-                return "<h5><p><b><u>Avocado</u></b></h3> Позиция " + key + "<br>[" +
-                        "<br>Название: " + item_name +
-                        ", <br>Количество: " + "<b>" + quantity + "</b>" +
-                        ", <br>Цена: " + item_cost +
-                        ", <br>Описание: " + item_details +
-                        "<br>]</p>";
-            case 3:
-                return "<h5><p><b><u>Джо</u></b></h3> Позиция " + key + "<br>[" +
-                        "<br>Название: " + item_name +
-                        ", <br>Количество: " + "<b>" + quantity + "</b>" +
-                        ", <br>Цена: " + item_cost +
-                        ", <br>Описание: " + item_details +
-                        "<br>]</p>";
+        if (id == 1) {
+            return  "<p><b><u>PodkrePizza</u></b>" +
+                    "<br>" + item_category +
+                    "<br>Название: " + item_name +
+                    ", <br>Количество: " + "<b>" + quantity + " шт." + "</b>" +
+                    ", <br>Цена: " + item_cost + " ₽" +
+                    ", <br>Описание: " + item_details +
+                    ", <br>Доп ингредиенты: " + Доп_ингредиенты +
+                    "</p>";
+        }
+        else if (id == 2) {
+            return "<p><b><u>Avocado</u></b>" +
+                    "<br>" + item_category +
+                    "<br>Название: " + item_name +
+                    ", <br>Количество: " + "<b>" + quantity + " шт." + "</b>" +
+                    ", <br>Цена: " + item_cost + " ₽" +
+                    ", <br>Описание: " + item_details +
+                    ", <br>Доп ингредиенты: " + Доп_ингредиенты +
+                    "</p>";
+        } else if (id == 3) {
+            return "<p><b><u>Джо</u></b>" +
+                    "<br>" + item_category +
+                    "<br>Название: " + item_name +
+                    ", <br>Количество: " + "<b>" + quantity + " шт." + "</b>" +
+                    ", <br>Цена: " + item_cost + " ₽" +
+                    ", <br>Описание: " + item_details +
+                    ", <br>Доп ингредиенты: " + Доп_ингредиенты +
+                    "</p>";
         }
        return "";
     }

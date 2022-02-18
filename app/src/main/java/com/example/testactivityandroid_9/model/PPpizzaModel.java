@@ -4,16 +4,14 @@ import java.io.Serializable;
 
 public class PPpizzaModel implements Serializable {
     private String key, item_name, item_image, item_details, item_ratings, item_weight, item_category;
-/*    private Map<String,Object>  Допы;*/
-    private int item_cost, id, item_cost_var1;
-/*    private List<String> details;*/
+    private int item_cost, id, item_cost_var1, item_cost_var2;
 
     public PPpizzaModel() {
     }
 
     public PPpizzaModel(String key, String item_name, String item_image, int item_cost,
                         String item_details, String item_ratings, String item_weight,
-                        String item_category, /*Map<String,Object>  Допы,*/ int id,/*, List<String> details*/int item_cost_var1) {
+                        String item_category, int id, int item_cost_var1, int item_cost_var2) {
         this.key = key;
         this.item_name = item_name;
         this.item_image = item_image;
@@ -22,44 +20,10 @@ public class PPpizzaModel implements Serializable {
         this.item_ratings = item_ratings;
         this.item_weight = item_weight;
         this.item_category = item_category;
-        /*this.Допы = Допы;*/
         this.id = id;
-/*        this.details = details;*/
         this.item_cost_var1 = item_cost_var1;
+        this.item_cost_var2 = item_cost_var2;
     }
-
-    /*public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String item_name) {
-        this.name = item_name;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String item_image) {
-        this.image = item_image;
-    }
-
-    public Number getPrice() {
-        return price;
-    }
-
-    public void setPrice(float item_cost) {
-        this.price = item_cost;
-    }*/
-
 
     public String getKey() {
         return key;
@@ -139,6 +103,14 @@ public class PPpizzaModel implements Serializable {
 
     public void setItem_cost_var1(int item_cost_var1) {
         this.item_cost_var1 = item_cost_var1;
+    }
+
+    public int getItem_cost_var2() {
+        return item_cost_var2;
+    }
+
+    public void setItem_cost_var2(int item_cost_var2) {
+        this.item_cost_var2 = item_cost_var2;
     }
 
 /*    public Map<String,Object>  getДопы() {

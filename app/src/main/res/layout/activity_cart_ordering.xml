@@ -130,7 +130,7 @@
                 android:layout_below="@+id/orderNumberLayout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:hint="Адрес доставки"
+                android:hint="Адрес доставки: улица д. кв. этаж"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 app:boxCornerRadiusBottomEnd="13dp"

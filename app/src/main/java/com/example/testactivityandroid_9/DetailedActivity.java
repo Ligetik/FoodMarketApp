@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,10 +103,88 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
     ImageView item_topping9_minus;
     @BindView(R.id.item_topping9_quantity)
     TextView item_topping9_quantity;
+    @BindView(R.id.item_topping10_plus)
+    ImageView item_topping10_plus;
+    @BindView(R.id.item_topping10_minus)
+    ImageView item_topping10_minus;
+    @BindView(R.id.item_topping10_quantity)
+    TextView item_topping10_quantity;
+    @BindView(R.id.item_topping11_plus)
+    ImageView item_topping11_plus;
+    @BindView(R.id.item_topping11_minus)
+    ImageView item_topping11_minus;
+    @BindView(R.id.item_topping11_quantity)
+    TextView item_topping11_quantity;
+    @BindView(R.id.item_topping12_plus)
+    ImageView item_topping12_plus;
+    @BindView(R.id.item_topping12_minus)
+    ImageView item_topping12_minus;
+    @BindView(R.id.item_topping12_quantity)
+    TextView item_topping12_quantity;
+    @BindView(R.id.item_topping13_plus)
+    ImageView item_topping13_plus;
+    @BindView(R.id.item_topping13_minus)
+    ImageView item_topping13_minus;
+    @BindView(R.id.item_topping13_quantity)
+    TextView item_topping13_quantity;
+    @BindView(R.id.item_topping14_plus)
+    ImageView item_topping14_plus;
+    @BindView(R.id.item_topping14_minus)
+    ImageView item_topping14_minus;
+    @BindView(R.id.item_topping14_quantity)
+    TextView item_topping14_quantity;
+    @BindView(R.id.item_topping15_plus)
+    ImageView item_topping15_plus;
+    @BindView(R.id.item_topping15_minus)
+    ImageView item_topping15_minus;
+    @BindView(R.id.item_topping15_quantity)
+    TextView item_topping15_quantity;
+    @BindView(R.id.item_topping16_plus)
+    ImageView item_topping16_plus;
+    @BindView(R.id.item_topping16_minus)
+    ImageView item_topping16_minus;
+    @BindView(R.id.item_topping16_quantity)
+    TextView item_topping16_quantity;
+    @BindView(R.id.item_topping17_plus)
+    ImageView item_topping17_plus;
+    @BindView(R.id.item_topping17_minus)
+    ImageView item_topping17_minus;
+    @BindView(R.id.item_topping17_quantity)
+    TextView item_topping17_quantity;
+    @BindView(R.id.item_topping18_plus)
+    ImageView item_topping18_plus;
+    @BindView(R.id.item_topping18_minus)
+    ImageView item_topping18_minus;
+    @BindView(R.id.item_topping18_quantity)
+    TextView item_topping18_quantity;
+    @BindView(R.id.item_topping19_plus)
+    ImageView item_topping19_plus;
+    @BindView(R.id.item_topping19_minus)
+    ImageView item_topping19_minus;
+    @BindView(R.id.item_topping19_quantity)
+    TextView item_topping19_quantity;
+    @BindView(R.id.item_topping20_plus)
+    ImageView item_topping20_plus;
+    @BindView(R.id.item_topping20_minus)
+    ImageView item_topping20_minus;
+    @BindView(R.id.item_topping20_quantity)
+    TextView item_topping20_quantity;
+    @BindView(R.id.item_topping21_plus)
+    ImageView item_topping21_plus;
+    @BindView(R.id.item_topping21_minus)
+    ImageView item_topping21_minus;
+    @BindView(R.id.item_topping21_quantity)
+    TextView item_topping21_quantity;
     @BindView(R.id.btnAddToCart_Detailed)
     Button btnAddToCart_Detailed;
     @BindView(R.id.itemSizeRadioButton)
     RadioGroup itemSizeRadioButton;
+    @BindView(R.id.radioButton1)
+    RadioButton radioButton1;
+    @BindView(R.id.radioButton2)
+    RadioButton radioButton2;
+    @BindView(R.id.radioButton3)
+    RadioButton radioButton3;
     @BindView(R.id.item_topping1)
     ConstraintLayout item_topping1;
     @BindView(R.id.item_topping2)
@@ -123,6 +203,30 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
     ConstraintLayout item_topping8;
     @BindView(R.id.item_topping9)
     ConstraintLayout item_topping9;
+    @BindView(R.id.item_topping10)
+    ConstraintLayout item_topping10;
+    @BindView(R.id.item_topping11)
+    ConstraintLayout item_topping11;
+    @BindView(R.id.item_topping12)
+    ConstraintLayout item_topping12;
+    @BindView(R.id.item_topping13)
+    ConstraintLayout item_topping13;
+    @BindView(R.id.item_topping14)
+    ConstraintLayout item_topping14;
+    @BindView(R.id.item_topping15)
+    ConstraintLayout item_topping15;
+    @BindView(R.id.item_topping16)
+    ConstraintLayout item_topping16;
+    @BindView(R.id.item_topping17)
+    ConstraintLayout item_topping17;
+    @BindView(R.id.item_topping18)
+    ConstraintLayout item_topping18;
+    @BindView(R.id.item_topping19)
+    ConstraintLayout item_topping19;
+    @BindView(R.id.item_topping20)
+    ConstraintLayout item_topping20;
+    @BindView(R.id.item_topping21)
+    ConstraintLayout item_topping21;
     @BindView(R.id.item_topping1_cost)
     TextView item_topping1_cost;
     @BindView(R.id.item_topping2_cost)
@@ -141,8 +245,76 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
     TextView item_topping8_cost;
     @BindView(R.id.item_topping9_cost)
     TextView item_topping9_cost;
+    @BindView(R.id.item_topping10_cost)
+    TextView item_topping10_cost;
+    @BindView(R.id.item_topping11_cost)
+    TextView item_topping11_cost;
+    @BindView(R.id.item_topping12_cost)
+    TextView item_topping12_cost;
+    @BindView(R.id.item_topping13_cost)
+    TextView item_topping13_cost;
+    @BindView(R.id.item_topping14_cost)
+    TextView item_topping14_cost;
+    @BindView(R.id.item_topping15_cost)
+    TextView item_topping15_cost;
+    @BindView(R.id.item_topping16_cost)
+    TextView item_topping16_cost;
+    @BindView(R.id.item_topping17_cost)
+    TextView item_topping17_cost;
+    @BindView(R.id.item_topping18_cost)
+    TextView item_topping18_cost;
+    @BindView(R.id.item_topping19_cost)
+    TextView item_topping19_cost;
+    @BindView(R.id.item_topping20_cost)
+    TextView item_topping20_cost;
+    @BindView(R.id.item_topping21_cost)
+    TextView item_topping21_cost;
+    @BindView(R.id.item_topping1_name)
+    TextView item_topping1_name;
+    @BindView(R.id.item_topping2_name)
+    TextView item_topping2_name;
+    @BindView(R.id.item_topping3_name)
+    TextView item_topping3_name;
+    @BindView(R.id.item_topping4_name)
+    TextView item_topping4_name;
+    @BindView(R.id.item_topping5_name)
+    TextView item_topping5_name;
+    @BindView(R.id.item_topping6_name)
+    TextView item_topping6_name;
+    @BindView(R.id.item_topping7_name)
+    TextView item_topping7_name;
+    @BindView(R.id.item_topping8_name)
+    TextView item_topping8_name;
+    @BindView(R.id.item_topping9_name)
+    TextView item_topping9_name;
+    @BindView(R.id.item_topping10_name)
+    TextView item_topping10_name;
+    @BindView(R.id.item_topping11_name)
+    TextView item_topping11_name;
+    @BindView(R.id.item_topping12_name)
+    TextView item_topping12_name;
+    @BindView(R.id.item_topping13_name)
+    TextView item_topping13_name;
+    @BindView(R.id.item_topping14_name)
+    TextView item_topping14_name;
+    @BindView(R.id.item_topping15_name)
+    TextView item_topping15_name;
+    @BindView(R.id.item_topping16_name)
+    TextView item_topping16_name;
+    @BindView(R.id.item_topping17_name)
+    TextView item_topping17_name;
+    @BindView(R.id.item_topping18_name)
+    TextView item_topping18_name;
+    @BindView(R.id.item_topping19_name)
+    TextView item_topping19_name;
+    @BindView(R.id.item_topping20_name)
+    TextView item_topping20_name;
+    @BindView(R.id.item_topping21_name)
+    TextView item_topping21_name;
     @BindView(R.id.item_cost)
     TextView item_cost;
+    @BindView(R.id.orderSelectSize)
+    ConstraintLayout orderSelectSize;
 
     ICartLoadListener cartLoadListener;
 
@@ -150,9 +322,13 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
     AvocadoModel avocadoModel = null;
     DjoModel djoModel = null;
 
-    int item_toppingQuantity1 = 0, item_topping2Quantity = 0, item_topping3Quantity = 0,
+    int item_topping1Quantity = 0, item_topping2Quantity = 0, item_topping3Quantity = 0,
             item_topping4Quantity = 0, item_topping5Quantity = 0, item_topping6Quantity = 0,
-            item_topping7Quantity = 0, item_topping8Quantity = 0, item_topping9Quantity = 0;
+            item_topping7Quantity = 0, item_topping8Quantity = 0, item_topping9Quantity = 0,
+            item_topping10Quantity = 0, item_topping11Quantity = 0, item_topping12Quantity = 0,
+            item_topping13Quantity = 0, item_topping14Quantity = 0, item_topping15Quantity = 0,
+            item_topping16Quantity = 0, item_topping17Quantity = 0, item_topping18Quantity = 0,
+            item_topping19Quantity = 0, item_topping20Quantity = 0, item_topping21Quantity = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,8 +350,6 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
         loadAvocado(object);
 
         loadDjo(object);
-
-
     }
 
     private void loadPpizza(Object object) {
@@ -200,6 +374,9 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                         case R.id.radioButton2:
                             item_cost.setText(pPpizzaModel.getItem_cost_var1() + " ₽");
                             break;
+                        case R.id.radioButton3:
+                            item_cost.setText(pPpizzaModel.getItem_cost_var2() + " ₽");
+                            break;
                         default:
                             break;
                     }
@@ -207,7 +384,9 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
             });
 
             switch (pPpizzaModel.getItem_category()) {
+
                 case "Пицца":
+
                     item_topping1.setVisibility(View.VISIBLE);
                     item_topping2.setVisibility(View.VISIBLE);
                     item_topping3.setVisibility(View.VISIBLE);
@@ -217,35 +396,128 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                     item_topping7.setVisibility(View.VISIBLE);
                     item_topping8.setVisibility(View.VISIBLE);
                     item_topping9.setVisibility(View.VISIBLE);
+                    item_topping10.setVisibility(View.VISIBLE);
+                    item_topping11.setVisibility(View.VISIBLE);
+                    item_topping12.setVisibility(View.VISIBLE);
+                    item_topping13.setVisibility(View.VISIBLE);
+                    item_topping14.setVisibility(View.VISIBLE);
+                    item_topping15.setVisibility(View.VISIBLE);
+                    item_topping16.setVisibility(View.VISIBLE);
+                    item_topping17.setVisibility(View.VISIBLE);
+                    item_topping18.setVisibility(View.VISIBLE);
+                    item_topping19.setVisibility(View.VISIBLE);
+                    item_topping20.setVisibility(View.VISIBLE);
+                    item_topping21.setVisibility(View.VISIBLE);
 
-                    final int VETCHINA_PRICE = 60;
-                    item_topping1_cost.setText(VETCHINA_PRICE + " ₽");
+                    if (pPpizzaModel.getItem_name().equals("Фрутти")) {
+                        orderSelectSize.setVisibility(View.GONE);
+                        item_topping1.setVisibility(View.GONE);
+                        item_topping2.setVisibility(View.GONE);
+                        item_topping3.setVisibility(View.GONE);
+                        item_topping4.setVisibility(View.GONE);
+                        item_topping5.setVisibility(View.GONE);
+                        item_topping6.setVisibility(View.GONE);
+                        item_topping7.setVisibility(View.GONE);
+                        item_topping8.setVisibility(View.GONE);
+                        item_topping9.setVisibility(View.GONE);
+                        item_topping10.setVisibility(View.GONE);
+                        item_topping11.setVisibility(View.GONE);
+                        item_topping12.setVisibility(View.GONE);
+                        item_topping13.setVisibility(View.GONE);
+                        item_topping14.setVisibility(View.GONE);
+                        item_topping15.setVisibility(View.GONE);
+                        item_topping16.setVisibility(View.GONE);
+                        item_topping17.setVisibility(View.GONE);
+                        item_topping18.setVisibility(View.GONE);
+                        item_topping19.setVisibility(View.GONE);
+                        item_topping20.setVisibility(View.GONE);
+                        item_topping21.setVisibility(View.GONE);
+                    }
 
 
-                    final int KRAB_PRICE = 80;
-                    item_topping2_cost.setText(KRAB_PRICE + " ₽");
+                    final int VETCHINA_PIZZA_PRICE = 60;
+                    item_topping1_cost.setText(VETCHINA_PIZZA_PRICE + " ₽");
+                    item_topping1_name.setText("Ветчина");
 
-                    final int BEKON_PRICE = 60;
-                    item_topping3_cost.setText(BEKON_PRICE + " ₽");
+                    final int KRAB_PIZZA_PRICE = 80;
+                    item_topping2_cost.setText(KRAB_PIZZA_PRICE + " ₽");
+                    item_topping2_name.setText("Краб");
 
-                    final int KREVETKA_PRICE = 100;
-                    item_topping4_cost.setText(KREVETKA_PRICE + " ₽");
+                    final int BEKON_PIZZA_PRICE = 60;
+                    item_topping3_cost.setText(BEKON_PIZZA_PRICE + " ₽");
+                    item_topping3_name.setText("Бекон");
 
-                    final int KURICA_PRICE = 50;
-                    item_topping5_cost.setText(KURICA_PRICE + " ₽");
+                    final int KREVETKA_PIZZA_PRICE = 100;
+                    item_topping4_cost.setText(KREVETKA_PIZZA_PRICE + " ₽");
+                    item_topping4_name.setText("Креветка");
 
-                    final int OSTR_KURICA_PRICE = 50;
-                    item_topping6_cost.setText(OSTR_KURICA_PRICE + " ₽");
+                    final int KURICA_PIZZA_PRICE = 50;
+                    item_topping5_cost.setText(KURICA_PIZZA_PRICE + " ₽");
+                    item_topping5_name.setText("Куриное филе");
 
-                    final int KOLBASKI_PRICE = 60;
-                    item_topping7_cost.setText(KOLBASKI_PRICE + " ₽");
+                    final int OSTRKURICA_PIZZA_PRICE = 50;
+                    item_topping6_cost.setText(OSTRKURICA_PIZZA_PRICE + " ₽");
+                    item_topping6_name.setText("Маринованная курица (острая)");
 
-                    final int PEPPERONI_PRICE = 50;
-                    item_topping8_cost.setText(PEPPERONI_PRICE + " ₽");
+                    final int KOLBASKI_PIZZA_PRICE = 60;
+                    item_topping7_cost.setText(KOLBASKI_PIZZA_PRICE + " ₽");
+                    item_topping7_name.setText("Охотничье колбаски");
 
-                    final int PEREC_PRICE = 30;
-                    item_topping9_cost.setText(PEREC_PRICE + " ₽");
+                    final int PEPPERONI_PIZZA_PRICE = 50;
+                    item_topping8_cost.setText(PEPPERONI_PIZZA_PRICE + " ₽");
+                    item_topping8_name.setText("Пепперони");
 
+                    final int PEREC_PIZZA_PRICE = 30;
+                    item_topping9_cost.setText(PEREC_PIZZA_PRICE + " ₽");
+                    item_topping9_name.setText("Перец острый");
+
+                    final int HOLLAND_PIZZA_PRICE = 40;
+                    item_topping10_cost.setText(HOLLAND_PIZZA_PRICE + " ₽");
+                    item_topping10_name.setText("Сыр Голландский");
+
+                    final int SLIV_PIZZA_PRICE = 50;
+                    item_topping11_cost.setText(SLIV_PIZZA_PRICE + " ₽");
+                    item_topping11_name.setText("Сыр сливочный");
+
+                    final int MOCARELLA_PIZZA_PRICE = 60;
+                    item_topping12_cost.setText(MOCARELLA_PIZZA_PRICE + " ₽");
+                    item_topping12_name.setText("Сыр Моцарелла");
+
+                    final int PARMEZAN_PIZZA_PRICE = 45;
+                    item_topping13_cost.setText(PARMEZAN_PIZZA_PRICE + " ₽");
+                    item_topping13_name.setText("Сыр Пармезан");
+
+                    final int FARSH_PIZZA_PRICE = 50;
+                    item_topping14_cost.setText(FARSH_PIZZA_PRICE + " ₽");
+                    item_topping14_name.setText("Фарш");
+
+                    final int FRI_PIZZA_PRICE = 30;
+                    item_topping15_cost.setText(FRI_PIZZA_PRICE + " ₽");
+                    item_topping15_name.setText("Картофель фри");
+
+                    final int CHERRY_PIZZA_PRICE = 30;
+                    item_topping16_cost.setText(CHERRY_PIZZA_PRICE + " ₽");
+                    item_topping16_name.setText("Помидоры Черри");
+
+                    final int GRIBI_PIZZA_PRICE = 50;
+                    item_topping17_cost.setText(CHERRY_PIZZA_PRICE + " ₽");
+                    item_topping17_name.setText("Грибы Шампиньоны");
+
+                    final int GREBESHOK_PIZZA_PRICE = 110;
+                    item_topping18_cost.setText(GREBESHOK_PIZZA_PRICE + " ₽");
+                    item_topping18_name.setText("Гребешок");
+
+                    final int KALMAR_PIZZA_PRICE = 50;
+                    item_topping19_cost.setText(KALMAR_PIZZA_PRICE + " ₽");
+                    item_topping19_name.setText("Кальмар");
+
+                    final int ANANASI_PIZZA_PRICE = 30;
+                    item_topping20_cost.setText(ANANASI_PIZZA_PRICE + " ₽");
+                    item_topping20_name.setText("Ананасы");
+
+                    final int TUNEC_PIZZA_PRICE = 60;
+                    item_topping21_cost.setText(TUNEC_PIZZA_PRICE + " ₽");
+                    item_topping21_name.setText("Тунец");
 
                     btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -268,7 +540,7 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                         .document()
                                                         .getId();
 
-                                                if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
+/*                                                if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
                                                 { // Обновляет количество и общую цену
                                                     CartModel cartModel = documentSnapshot.toObject(CartModel.class);
 
@@ -289,23 +561,35 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                             })
                                                             .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
 
-                                                } else { // если в корзине нет предмета, то добавить новый
+                                                } else { // если в корзине нет предмета, то добавить новый*/
 
                                                     int toppingPizza =
-                                                        (VETCHINA_PRICE * item_toppingQuantity1) +
-                                                        (KRAB_PRICE * item_topping2Quantity) +
-                                                        (BEKON_PRICE * item_topping3Quantity) +
-                                                        (KREVETKA_PRICE * item_topping4Quantity) +
-                                                        (KURICA_PRICE * item_topping5Quantity) +
-                                                        (OSTR_KURICA_PRICE * item_topping6Quantity) +
-                                                        (KOLBASKI_PRICE * item_topping7Quantity) +
-                                                        (PEPPERONI_PRICE * item_topping8Quantity) +
-                                                        (PEREC_PRICE * item_topping9Quantity);
+                                                        (VETCHINA_PIZZA_PRICE * item_topping1Quantity) +
+                                                        (KRAB_PIZZA_PRICE * item_topping2Quantity) +
+                                                        (BEKON_PIZZA_PRICE * item_topping3Quantity) +
+                                                        (KREVETKA_PIZZA_PRICE * item_topping4Quantity) +
+                                                        (KURICA_PIZZA_PRICE * item_topping5Quantity) +
+                                                        (OSTRKURICA_PIZZA_PRICE * item_topping6Quantity) +
+                                                        (KOLBASKI_PIZZA_PRICE * item_topping7Quantity) +
+                                                        (PEPPERONI_PIZZA_PRICE * item_topping8Quantity) +
+                                                        (PEREC_PIZZA_PRICE * item_topping9Quantity) +
+                                                        (HOLLAND_PIZZA_PRICE * item_topping10Quantity) +
+                                                        (SLIV_PIZZA_PRICE * item_topping11Quantity) +
+                                                        (MOCARELLA_PIZZA_PRICE * item_topping12Quantity) +
+                                                        (PARMEZAN_PIZZA_PRICE * item_topping13Quantity) +
+                                                        (FARSH_PIZZA_PRICE * item_topping14Quantity) +
+                                                        (FRI_PIZZA_PRICE * item_topping15Quantity) +
+                                                        (CHERRY_PIZZA_PRICE * item_topping16Quantity)  +
+                                                        (GRIBI_PIZZA_PRICE * item_topping17Quantity) +
+                                                        (GREBESHOK_PIZZA_PRICE * item_topping18Quantity) +
+                                                        (KALMAR_PIZZA_PRICE * item_topping19Quantity) +
+                                                        (ANANASI_PIZZA_PRICE * item_topping20Quantity) +
+                                                        (TUNEC_PIZZA_PRICE * item_topping21Quantity);
 
                                                     Map<String, Object> toppingsMap = new HashMap<>();
 
-                                                    if (item_toppingQuantity1 > 0 ) {
-                                                        toppingsMap.put("Доп Ветчина", item_toppingQuantity1);
+                                                    if (item_topping1Quantity > 0 ) {
+                                                        toppingsMap.put("Доп Ветчина", item_topping1Quantity);
                                                     }
                                                     if (item_topping2Quantity > 0) {
                                                         toppingsMap.put("Доп Краб", item_topping2Quantity);
@@ -330,6 +614,42 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                     }
                                                     if (item_topping9Quantity > 0) {
                                                         toppingsMap.put("Доп Перец острый", item_topping9Quantity);
+                                                    }
+                                                    if (item_topping10Quantity > 0) {
+                                                        toppingsMap.put("Доп Сыр Голландский", item_topping10Quantity);
+                                                    }
+                                                    if (item_topping11Quantity > 0 ) {
+                                                        toppingsMap.put("Доп Сыр сливочный", item_topping11Quantity);
+                                                    }
+                                                    if (item_topping12Quantity > 0) {
+                                                        toppingsMap.put("Доп Сыр Моцарелла", item_topping12Quantity);
+                                                    }
+                                                    if (item_topping13Quantity > 0) {
+                                                        toppingsMap.put("Доп Сыр Пармезан", item_topping13Quantity);
+                                                    }
+                                                    if (item_topping14Quantity > 0) {
+                                                        toppingsMap.put("Доп Фарш", item_topping14Quantity);
+                                                    }
+                                                    if (item_topping15Quantity > 0) {
+                                                        toppingsMap.put("Доп Картофель Фри", item_topping15Quantity);
+                                                    }
+                                                    if (item_topping16Quantity > 0) {
+                                                        toppingsMap.put("Доп Помидоры Черри", item_topping16Quantity);
+                                                    }
+                                                    if (item_topping17Quantity > 0) {
+                                                        toppingsMap.put("Доп Грибы Шампиньоны", item_topping17Quantity);
+                                                    }
+                                                    if (item_topping18Quantity > 0) {
+                                                        toppingsMap.put("Доп Гребешок", item_topping18Quantity);
+                                                    }
+                                                    if (item_topping19Quantity > 0) {
+                                                        toppingsMap.put("Доп Кальмар", item_topping19Quantity);
+                                                    }
+                                                    if (item_topping20Quantity > 0) {
+                                                        toppingsMap.put("Доп Ананасы", item_topping20Quantity);
+                                                    }
+                                                    if (item_topping21Quantity > 0) {
+                                                        toppingsMap.put("Доп Тунец", item_topping21Quantity);
                                                     }
 
                                                         CartModel cartModel = new CartModel();
@@ -356,7 +676,7 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                                     .collection("Users_Cart")
                                                                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                                     .collection("Корзина")
-                                                                    .document(pPpizzaModel.getKey())
+                                                                    .document(id)
                                                                     .set(cartModel)
                                                                     .addOnSuccessListener(aVoid -> {
                                                                         cartLoadListener.OnCartloadFailed("Добавлено");
@@ -395,7 +715,7 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                                         finish();
                                                                     })
                                                                     .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
-                                                        }
+                                                        /*}*/
                                                         }
 
 
@@ -411,11 +731,117 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                     });
 
                     break;
+
+
                 case "Роллы":
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(pPpizzaModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
+                                                { // Обновляет количество и общую цену
+                                                    CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+
+                                                    cartModel.setQuantity(cartModel.getQuantity() + 1);
+                                                    Map<String, Object> updateData = new HashMap<>();
+                                                    updateData.put("quantity", cartModel.getQuantity());
+                                                    updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
+
+                                                    FirebaseFirestore.getInstance()
+                                                            .collection("Users_Cart")
+                                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                            .collection("Корзина")
+                                                            .document(pPpizzaModel.getKey())
+                                                            .update(updateData)
+                                                            .addOnSuccessListener(aVoid -> {
+                                                                cartLoadListener.OnCartloadFailed("Добавлено");
+                                                                finish();
+                                                            })
+                                                            .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
+
+                                                } else { // если в корзине нет предмета, то добавить новый
+
+                                                    CartModel cartModel = new CartModel();
+                                                    cartModel.setItem_name(pPpizzaModel.getItem_name());
+                                                    cartModel.setItem_image(pPpizzaModel.getItem_image());
+                                                    cartModel.setItem_details(pPpizzaModel.getItem_details());
+                                                    cartModel.setKey(pPpizzaModel.getKey());
+                                                    cartModel.setItem_cost(pPpizzaModel.getItem_cost());
+                                                    cartModel.setQuantity(1);
+                                                    cartModel.setTotalPrice(pPpizzaModel.getItem_cost());
+                                                    cartModel.setId(pPpizzaModel.getId());
+                                                    cartModel.setItem_category(pPpizzaModel.getItem_category());
+
+                                                    FirebaseFirestore.getInstance()
+                                                            .collection("Users_Cart")
+                                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                            .collection("Корзина")
+                                                            .document(pPpizzaModel.getKey())
+                                                            .set(cartModel)
+                                                            .addOnSuccessListener(aVoid -> {
+
+                                                                cartLoadListener.OnCartloadFailed("Добавлено");
+                                                                finish();
+                                                            })
+                                                            .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
+                                                }
+
+
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+
+                                            }
+
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+
+                    break;
+
+                case "Сэндвичи":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
                     item_topping1.setVisibility(View.VISIBLE);
                     item_topping2.setVisibility(View.VISIBLE);
                     item_topping3.setVisibility(View.VISIBLE);
                     item_topping4.setVisibility(View.VISIBLE);
+                    item_topping5.setVisibility(View.VISIBLE);
+
+
+                    final int KRAB_SANDWICH_PRICE = 40;
+                    item_topping1_cost.setText(KRAB_SANDWICH_PRICE + " ₽");
+                    item_topping1_name.setText("Краб");
+
+                    final int VETCHINA_SANDWICH_PRICE = 30;
+                    item_topping2_cost.setText(VETCHINA_SANDWICH_PRICE + " ₽");
+                    item_topping2_name.setText("Ветчина");
+
+                    final int NERKA_SANDWICH_PRICE = 50;
+                    item_topping3_cost.setText(NERKA_SANDWICH_PRICE + " ₽");
+                    item_topping3_name.setText("Нерка");
+
+                    final int HOHLAND_SANDWICH_PRICE = 20;
+                    item_topping4_cost.setText(HOHLAND_SANDWICH_PRICE + " ₽");
+                    item_topping4_name.setText("Сыр хохланд");
+
+                    final int BUZHENINA_SANDWICH_PRICE = 30;
+                    item_topping5_cost.setText(BUZHENINA_SANDWICH_PRICE + " ₽");
+                    item_topping5_name.setText("Буженина");
 
                     btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -438,46 +864,479 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                         .document()
                                                         .getId();
 
-                                                if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
-                                                { // Обновляет количество и общую цену
-                                                    CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+                                                int toppingPizza =
+                                                                (KRAB_SANDWICH_PRICE * item_topping1Quantity) +
+                                                                (VETCHINA_SANDWICH_PRICE * item_topping2Quantity) +
+                                                                (NERKA_SANDWICH_PRICE * item_topping3Quantity) +
+                                                                (HOHLAND_SANDWICH_PRICE * item_topping4Quantity) +
+                                                                (BUZHENINA_SANDWICH_PRICE * item_topping5Quantity);
 
-                                                    cartModel.setQuantity(cartModel.getQuantity() + 1);
-                                                    Map<String, Object> updateData = new HashMap<>();
-                                                    updateData.put("quantity", cartModel.getQuantity());
-                                                    updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
+                                                Map<String, Object> toppingsMap = new HashMap<>();
 
-                                                    FirebaseFirestore.getInstance()
+                                                if (item_topping1Quantity > 0 ) {
+                                                    toppingsMap.put("Доп Краб", item_topping1Quantity);
+                                                }
+                                                if (item_topping2Quantity > 0) {
+                                                    toppingsMap.put("Доп Ветчина", item_topping2Quantity);
+                                                }
+                                                if (item_topping3Quantity > 0) {
+                                                    toppingsMap.put("Доп Нерка", item_topping3Quantity);
+                                                }
+                                                if (item_topping4Quantity > 0) {
+                                                    toppingsMap.put("Доп Сыр хохланд", item_topping4Quantity);
+                                                }
+                                                if (item_topping5Quantity > 0) {
+                                                    toppingsMap.put("Доп Буженина", item_topping5Quantity);
+                                                }
+
+                                                CartModel cartModel = new CartModel();
+                                                cartModel.setItem_name(pPpizzaModel.getItem_name());
+                                                cartModel.setItem_image(pPpizzaModel.getItem_image());
+                                                cartModel.setItem_details(pPpizzaModel.getItem_details());
+                                                cartModel.setKey(pPpizzaModel.getKey());
+                                                cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setQuantity(1);
+                                                cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setId(pPpizzaModel.getId());
+                                                cartModel.setДопы(toppingsMap);
+                                                cartModel.setItem_category(pPpizzaModel.getItem_category());
+
+                                                cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+
+                    break;
+
+                case "Салаты":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    item_topping1.setVisibility(View.VISIBLE);
+                    item_topping2.setVisibility(View.VISIBLE);
+                    item_topping3.setVisibility(View.VISIBLE);
+                    item_topping4.setVisibility(View.VISIBLE);
+                    item_topping5.setVisibility(View.VISIBLE);
+                    item_topping6.setVisibility(View.VISIBLE);
+                    item_topping7.setVisibility(View.VISIBLE);
+                    item_topping8.setVisibility(View.VISIBLE);
+                    item_topping9.setVisibility(View.VISIBLE);
+                    item_topping10.setVisibility(View.VISIBLE);
+                    item_topping11.setVisibility(View.VISIBLE);
+                    item_topping12.setVisibility(View.VISIBLE);
+                    item_topping13.setVisibility(View.VISIBLE);
+                    item_topping14.setVisibility(View.VISIBLE);
+
+
+                    final int VETCHINA_SALAT_PRICE = 30;
+                    item_topping1_cost.setText(VETCHINA_SALAT_PRICE + " ₽");
+                    item_topping1_name.setText("Ветчина");
+
+                    final int KRAB_SALAT_PRICE = 40;
+                    item_topping2_cost.setText(KRAB_SALAT_PRICE + " ₽");
+                    item_topping2_name.setText("Краб");
+
+                    final int KREMMETA_SALAT_PRICE = 30;
+                    item_topping3_cost.setText(KREMMETA_SALAT_PRICE + " ₽");
+                    item_topping3_name.setText("Креммета");
+
+                    final int KUKURUZA_SALAT_PRICE = 20;
+                    item_topping4_cost.setText(KUKURUZA_SALAT_PRICE + " ₽");
+                    item_topping4_name.setText("Кукуруза");
+
+                    final int FONARIK_SALAT_PRICE = 30;
+                    item_topping5_cost.setText(FONARIK_SALAT_PRICE + " ₽");
+                    item_topping5_name.setText("Куриный фонарик");
+
+                    final int KURICA_SALAT_PRICE = 30;
+                    item_topping6_cost.setText(KURICA_SALAT_PRICE + " ₽");
+                    item_topping6_name.setText("Куриное филе");
+
+                    final int NERKA_SALAT_PRICE = 50;
+                    item_topping7_cost.setText(NERKA_SALAT_PRICE + " ₽");
+                    item_topping7_name.setText("Нерка");
+
+                    final int PARMEZAN_SALAT_PRICE = 45;
+                    item_topping8_cost.setText(PARMEZAN_SALAT_PRICE + " ₽");
+                    item_topping8_name.setText("Сыр Пармезан");
+
+                    final int TUNEC_SALAT_PRICE = 30;
+                    item_topping9_cost.setText(TUNEC_SALAT_PRICE + " ₽");
+                    item_topping9_name.setText("Тунец");
+
+                    final int FETAKSA_SALAT_PRICE = 20;
+                    item_topping10_cost.setText(FETAKSA_SALAT_PRICE + " ₽");
+                    item_topping10_name.setText("Сыр Фетакса");
+
+                    final int CHERRY_SALAT_PRICE = 15;
+                    item_topping11_cost.setText(CHERRY_SALAT_PRICE + " ₽");
+                    item_topping11_name.setText("Помидоры Черри");
+
+                    final int KOLBASKI_SALAT_PRICE = 40;
+                    item_topping12_cost.setText(KOLBASKI_SALAT_PRICE + " ₽");
+                    item_topping12_name.setText("Охотничье колбаски");
+
+                    final int KREVETKA_ASALAT_PRICE = 100;
+                    item_topping13_cost.setText(KREVETKA_ASALAT_PRICE + " ₽");
+                    item_topping13_name.setText("Креветка");
+
+                    final int SUHARIKI_SALAT_PRICE = 10;
+                    item_topping14_cost.setText(SUHARIKI_SALAT_PRICE + " ₽");
+                    item_topping14_name.setText("Сухарики");
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(pPpizzaModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+                                                int toppingPizza =
+                                                        (VETCHINA_SALAT_PRICE * item_topping1Quantity) +
+                                                        (KRAB_SALAT_PRICE * item_topping2Quantity) +
+                                                        (KREMMETA_SALAT_PRICE * item_topping3Quantity) +
+                                                        (KUKURUZA_SALAT_PRICE * item_topping4Quantity) +
+                                                        (FONARIK_SALAT_PRICE * item_topping5Quantity) +
+                                                        (KURICA_SALAT_PRICE * item_topping6Quantity) +
+                                                        (NERKA_SALAT_PRICE * item_topping7Quantity) +
+                                                        (PARMEZAN_SALAT_PRICE * item_topping8Quantity) +
+                                                        (TUNEC_SALAT_PRICE * item_topping9Quantity) +
+                                                        (FETAKSA_SALAT_PRICE * item_topping10Quantity) +
+                                                        (CHERRY_SALAT_PRICE * item_topping11Quantity) +
+                                                        (KOLBASKI_SALAT_PRICE * item_topping12Quantity) +
+                                                        (KREVETKA_ASALAT_PRICE * item_topping13Quantity) +
+                                                        (SUHARIKI_SALAT_PRICE * item_topping14Quantity);
+
+                                                Map<String, Object> toppingsMap = new HashMap<>();
+
+                                                if (item_topping1Quantity > 0 ) {
+                                                    toppingsMap.put("Доп Ветчина", item_topping1Quantity);
+                                                }
+                                                if (item_topping2Quantity > 0) {
+                                                    toppingsMap.put("Доп Краб", item_topping2Quantity);
+                                                }
+                                                if (item_topping3Quantity > 0) {
+                                                    toppingsMap.put("Доп Креммета", item_topping3Quantity);
+                                                }
+                                                if (item_topping4Quantity > 0) {
+                                                    toppingsMap.put("Доп Кукуруза", item_topping4Quantity);
+                                                }
+                                                if (item_topping5Quantity > 0) {
+                                                    toppingsMap.put("Доп Куриный фонарик", item_topping5Quantity);
+                                                }
+                                                if (item_topping6Quantity > 0) {
+                                                    toppingsMap.put("Доп Куриное филе", item_topping6Quantity);
+                                                }
+                                                if (item_topping7Quantity > 0) {
+                                                    toppingsMap.put("Доп Нерка", item_topping7Quantity);
+                                                }
+                                                if (item_topping8Quantity > 0) {
+                                                    toppingsMap.put("Доп Сыр Пармезан", item_topping8Quantity);
+                                                }
+                                                if (item_topping9Quantity > 0) {
+                                                    toppingsMap.put("Доп Тунец", item_topping9Quantity);
+                                                }
+                                                if (item_topping10Quantity > 0) {
+                                                    toppingsMap.put("Доп Сыр Фетакса", item_topping10Quantity);
+                                                }
+                                                if (item_topping11Quantity > 0 ) {
+                                                    toppingsMap.put("Доп Помидоры Черри", item_topping11Quantity);
+                                                }
+                                                if (item_topping12Quantity > 0) {
+                                                    toppingsMap.put("Доп Охотничье колбаски", item_topping12Quantity);
+                                                }
+                                                if (item_topping13Quantity > 0) {
+                                                    toppingsMap.put("Доп Креветка", item_topping13Quantity);
+                                                }
+                                                if (item_topping14Quantity > 0) {
+                                                    toppingsMap.put("Доп Сухарики", item_topping14Quantity);
+                                                }
+
+
+                                                CartModel cartModel = new CartModel();
+                                                cartModel.setItem_name(pPpizzaModel.getItem_name());
+                                                cartModel.setItem_image(pPpizzaModel.getItem_image());
+                                                cartModel.setItem_details(pPpizzaModel.getItem_details());
+                                                cartModel.setKey(pPpizzaModel.getKey());
+                                                cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setQuantity(1);
+                                                cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setId(pPpizzaModel.getId());
+                                                cartModel.setДопы(toppingsMap);
+                                                cartModel.setItem_category(pPpizzaModel.getItem_category());
+
+                                                cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+
+                    break;
+
+                case "Супы":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    item_topping1.setVisibility(View.VISIBLE);
+                    item_topping2.setVisibility(View.VISIBLE);
+                    item_topping3.setVisibility(View.VISIBLE);
+                    item_topping4.setVisibility(View.VISIBLE);
+                    item_topping5.setVisibility(View.VISIBLE);
+                    item_topping6.setVisibility(View.VISIBLE);
+                    item_topping7.setVisibility(View.VISIBLE);
+
+
+                    final int GRIBI_SUP_PRICE = 30;
+                    item_topping1_cost.setText(GRIBI_SUP_PRICE + " ₽");
+                    item_topping1_name.setText("Ветчина");
+
+                    final int BEKON_SUP_PRICE = 40;
+                    item_topping2_cost.setText(BEKON_SUP_PRICE + " ₽");
+                    item_topping2_name.setText("Краб");
+
+                    final int KURICA_SUP_PRICE = 30;
+                    item_topping3_cost.setText(KURICA_SUP_PRICE + " ₽");
+                    item_topping3_name.setText("Куриное филе");
+
+                    final int KOLBASKI_SUP_PRICE = 40;
+                    item_topping4_cost.setText(KOLBASKI_SUP_PRICE + " ₽");
+                    item_topping4_name.setText("Охотничье колбаски");
+
+                    final int PEPPERONI_SUP_PRICE = 30;
+                    item_topping5_cost.setText(PEPPERONI_SUP_PRICE + " ₽");
+                    item_topping5_name.setText("Пепперони");
+
+                    final int SUHARIKI_SUP_PRICE = 10;
+                    item_topping6_cost.setText(SUHARIKI_SUP_PRICE + " ₽");
+                    item_topping6_name.setText("Сухарики");
+
+                    final int PARMEZAN_SUP_PRICE = 45;
+                    item_topping7_cost.setText(PARMEZAN_SUP_PRICE + " ₽");
+                    item_topping7_name.setText("Сыр Пармезан");
+
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(pPpizzaModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+                                                int toppingPizza =
+                                                        (GRIBI_SUP_PRICE * item_topping1Quantity) +
+                                                        (BEKON_SUP_PRICE * item_topping2Quantity) +
+                                                        (KURICA_SUP_PRICE * item_topping3Quantity) +
+                                                        (KOLBASKI_SUP_PRICE * item_topping4Quantity) +
+                                                        (PEPPERONI_SUP_PRICE * item_topping5Quantity) +
+                                                        (SUHARIKI_SUP_PRICE * item_topping6Quantity) +
+                                                        (PARMEZAN_SUP_PRICE * item_topping7Quantity);
+
+                                                Map<String, Object> toppingsMap = new HashMap<>();
+
+                                                if (item_topping1Quantity > 0) {
+                                                    toppingsMap.put("Доп Ветчина", item_topping1Quantity);
+                                                }
+                                                if (item_topping2Quantity > 0) {
+                                                    toppingsMap.put("Доп Краб", item_topping2Quantity);
+                                                }
+                                                if (item_topping3Quantity > 0) {
+                                                    toppingsMap.put("Доп Куриное филе", item_topping3Quantity);
+                                                }
+                                                if (item_topping4Quantity > 0) {
+                                                    toppingsMap.put("Доп Охотничье колбаски", item_topping4Quantity);
+                                                }
+                                                if (item_topping5Quantity > 0) {
+                                                    toppingsMap.put("Доп Пепперони", item_topping5Quantity);
+                                                }
+                                                if (item_topping6Quantity > 0) {
+                                                    toppingsMap.put("Доп Сухарики", item_topping6Quantity);
+                                                }
+                                                if (item_topping7Quantity > 0) {
+                                                    toppingsMap.put("Сыр Пармезан", item_topping7Quantity);
+                                                }
+
+
+                                                CartModel cartModel = new CartModel();
+                                                cartModel.setItem_name(pPpizzaModel.getItem_name());
+                                                cartModel.setItem_image(pPpizzaModel.getItem_image());
+                                                cartModel.setItem_details(pPpizzaModel.getItem_details());
+                                                cartModel.setKey(pPpizzaModel.getKey());
+                                                cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setQuantity(1);
+                                                cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setId(pPpizzaModel.getId());
+                                                cartModel.setДопы(toppingsMap);
+                                                cartModel.setItem_category(pPpizzaModel.getItem_category());
+
+                                                cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                        }
+                                    });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+
+                    break;
+
+                case "Бургеры":
+
+                    final int HOHLAND_BURGER_PRICE = 20;
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    item_topping1.setVisibility(View.VISIBLE);
+                    item_topping2.setVisibility(View.VISIBLE);
+                    item_topping3.setVisibility(View.VISIBLE);
+                    item_topping4.setVisibility(View.VISIBLE);
+                    item_topping5.setVisibility(View.VISIBLE);
+                    item_topping6.setVisibility(View.VISIBLE);
+                    item_topping7.setVisibility(View.VISIBLE);
+                    item_topping8.setVisibility(View.VISIBLE);
+                    item_topping9.setVisibility(View.VISIBLE);
+
+                    if (pPpizzaModel.getItem_name().equals("Булочка с ветчиной") || pPpizzaModel.getItem_name().equals("Булочка с неркой")) {
+
+                        item_topping1.setVisibility(View.VISIBLE);
+                        item_topping2.setVisibility(View.VISIBLE);
+                        item_topping3.setVisibility(View.VISIBLE);
+                        item_topping4.setVisibility(View.GONE);
+                        item_topping5.setVisibility(View.GONE);
+                        item_topping6.setVisibility(View.GONE);
+                        item_topping7.setVisibility(View.GONE);
+                        item_topping8.setVisibility(View.GONE);
+                        item_topping9.setVisibility(View.GONE);
+
+
+                        final int NERKA_BURGER_PRICE = 50;
+                        item_topping1_cost.setText(NERKA_BURGER_PRICE + " ₽");
+                        item_topping1_name.setText("Нерка");
+
+                        final int VETCHINA_BURGER_PRICE = 30;
+                        item_topping2_cost.setText(VETCHINA_BURGER_PRICE + " ₽");
+                        item_topping2_name.setText("Ветчина");
+
+                        item_topping3_cost.setText(HOHLAND_BURGER_PRICE + " ₽");
+                        item_topping3_name.setText("Сыр хохланд");
+
+
+                        btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                try {
+                                    FirebaseFirestore.getInstance()
+                                            .collection("Users_Cart")
+                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .collection("Корзина")
+                                            .document(pPpizzaModel.getKey())
+                                            .get()
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                    String id = FirebaseFirestore.getInstance()
                                                             .collection("Users_Cart")
                                                             .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                             .collection("Корзина")
-                                                            .document(pPpizzaModel.getKey())
-                                                            .update(updateData)
-                                                            .addOnSuccessListener(aVoid -> {
-                                                                cartLoadListener.OnCartloadFailed("Добавлено");
-                                                                finish();
-                                                            })
-                                                            .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
+                                                            .document()
+                                                            .getId();
 
-                                                } else // если в корзине нет предмета, то добавить новый
-                                                {
-                                                    int toppingPizza = 0;
-                                                    int VETCHINA_PRICE = 60;
-                                                    int KRAB_PRICE = 80;
-
-                                                    toppingPizza = VETCHINA_PRICE * item_toppingQuantity1 +
-                                                            KRAB_PRICE * item_topping2Quantity;
-
+                                                    int toppingPizza =
+                                                        (NERKA_BURGER_PRICE * item_topping1Quantity) +
+                                                        (VETCHINA_BURGER_PRICE * item_topping2Quantity) +
+                                                        (HOHLAND_BURGER_PRICE * item_topping3Quantity);
 
                                                     Map<String, Object> toppingsMap = new HashMap<>();
-                                                    toppingsMap.put("Доп Ветчина", item_toppingQuantity1);
-                                                    toppingsMap.put("Доп Краб", item_topping2Quantity);
-                                                    toppingsMap.put("Доп Бекон", item_topping3Quantity);
-                                                    toppingsMap.put("Доп Креветка", item_topping4Quantity);
 
+                                                    if (item_topping1Quantity > 0) {
+                                                        toppingsMap.put("Доп Нерка", item_topping1Quantity);
+                                                    }
+                                                    if (item_topping2Quantity > 0) {
+                                                        toppingsMap.put("Доп Ветчина", item_topping2Quantity);
+                                                    }
+                                                    if (item_topping3Quantity > 0) {
+                                                        toppingsMap.put("Доп Сыр хохланд", item_topping3Quantity);
+                                                    }
 
-                                                    Map<String, Object> toppingsMapArray = new HashMap<>();
-                                                    toppingsMapArray.put("допы", toppingsMap);
 
                                                     CartModel cartModel = new CartModel();
                                                     cartModel.setItem_name(pPpizzaModel.getItem_name());
@@ -488,16 +1347,423 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                     cartModel.setQuantity(1);
                                                     cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
                                                     cartModel.setId(pPpizzaModel.getId());
+                                                    cartModel.setДопы(toppingsMap);
+                                                    cartModel.setItem_category(pPpizzaModel.getItem_category());
+
+                                                 /*   cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                    cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+*/
+                                                    FirebaseFirestore.getInstance()
+                                                            .collection("Users_Cart")
+                                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                            .collection("Корзина")
+                                                            .document(id)
+                                                            .set(cartModel)
+                                                            .addOnSuccessListener(aVoid -> {
+                                                                cartLoadListener.OnCartloadFailed("Добавлено");
+                                                                finish();
+                                                            });
+
+                                                    EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                                }
+                                            });
+                                } catch (Exception e) {
+                                    FirebaseCrashlytics.getInstance().recordException(e);
+                                }
+                            }
+                        });
+                    } else {
+
+
+                        final int GOVYADINA_BURGER_PRICE = 135;
+                        item_topping1_cost.setText(GOVYADINA_BURGER_PRICE + " ₽");
+                        item_topping1_name.setText("Котлета говядина");
+
+                        final int KURICA_BURGER_PRICE = 90;
+                        item_topping2_cost.setText(KURICA_BURGER_PRICE + " ₽");
+                        item_topping2_name.setText("Котлета куриная");
+
+                        final int KREVETKA_BURGER_PRICE = 100;
+                        item_topping3_cost.setText(KREVETKA_BURGER_PRICE + " ₽");
+                        item_topping3_name.setText("Креветка");
+
+                        final int BEKON_BURGER_PRICE = 40;
+                        item_topping4_cost.setText(BEKON_BURGER_PRICE + " ₽");
+                        item_topping4_name.setText("Бекон");
+
+                        item_topping5_cost.setText(HOHLAND_BURGER_PRICE + " ₽");
+                        item_topping5_name.setText("Сыр хохланд");
+
+                        final int SIRNIY_BURGER_PRICE = 20;
+                        item_topping6_cost.setText(SIRNIY_BURGER_PRICE + " ₽");
+                        item_topping6_name.setText("Соус сырный");
+
+                        final int BARBEKYU_BURGER_PRICE = 20;
+                        item_topping7_cost.setText(BARBEKYU_BURGER_PRICE + " ₽");
+                        item_topping7_name.setText("Соус барбекю");
+
+                        final int GRIBI_BURGER_PRICE = 30;
+                        item_topping8_cost.setText(GRIBI_BURGER_PRICE + " ₽");
+                        item_topping8_name.setText("Грибы Шампиньоны");
+
+                        final int YAYCO_BURGER_PRICE = 15;
+                        item_topping9_cost.setText(YAYCO_BURGER_PRICE + " ₽");
+                        item_topping9_name.setText("Яйцо");
+
+                        btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                try {
+                                    FirebaseFirestore.getInstance()
+                                            .collection("Users_Cart")
+                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .collection("Корзина")
+                                            .document(pPpizzaModel.getKey())
+                                            .get()
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                    String id = FirebaseFirestore.getInstance()
+                                                            .collection("Users_Cart")
+                                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                            .collection("Корзина")
+                                                            .document()
+                                                            .getId();
+
+                                                    int toppingPizza =
+                                                            (GOVYADINA_BURGER_PRICE * item_topping1Quantity) +
+                                                                    (KURICA_BURGER_PRICE * item_topping2Quantity) +
+                                                                    (KREVETKA_BURGER_PRICE * item_topping3Quantity) +
+                                                                    (BEKON_BURGER_PRICE * item_topping4Quantity) +
+                                                                    (HOHLAND_BURGER_PRICE * item_topping5Quantity) +
+                                                                    (SIRNIY_BURGER_PRICE * item_topping6Quantity) +
+                                                                    (BARBEKYU_BURGER_PRICE * item_topping7Quantity) +
+                                                                    (GRIBI_BURGER_PRICE * item_topping8Quantity) +
+                                                                    (YAYCO_BURGER_PRICE * item_topping9Quantity);
+
+                                                    Map<String, Object> toppingsMap = new HashMap<>();
+
+                                                    if (item_topping1Quantity > 0) {
+                                                        toppingsMap.put("Доп Котлета говядина", item_topping1Quantity);
+                                                    }
+                                                    if (item_topping2Quantity > 0) {
+                                                        toppingsMap.put("Доп Котлета куриная", item_topping2Quantity);
+                                                    }
+                                                    if (item_topping3Quantity > 0) {
+                                                        toppingsMap.put("Доп Креветка", item_topping3Quantity);
+                                                    }
+                                                    if (item_topping4Quantity > 0) {
+                                                        toppingsMap.put("Доп Бекон", item_topping4Quantity);
+                                                    }
+                                                    if (item_topping5Quantity > 0) {
+                                                        toppingsMap.put("Доп Сыр хохланд", item_topping5Quantity);
+                                                    }
+                                                    if (item_topping6Quantity > 0) {
+                                                        toppingsMap.put("Доп Соус сырный", item_topping6Quantity);
+                                                    }
+                                                    if (item_topping7Quantity > 0) {
+                                                        toppingsMap.put("Доп Соус барбекю", item_topping7Quantity);
+                                                    }
+                                                    if (item_topping8Quantity > 0) {
+                                                        toppingsMap.put("Доп Грибы Шампиньоны", item_topping8Quantity);
+                                                    }
+                                                    if (item_topping9Quantity > 0) {
+                                                        toppingsMap.put("Соус Яйцо", item_topping9Quantity);
+                                                    }
+
+
+                                                    CartModel cartModel = new CartModel();
+                                                    cartModel.setItem_name(pPpizzaModel.getItem_name());
+                                                    cartModel.setItem_image(pPpizzaModel.getItem_image());
+                                                    cartModel.setItem_details(pPpizzaModel.getItem_details());
+                                                    cartModel.setKey(pPpizzaModel.getKey());
+                                                    cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                    cartModel.setQuantity(1);
+                                                    cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                    cartModel.setId(pPpizzaModel.getId());
+                                                    cartModel.setДопы(toppingsMap);
+                                                    cartModel.setItem_category(pPpizzaModel.getItem_category());
+
+                                                    cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                    cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+
+                                                    FirebaseFirestore.getInstance()
+                                                            .collection("Users_Cart")
+                                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                            .collection("Корзина")
+                                                            .document(id)
+                                                            .set(cartModel)
+                                                            .addOnSuccessListener(aVoid -> {
+                                                                cartLoadListener.OnCartloadFailed("Добавлено");
+                                                                finish();
+                                                            });
+
+                                                    EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                                }
+                                            });
+                                } catch (Exception e) {
+                                    FirebaseCrashlytics.getInstance().recordException(e);
+                                }
+                            }
+                        });
+                    }
+                    break;
+
+                case "Сеты":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    item_topping1.setVisibility(View.VISIBLE);
+                    item_topping2.setVisibility(View.VISIBLE);
+                    item_topping3.setVisibility(View.VISIBLE);
+                    item_topping4.setVisibility(View.VISIBLE);
+                    item_topping5.setVisibility(View.VISIBLE);
+                    item_topping6.setVisibility(View.VISIBLE);
+
+
+                    final int TOMAT_SET_PRICE = 10;
+                    item_topping1_cost.setText(TOMAT_SET_PRICE + " ₽");
+                    item_topping1_name.setText("Соус томатный");
+
+                    final int SIR_SET_PRICE = 10;
+                    item_topping2_cost.setText(SIR_SET_PRICE + " ₽");
+                    item_topping2_name.setText("Соус сырный");
+
+                    final int BARBEKYU_SET_PRICE = 10;
+                    item_topping3_cost.setText(BARBEKYU_SET_PRICE + " ₽");
+                    item_topping3_name.setText("Соус барбекю");
+
+                    final int CHESNOK_SET_PRICE = 10;
+                    item_topping4_cost.setText(CHESNOK_SET_PRICE + " ₽");
+                    item_topping4_name.setText("Соус чесночный");
+
+                    final int KISLSLAD_SET_PRICE = 10;
+                    item_topping5_cost.setText(KISLSLAD_SET_PRICE + " ₽");
+                    item_topping5_name.setText("Соус кисло-сладкий");
+
+                    final int GORCHIZA_SET_PRICE = 10;
+                    item_topping6_cost.setText(GORCHIZA_SET_PRICE + " ₽");
+                    item_topping6_name.setText("Соус горчичный");
+
+
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(pPpizzaModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+                                                int toppingPizza =
+                                                        (TOMAT_SET_PRICE * item_topping1Quantity) +
+                                                        (SIR_SET_PRICE * item_topping2Quantity) +
+                                                        (BARBEKYU_SET_PRICE * item_topping3Quantity) +
+                                                        (CHESNOK_SET_PRICE * item_topping4Quantity) +
+                                                        (KISLSLAD_SET_PRICE * item_topping5Quantity) +
+                                                        (GORCHIZA_SET_PRICE * item_topping6Quantity) ;
+
+                                                Map<String, Object> toppingsMap = new HashMap<>();
+
+                                                if (item_topping1Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус томатный", item_topping1Quantity);
+                                                }
+                                                if (item_topping2Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус сырный", item_topping2Quantity);
+                                                }
+                                                if (item_topping3Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус барбекю", item_topping3Quantity);
+                                                }
+                                                if (item_topping4Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус чесночный", item_topping4Quantity);
+                                                }
+                                                if (item_topping5Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус кисло-сладкий", item_topping5Quantity);
+                                                }
+                                                if (item_topping6Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус горчичный", item_topping6Quantity);
+                                                }
+
+
+                                                CartModel cartModel = new CartModel();
+                                                cartModel.setItem_name(pPpizzaModel.getItem_name());
+                                                cartModel.setItem_image(pPpizzaModel.getItem_image());
+                                                cartModel.setItem_details(pPpizzaModel.getItem_details());
+                                                cartModel.setKey(pPpizzaModel.getKey());
+                                                cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setQuantity(1);
+                                                cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setId(pPpizzaModel.getId());
+                                                cartModel.setДопы(toppingsMap);
+                                                cartModel.setItem_category(pPpizzaModel.getItem_category());
+
+                                                cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+
+                    break;
+
+                case "Фритюр":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    item_topping1.setVisibility(View.VISIBLE);
+                    item_topping2.setVisibility(View.VISIBLE);
+                    item_topping3.setVisibility(View.VISIBLE);
+                    item_topping4.setVisibility(View.VISIBLE);
+                    item_topping5.setVisibility(View.VISIBLE);
+                    item_topping6.setVisibility(View.VISIBLE);
+
+                    final int TOMAT_FRITUR_PRICE = 10;
+                    item_topping1_cost.setText(TOMAT_FRITUR_PRICE + " ₽");
+                    item_topping1_name.setText("Соус томатный");
+
+                    final int SIRNIY_FRITUR_PRICE = 10;
+                    item_topping2_cost.setText(SIRNIY_FRITUR_PRICE + " ₽");
+                    item_topping2_name.setText("Соус сырный");
+
+                    final int BARBEKYU_FRITUR_PRICE = 10;
+                    item_topping3_cost.setText(BARBEKYU_FRITUR_PRICE + " ₽");
+                    item_topping3_name.setText("Соус барбекю");
+
+                    final int CHESNOK_FRITUR_PRICE = 10;
+                    item_topping4_cost.setText(CHESNOK_FRITUR_PRICE + " ₽");
+                    item_topping4_name.setText("Соус чесночный");
+
+                    final int KISLSLAD_FRITUR_PRICE = 10;
+                    item_topping5_cost.setText(KISLSLAD_FRITUR_PRICE + " ₽");
+                    item_topping5_name.setText("Соус кисло-сладкий");
+
+                    final int GORCHICA_FRITUR_PRICE = 10;
+                    item_topping6_cost.setText(GORCHICA_FRITUR_PRICE + " ₽");
+                    item_topping6_name.setText("Соус горчичный");
+
+
+                    if (pPpizzaModel.getItem_name().equals("Сосиски охотничье на шпажке")) {
+
+                        orderSelectSize.setVisibility(View.VISIBLE);
+                        radioButton3.setVisibility(View.VISIBLE);
+
+                        radioButton1.setText("3 шт");
+                        radioButton2.setText("6 шт");
+                        radioButton3.setText("9 шт");
+                    }
+
+                        btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                try {
+
+                                    FirebaseFirestore.getInstance()
+                                            .collection("Users_Cart")
+                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .collection("Корзина")
+                                            .document(pPpizzaModel.getKey())
+                                            .get()
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                    String id = FirebaseFirestore.getInstance()
+                                                            .collection("Users_Cart")
+                                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                            .collection("Корзина")
+                                                            .document()
+                                                            .getId();
+
+                                                    int toppingPizza =
+                                                            (TOMAT_FRITUR_PRICE * item_topping1Quantity) +
+                                                                    (SIRNIY_FRITUR_PRICE * item_topping2Quantity) +
+                                                                    (BARBEKYU_FRITUR_PRICE * item_topping3Quantity) +
+                                                                    (CHESNOK_FRITUR_PRICE * item_topping4Quantity) +
+                                                                    (KISLSLAD_FRITUR_PRICE * item_topping5Quantity) +
+                                                                    (GORCHICA_FRITUR_PRICE * item_topping6Quantity);
+
+                                                    Map<String, Object> toppingsMap = new HashMap<>();
+
+                                                    if (item_topping1Quantity > 0) {
+                                                        toppingsMap.put("Доп Соус томатный", item_topping1Quantity);
+                                                    }
+                                                    if (item_topping2Quantity > 0) {
+                                                        toppingsMap.put("Доп Соус сырный", item_topping2Quantity);
+                                                    }
+                                                    if (item_topping3Quantity > 0) {
+                                                        toppingsMap.put("Доп Соус барбекю", item_topping3Quantity);
+                                                    }
+                                                    if (item_topping4Quantity > 0) {
+                                                        toppingsMap.put("Доп Соус чесночный", item_topping4Quantity);
+                                                    }
+                                                    if (item_topping5Quantity > 0) {
+                                                        toppingsMap.put("Доп Соус кисло-сладкий", item_topping5Quantity);
+                                                    }
+                                                    if (item_topping6Quantity > 0) {
+                                                        toppingsMap.put("Доп Соус горчичный", item_topping6Quantity);
+                                                    }
+
+                                                    CartModel cartModel = new CartModel();
+
+                                                    cartModel.setItem_name(pPpizzaModel.getItem_name());
+                                                    cartModel.setItem_image(pPpizzaModel.getItem_image());
+                                                    cartModel.setItem_details(pPpizzaModel.getItem_details());
+                                                    cartModel.setKey(pPpizzaModel.getKey());
+                                                    cartModel.setQuantity(1);
+                                                    cartModel.setId(pPpizzaModel.getId());
+                                                    cartModel.setДопы(toppingsMap);
                                                     cartModel.setItem_category(pPpizzaModel.getItem_category());
 
                                                     Map<String, Object> dopSizeMap = new HashMap<>();
 
-                                                    if (itemSizeRadioButton.getCheckedRadioButtonId() == R.id.radioButton1) {
-                                                        dopSizeMap.put("Доп размер", "32 см");
-                                                    } else if (itemSizeRadioButton.getCheckedRadioButtonId() == R.id.radioButton2) {
-                                                        dopSizeMap.put("Доп размер", "40 см");
-                                                    } else {
-                                                        dopSizeMap.put("Доп размер", "-");
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                            cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            dopSizeMap.put("Доп размер", "6 шт");
+
+                                                            cartModel.setItem_cost(pPpizzaModel.getItem_cost_var1() + toppingPizza);
+                                                            cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var1() + toppingPizza);
+                                                            break;
+                                                        case R.id.radioButton3:
+                                                            dopSizeMap.put("Доп размер", "9 шт");
+
+                                                            cartModel.setItem_cost(pPpizzaModel.getItem_cost_var2() + toppingPizza);
+                                                            cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var2() + toppingPizza);
+
+                                                            break;
                                                     }
 
                                                     FirebaseFirestore.getInstance()
@@ -515,35 +1781,183 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                                         .document(id)
                                                                         .update(dopSizeMap);
 
-                                                                FirebaseFirestore.getInstance()
-                                                                        .collection("Users_Cart")
-                                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                                        .collection("Корзина")
-                                                                        .document(id)
-                                                                        .update(toppingsMapArray);
-
                                                                 cartLoadListener.OnCartloadFailed("Добавлено");
                                                                 finish();
-                                                            })
-                                                            .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
+                                                            });
+
+                                                    EventBus.getDefault().postSticky(new MyUpdateCartEvent());
                                                 }
+                                            });
+                                } catch (Exception e) {
+                                    FirebaseCrashlytics.getInstance().recordException(e);
+                                }
+                            }
+                        });
+                    break;
+
+                case "Напитки":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    if (pPpizzaModel.getItem_name().equals("Молочный шейк \"Дыня\"") ||
+                            pPpizzaModel.getItem_name().equals("Банан-клубника") ||
+                            pPpizzaModel.getItem_name().equals("Манго-персик") ||
+                            pPpizzaModel.getItem_name().equals("Шейк Кокос") ||
+                            pPpizzaModel.getItem_name().equals("Молочный") ||
+                            pPpizzaModel.getItem_name().equals("Банановый коктейль") ||
+                            pPpizzaModel.getItem_name().equals("Шоколадный") ||
+                            pPpizzaModel.getItem_name().equals("Орео")) {
+
+                        orderSelectSize.setVisibility(View.VISIBLE);
+
+                        radioButton1.setText("Объем 0,4 л.");
+                        radioButton2.setText("Объем 0,5 л.");
+                    }
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(pPpizzaModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+                                                /*int toppingPizza =
+                                                        (TOMAT_FRITUR_PRICE * item_topping1Quantity) +
+                                                                (SIRNIY_FRITUR_PRICE * item_topping2Quantity) +
+                                                                (BARBEKYU_FRITUR_PRICE * item_topping3Quantity) +
+                                                                (CHESNOK_FRITUR_PRICE * item_topping4Quantity) +
+                                                                (KISLSLAD_FRITUR_PRICE * item_topping5Quantity) +
+                                                                (GORCHICA_FRITUR_PRICE * item_topping6Quantity);
+*/
+                                                Map<String, Object> toppingsMap = new HashMap<>();
+
+                                                if (item_topping1Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус томатный", item_topping1Quantity);
+                                                }
+                                                if (item_topping2Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус сырный", item_topping2Quantity);
+                                                }
+                                                if (item_topping3Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус барбекю", item_topping3Quantity);
+                                                }
+                                                if (item_topping4Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус чесночный", item_topping4Quantity);
+                                                }
+                                                if (item_topping5Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус кисло-сладкий", item_topping5Quantity);
+                                                }
+                                                if (item_topping6Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус горчичный", item_topping6Quantity);
+                                                }
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(pPpizzaModel.getItem_name());
+                                                cartModel.setItem_image(pPpizzaModel.getItem_image());
+                                                cartModel.setItem_details(pPpizzaModel.getItem_details());
+                                                cartModel.setKey(pPpizzaModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(pPpizzaModel.getId());
+                                                cartModel.setДопы(toppingsMap);
+                                                cartModel.setItem_category(pPpizzaModel.getItem_category());
+
+                                                Map<String, Object> dopSizeMap = new HashMap<>();
+
+                                                if (pPpizzaModel.getItem_name().equals("Молочный шейк \"Дыня\"") ||
+                                                        pPpizzaModel.getItem_name().equals("Банан-клубника") ||
+                                                        pPpizzaModel.getItem_name().equals("Манго-персик") ||
+                                                        pPpizzaModel.getItem_name().equals("Шейк Кокос") ||
+                                                        pPpizzaModel.getItem_name().equals("Молочный") ||
+                                                        pPpizzaModel.getItem_name().equals("Банановый коктейль") ||
+                                                        pPpizzaModel.getItem_name().equals("Шоколадный") ||
+                                                        pPpizzaModel.getItem_name().equals("Орео")) {
+
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setItem_cost(pPpizzaModel.getItem_cost());
+                                                            cartModel.setTotalPrice(pPpizzaModel.getItem_cost());
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            dopSizeMap.put("Доп размер", "Объем 0,5 л.");
+
+                                                            cartModel.setItem_cost(pPpizzaModel.getItem_cost_var1());
+                                                            cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var1());
+                                                            break;
+                                                    }
+                                                }
+
+/*
+
+                                                switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                    case R.id.radioButton1:
+                                                        cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                        cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                        break;
+                                                    case R.id.radioButton2:
+                                                        dopSizeMap.put("Доп размер", "6 шт");
+
+                                                        cartModel.setItem_cost(pPpizzaModel.getItem_cost_var1() + toppingPizza);
+                                                        cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var1() + toppingPizza);
+                                                        break;
+                                                    case R.id.radioButton3:
+                                                        dopSizeMap.put("Доп размер", "9 шт");
+
+                                                        cartModel.setItem_cost(pPpizzaModel.getItem_cost_var2() + toppingPizza);
+                                                        cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var2() + toppingPizza);
+
+                                                        break;
+                                                }
+*/
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+
+                                                            FirebaseFirestore.getInstance()
+                                                                    .collection("Users_Cart")
+                                                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                                    .collection("Корзина")
+                                                                    .document(id)
+                                                                    .update(dopSizeMap);
+
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
                                                 EventBus.getDefault().postSticky(new MyUpdateCartEvent());
-
                                             }
-
                                         });
                             } catch (Exception e) {
                                 FirebaseCrashlytics.getInstance().recordException(e);
                             }
                         }
                     });
-
                     break;
-            }
 
+            }
 
         }
     }
+
 
     private void loadAvocado(Object object) {
         if (object instanceof AvocadoModel) {
@@ -657,17 +2071,17 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
     private void toppingsCountPpizza() {
         item_topping1_plus.setOnClickListener(v ->{
 
-            if (item_toppingQuantity1 >= 0) {
-                item_toppingQuantity1++;
-                item_topping1_quantity.setText(String.valueOf(item_toppingQuantity1));
+            if (item_topping1Quantity >= 0) {
+                item_topping1Quantity++;
+                item_topping1_quantity.setText(String.valueOf(item_topping1Quantity));
             }
         });
 
         item_topping1_minus.setOnClickListener(v ->{
 
-            if (item_toppingQuantity1 > 0) {
-                item_toppingQuantity1--;
-                item_topping1_quantity.setText(String.valueOf(item_toppingQuantity1));
+            if (item_topping1Quantity > 0) {
+                item_topping1Quantity--;
+                item_topping1_quantity.setText(String.valueOf(item_topping1Quantity));
             }
         });
 
@@ -803,6 +2217,210 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
             if (item_topping9Quantity > 0) {
                 item_topping9Quantity--;
                 item_topping9_quantity.setText(String.valueOf(item_topping9Quantity));
+            }
+        });
+
+
+        item_topping10_plus.setOnClickListener(v ->{
+
+            if (item_topping10Quantity >= 0) {
+                item_topping10Quantity++;
+                item_topping10_quantity.setText(String.valueOf(item_topping10Quantity));
+            }
+        });
+
+        item_topping10_minus.setOnClickListener(v ->{
+
+            if (item_topping10Quantity > 0) {
+                item_topping10Quantity--;
+                item_topping10_quantity.setText(String.valueOf(item_topping10Quantity));
+            }
+        });
+
+
+        item_topping11_plus.setOnClickListener(v ->{
+
+            if (item_topping11Quantity >= 0) {
+                item_topping11Quantity++;
+                item_topping11_quantity.setText(String.valueOf(item_topping11Quantity));
+            }
+        });
+
+        item_topping11_minus.setOnClickListener(v ->{
+
+            if (item_topping11Quantity > 0) {
+                item_topping11Quantity--;
+                item_topping11_quantity.setText(String.valueOf(item_topping11Quantity));
+            }
+        });
+
+
+        item_topping12_plus.setOnClickListener(v ->{
+
+            if (item_topping12Quantity >= 0) {
+                item_topping12Quantity++;
+                item_topping12_quantity.setText(String.valueOf(item_topping12Quantity));
+            }
+        });
+
+        item_topping12_minus.setOnClickListener(v ->{
+
+            if (item_topping12Quantity > 0) {
+                item_topping12Quantity--;
+                item_topping12_quantity.setText(String.valueOf(item_topping12Quantity));
+            }
+        });
+
+
+        item_topping13_plus.setOnClickListener(v ->{
+
+            if (item_topping13Quantity >= 0) {
+                item_topping13Quantity++;
+                item_topping13_quantity.setText(String.valueOf(item_topping13Quantity));
+            }
+        });
+
+        item_topping13_minus.setOnClickListener(v ->{
+
+            if (item_topping13Quantity > 0) {
+                item_topping13Quantity--;
+                item_topping13_quantity.setText(String.valueOf(item_topping13Quantity));
+            }
+        });
+
+
+        item_topping14_plus.setOnClickListener(v ->{
+
+            if (item_topping14Quantity >= 0) {
+                item_topping14Quantity++;
+                item_topping14_quantity.setText(String.valueOf(item_topping14Quantity));
+            }
+        });
+
+        item_topping14_minus.setOnClickListener(v ->{
+
+            if (item_topping14Quantity > 0) {
+                item_topping14Quantity--;
+                item_topping14_quantity.setText(String.valueOf(item_topping14Quantity));
+            }
+        });
+
+
+        item_topping15_plus.setOnClickListener(v ->{
+
+            if (item_topping15Quantity >= 0) {
+                item_topping15Quantity++;
+                item_topping15_quantity.setText(String.valueOf(item_topping15Quantity));
+            }
+        });
+
+        item_topping15_minus.setOnClickListener(v ->{
+
+            if (item_topping15Quantity > 0) {
+                item_topping15Quantity--;
+                item_topping15_quantity.setText(String.valueOf(item_topping15Quantity));
+            }
+        });
+
+
+        item_topping16_plus.setOnClickListener(v ->{
+
+            if (item_topping16Quantity >= 0) {
+                item_topping16Quantity++;
+                item_topping16_quantity.setText(String.valueOf(item_topping16Quantity));
+            }
+        });
+
+        item_topping16_minus.setOnClickListener(v ->{
+
+            if (item_topping16Quantity > 0) {
+                item_topping16Quantity--;
+                item_topping16_quantity.setText(String.valueOf(item_topping16Quantity));
+            }
+        });
+
+
+        item_topping17_plus.setOnClickListener(v ->{
+
+            if (item_topping17Quantity >= 0) {
+                item_topping17Quantity++;
+                item_topping17_quantity.setText(String.valueOf(item_topping17Quantity));
+            }
+        });
+
+        item_topping17_minus.setOnClickListener(v ->{
+
+            if (item_topping17Quantity > 0) {
+                item_topping17Quantity--;
+                item_topping17_quantity.setText(String.valueOf(item_topping17Quantity));
+            }
+        });
+
+
+        item_topping18_plus.setOnClickListener(v ->{
+
+            if (item_topping18Quantity >= 0) {
+                item_topping18Quantity++;
+                item_topping18_quantity.setText(String.valueOf(item_topping18Quantity));
+            }
+        });
+
+        item_topping18_minus.setOnClickListener(v ->{
+
+            if (item_topping18Quantity > 0) {
+                item_topping18Quantity--;
+                item_topping18_quantity.setText(String.valueOf(item_topping18Quantity));
+            }
+        });
+
+
+        item_topping19_plus.setOnClickListener(v ->{
+
+            if (item_topping19Quantity >= 0) {
+                item_topping19Quantity++;
+                item_topping19_quantity.setText(String.valueOf(item_topping19Quantity));
+            }
+        });
+
+        item_topping19_minus.setOnClickListener(v ->{
+
+            if (item_topping19Quantity > 0) {
+                item_topping19Quantity--;
+                item_topping19_quantity.setText(String.valueOf(item_topping19Quantity));
+            }
+        });
+
+
+        item_topping20_plus.setOnClickListener(v ->{
+
+            if (item_topping20Quantity >= 0) {
+                item_topping20Quantity++;
+                item_topping20_quantity.setText(String.valueOf(item_topping20Quantity));
+            }
+        });
+
+        item_topping20_minus.setOnClickListener(v ->{
+
+            if (item_topping20Quantity > 0) {
+                item_topping20Quantity--;
+                item_topping20_quantity.setText(String.valueOf(item_topping20Quantity));
+            }
+        });
+
+
+        item_topping21_plus.setOnClickListener(v ->{
+
+            if (item_topping21Quantity >= 0) {
+                item_topping21Quantity++;
+                item_topping21_quantity.setText(String.valueOf(item_topping21Quantity));
+            }
+        });
+
+        item_topping21_minus.setOnClickListener(v ->{
+
+            if (item_topping21Quantity > 0) {
+                item_topping21Quantity--;
+                item_topping21_quantity.setText(String.valueOf(item_topping21Quantity));
             }
         });
     }
