@@ -732,7 +732,7 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
 
                     break;
 
-
+                case "Десерты":
                 case "Роллы":
                     orderSelectSize.setVisibility(View.GONE);
 
@@ -1813,6 +1813,60 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                         radioButton1.setText("Объем 0,4 л.");
                         radioButton2.setText("Объем 0,5 л.");
                     }
+                    if (pPpizzaModel.getItem_name().equals("Американо") ||
+                            pPpizzaModel.getItem_name().equals("Эспрессо") ||
+                            pPpizzaModel.getItem_name().equals("Латте") ||
+                            pPpizzaModel.getItem_name().equals("Кон Миель")) {
+
+                        item_topping1.setVisibility(View.VISIBLE);
+                        item_topping2.setVisibility(View.VISIBLE);
+                        item_topping3.setVisibility(View.VISIBLE);
+                        item_topping5.setVisibility(View.VISIBLE);
+                        item_topping6.setVisibility(View.VISIBLE);
+                        item_topping7.setVisibility(View.VISIBLE);
+                    }
+                    if(pPpizzaModel.getItem_name().equals("Капучино")) {
+
+                        orderSelectSize.setVisibility(View.VISIBLE);
+
+                        radioButton1.setText("Объем 250 мл.");
+                        radioButton2.setText("Объем 350 мл.");
+
+                        item_topping1.setVisibility(View.VISIBLE);
+                        item_topping2.setVisibility(View.VISIBLE);
+                        item_topping3.setVisibility(View.VISIBLE);
+                        item_topping5.setVisibility(View.VISIBLE);
+                        item_topping6.setVisibility(View.VISIBLE);
+                        item_topping7.setVisibility(View.VISIBLE);
+                    }
+
+                    final int MED_NAPITKI_PRICE = 15;
+                    item_topping1_cost.setText(MED_NAPITKI_PRICE + " ₽");
+                    item_topping1_name.setText("Мёд");
+
+                    final int SAHAR_NAPITKI_PRICE = 0;
+                    item_topping2_cost.setText(SAHAR_NAPITKI_PRICE + " ₽");
+                    item_topping2_name.setText("Сахар");
+
+                    final int SIROP_NAPITKI_PRICE = 20;
+                    item_topping3_cost.setText(SIROP_NAPITKI_PRICE + " ₽");
+                    item_topping3_name.setText("Сироп");
+
+                    final int KORICA_NAPITKI_PRICE = 0;
+                    item_topping4_cost.setText(KORICA_NAPITKI_PRICE + " ₽");
+                    item_topping4_name.setText("Корица");
+
+                    final int ZEFIR_NAPITKI_PRICE = 20;
+                    item_topping5_cost.setText(ZEFIR_NAPITKI_PRICE + " ₽");
+                    item_topping5_name.setText("Зефирки");
+
+                    final int SLIVKI_NAPITKI_PRICE = 30;
+                    item_topping6_cost.setText(SLIVKI_NAPITKI_PRICE + " ₽");
+                    item_topping6_name.setText("Взбитые сливки");
+
+                    final int LIMON_NAPITKI_PRICE = 5;
+                    item_topping7_cost.setText(LIMON_NAPITKI_PRICE + " ₽");
+                    item_topping7_name.setText("Лимон (1 долька)");
 
                     btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -1836,33 +1890,36 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                         .document()
                                                         .getId();
 
-                                                /*int toppingPizza =
-                                                        (TOMAT_FRITUR_PRICE * item_topping1Quantity) +
-                                                                (SIRNIY_FRITUR_PRICE * item_topping2Quantity) +
-                                                                (BARBEKYU_FRITUR_PRICE * item_topping3Quantity) +
-                                                                (CHESNOK_FRITUR_PRICE * item_topping4Quantity) +
-                                                                (KISLSLAD_FRITUR_PRICE * item_topping5Quantity) +
-                                                                (GORCHICA_FRITUR_PRICE * item_topping6Quantity);
-*/
+                                                int toppingPizza =
+                                                        (MED_NAPITKI_PRICE * item_topping1Quantity) +
+                                                                (SAHAR_NAPITKI_PRICE * item_topping2Quantity) +
+                                                                (SIROP_NAPITKI_PRICE * item_topping3Quantity) +
+                                                                (KORICA_NAPITKI_PRICE * item_topping4Quantity) +
+                                                                (ZEFIR_NAPITKI_PRICE * item_topping5Quantity) +
+                                                                (SLIVKI_NAPITKI_PRICE * item_topping6Quantity) +
+                                                                (LIMON_NAPITKI_PRICE * item_topping7Quantity);
                                                 Map<String, Object> toppingsMap = new HashMap<>();
 
                                                 if (item_topping1Quantity > 0) {
-                                                    toppingsMap.put("Доп Соус томатный", item_topping1Quantity);
+                                                    toppingsMap.put("Доп Мёд", item_topping1Quantity);
                                                 }
                                                 if (item_topping2Quantity > 0) {
-                                                    toppingsMap.put("Доп Соус сырный", item_topping2Quantity);
+                                                    toppingsMap.put("Доп Сахар", item_topping2Quantity);
                                                 }
                                                 if (item_topping3Quantity > 0) {
-                                                    toppingsMap.put("Доп Соус барбекю", item_topping3Quantity);
+                                                    toppingsMap.put("Доп Сироп", item_topping3Quantity);
                                                 }
                                                 if (item_topping4Quantity > 0) {
-                                                    toppingsMap.put("Доп Соус чесночный", item_topping4Quantity);
+                                                    toppingsMap.put("Доп Корица", item_topping4Quantity);
                                                 }
                                                 if (item_topping5Quantity > 0) {
-                                                    toppingsMap.put("Доп Соус кисло-сладкий", item_topping5Quantity);
+                                                    toppingsMap.put("Доп Зефирки", item_topping5Quantity);
                                                 }
                                                 if (item_topping6Quantity > 0) {
-                                                    toppingsMap.put("Доп Соус горчичный", item_topping6Quantity);
+                                                    toppingsMap.put("Доп Взбитые сливки", item_topping6Quantity);
+                                                }
+                                                if (item_topping7Quantity > 0) {
+                                                    toppingsMap.put("Доп Соус горчичный", item_topping7Quantity);
                                                 }
 
                                                 CartModel cartModel = new CartModel();
@@ -1901,28 +1958,30 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                     }
                                                 }
 
-/*
+                                                if (pPpizzaModel.getItem_name().equals("Американо") ||
+                                                        pPpizzaModel.getItem_name().equals("Эспрессо") ||
+                                                        pPpizzaModel.getItem_name().equals("Латте") ||
+                                                        pPpizzaModel.getItem_name().equals("Кон Миель")) {
 
-                                                switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
-                                                    case R.id.radioButton1:
-                                                        cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
-                                                        cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
-                                                        break;
-                                                    case R.id.radioButton2:
-                                                        dopSizeMap.put("Доп размер", "6 шт");
-
-                                                        cartModel.setItem_cost(pPpizzaModel.getItem_cost_var1() + toppingPizza);
-                                                        cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var1() + toppingPizza);
-                                                        break;
-                                                    case R.id.radioButton3:
-                                                        dopSizeMap.put("Доп размер", "9 шт");
-
-                                                        cartModel.setItem_cost(pPpizzaModel.getItem_cost_var2() + toppingPizza);
-                                                        cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var2() + toppingPizza);
-
-                                                        break;
+                                                    cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                    cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
                                                 }
-*/
+
+                                                if (pPpizzaModel.getItem_name().equals("Капучино")) {
+
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                            cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            dopSizeMap.put("Доп размер", "Объем 350 мл.");
+
+                                                            cartModel.setItem_cost(pPpizzaModel.getItem_cost_var1() + toppingPizza);
+                                                            cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var1() + toppingPizza);
+                                                            break;
+                                                    }
+                                                }
 
                                                 FirebaseFirestore.getInstance()
                                                         .collection("Users_Cart")
