@@ -1,14 +1,11 @@
 package com.example.testactivityandroid_9.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class CartModel implements Serializable {
-    private String key,item_name,item_image, item_details, item_category;
+    private String key,item_name,item_image, item_details, item_category, Вариант_блюда;
     private Map<String,Object>  Доп_ингредиенты;
     private int quantity, item_cost, totalPrice, id/*, item_cost_var1*/;
 /*    private List<String> details;*/
@@ -104,6 +101,9 @@ public class CartModel implements Serializable {
         if (Доп_ингредиенты == null) {
             Доп_ингредиенты = Collections.emptyMap();
         }
+        if (Вариант_блюда == null) {
+            Вариант_блюда = "По умолчанию";
+        }
 
         if (id == 1) {
             return  "<p><b><u>PodkrePizza</u></b>" +
@@ -112,6 +112,7 @@ public class CartModel implements Serializable {
                     ", <br>Количество: " + "<b>" + quantity + " шт." + "</b>" +
                     ", <br>Цена: " + item_cost + " ₽" +
                     ", <br>Описание: " + item_details +
+                    ", <br>Вариант блюда: " + Вариант_блюда +
                     ", <br>Доп ингредиенты: " + Доп_ингредиенты +
                     "</p>";
         }
@@ -122,6 +123,7 @@ public class CartModel implements Serializable {
                     ", <br>Количество: " + "<b>" + quantity + " шт." + "</b>" +
                     ", <br>Цена: " + item_cost + " ₽" +
                     ", <br>Описание: " + item_details +
+                    ", <br>Вариант блюда: " + Вариант_блюда +
                     ", <br>Доп ингредиенты: " + Доп_ингредиенты +
                     "</p>";
         } else if (id == 3) {
@@ -131,73 +133,19 @@ public class CartModel implements Serializable {
                     ", <br>Количество: " + "<b>" + quantity + " шт." + "</b>" +
                     ", <br>Цена: " + item_cost + " ₽" +
                     ", <br>Описание: " + item_details +
+                    ", <br>Вариант блюда: " + Вариант_блюда +
                     ", <br>Доп ингредиенты: " + Доп_ингредиенты +
                     "</p>";
         }
        return "";
     }
 
-/*    public int getItem_cost_var1() {
-        return item_cost_var1;
+
+    public void setВариант_блюда(String вариант_блюда) {
+        Вариант_блюда = вариант_блюда;
     }
 
-    public void setItem_cost_var1(int item_cost_var) {
-        this.item_cost_var1 = item_cost_var;
-    }*/
-
-
-    /*    public ArrayList<String> getDetails() {
-        return details;
+    public String getВариант_блюда() {
+        return Вариант_блюда;
     }
-
-    public void setDetails(ArrayList<String> details) {
-        this.details = details;
-    }*/
-/*    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public float getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
-    }*/
 }

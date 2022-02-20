@@ -2,13 +2,17 @@ package com.example.testactivityandroid_9;
 
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -25,7 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
+import android.widget.LinearLayout.LayoutParams;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.Arrays;
@@ -185,6 +189,18 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
     RadioButton radioButton2;
     @BindView(R.id.radioButton3)
     RadioButton radioButton3;
+    @BindView(R.id.radioButton4)
+    RadioButton radioButton4;
+    @BindView(R.id.radioButton5)
+    RadioButton radioButton5;
+    @BindView(R.id.radioButton6)
+    RadioButton radioButton6;
+    @BindView(R.id.radioButton7)
+    RadioButton radioButton7;
+    @BindView(R.id.radioButton8)
+    RadioButton radioButton8;
+    @BindView(R.id.radioButton9)
+    RadioButton radioButton9;
     @BindView(R.id.item_topping1)
     ConstraintLayout item_topping1;
     @BindView(R.id.item_topping2)
@@ -329,6 +345,8 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
             item_topping13Quantity = 0, item_topping14Quantity = 0, item_topping15Quantity = 0,
             item_topping16Quantity = 0, item_topping17Quantity = 0, item_topping18Quantity = 0,
             item_topping19Quantity = 0, item_topping20Quantity = 0, item_topping21Quantity = 0;
+
+    FrameLayout.LayoutParams params = getLayoutParams();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -664,13 +682,14 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                         cartModel.setДопы(toppingsMap);
                                                         cartModel.setItem_category(pPpizzaModel.getItem_category());
 
-                                                        Map<String, Object> dopSizeMap = new HashMap<>();
+                                                       /* Map<String, Object> dopSizeMap = new HashMap<>();*/
 
                                                         if (itemSizeRadioButton.getCheckedRadioButtonId() == R.id.radioButton1) {
                                                             /*dopSizeMap.put("Доп размер", "32 см");*/
 
                                                             cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
                                                             cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                            cartModel.setВариант_блюда("32 см");
 
                                                             FirebaseFirestore.getInstance()
                                                                     .collection("Users_Cart")
@@ -684,10 +703,11 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                                     });
 
                                                         } else if (itemSizeRadioButton.getCheckedRadioButtonId() == R.id.radioButton2) {
-                                                            dopSizeMap.put("Доп размер", "40 см");
+                                                           /* dopSizeMap.put("Вариант_блюда", "40 см");*/
 
                                                             cartModel.setItem_cost(pPpizzaModel.getItem_cost_var1() + toppingPizza);
                                                             cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var1() + toppingPizza);
+                                                            cartModel.setВариант_блюда("40 см");
 
                                                             FirebaseFirestore.getInstance()
                                                                     .collection("Users_Cart")
@@ -697,13 +717,13 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                                     .set(cartModel)
                                                                     .addOnSuccessListener(aVoid -> {
 
-                                                                        FirebaseFirestore.getInstance()
+                                         /*                               FirebaseFirestore.getInstance()
                                                                                 .collection("Users_Cart")
                                                                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                                                 .collection("Корзина")
                                                                                 .document(id)
                                                                                 .update(dopSizeMap);
-
+*/
     /*                                                                FirebaseFirestore.getInstance()
                                                                             .collection("Users_Cart")
                                                                             .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -1706,11 +1726,11 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
 
                                                     int toppingPizza =
                                                             (TOMAT_FRITUR_PRICE * item_topping1Quantity) +
-                                                                    (SIRNIY_FRITUR_PRICE * item_topping2Quantity) +
-                                                                    (BARBEKYU_FRITUR_PRICE * item_topping3Quantity) +
-                                                                    (CHESNOK_FRITUR_PRICE * item_topping4Quantity) +
-                                                                    (KISLSLAD_FRITUR_PRICE * item_topping5Quantity) +
-                                                                    (GORCHICA_FRITUR_PRICE * item_topping6Quantity);
+                                                            (SIRNIY_FRITUR_PRICE * item_topping2Quantity) +
+                                                            (BARBEKYU_FRITUR_PRICE * item_topping3Quantity) +
+                                                            (CHESNOK_FRITUR_PRICE * item_topping4Quantity) +
+                                                            (KISLSLAD_FRITUR_PRICE * item_topping5Quantity) +
+                                                            (GORCHICA_FRITUR_PRICE * item_topping6Quantity);
 
                                                     Map<String, Object> toppingsMap = new HashMap<>();
 
@@ -1744,25 +1764,27 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                     cartModel.setДопы(toppingsMap);
                                                     cartModel.setItem_category(pPpizzaModel.getItem_category());
 
-                                                    Map<String, Object> dopSizeMap = new HashMap<>();
+                                                    /*Map<String, Object> dopSizeMap = new HashMap<>();*/
 
                                                     switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
                                                         case R.id.radioButton1:
                                                             cartModel.setItem_cost(pPpizzaModel.getItem_cost() + toppingPizza);
                                                             cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
+                                                            cartModel.setВариант_блюда("3 шт");
                                                             break;
                                                         case R.id.radioButton2:
-                                                            dopSizeMap.put("Доп размер", "6 шт");
+                                                            /*dopSizeMap.put("Доп размер", "6 шт");*/
 
                                                             cartModel.setItem_cost(pPpizzaModel.getItem_cost_var1() + toppingPizza);
                                                             cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var1() + toppingPizza);
+                                                            cartModel.setВариант_блюда("6 шт");
                                                             break;
                                                         case R.id.radioButton3:
-                                                            dopSizeMap.put("Доп размер", "9 шт");
+                                                            /*dopSizeMap.put("Доп размер", "9 шт");*/
 
                                                             cartModel.setItem_cost(pPpizzaModel.getItem_cost_var2() + toppingPizza);
                                                             cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var2() + toppingPizza);
-
+                                                            cartModel.setВариант_блюда("9 шт");
                                                             break;
                                                     }
 
@@ -1773,13 +1795,13 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                             .document(id)
                                                             .set(cartModel)
                                                             .addOnSuccessListener(aVoid -> {
-
+/*
                                                                 FirebaseFirestore.getInstance()
                                                                         .collection("Users_Cart")
                                                                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                                         .collection("Корзина")
                                                                         .document(id)
-                                                                        .update(dopSizeMap);
+                                                                        .update(dopSizeMap);*/
 
                                                                 cartLoadListener.OnCartloadFailed("Добавлено");
                                                                 finish();
@@ -1949,11 +1971,12 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                             cartModel.setItem_cost(pPpizzaModel.getItem_cost());
                                                             cartModel.setTotalPrice(pPpizzaModel.getItem_cost());
                                                             break;
-                                                        case R.id.radioButton2:
-                                                            dopSizeMap.put("Доп размер", "Объем 0,5 л.");
+                                                         case R.id.radioButton2:
+                                                            /*dopSizeMap.put("Доп размер", "Объем 0,5 л.");*/
 
                                                             cartModel.setItem_cost(pPpizzaModel.getItem_cost_var1());
                                                             cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var1());
+                                                            cartModel.setВариант_блюда("Объем 0,5 л.");
                                                             break;
                                                     }
                                                 }
@@ -1975,10 +1998,11 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                             cartModel.setTotalPrice(pPpizzaModel.getItem_cost() + toppingPizza);
                                                             break;
                                                         case R.id.radioButton2:
-                                                            dopSizeMap.put("Доп размер", "Объем 350 мл.");
+                                                            /*dopSizeMap.put("Доп размер", "Объем 350 мл.")*/;
 
                                                             cartModel.setItem_cost(pPpizzaModel.getItem_cost_var1() + toppingPizza);
                                                             cartModel.setTotalPrice(pPpizzaModel.getItem_cost_var1() + toppingPizza);
+                                                            cartModel.setВариант_блюда("Объем 350 мл.");
                                                             break;
                                                     }
                                                 }
@@ -1991,12 +2015,12 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                                                         .set(cartModel)
                                                         .addOnSuccessListener(aVoid -> {
 
-                                                            FirebaseFirestore.getInstance()
+/*                                                            FirebaseFirestore.getInstance()
                                                                     .collection("Users_Cart")
                                                                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                                     .collection("Корзина")
                                                                     .document(id)
-                                                                    .update(dopSizeMap);
+                                                                    .update(dopSizeMap);*/
 
                                                             cartLoadListener.OnCartloadFailed("Добавлено");
                                                             finish();
@@ -2027,89 +2051,989 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
             Glide.with(getApplicationContext()).load(avocadoModel.getItem_image()).into(item_image);
             item_descr.setText(avocadoModel.getItem_details());
             item_name.setText(avocadoModel.getItem_name());
+            item_category.setText(avocadoModel.getItem_category());
+            item_cost.setText(avocadoModel.getItem_cost() + " ₽");
 
-            btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+
+            itemSizeRadioButton.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
-                public void onClick(View v) {
-                    try {
-                        FirebaseFirestore.getInstance()
-                                .collection("Users_Cart")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .collection("Корзина")
-                                .document(avocadoModel.getKey())
-                                .get()
-                                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        if (documentSnapshot.exists()) //если у пользователя уже есть товар в корзине
-                                        { // Обновляет количество и общую цену
-                                            CartModel cartModel = documentSnapshot.toObject(CartModel.class);
-
-                                            cartModel.setQuantity(cartModel.getQuantity()+1);
-                                            Map<String,Object> updateData = new HashMap<>();
-                                            updateData.put("quantity", cartModel.getQuantity());
-                                            updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getItem_cost());
-
-                                            FirebaseFirestore.getInstance()
-                                                    .collection("Users_Cart")
-                                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                    .collection("Корзина")
-                                                    .document(avocadoModel.getKey())
-                                                    .update(updateData)
-                                                    .addOnSuccessListener(aVoid -> {
-
-                                                        cartLoadListener.OnCartloadFailed("Добавлено");
-                                                    })
-                                                    .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
-
-                                        }
-                                        else // если в корзине нет предмета, то добавить новый
-                                        {
-                                            CartModel cartModel = new CartModel();
-                                            cartModel.setItem_name(avocadoModel.getItem_name());
-                                            cartModel.setItem_image(avocadoModel.getItem_image());
-                                            cartModel.setItem_details(avocadoModel.getItem_details());
-                                            cartModel.setKey(avocadoModel.getKey());
-                                            cartModel.setItem_cost(avocadoModel.getItem_cost());
-                                            cartModel.setQuantity(1);
-                                            cartModel.setTotalPrice(avocadoModel.getItem_cost());
-                                            cartModel.setId(avocadoModel.getId());
-
-                                            Map<String,Object> dop = new HashMap<>();
-                                            dop.put("size", "32");
-                                            dop.put("dops", "krab");
-
-                                            FirebaseFirestore.getInstance()
-                                                    .collection("Users_Cart")
-                                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                    .collection("Корзина")
-                                                    .document(avocadoModel.getKey())
-                                                    .set(cartModel)
-                                                    .addOnSuccessListener(aVoid -> {
-
-                                                        FirebaseFirestore.getInstance()
-                                                                .collection("Users_Cart")
-                                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                                .collection("Корзина")
-                                                                .document(avocadoModel.getKey())
-                                                                .update(dop);
-
-                                                        cartLoadListener.OnCartloadFailed("Добавлено");
-                                                    })
-                                                    .addOnFailureListener(e -> cartLoadListener.OnCartloadFailed(e.getMessage()));
-                                        }
-                                        EventBus.getDefault().postSticky(new MyUpdateCartEvent());
-
-                                    }
-
-                                });
-                    } catch (Exception e) {
-                        FirebaseCrashlytics.getInstance().recordException(e);
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    switch (checkedId) {
+                        case R.id.radioButton1:
+                            item_cost.setText(avocadoModel.getItem_cost() + " ₽");
+                            break;
+                        case R.id.radioButton2:
+                            item_cost.setText(avocadoModel.getItem_cost_var1() + " ₽");
+                            break;
+                        case R.id.radioButton3:
+                            item_cost.setText(avocadoModel.getItem_cost_var2() + " ₽");
+                            break;
+                        case R.id.radioButton4:
+                            item_cost.setText(avocadoModel.getItem_cost_var3() + " ₽");
+                            break;
+                        case R.id.radioButton5:
+                            item_cost.setText(avocadoModel.getItem_cost_var4() + " ₽");
+                            break;
+                        case R.id.radioButton6:
+                            item_cost.setText(avocadoModel.getItem_cost_var5() + " ₽");
+                            break;
+                        default:
+                            break;
                     }
                 }
             });
+
+            switch (avocadoModel.getItem_category()) {
+
+                case "Пицца":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+
+                    if (avocadoModel.getItem_name().equals("Гавайи")) {
+
+                        orderSelectSize.setVisibility(View.VISIBLE);
+
+                        radioButton1.setText("Ветчина");
+                        radioButton2.setText("Курица");
+                    }
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(avocadoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(avocadoModel.getItem_name());
+                                                cartModel.setItem_image(avocadoModel.getItem_image());
+                                                cartModel.setItem_details(avocadoModel.getItem_details());
+                                                cartModel.setKey(avocadoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(avocadoModel.getId());
+                                                cartModel.setItem_category(avocadoModel.getItem_category());
+
+                                                cartModel.setItem_cost(avocadoModel.getItem_cost());
+                                                cartModel.setTotalPrice(avocadoModel.getItem_cost());
+
+
+                                                if (avocadoModel.getItem_name().equals("Гавайи")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setВариант_блюда("Ветчина");
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            cartModel.setВариант_блюда("Курица");
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+
+                case "Вок":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    if (avocadoModel.getItem_name().equals("Удон \"Том-ям\" с курицей") ||
+                        avocadoModel.getItem_name().equals("Удон \"Том-ям\" с морепродуктами")) {
+
+                        orderSelectSize.setVisibility(View.VISIBLE);
+
+                        radioButton1.setText("Не острый");
+                        radioButton2.setText("Перчик чилли");
+
+                    }
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(avocadoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(avocadoModel.getItem_name());
+                                                cartModel.setItem_image(avocadoModel.getItem_image());
+                                                cartModel.setItem_details(avocadoModel.getItem_details());
+                                                cartModel.setKey(avocadoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(avocadoModel.getId());
+                                                cartModel.setItem_category(avocadoModel.getItem_category());
+
+                                                cartModel.setItem_cost(avocadoModel.getItem_cost());
+                                                cartModel.setTotalPrice(avocadoModel.getItem_cost());
+
+
+                                                if (avocadoModel.getItem_name().equals("Удон \"Том-ям\" с курицей") ||
+                                                        avocadoModel.getItem_name().equals("Удон \"Том-ям\" с морепродуктами")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setВариант_блюда("Не острый");
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            cartModel.setВариант_блюда("Перчик чилли");
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+
+
+                case "Салаты":
+
+                    orderSelectSize.setVisibility(View.VISIBLE);
+                    radioButton1.setText("Цезарь соус");
+                    radioButton2.setText("Соус крем бальзамик");
+
+                    if (avocadoModel.getItem_name().equals("Салат \"Гамадари\" с морепродуктами") ||
+                            avocadoModel.getItem_name().equals("Салат \"Гамадари\" с куриным филе")) {
+
+                        orderSelectSize.setVisibility(View.GONE);
+                    }
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(avocadoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(avocadoModel.getItem_name());
+                                                cartModel.setItem_image(avocadoModel.getItem_image());
+                                                cartModel.setItem_details(avocadoModel.getItem_details());
+                                                cartModel.setKey(avocadoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(avocadoModel.getId());
+                                                cartModel.setItem_category(avocadoModel.getItem_category());
+
+                                                cartModel.setItem_cost(avocadoModel.getItem_cost());
+                                                cartModel.setTotalPrice(avocadoModel.getItem_cost());
+
+
+                                                switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                    case R.id.radioButton1:
+                                                        cartModel.setВариант_блюда("Цезарь соус");
+                                                        break;
+                                                    case R.id.radioButton2:
+                                                        cartModel.setВариант_блюда("Соус крем бальзамик");
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+
+                                                if (avocadoModel.getItem_name().equals("Салат \"Гамадари\" с морепродуктами") ||
+                                                        avocadoModel.getItem_name().equals("Салат \"Гамадари\" с куриным филе")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                        case R.id.radioButton2:
+                                                            cartModel.setВариант_блюда(null);
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+
+
+                case "Супы":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    if (avocadoModel.getItem_name().equals("Бульон говяжий")) {
+                        orderSelectSize.setVisibility(View.VISIBLE);
+                        radioButton1.setText("Без лапши");
+                        radioButton2.setText("Лапша удон ручной работы");
+                    }
+                    if (avocadoModel.getItem_name().equals("Суп \"Том ям\"")) {
+                        orderSelectSize.setVisibility(View.VISIBLE);
+                        radioButton1.setText("Без лапши");
+                        radioButton2.setText("Рисовая лапша");
+                    }
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(avocadoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(avocadoModel.getItem_name());
+                                                cartModel.setItem_image(avocadoModel.getItem_image());
+                                                cartModel.setItem_details(avocadoModel.getItem_details());
+                                                cartModel.setKey(avocadoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(avocadoModel.getId());
+                                                cartModel.setItem_category(avocadoModel.getItem_category());
+
+                                                cartModel.setItem_cost(avocadoModel.getItem_cost());
+                                                cartModel.setTotalPrice(avocadoModel.getItem_cost());
+
+
+                                                if (avocadoModel.getItem_name().equals("Бульон говяжий")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setВариант_блюда("Без лапши");
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            cartModel.setВариант_блюда("Лапша удон ручной работы");
+                                                            cartModel.setItem_cost(avocadoModel.getItem_cost_var1());
+                                                            cartModel.setTotalPrice(avocadoModel.getItem_cost_var1());
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+                                                if (avocadoModel.getItem_name().equals("Суп \"Том ям\"")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setВариант_блюда("Без лапши");
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            cartModel.setВариант_блюда("Рисовая лапша");
+                                                            cartModel.setItem_cost(avocadoModel.getItem_cost_var1());
+                                                            cartModel.setTotalPrice(avocadoModel.getItem_cost_var1());
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+
+
+                case "Картофель фри":
+
+                    orderSelectSize.setVisibility(View.VISIBLE);
+                    radioButton3.setVisibility(View.VISIBLE);
+                    radioButton4.setVisibility(View.VISIBLE);
+                    radioButton5.setVisibility(View.VISIBLE);
+                    radioButton6.setVisibility(View.VISIBLE);
+
+                    itemSizeRadioButton.setLayoutParams(params);
+                    radioButton1.setText("Без соуса");
+                    radioButton2.setText("Соус BBQ");
+                    radioButton3.setText("Тар-тар соус");
+                    radioButton4.setText("Соус горчичный");
+                    radioButton5.setText("Цезарь соус");
+                    radioButton6.setText("Соус чилли шрирача");
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(avocadoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(avocadoModel.getItem_name());
+                                                cartModel.setItem_image(avocadoModel.getItem_image());
+                                                cartModel.setItem_details(avocadoModel.getItem_details());
+                                                cartModel.setKey(avocadoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(avocadoModel.getId());
+                                                cartModel.setItem_category(avocadoModel.getItem_category());
+
+                                                cartModel.setItem_cost(avocadoModel.getItem_cost());
+                                                cartModel.setTotalPrice(avocadoModel.getItem_cost());
+
+                                                switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                    case R.id.radioButton1:
+                                                        cartModel.setВариант_блюда("Без соуса");
+                                                        break;
+                                                    case R.id.radioButton2:
+                                                        cartModel.setВариант_блюда("Соус BBQ");
+                                                        cartModel.setItem_cost(avocadoModel.getItem_cost_var1());
+                                                        cartModel.setTotalPrice(avocadoModel.getItem_cost_var1());
+                                                        break;
+                                                    case R.id.radioButton3:
+                                                        cartModel.setВариант_блюда("Тар-тар соус");
+                                                        cartModel.setItem_cost(avocadoModel.getItem_cost_var1());
+                                                        cartModel.setTotalPrice(avocadoModel.getItem_cost_var1());
+                                                        break;
+                                                    case R.id.radioButton4:
+                                                        cartModel.setВариант_блюда("Соус горчичный");
+                                                        cartModel.setItem_cost(avocadoModel.getItem_cost_var1());
+                                                        cartModel.setTotalPrice(avocadoModel.getItem_cost_var1());
+                                                        break;
+                                                    case R.id.radioButton5:
+                                                        cartModel.setВариант_блюда("Цезарь соус");
+                                                        cartModel.setItem_cost(avocadoModel.getItem_cost_var1());
+                                                        cartModel.setTotalPrice(avocadoModel.getItem_cost_var1());
+                                                        break;
+                                                    case R.id.radioButton6:
+                                                        cartModel.setВариант_блюда("Соус чилли шрирача");
+                                                        cartModel.setItem_cost(avocadoModel.getItem_cost_var1());
+                                                        cartModel.setTotalPrice(avocadoModel.getItem_cost_var1());
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+
+
+                case "Каша":
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    if (avocadoModel.getItem_name().equals("Каша овсяная")) {
+                        orderSelectSize.setVisibility(View.VISIBLE);
+                        radioButton3.setVisibility(View.VISIBLE);
+                        radioButton4.setVisibility(View.VISIBLE);
+
+                        itemSizeRadioButton.setLayoutParams(params);
+                        radioButton1.setText("Молоко");
+                        radioButton2.setText("Вода");
+                        radioButton3.setText("Молоко кокосовое");
+                        radioButton4.setText("Молоко миндальное");
+                    }
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(avocadoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(avocadoModel.getItem_name());
+                                                cartModel.setItem_image(avocadoModel.getItem_image());
+                                                cartModel.setItem_details(avocadoModel.getItem_details());
+                                                cartModel.setKey(avocadoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(avocadoModel.getId());
+                                                cartModel.setItem_category(avocadoModel.getItem_category());
+
+                                                cartModel.setItem_cost(avocadoModel.getItem_cost());
+                                                cartModel.setTotalPrice(avocadoModel.getItem_cost());
+
+                                                if (avocadoModel.getItem_name().equals("Каша овсяная")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setВариант_блюда("Молоко");
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            cartModel.setВариант_блюда("Вода");
+                                                            cartModel.setItem_cost(avocadoModel.getItem_cost_var1());
+                                                            cartModel.setTotalPrice(avocadoModel.getItem_cost_var1());
+                                                            break;
+                                                        case R.id.radioButton3:
+                                                            cartModel.setВариант_блюда("Молоко кокосовое");
+                                                            cartModel.setItem_cost(avocadoModel.getItem_cost_var2());
+                                                            cartModel.setTotalPrice(avocadoModel.getItem_cost_var2());
+                                                            break;
+                                                        case R.id.radioButton4:
+                                                            cartModel.setВариант_блюда("Молоко миндальное");
+                                                            cartModel.setItem_cost(avocadoModel.getItem_cost_var3());
+                                                            cartModel.setTotalPrice(avocadoModel.getItem_cost_var3());
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+
+
+                case "Авторские чаи":
+
+                    orderSelectSize.setVisibility(View.VISIBLE);
+                    radioButton3.setVisibility(View.VISIBLE);
+                    radioButton4.setVisibility(View.VISIBLE);
+
+                    itemSizeRadioButton.setLayoutParams(params);
+
+                    radioButton1.setText("Без сахара");
+                    radioButton2.setText("Сахарный сироп");
+                    radioButton3.setText("Мёд");
+                    radioButton4.setText("Сироп (на выбор)");
+
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(avocadoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(avocadoModel.getItem_name());
+                                                cartModel.setItem_image(avocadoModel.getItem_image());
+                                                cartModel.setItem_details(avocadoModel.getItem_details());
+                                                cartModel.setKey(avocadoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(avocadoModel.getId());
+                                                cartModel.setItem_category(avocadoModel.getItem_category());
+
+                                                cartModel.setItem_cost(avocadoModel.getItem_cost());
+                                                cartModel.setTotalPrice(avocadoModel.getItem_cost());
+
+                                                switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                    case R.id.radioButton1:
+                                                        cartModel.setВариант_блюда("Без сахара");
+                                                        break;
+                                                    case R.id.radioButton2:
+                                                        cartModel.setВариант_блюда("Сахарный сироп");
+                                                        cartModel.setItem_cost(avocadoModel.getItem_cost_var1());
+                                                        cartModel.setTotalPrice(avocadoModel.getItem_cost_var1());
+                                                        break;
+                                                    case R.id.radioButton3:
+                                                        cartModel.setВариант_блюда("Мёд");
+                                                        cartModel.setItem_cost(avocadoModel.getItem_cost_var2());
+                                                        cartModel.setTotalPrice(avocadoModel.getItem_cost_var2());
+                                                        break;
+                                                    case R.id.radioButton4:
+                                                        cartModel.setВариант_блюда("Сироп (на выбор)");
+                                                        cartModel.setItem_cost(avocadoModel.getItem_cost_var3());
+                                                        cartModel.setTotalPrice(avocadoModel.getItem_cost_var3());
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+
+                case "Кофе":
+
+                    orderSelectSize.setVisibility(View.VISIBLE);
+                    radioButton3.setVisibility(View.VISIBLE);
+
+                    radioButton1.setText("Без сахара");
+                    radioButton2.setText("Сахарный сироп");
+                    radioButton3.setText("Сироп (на выбор)");
+
+                    if (avocadoModel.getItem_name().equals("Дополнительная крепость кофе") ||
+                            avocadoModel.getItem_name().equals("Фраппучино")) {
+                        orderSelectSize.setVisibility(View.GONE);
+                    }
+
+                    if (avocadoModel.getItem_name().equals("Какао с маршмеллоу 0,3")) {
+                        radioButton1.setText("Молоко");
+                        radioButton2.setText("Молоко кокосовое");
+                        radioButton3.setText("Молоко миндальное");
+                    }
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(avocadoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(avocadoModel.getItem_name());
+                                                cartModel.setItem_image(avocadoModel.getItem_image());
+                                                cartModel.setItem_details(avocadoModel.getItem_details());
+                                                cartModel.setKey(avocadoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(avocadoModel.getId());
+                                                cartModel.setItem_category(avocadoModel.getItem_category());
+
+                                                cartModel.setItem_cost(avocadoModel.getItem_cost());
+                                                cartModel.setTotalPrice(avocadoModel.getItem_cost());
+
+                                                switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                    case R.id.radioButton1:
+                                                        cartModel.setВариант_блюда("Без сахара");
+                                                        break;
+                                                    case R.id.radioButton2:
+                                                        cartModel.setВариант_блюда("Сахарный сироп");
+                                                        cartModel.setItem_cost(avocadoModel.getItem_cost_var1());
+                                                        cartModel.setTotalPrice(avocadoModel.getItem_cost_var1());
+                                                        break;
+                                                    case R.id.radioButton3:
+                                                        cartModel.setВариант_блюда("Сироп (на выбор)");
+                                                        cartModel.setItem_cost(avocadoModel.getItem_cost_var2());
+                                                        cartModel.setTotalPrice(avocadoModel.getItem_cost_var2());
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+
+                                                if (avocadoModel.getItem_name().equals("Дополнительная крепость кофе") ||
+                                                        avocadoModel.getItem_name().equals("Фраппучино")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                        case R.id.radioButton2:
+                                                        case R.id.radioButton3:
+                                                            cartModel.setВариант_блюда(null);
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+
+                                                if (avocadoModel.getItem_name().equals("Какао с маршмеллоу 0,3")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setВариант_блюда("Молоко");
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            cartModel.setВариант_блюда("Молоко кокосовое");
+                                                            cartModel.setItem_cost(avocadoModel.getItem_cost_var1());
+                                                            cartModel.setTotalPrice(avocadoModel.getItem_cost_var1());
+                                                            break;
+                                                        case R.id.radioButton3:
+                                                            cartModel.setВариант_блюда("Молоко миндальное");
+                                                            cartModel.setItem_cost(avocadoModel.getItem_cost_var2());
+                                                            cartModel.setTotalPrice(avocadoModel.getItem_cost_var2());
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+
+
+                case "Дополнение":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+
+                    if (avocadoModel.getItem_name().equals("Молоко растительное 30 мл.")) {
+                        orderSelectSize.setVisibility(View.VISIBLE);
+                        radioButton1.setText("Молоко кокос");
+                        radioButton2.setText("Молоко миндаль");
+                    }
+
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(avocadoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(avocadoModel.getItem_name());
+                                                cartModel.setItem_image(avocadoModel.getItem_image());
+                                                cartModel.setItem_details(avocadoModel.getItem_details());
+                                                cartModel.setKey(avocadoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(avocadoModel.getId());
+                                                cartModel.setItem_category(avocadoModel.getItem_category());
+
+                                                cartModel.setItem_cost(avocadoModel.getItem_cost());
+                                                cartModel.setTotalPrice(avocadoModel.getItem_cost());
+
+                                                if (avocadoModel.getItem_name().equals("Молоко растительное 30 мл.")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setВариант_блюда("Молоко кокос");
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            cartModel.setВариант_блюда("Молоко миндаль");
+                                                            cartModel.setItem_cost(avocadoModel.getItem_cost_var1());
+                                                            cartModel.setTotalPrice(avocadoModel.getItem_cost_var1());
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+
+                case "Роллы":
+                case "Сэндвичи":
+                case "Молочные коктейли":
+                case "Десерты":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(avocadoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(avocadoModel.getItem_name());
+                                                cartModel.setItem_image(avocadoModel.getItem_image());
+                                                cartModel.setItem_details(avocadoModel.getItem_details());
+                                                cartModel.setKey(avocadoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(avocadoModel.getId());
+                                                cartModel.setItem_category(avocadoModel.getItem_category());
+
+                                                cartModel.setItem_cost(avocadoModel.getItem_cost());
+                                                cartModel.setTotalPrice(avocadoModel.getItem_cost());
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+            }
         }
+
     }
+
 
     private void loadDjo(Object object) {
         if (object instanceof DjoModel) {
@@ -2120,6 +3044,414 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
             Glide.with(getApplicationContext()).load(djoModel.getItem_image()).into(item_image);
             item_descr.setText(djoModel.getItem_details());
             item_name.setText(djoModel.getItem_name());
+            item_category.setText(djoModel.getItem_category());
+            item_cost.setText(djoModel.getItem_cost() + " ₽");
+
+            itemSizeRadioButton.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    switch (checkedId) {
+                        case R.id.radioButton1:
+                            item_cost.setText(djoModel.getItem_cost() + " ₽");
+                            break;
+                        case R.id.radioButton2:
+                            item_cost.setText(djoModel.getItem_cost_var1() + " ₽");
+                            break;
+                        case R.id.radioButton3:
+                            item_cost.setText(djoModel.getItem_cost_var2() + " ₽");
+                            break;
+                        case R.id.radioButton4:
+                            item_cost.setText(djoModel.getItem_cost_var3() + " ₽");
+                            break;
+                        case R.id.radioButton5:
+                            item_cost.setText(djoModel.getItem_cost_var4() + " ₽");
+                            break;
+                        case R.id.radioButton6:
+                            item_cost.setText(djoModel.getItem_cost_var5() + " ₽");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+
+            switch (djoModel.getItem_category()) {
+
+                case "Пицца":
+                case "Сеты":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(djoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(djoModel.getItem_name());
+                                                cartModel.setItem_image(djoModel.getItem_image());
+                                                cartModel.setItem_details(djoModel.getItem_details());
+                                                cartModel.setKey(djoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(djoModel.getId());
+                                                cartModel.setItem_category(djoModel.getItem_category());
+
+                                                cartModel.setItem_cost(djoModel.getItem_cost());
+                                                cartModel.setTotalPrice(djoModel.getItem_cost());
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+
+
+                case "Фритюр":
+
+                    orderSelectSize.setVisibility(View.VISIBLE);
+
+                    radioButton1.setText("12 шт.");
+                    radioButton2.setText("6 шт.");
+
+
+                    if (djoModel.getItem_name().equals("Фирменные куриные крылышки") ||
+                            djoModel.getItem_name().equals("Фирменные куриные крылышки в соусе Сладкий Чили") ||
+                            djoModel.getItem_name().equals("Фирменные куриные крылышки с сыром")) {
+                        radioButton3.setVisibility(View.VISIBLE);
+
+                        radioButton1.setText("1 кг");
+                        radioButton2.setText("0,5 кг");
+                        radioButton3.setText("0,25 кг");
+                    }
+                    if (djoModel.getItem_name().equals("Дамплинги Острые") ||
+                            djoModel.getItem_name().equals("Дамплинги С морепродуктами")) {
+                        radioButton1.setText("6 шт.");
+                        radioButton2.setText("12 шт.");
+                    }
+                    if (djoModel.getItem_name().equals("Наггетсы")) {
+                        radioButton3.setVisibility(View.VISIBLE);
+
+                        radioButton1.setText("12 шт.");
+                        radioButton2.setText("6 шт.");
+                        radioButton3.setText("30 шт.");
+                    }
+                    if (djoModel.getItem_name().equals("Картофель фри Соломка") ||
+                            djoModel.getItem_name().equals("Чебуреки") ||
+                            djoModel.getItem_name().equals("Картофель фри Дольки") ||
+                            djoModel.getItem_name().equals("Пышные Сырники") ||
+                            djoModel.getItem_name().equals("Пельмешки Фри")) {
+                        orderSelectSize.setVisibility(View.GONE);
+                    }
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(djoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(djoModel.getItem_name());
+                                                cartModel.setItem_image(djoModel.getItem_image());
+                                                cartModel.setItem_details(djoModel.getItem_details());
+                                                cartModel.setKey(djoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(djoModel.getId());
+                                                cartModel.setItem_category(djoModel.getItem_category());
+
+                                                cartModel.setItem_cost(djoModel.getItem_cost());
+                                                cartModel.setTotalPrice(djoModel.getItem_cost());
+
+                                                switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                    case R.id.radioButton1:
+                                                        cartModel.setВариант_блюда("12 шт.");
+                                                        break;
+                                                    case R.id.radioButton2:
+                                                        cartModel.setВариант_блюда("6 шт.");
+                                                        cartModel.setItem_cost(djoModel.getItem_cost_var1());
+                                                        cartModel.setTotalPrice(djoModel.getItem_cost_var1());
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+
+                                                if (djoModel.getItem_name().equals("Дамплинги Острые") ||
+                                                        djoModel.getItem_name().equals("Дамплинги С морепродуктами")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setВариант_блюда("6 шт.");
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            cartModel.setВариант_блюда("12 шт.");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var1());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var1());
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+
+                                                if (djoModel.getItem_name().equals("Фирменные куриные крылышки") ||
+                                                        djoModel.getItem_name().equals("Фирменные куриные крылышки в соусе Сладкий Чили") ||
+                                                        djoModel.getItem_name().equals("Фирменные куриные крылышки")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setВариант_блюда("1 кг");
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            cartModel.setВариант_блюда("0,5 кг");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var1());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var1());
+                                                            break;
+                                                        case R.id.radioButton3:
+                                                            cartModel.setВариант_блюда("0,25 кг");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var2());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var2());
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+
+                                                if (djoModel.getItem_name().equals("Наггетсы")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setВариант_блюда("12 шт.");
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            cartModel.setВариант_блюда("6 шт.");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var1());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var1());
+                                                            break;
+                                                        case R.id.radioButton3:
+                                                            cartModel.setВариант_блюда("30 шт.");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var2());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var2());
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+
+                                                if (djoModel.getItem_name().equals("Картофель фри Соломка") ||
+                                                        djoModel.getItem_name().equals("Чебуреки") ||
+                                                        djoModel.getItem_name().equals("Картофель фри Дольки") ||
+                                                        djoModel.getItem_name().equals("Пышные Сырники") ||
+                                                        djoModel.getItem_name().equals("Пельмешки Фри")) {
+                                                    cartModel.setВариант_блюда(null);
+                                                }
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+
+                case "Дополнение":
+
+                    orderSelectSize.setVisibility(View.GONE);
+
+                    if (djoModel.getItem_name().equals("Дополнительные соусы")) {
+                        orderSelectSize.setVisibility(View.VISIBLE);
+
+                        radioButton3.setVisibility(View.VISIBLE);
+                        radioButton4.setVisibility(View.VISIBLE);
+                        radioButton5.setVisibility(View.VISIBLE);
+                        radioButton6.setVisibility(View.VISIBLE);
+                        radioButton7.setVisibility(View.VISIBLE);
+                        radioButton8.setVisibility(View.VISIBLE);
+                        radioButton9.setVisibility(View.VISIBLE);
+
+                        itemSizeRadioButton.setLayoutParams(params);
+
+                        radioButton1.setText("Томатный");
+                        radioButton2.setText("Барбекью");
+                        radioButton3.setText("Сырный");
+                        radioButton4.setText("Терияки");
+                        radioButton5.setText("Сальса");
+                        radioButton6.setText("Чесночный");
+                        radioButton7.setText("Кисло - сладкий");
+                        radioButton8.setText("Карри");
+                        radioButton9.setText("Горчичный");
+                    }
+
+                    btnAddToCart_Detailed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("Users_Cart")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("Корзина")
+                                        .document(djoModel.getKey())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                String id = FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document()
+                                                        .getId();
+
+
+                                                CartModel cartModel = new CartModel();
+
+                                                cartModel.setItem_name(djoModel.getItem_name());
+                                                cartModel.setItem_image(djoModel.getItem_image());
+                                                cartModel.setItem_details(djoModel.getItem_details());
+                                                cartModel.setKey(djoModel.getKey());
+                                                cartModel.setQuantity(1);
+                                                cartModel.setId(djoModel.getId());
+                                                cartModel.setItem_category(djoModel.getItem_category());
+
+                                                cartModel.setItem_cost(djoModel.getItem_cost());
+                                                cartModel.setTotalPrice(djoModel.getItem_cost());
+
+
+                                                if (djoModel.getItem_name().equals("Дополнительные соусы")) {
+                                                    switch (itemSizeRadioButton.getCheckedRadioButtonId()) {
+                                                        case R.id.radioButton1:
+                                                            cartModel.setВариант_блюда("Томатный");
+                                                            break;
+                                                        case R.id.radioButton2:
+                                                            cartModel.setВариант_блюда("Барбекью");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var1());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var1());
+                                                            break;
+                                                        case R.id.radioButton3:
+                                                            cartModel.setВариант_блюда("Сырный");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var2());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var2());
+                                                            break;
+                                                        case R.id.radioButton4:
+                                                            cartModel.setВариант_блюда("Терияки");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var3());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var3());
+                                                            break;
+                                                        case R.id.radioButton5:
+                                                            cartModel.setВариант_блюда("Сальса");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var4());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var4());
+                                                            break;
+                                                        case R.id.radioButton6:
+                                                            cartModel.setВариант_блюда("Чесночный");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var5());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var5());
+                                                            break;
+                                                        case R.id.radioButton7:
+                                                            cartModel.setВариант_блюда("Кисло-сладкий");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var6());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var6());
+                                                            break;
+                                                        case R.id.radioButton8:
+                                                            cartModel.setВариант_блюда("Карри");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var7());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var7());
+                                                            break;
+                                                        case R.id.radioButton9:
+                                                            cartModel.setВариант_блюда("Горчичный");
+                                                            cartModel.setItem_cost(djoModel.getItem_cost_var8());
+                                                            cartModel.setTotalPrice(djoModel.getItem_cost_var8());
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+
+                                                FirebaseFirestore.getInstance()
+                                                        .collection("Users_Cart")
+                                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .collection("Корзина")
+                                                        .document(id)
+                                                        .set(cartModel)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            cartLoadListener.OnCartloadFailed("Добавлено");
+                                                            finish();
+                                                        });
+
+                                                EventBus.getDefault().postSticky(new MyUpdateCartEvent());
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                FirebaseCrashlytics.getInstance().recordException(e);
+                            }
+                        }
+                    });
+                    break;
+
+
+            }
+
         }
     }
 
@@ -2482,6 +3814,13 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                 item_topping21_quantity.setText(String.valueOf(item_topping21Quantity));
             }
         });
+    }
+
+    @NonNull
+    private FrameLayout.LayoutParams getLayoutParams() {
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        params.gravity = Gravity.START;
+        return params;
     }
 
     @Override

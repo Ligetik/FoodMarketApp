@@ -137,6 +137,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 cartMap.put("Описание", model.getItem_details());
                                 cartMap.put("Количество", model.getQuantity());
                                 cartMap.put("Заведение", model.getId());
+                                cartMap.put("Вариант блюда", model.getВариант_блюда());
                                 cartMap.put("Доп ингредиенты", model.getДопы());
 
 
