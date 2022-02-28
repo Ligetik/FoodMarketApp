@@ -83,42 +83,42 @@ public class Login_SignupActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String UserNumber = userNumber.getText().toString().trim();
-                final String UserName = userName.getText().toString();
-                final String UserEmail = userEmail.getText().toString().trim();;
-                String UserPassword = userPassword.getText().toString().trim();
+                final String USER_NUMBER = userNumber.getText().toString().trim();
+                final String USER_NAME = userName.getText().toString();
+                final String USER_EMAIL = userEmail.getText().toString().trim();;
+                final String USER_PASSWORD = userPassword.getText().toString().trim();
 
-                if (TextUtils.isEmpty(UserNumber)) {
+                if (TextUtils.isEmpty(USER_NUMBER)) {
                     userNumber.setError("Не указан номер телефона");
                     return;
                 }
-                if (UserNumber.length() < 10) {
+                if (USER_NUMBER.length() < 10) {
                     userNumber.setError("Неккоректный номер телефона");
                     return;
                 }
-                if (TextUtils.isEmpty(UserName)) {
+                if (TextUtils.isEmpty(USER_NAME)) {
                     userName.setError("Не указано Ваше имя");
                     return;
                 }
-                if (TextUtils.isEmpty(UserEmail)) {
+                if (TextUtils.isEmpty(USER_EMAIL)) {
                     userEmail.setError("Не указана электронная почта");
                     return;
                 }
-                if (!isValidEmail(UserEmail)){
+                if (!isValidEmail(USER_EMAIL)){
                     userEmail.setError("Неверный формат электронной почты");
                     return;
                 }
-                if (TextUtils.isEmpty(UserPassword)) {
+                if (TextUtils.isEmpty(USER_PASSWORD)) {
                     userPassword.setError("Не указан пароль");
                     return;
                 }
-                if (UserPassword.length() < 6) {
+                if (USER_PASSWORD.length() < 6) {
                     userPassword.setError("Пароль должен состоять как минимум из 6 символов");
                     return;
                 }
 
 
-                firebaseAuth.createUserWithEmailAndPassword(UserEmail, UserPassword).addOnCompleteListener((Task<AuthResult> task) -> {
+                firebaseAuth.createUserWithEmailAndPassword(USER_EMAIL, USER_PASSWORD).addOnCompleteListener((Task<AuthResult> task) -> {
                     if (task.isSuccessful()) {
                         userID = firebaseAuth.getCurrentUser().getUid();
                         DocumentReference documentReference = db.collection("user").document(userID);
@@ -129,10 +129,10 @@ public class Login_SignupActivity extends AppCompatActivity {
 
                         /*BonusModel bonusModel = new BonusModel();*/
                         Map<String, Object>  user = new HashMap<>();
-                        user.put("Имя", UserName);
-                        user.put("Номер телефона", "+7" + UserNumber);
-                        user.put("Пароль", UserPassword);
-                        user.put("Почта", UserEmail);
+                        user.put("Имя", USER_NAME);
+                        user.put("Номер телефона", "+7" + USER_NUMBER);
+                        user.put("Пароль", USER_PASSWORD);
+                        user.put("Почта", USER_EMAIL);
                         user.put("bonus", 0 /*bonusModel.setBonus(0)*/);
 
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -141,7 +141,7 @@ public class Login_SignupActivity extends AppCompatActivity {
                                 Log.d(TAG, "OnSuccess" + userID);
 
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(UserName)
+                                        .setDisplayName(USER_NAME)
                                         .build();
                                 firebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {

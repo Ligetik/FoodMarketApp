@@ -1,6 +1,7 @@
 package com.example.testactivityandroid_9.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.PatternsCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -90,6 +91,10 @@ public class LogInActivity extends AppCompatActivity {
                     userLogInEmail.setError("Не указан электронный адрес");
                     return;
                 }
+                if (!isValidEmail(UserEmail)){
+                    userLogInEmail.setError("Неверный формат электронной почты");
+                    return;
+                }
                 if (TextUtils.isEmpty(UserPassword)) {
                     userLogInPassword.setError("Не указан пароль");
                     return;
@@ -106,11 +111,15 @@ public class LogInActivity extends AppCompatActivity {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     }else {
-                        Toast.makeText(LogInActivity.this, "Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LogInActivity.this, "Неверный логин или пароль" /*+ task.getException().getMessage()*/, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
+    }
+
+    public boolean isValidEmail(String userEmail) {
+        return (PatternsCompat.EMAIL_ADDRESS.matcher(userEmail).matches());
     }
 
     private void clickBtnRegistration() {

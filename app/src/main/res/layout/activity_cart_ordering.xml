@@ -59,6 +59,57 @@
             android:padding="10dp">
 
             <TextView
+                android:id="@+id/orderDeliveryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderAddressLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Способ доставки"
+                android:textAlignment="center"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/orderDeliveryMethod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderDeliveryText"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:animateLayoutChanges="true"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:id="@+id/radioButtonDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_selector_orange"
+                    android:button="@android:color/transparent"
+                    android:checked="true"
+                    android:text="Доставка"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_textcolor_orange" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonSelfDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_selector_orange"
+                    android:button="@android:color/transparent"
+                    android:text="Самовывоз"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_textcolor_orange" />
+            </RadioGroup>
+
+            <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -147,11 +198,97 @@
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <RelativeLayout
+                android:id="@+id/orderDeliveryLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderDeliveryMethod"
+                android:layout_centerHorizontal="true"
+                android:animateLayoutChanges="true">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/orderDeliverySwitch"
+                    style="@style/Widget.App.Switch"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:checked="true"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Доставить как можно быстрее"
+                    android:textColor="#94000000"
+                    android:textColorLink="@color/orange"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:id="@+id/orderDeliveryTimeDate"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/orderDeliverySwitch"
+                    android:visibility="gone"
+                    tools:visibility="invisible">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/orderTimeLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:hint="Время доставки"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        app:boxCornerRadiusBottomEnd="13dp"
+                        app:boxCornerRadiusBottomStart="13dp"
+                        app:boxCornerRadiusTopEnd="13dp"
+                        app:boxCornerRadiusTopStart="13dp"
+                        app:boxStrokeColor="@color/orange"
+                        app:hintTextColor="@color/orange">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/orderTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:inputType="text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/orderDateLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/orderTimeLayout"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:hint="Дата доставки"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        app:boxCornerRadiusBottomEnd="13dp"
+                        app:boxCornerRadiusBottomStart="13dp"
+                        app:boxCornerRadiusTopEnd="13dp"
+                        app:boxCornerRadiusTopStart="13dp"
+                        app:boxStrokeColor="@color/orange"
+                        app:hintTextColor="@color/orange">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/orderDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:inputType="text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/orderAddressLayout"
+                android:layout_below="@id/orderDeliveryLayout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:text="@string/payment_method"
@@ -230,7 +367,7 @@
                 android:id="@+id/btnOrder"
                 android:layout_width="320dp"
                 android:layout_height="68dp"
-                android:layout_below="@+id/orderCommentaryLayout"
+                android:layout_below="@id/orderCommentaryLayout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="40dp"
                 android:text="@string/order_btn"

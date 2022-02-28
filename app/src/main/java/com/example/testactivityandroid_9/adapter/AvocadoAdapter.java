@@ -134,6 +134,7 @@ public class AvocadoAdapter extends RecyclerView.Adapter<AvocadoAdapter.MyPizzaV
                                 cartModel.setQuantity(1);
                                 cartModel.setTotalPrice(avocadoModel.getItem_cost());
                                 cartModel.setId(avocadoModel.getId());
+                                cartModel.setItem_category(avocadoModel.getItem_category());
 
                                 FirebaseFirestore.getInstance()
                                         .collection("Users_Cart")

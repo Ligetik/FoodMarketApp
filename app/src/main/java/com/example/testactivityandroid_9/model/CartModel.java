@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Map;
 
+
 public class CartModel implements Serializable {
     private String key,item_name,item_image, item_details, item_category, Вариант_блюда;
     private Map<String,Object>  Доп_ингредиенты;
     private int quantity, item_cost, totalPrice, id/*, item_cost_var1*/;
 /*    private List<String> details;*/
+
+    static int ppizzaCounter = 1;
+    static int avocadoCounter = 1;
+    static int djoCounter = 1;
 
     public CartModel() {
     }
@@ -93,9 +98,16 @@ public class CartModel implements Serializable {
         this.Доп_ингредиенты = Доп_ингредиенты;
     }
 
+    public void setВариант_блюда(String вариант_блюда) {
+        Вариант_блюда = вариант_блюда;
+    }
+
+    public String getВариант_блюда() {
+        return Вариант_блюда;
+    }
+
     @Override
     public String toString() {
-        int i = 0;
 
         //Если допы имеют null, то возвращает пустоту
         if (Доп_ингредиенты == null) {
@@ -104,20 +116,22 @@ public class CartModel implements Serializable {
         if (Вариант_блюда == null) {
             Вариант_блюда = "По умолчанию";
         }
-
         if (id == 1) {
-            return  "<p><b><u>PodkrePizza</u></b>" +
+            return
+                    "<p><b><u>PodkrePizza</u></b>" +
+                    "<br>№ " + ppizzaCounter++ +
                     "<br>" + item_category +
                     "<br>Название: " + item_name +
                     ", <br>Количество: " + "<b>" + quantity + " шт." + "</b>" +
                     ", <br>Цена: " + item_cost + " ₽" +
                     ", <br>Описание: " + item_details +
                     ", <br>Вариант блюда: " + Вариант_блюда +
-                    ", <br>Доп ингредиенты: " + Доп_ингредиенты +
-                    "</p>";
+                    ", <br>Доп ингредиенты: " + Доп_ингредиенты /*+
+                    "</p>"*/;
         }
         else if (id == 2) {
             return "<p><b><u>Avocado</u></b>" +
+                    "<br>№ " + avocadoCounter++ +
                     "<br>" + item_category +
                     "<br>Название: " + item_name +
                     ", <br>Количество: " + "<b>" + quantity + " шт." + "</b>" +
@@ -128,6 +142,7 @@ public class CartModel implements Serializable {
                     "</p>";
         } else if (id == 3) {
             return "<p><b><u>Джо</u></b>" +
+                    "<br>№ " + djoCounter++ +
                     "<br>" + item_category +
                     "<br>Название: " + item_name +
                     ", <br>Количество: " + "<b>" + quantity + " шт." + "</b>" +
@@ -137,15 +152,12 @@ public class CartModel implements Serializable {
                     ", <br>Доп ингредиенты: " + Доп_ингредиенты +
                     "</p>";
         }
+
        return "";
     }
-
-
-    public void setВариант_блюда(String вариант_блюда) {
-        Вариант_блюда = вариант_блюда;
-    }
-
-    public String getВариант_блюда() {
-        return Вариант_блюда;
+    public static void resetCounter() {
+        ppizzaCounter = 1;
+        avocadoCounter = 1;
+        djoCounter = 1;
     }
 }

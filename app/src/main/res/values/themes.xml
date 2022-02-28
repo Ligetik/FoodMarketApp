@@ -51,6 +51,7 @@
     <style name="MyTabLayout" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="tabTextAppearance">@style/MyTabTextAppearance</item>
     </style>
+
     <style name="MyTabTextAppearance" parent="Widget.Design.TabLayout">
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
@@ -60,6 +61,20 @@
    <style name="MyTextInputLayout"  parent="Theme.MaterialComponents.DayNight.NoActionBar"
        tools:override="true">#673AB7
    </style>
+
+
+    <style name="MaterialSwitch" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="switchStyle">@style/Widget.App.Switch</item>
+    </style>
+
+    <style name="Widget.App.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="colorOnSurface">@color/orange</item>
+        <item name="colorSecondary">@color/orange</item>
+    </style>
 
     <style name="Theme.TestActivityAndroid_9.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

@@ -2,8 +2,8 @@ package com.example.testactivityandroid_9.model;
 
 public class HistoryOrderModel {
     private String  Адрес_доставки, Дата_и_время, Имя, Комментарий, Номер_телефона,
-            Способ_оплаты_курьеру, Сумма_заказа;
-    private int Номер_заказа/*, Сумма_заказа*/;
+            Способ_оплаты_курьеру/*, Сумма_заказа*/;
+    private int Номер_заказа, Сумма_заказа;
 
     public HistoryOrderModel() {
     }
@@ -64,19 +64,19 @@ public class HistoryOrderModel {
         Номер_заказа = номер_заказа;
     }
 
-    public String getСумма_заказа() {
+/*    public String getСумма_заказа() {
         return Сумма_заказа;
     }
 
     public void setСумма_заказа(String сумма_заказа) {
         Сумма_заказа = сумма_заказа;
-    }
+    }*/
 
-/*    public int getСумма_заказа() {
+    public int getСумма_заказа() {
         return Сумма_заказа;
     }
 
     public void setСумма_заказа(int сумма_заказа) {
         Сумма_заказа = сумма_заказа;
-    }*/
+    }
 }

@@ -135,6 +135,7 @@ public class DjoAdapter extends RecyclerView.Adapter<DjoAdapter.MyPizzaViewHolde
                                 cartModel.setQuantity(1);
                                 cartModel.setTotalPrice(djoModel.getItem_cost());
                                 cartModel.setId(djoModel.getId());
+                                cartModel.setItem_category(djoModel.getItem_category());
 
                                 FirebaseFirestore.getInstance()
                                         .collection("Users_Cart")

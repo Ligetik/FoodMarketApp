@@ -43,6 +43,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -127,107 +128,25 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
         LoadBonuses();
 
+        sliderBonus.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onStartTrackingTouch(@NonNull Slider slider) {
+
+            }
+
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onStopTrackingTouch(@NonNull Slider slider) {
+                String sliderBonusValue = String.valueOf((int) sliderBonus.getValue());
+                orderBonusEditText.setText(sliderBonusValue);
+            }
+        });
+
+
         orderBonusEditText.setTransformationMethod(null);
 
-        if (FirebaseAuth.getInstance().getCurrentUser().isAnonymous()) {
 
-            orderBonusInfo.setVisibility(View.GONE);
-
-/*            sliderBonus.setVisibility(View.GONE);
-            orderBonusEditText.setVisibility(View.GONE);
-            btnGetBonus.setVisibility(View.GONE);
-            orderBonus.setVisibility(View.GONE);
-            textView12.setVisibility(View.GONE);
-            textView13.setVisibility(View.GONE);*/
-
-            /*orderPayment.setLayoutParams(new RelativeLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT));*/
-        } else {
-            FirebaseFirestore.getInstance()
-                    .collection("user")
-                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .get()
-                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-
-                            bonus = documentSnapshot.getLong("bonus").intValue();
-                            orderBonus.setText(bonus + "");
-
-                            if (bonus == 0) {
-                                orderBonusWriteOff.setVisibility(View.GONE);
-
-                                sliderBonus.setVisibility(View.GONE);
-/*                                orderBonusEditText.setVisibility(View.GONE);
-                                btnGetBonus.setVisibility(View.GONE);*/
-                            } else {
-                                orderBonusEditText.setText(bonus + "");
-
-                                sliderBonus.setValueTo(bonus);
-                                sliderBonus.setValue(bonus);
-                            }
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(CartActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-
-            sliderBonus.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
-                @SuppressLint("RestrictedApi")
-                @Override
-                public void onStartTrackingTouch(@NonNull Slider slider) {
-
-                }
-
-                @SuppressLint("RestrictedApi")
-                @Override
-                public void onStopTrackingTouch(@NonNull Slider slider) {
-                    String sliderBonusValue = String.valueOf((int) sliderBonus.getValue());
-                    orderBonusEditText.setText(sliderBonusValue);
-                }
-            });
-
-            btnGetBonus.setOnClickListener(v -> {
-                String buttonText = btnGetBonus.getText().toString();
-                String bonusCount = String.valueOf(orderBonusEditText.getText());
-                int deliverySum = restaurantsSum;
-                int deliverySumCount = 0;
-
-                if (/*restaurantsSum*/ sumTotal > 0) {
-                    if (buttonText.equals("Списать")) {
-                        btnGetBonus.setText("Сбросить");
-                        sliderBonus.setValue(Float.parseFloat(bonusCount));
-
-                        orderBonusTitleText.setText("Оплата доставки бонусами");
-                        orderBonusTitleCount.setText("-" + bonusCount + " ₽");
-
-                        deliverySum -= Integer.parseInt(bonusCount);
-                        deliverySumCount = deliverySum;
-
-                        txtTotalDelivery.setText(deliverySum + " ₽");
-
-                    }
-                    if (buttonText.equals("Сбросить")) {
-                        btnGetBonus.setText("Списать");
-
-                        orderBonusTitleText.setText("");
-                        orderBonusTitleCount.setText("");
-
-                        deliverySum += deliverySumCount;
-
-                        txtTotalDelivery.setText(deliverySum + " ₽");
-
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "Добавьте любое блюдо в корзину",Toast.LENGTH_SHORT).show();
-                }
-                txtTotalDelivery.setText(deliverySum + " ₽");
-                txtTotal.setText(/*sum*/ sumTotal + deliverySum  + " ₽");
-            });
-        }
 
     }
 
@@ -325,6 +244,116 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                 cartModels.add(cartModel);
                             }
                             cartLoadListener.OnCartloadSuccess(cartModels);
+
+                            if (FirebaseAuth.getInstance().getCurrentUser().isAnonymous()) {
+
+                                orderBonusInfo.setVisibility(View.GONE);
+
+                            } else {
+                                FirebaseFirestore.getInstance()
+                                        .collection("user")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                bonus = documentSnapshot.getLong("bonus").intValue();
+                                                orderBonus.setText(bonus + "");
+
+
+                                                if (bonus == 0 || cartModel2.isEmpty()) {
+                                                    orderBonusWriteOff.setVisibility(View.GONE);
+
+                                                    sliderBonus.setVisibility(View.GONE);
+/*                                orderBonusEditText.setVisibility(View.GONE);
+                                btnGetBonus.setVisibility(View.GONE);*/
+                                                }
+                                                /*orderBonusEditText.setText(bonus + "");*/
+
+                                                /*if (sumTotal == 0) {*/
+                                                /*                                if (*//*sumTotal == 0*//* cartModel2.isEmpty() ) {
+                                    orderBonusWriteOff.setVisibility(View.GONE);
+                                    sliderBonus.setVisibility(View.GONE);
+                                }*/
+
+                                                else if (bonus >= restaurantsSum) {
+         /*                           orderBonusWriteOff.setVisibility(View.VISIBLE);
+                                    sliderBonus.setVisibility(View.VISIBLE);*/
+                                                    orderBonusEditText.setText(restaurantsSum + "");
+                                                    sliderBonus.setValueTo(Integer.parseInt(String.valueOf(restaurantsSum)));
+                                                    sliderBonus.setValue(Integer.parseInt(String.valueOf(restaurantsSum)));
+                                                }
+                                                else {
+/*                                    orderBonusWriteOff.setVisibility(View.VISIBLE);
+                                    sliderBonus.setVisibility(View.VISIBLE);*/
+                                                    orderBonusEditText.setText(bonus + "");
+                                                    sliderBonus.setValueTo(bonus);
+                                                    sliderBonus.setValue(bonus);
+                                                }
+
+                                                /* }*/
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(CartActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+
+
+                                btnGetBonus.setOnClickListener(v -> {
+                                    String buttonText = btnGetBonus.getText().toString();
+                                    String bonusCount = String.valueOf(orderBonusEditText.getText());
+                                    int deliverySum = restaurantsSum;
+                                    int deliverySumCount = 0;
+
+                                    if (/*restaurantsSum*/ sumTotal > 0) {
+                                        if (buttonText.equals("Списать")) {
+                                            btnGetBonus.setText("Сбросить");
+                                            sliderBonus.setValue(Float.parseFloat(bonusCount));
+
+                                            orderBonusTitleText.setText("Оплата доставки бонусами");
+                                            orderBonusTitleCount.setText("-" + bonusCount + " ₽");
+
+                                            deliverySum -= Integer.parseInt(bonusCount);
+
+/*                        if (deliverySum > Integer.parseInt(bonusCount)) {
+                            deliverySum -= Integer.parseInt(bonusCount);
+
+                            deliverySumCount = deliverySum;
+                            txtTotalDelivery.setText(deliverySum + " ₽");
+                        } else {
+                            deliverySum = Integer.parseInt(bonusCount) - deliverySum;
+                            deliverySum = deliverySum - deliverySum;
+                            txtTotalDelivery.setText(deliverySum + " ₽");
+                        }*/
+
+                                            /*txtTotalDelivery.setText(deliverySum + " ₽");*/
+
+                                        }
+                                        if (buttonText.equals("Сбросить")) {
+                                            btnGetBonus.setText("Списать");
+
+                                            orderBonusTitleText.setText("");
+                                            orderBonusTitleCount.setText("");
+
+                                            deliverySum += deliverySumCount;
+
+                                            /*                        txtTotalDelivery.setText(deliverySum + " ₽");*/
+
+                                        }
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Добавьте любое блюдо в корзину",Toast.LENGTH_SHORT).show();
+                                    }
+                                    txtTotalDelivery.setText(deliverySum + " ₽");
+                                    txtTotal.setText( sumTotal + deliverySum  + " ₽");
+                                });
+                            }
+
                         }
                     }
                 })
@@ -495,8 +524,8 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                             intent.putExtra("itemList", (Serializable) cartModel2);
                                             intent.putExtra("bonus", orderBonusEditText.getText().toString());
                                             intent.putExtra("btnGetBonus", btnGetBonus.getText().toString());
-                                            intent.putExtra("deliverySum", txtTotalDelivery.getText().toString());
-                                            intent.putExtra("totalSum", txtTotal.getText().toString());
+                                            intent.putExtra("deliverySum",/* txtTotalDelivery.getText().toString()*/ restaurantsSum);
+                                            intent.putExtra("totalSum", /*txtTotal.getText().toString()*/  sumTotal + restaurantsSum);
                                             startActivity(intent);
 
                                             /*startActivity(new Intent(getApplicationContext(), CartOrderingActivity.class));*/
@@ -549,8 +578,12 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         restaurantsSum = PodkrePizza + Avocado + Djo;
         txtTotalDelivery.setText(restaurantsSum + " ₽");
 
+        btnGetBonus.setText("Списать");
+        orderBonusTitleText.setText("");
+        orderBonusTitleCount.setText("");
 
         txtTotal.setText(sum + restaurantsSum  + " ₽");
+
         sumTotal = sum;
 
         MyCartAdapter adapter = new MyCartAdapter(this, cartModelList);
