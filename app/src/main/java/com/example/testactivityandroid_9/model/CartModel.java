@@ -138,8 +138,7 @@ public class CartModel implements Serializable {
                     ", <br>Цена: " + item_cost + " ₽" +
                     ", <br>Описание: " + item_details +
                     ", <br>Вариант блюда: " + Вариант_блюда +
-                    ", <br>Доп ингредиенты: " + Доп_ингредиенты +
-                    "</p>";
+                    ", <br>Доп ингредиенты: " + Доп_ингредиенты;
         } else if (id == 3) {
             return "<p><b><u>Джо</u></b>" +
                     "<br>№ " + djoCounter++ +
@@ -149,8 +148,7 @@ public class CartModel implements Serializable {
                     ", <br>Цена: " + item_cost + " ₽" +
                     ", <br>Описание: " + item_details +
                     ", <br>Вариант блюда: " + Вариант_блюда +
-                    ", <br>Доп ингредиенты: " + Доп_ингредиенты +
-                    "</p>";
+                    ", <br>Доп ингредиенты: " + Доп_ингредиенты;
         }
 
        return "";

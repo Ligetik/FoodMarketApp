@@ -3,6 +3,7 @@ package com.example.testactivityandroid_9;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -140,6 +141,13 @@ public class CartOrderingActivity extends AppCompatActivity {
                     } else {
                         orderDeliveryLayout.setVisibility(View.GONE);
                     }
+            }
+        });
+
+        orderDeliverySwitch.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return event.getActionMasked() == MotionEvent.ACTION_MOVE;
             }
         });
 
@@ -754,41 +762,45 @@ public class CartOrderingActivity extends AppCompatActivity {
             }
 
             private void UserBonusCounter() {
-                FirebaseFirestore.getInstance()
-                        .collection("user")
-                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .get()
-                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if (documentSnapshot.exists()) {
-                                    int bonus = documentSnapshot.getLong("bonus").intValue();
-                                    BonusModel bonusModel = documentSnapshot.toObject(BonusModel.class);
+                if (orderDeliveryMethod.getCheckedRadioButtonId() == R.id.radioButtonSelfDelivery) {
+                    return;
+                } else {
+                    FirebaseFirestore.getInstance()
+                            .collection("user")
+                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .get()
+                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    if (documentSnapshot.exists()) {
+                                        int bonus = documentSnapshot.getLong("bonus").intValue();
+                                        BonusModel bonusModel = documentSnapshot.toObject(BonusModel.class);
 
-                                    int bonuses = Integer.parseInt(getIntent().getStringExtra("bonus"));
-                                    String buttonText = getIntent().getStringExtra("btnGetBonus");
+                                        int bonuses = Integer.parseInt(getIntent().getStringExtra("bonus"));
+                                        String buttonText = getIntent().getStringExtra("btnGetBonus");
 
-                                    if (buttonText.equals("Сбросить")) {
-                                        if (bonus != 0) {
-                                            bonusModel.setBonus(bonusModel.getBonus() - bonuses);
+                                        if (buttonText.equals("Сбросить")) {
+                                            if (bonus != 0) {
+                                                bonusModel.setBonus(bonusModel.getBonus() - bonuses);
+                                            }
                                         }
+
+                                        bonusModel.setBonus(bonusModel.getBonus() + 15);
+
+                                        Map<String,Object> bonusModelMap = new HashMap<>();
+                                        bonusModelMap.put("bonus", bonusModel.getBonus());
+
+                                        FirebaseFirestore.getInstance()
+                                                .collection("user")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .update(bonusModelMap)
+                                                .addOnSuccessListener(aVoid -> {
+
+                                                });
                                     }
-
-                                    bonusModel.setBonus(bonusModel.getBonus() + 15);
-
-                                    Map<String,Object> bonusModelMap = new HashMap<>();
-                                    bonusModelMap.put("bonus", bonusModel.getBonus());
-
-                                    FirebaseFirestore.getInstance()
-                                            .collection("user")
-                                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .update(bonusModelMap)
-                                            .addOnSuccessListener(aVoid -> {
-
-                                            });
                                 }
-                            }
-                        });
+                            });
+                }
             }
 
             private void OrderHistory(int totalPrice,
@@ -874,11 +886,11 @@ public class CartOrderingActivity extends AppCompatActivity {
 
                 if (orderDeliveryMethod.getCheckedRadioButtonId() == R.id.radioButtonDelivery){
                     orderContactInfoMap.put("Способ доставки:", "Доставка");
-                    orderContactInfoMap.put("Сумма доставка:", deliverySum);
-                    orderContactInfoMap.put("Общая сумма заказа:", totalSum);
+                    orderContactInfoMap.put("Сумма доставка:", deliverySum  + " ₽");
+                    orderContactInfoMap.put("Общая сумма заказа:", totalSum  + " ₽");
                 } else {
                     orderContactInfoMap.put("Способ доставки:", "Самовывоз");
-                    orderContactInfoMap.put("Общая сумма заказа:", totalSum - deliverySum);
+                    orderContactInfoMap.put("Общая сумма заказа:", totalSum - deliverySum  + " ₽");
                 }
 
                 if (orderDeliverySwitch.isChecked()) {
@@ -905,7 +917,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                 orderContactInfoMapPpizza.put("Адрес:", OrderAddress);
                 orderContactInfoMapPpizza.put("Время отправки заявки:", strDate);
                 orderContactInfoMapPpizza.put("Комментарий заказчика:", OrderCommentary);
-                orderContactInfoMapPpizza.put("Общая сумма заказа:", totalPricePpizza);
+                orderContactInfoMapPpizza.put("Общая сумма заказа:", totalPricePpizza  + " ₽");
 
                 if (orderDeliverySwitch.isChecked()) {
                     return;
@@ -925,7 +937,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                 orderContactInfoMapAvocado.put("Адрес:", OrderAddress);
                 orderContactInfoMapAvocado.put("Время отправки заявки:", strDate);
                 orderContactInfoMapAvocado.put("Комментарий заказчика:", OrderCommentary);
-                orderContactInfoMapAvocado.put("Общая сумма заказа:", totalPriceAvocado);
+                orderContactInfoMapAvocado.put("Общая сумма заказа:", totalPriceAvocado  + " ₽");
 
                 if (orderDeliverySwitch.isChecked()) {
                     return;
@@ -945,7 +957,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                 orderContactInfoMapDjo.put("Адрес:", OrderAddress);
                 orderContactInfoMapDjo.put("Время отправки заявки:", strDate);
                 orderContactInfoMapDjo.put("Комментарий заказчика:", OrderCommentary);
-                orderContactInfoMapDjo.put("Общая сумма заказа:", totalPriceDjo);
+                orderContactInfoMapDjo.put("Общая сумма заказа:", totalPriceDjo + " ₽");
 
                 if (orderDeliverySwitch.isChecked()) {
                     return;

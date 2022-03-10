@@ -213,8 +213,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:checked="true"
+                    android:clickable="false"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
+                    android:soundEffectsEnabled="true"
                     android:text="Доставить как можно быстрее"
                     android:textColor="#94000000"
                     android:textColorLink="@color/orange"
@@ -222,10 +224,10 @@
 
                 <RelativeLayout
                     android:id="@+id/orderDeliveryTimeDate"
-                    android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/orderDeliverySwitch"
+                    android:layout_centerHorizontal="true"
                     android:visibility="gone"
                     tools:visibility="invisible">
 
@@ -318,7 +320,7 @@
                     android:background="@drawable/radio_selector_orange"
                     android:button="@android:color/transparent"
                     android:checked="true"
-                    android:text="@string/order_byCash"
+                    android:text="Наличными"
                     android:textAlignment="center"
                     android:textColor="@drawable/radio_textcolor_orange" />
 
@@ -330,7 +332,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/radio_selector_orange"
                     android:button="@android:color/transparent"
-                    android:text="@string/order_byCard"
+                    android:padding="5dp"
+                    android:text="Перевод через СберБанк онлайн"
                     android:textAlignment="center"
                     android:textColor="@drawable/radio_textcolor_orange" />
             </RadioGroup>

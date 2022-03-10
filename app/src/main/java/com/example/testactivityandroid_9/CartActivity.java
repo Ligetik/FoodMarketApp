@@ -235,14 +235,13 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
 
-                                String documentId = documentSnapshot.getId();
-
                                 CartModel cartModel = documentSnapshot.toObject(CartModel.class);
 
                                 cartModel.setKey(documentSnapshot.getId());
 
                                 cartModels.add(cartModel);
                             }
+
                             cartLoadListener.OnCartloadSuccess(cartModels);
 
                             if (FirebaseAuth.getInstance().getCurrentUser().isAnonymous()) {
@@ -261,38 +260,21 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                                 bonus = documentSnapshot.getLong("bonus").intValue();
                                                 orderBonus.setText(bonus + "");
 
-
-                                                if (bonus == 0 || cartModel2.isEmpty()) {
+                                                if (bonus == 0 || cartModels.isEmpty()) {
                                                     orderBonusWriteOff.setVisibility(View.GONE);
-
                                                     sliderBonus.setVisibility(View.GONE);
-/*                                orderBonusEditText.setVisibility(View.GONE);
-                                btnGetBonus.setVisibility(View.GONE);*/
                                                 }
-                                                /*orderBonusEditText.setText(bonus + "");*/
-
-                                                /*if (sumTotal == 0) {*/
-                                                /*                                if (*//*sumTotal == 0*//* cartModel2.isEmpty() ) {
-                                    orderBonusWriteOff.setVisibility(View.GONE);
-                                    sliderBonus.setVisibility(View.GONE);
-                                }*/
 
                                                 else if (bonus >= restaurantsSum) {
-         /*                           orderBonusWriteOff.setVisibility(View.VISIBLE);
-                                    sliderBonus.setVisibility(View.VISIBLE);*/
                                                     orderBonusEditText.setText(restaurantsSum + "");
                                                     sliderBonus.setValueTo(Integer.parseInt(String.valueOf(restaurantsSum)));
                                                     sliderBonus.setValue(Integer.parseInt(String.valueOf(restaurantsSum)));
                                                 }
                                                 else {
-/*                                    orderBonusWriteOff.setVisibility(View.VISIBLE);
-                                    sliderBonus.setVisibility(View.VISIBLE);*/
                                                     orderBonusEditText.setText(bonus + "");
                                                     sliderBonus.setValueTo(bonus);
                                                     sliderBonus.setValue(bonus);
                                                 }
-
-                                                /* }*/
 
                                             }
                                         })
@@ -485,6 +467,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         btnBack.setOnClickListener(v -> finish());
 
 
+
 /*        btnToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -573,7 +556,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
             txtFreeDelivery.setText(price2 + " ₽");
         }
 
-       totalMinOrder = price2;
+        totalMinOrder = price2;
 
         restaurantsSum = PodkrePizza + Avocado + Djo;
         txtTotalDelivery.setText(restaurantsSum + " ₽");
