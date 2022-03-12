@@ -2970,6 +2970,7 @@ public class DetailedActivity extends AppCompatActivity implements ICartLoadList
                 case "Сэндвичи":
                 case "Молочные коктейли":
                 case "Десерты":
+                case "Напитки":
 
                     orderSelectSize.setVisibility(View.GONE);
 

@@ -17,6 +17,7 @@ import com.example.testactivityandroid_9.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.common.base.Joiner;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.firestore.DocumentReference;
@@ -55,18 +56,18 @@ public class CallBackActivity extends AppCompatActivity {
         btnCallback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String UserName = callbackName.getText().toString();
-                final String UserNumber = callbackNumber.getText().toString().trim();
+                final String userName = callbackName.getText().toString();
+                final String userNumber = callbackNumber.getText().toString().trim();
 
-                if (TextUtils.isEmpty(UserName)) {
+                if (TextUtils.isEmpty(userName)) {
                     callbackName.setError("Не указано Ваше имя");
                     return;
                 }
-                if (TextUtils.isEmpty(UserNumber)) {
+                if (TextUtils.isEmpty(userNumber)) {
                     callbackNumber.setError("Не указан номер телефона");
                     return;
                 }
-                if (UserNumber.length() < 10) {
+                if (userNumber.length() < 10) {
                     callbackNumber.setError("Неккоректный номер телефона");
                     return;
                 }
@@ -76,10 +77,10 @@ public class CallBackActivity extends AppCompatActivity {
                 Date date = new Date();
                 String strDate = dateFormat.format(date).toString();
 
-                Map<String, Object> user = new HashMap<>();
-                user.put("Имя", UserName);
-                user.put("Номер телефона", "+7" + UserNumber);
-                user.put("Дата и время",  strDate);
+                Map<String, Object> userContact = new HashMap<>();
+                userContact.put("Имя:", userName);
+                userContact.put("Номер телефона:", "+7" + userNumber);
+                userContact.put("Дата и время:",  strDate);
 
 
 
@@ -87,10 +88,26 @@ public class CallBackActivity extends AppCompatActivity {
                         .collection("Users_Cart")
                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .collection("Данные обратной связи")
-                        .add(user)
+                        .add(userContact)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
+
+                                String orderContactInfoMapStrPizza = Joiner.on("<br>").withKeyValueSeparator(" ").join(userContact);
+
+                                Map<String,Object> message = new HashMap<>();
+                                message.put("subject", "Поступили данные для обратной связи");
+                                message.put("html", orderContactInfoMapStrPizza);
+
+                                Map<String,Object> mail = new HashMap<>();
+                                mail.put("to", "skyendofmind@gmail.com");
+                                mail.put("message", message);
+
+                                FirebaseFirestore.getInstance()
+                                        .collection("mail")
+                                        .add(mail);
+
+
                                 Toast.makeText(getApplicationContext(), "Заявка отправлена!",Toast.LENGTH_SHORT).show();
 
 

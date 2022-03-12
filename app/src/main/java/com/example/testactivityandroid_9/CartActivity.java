@@ -1,12 +1,13 @@
 package com.example.testactivityandroid_9;
 
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -43,7 +44,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,7 +59,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     @BindView(R.id.txtTotal)
     TextView txtTotal;
     @BindView(R.id.txtFreeDelivery)
-    TextView txtFreeDelivery;
+    TextView txtMinDelivery;
     @BindView(R.id.orderBonus)
     TextView orderBonus;
     @BindView(R.id.orderBonusTitleCount)
@@ -86,6 +86,8 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     ConstraintLayout orderBonusInfo;
     @BindView(R.id.orderBonusWriteOff)
     ConstraintLayout orderBonusWriteOff;
+    @BindView(R.id.selectDeliveryZone_TextView)
+    AutoCompleteTextView selectDeliveryZone_TextView;
 
     ICartLoadListener cartLoadListener;
     CartModel cartModels;
@@ -93,9 +95,9 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     List<CartModel> cartModel2 = new ArrayList<>(); // УДАЛИТЬ
     private int bonus;
 
-    int restaurantsSum;
-    /*int sum = 0;*/
+    int deliverySum;
     int sumTotal = 0 , totalMinOrder;
+    int deliveryZoneCost = 160;
 
     @Override
     protected void onStart() {
@@ -124,9 +126,11 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
         init();
 
+        selectDeliveryZone();
+
         loadCartFromFribase();
 
-        LoadBonuses();
+        loadBonuses();
 
         sliderBonus.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
             @SuppressLint("RestrictedApi")
@@ -143,16 +147,50 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
             }
         });
 
-
         orderBonusEditText.setTransformationMethod(null);
-
-
 
     }
 
+    private void selectDeliveryZone() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("район Центральный - 160 ₽");
+        list.add("район Семи Ветров - 200 ₽");
+        list.add("район Слободка - 250 ₽");
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
+                R.layout.activity_cart_list_items,
+                list);
+
+        selectDeliveryZone_TextView.setAdapter(arrayAdapter);
+
+        selectDeliveryZone_TextView.setText("район Центральный - 160 ₽", false);
+
+        selectDeliveryZone_TextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        deliveryZoneCost = 160;
+                        break;
+                    case 1:
+                        deliveryZoneCost = 200;
+                        break;
+                    case 2:
+                        deliveryZoneCost = 250;
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + position);
+                }
+
+                cartLoadListener.OnCartloadSuccess(cartModel2);
+
+                updateBonuses(cartModel2);
+            }
+        });
+    }
 
 
-    private void LoadBonuses() {
+    private void loadBonuses() {
 
     }
 
@@ -233,6 +271,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+
                             for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
 
                                 CartModel cartModel = documentSnapshot.toObject(CartModel.class);
@@ -260,21 +299,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                                 bonus = documentSnapshot.getLong("bonus").intValue();
                                                 orderBonus.setText(bonus + "");
 
-                                                if (bonus == 0 || cartModels.isEmpty()) {
-                                                    orderBonusWriteOff.setVisibility(View.GONE);
-                                                    sliderBonus.setVisibility(View.GONE);
-                                                }
-
-                                                else if (bonus >= restaurantsSum) {
-                                                    orderBonusEditText.setText(restaurantsSum + "");
-                                                    sliderBonus.setValueTo(Integer.parseInt(String.valueOf(restaurantsSum)));
-                                                    sliderBonus.setValue(Integer.parseInt(String.valueOf(restaurantsSum)));
-                                                }
-                                                else {
-                                                    orderBonusEditText.setText(bonus + "");
-                                                    sliderBonus.setValueTo(bonus);
-                                                    sliderBonus.setValue(bonus);
-                                                }
+                                                updateBonuses(cartModels);
 
                                             }
                                         })
@@ -285,15 +310,13 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                             }
                                         });
 
-
-
                                 btnGetBonus.setOnClickListener(v -> {
                                     String buttonText = btnGetBonus.getText().toString();
                                     String bonusCount = String.valueOf(orderBonusEditText.getText());
-                                    int deliverySum = restaurantsSum;
+                                    int deliverySum = CartActivity.this.deliverySum;
                                     int deliverySumCount = 0;
 
-                                    if (/*restaurantsSum*/ sumTotal > 0) {
+                                    if (sumTotal > 0) {
                                         if (buttonText.equals("Списать")) {
                                             btnGetBonus.setText("Сбросить");
                                             sliderBonus.setValue(Float.parseFloat(bonusCount));
@@ -303,19 +326,6 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
                                             deliverySum -= Integer.parseInt(bonusCount);
 
-/*                        if (deliverySum > Integer.parseInt(bonusCount)) {
-                            deliverySum -= Integer.parseInt(bonusCount);
-
-                            deliverySumCount = deliverySum;
-                            txtTotalDelivery.setText(deliverySum + " ₽");
-                        } else {
-                            deliverySum = Integer.parseInt(bonusCount) - deliverySum;
-                            deliverySum = deliverySum - deliverySum;
-                            txtTotalDelivery.setText(deliverySum + " ₽");
-                        }*/
-
-                                            /*txtTotalDelivery.setText(deliverySum + " ₽");*/
-
                                         }
                                         if (buttonText.equals("Сбросить")) {
                                             btnGetBonus.setText("Списать");
@@ -324,9 +334,6 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                             orderBonusTitleCount.setText("");
 
                                             deliverySum += deliverySumCount;
-
-                                            /*                        txtTotalDelivery.setText(deliverySum + " ₽");*/
-
                                         }
                                     } else {
                                         Toast.makeText(getApplicationContext(), "Добавьте любое блюдо в корзину",Toast.LENGTH_SHORT).show();
@@ -455,6 +462,21 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                 });*/
     }
 
+    private void updateBonuses(List<CartModel> cartModels) {
+        if (bonus == 0 || cartModels.isEmpty()) {
+            orderBonusWriteOff.setVisibility(View.GONE);
+            sliderBonus.setVisibility(View.GONE);
+        } else if (bonus >= deliverySum) {
+            orderBonusEditText.setText(deliverySum + "");
+            sliderBonus.setValueTo(Integer.parseInt(String.valueOf(deliverySum)));
+            sliderBonus.setValue(Integer.parseInt(String.valueOf(deliverySum)));
+        } else {
+            orderBonusEditText.setText(bonus + "");
+            sliderBonus.setValueTo(bonus);
+            sliderBonus.setValue(bonus);
+        }
+    }
+
     private void init(){
 
         ButterKnife.bind(this);
@@ -507,8 +529,10 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                             intent.putExtra("itemList", (Serializable) cartModel2);
                                             intent.putExtra("bonus", orderBonusEditText.getText().toString());
                                             intent.putExtra("btnGetBonus", btnGetBonus.getText().toString());
-                                            intent.putExtra("deliverySum",/* txtTotalDelivery.getText().toString()*/ restaurantsSum);
-                                            intent.putExtra("totalSum", /*txtTotal.getText().toString()*/  sumTotal + restaurantsSum);
+                                            intent.putExtra("deliverySum",/* txtTotalDelivery.getText().toString()*/ deliverySum);
+                                            intent.putExtra("totalSum", /*txtTotal.getText().toString()*/  sumTotal + deliverySum);
+                                            intent.putExtra("deliveryZoneCost", deliveryZoneCost);
+
                                             startActivity(intent);
 
                                             /*startActivity(new Intent(getApplicationContext(), CartOrderingActivity.class));*/
@@ -532,6 +556,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         int PodkrePizza = 0;
         int Avocado = 0;
         int Djo = 0;
+
         for (CartModel cartModel : cartModelList) {
             sum += cartModel.getTotalPrice();
 
@@ -540,32 +565,33 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
             switch (cartModel.getId()) {
                 case 1:
-                    PodkrePizza = 160;
+                    PodkrePizza = deliveryZoneCost;
                     break;
                 case 2:
-                    Avocado = 160;
+                    Avocado = deliveryZoneCost;
                     break;
                 case 3:
-                    Djo = 160;
+                    Djo = deliveryZoneCost;
                     break;
             }
         }
         if (price2 < 0) {
-            txtFreeDelivery.setText("0 ₽");
+            txtMinDelivery.setText("0 ₽");
         } else {
-            txtFreeDelivery.setText(price2 + " ₽");
+            txtMinDelivery.setText(price2 + " ₽");
         }
 
         totalMinOrder = price2;
 
-        restaurantsSum = PodkrePizza + Avocado + Djo;
-        txtTotalDelivery.setText(restaurantsSum + " ₽");
+        deliverySum = PodkrePizza + Avocado + Djo;
+
+        txtTotalDelivery.setText(deliverySum + " ₽");
 
         btnGetBonus.setText("Списать");
         orderBonusTitleText.setText("");
         orderBonusTitleCount.setText("");
 
-        txtTotal.setText(sum + restaurantsSum  + " ₽");
+        txtTotal.setText(sum + deliverySum + " ₽");
 
         sumTotal = sum;
 

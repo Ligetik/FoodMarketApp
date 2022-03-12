@@ -94,10 +94,10 @@ public class CartOrderingActivity extends AppCompatActivity {
     List<CartModel>  cartModelList;
     CartModel cartModel;
     List<Object> list2;
-    Map<String, Object>  orderContactInfoMap = new HashMap<>();
-    Map<String, Object>  orderContactInfoMapPpizza = new HashMap<>();
-    Map<String, Object>  orderContactInfoMapAvocado = new HashMap<>();
-    Map<String, Object>  orderContactInfoMapDjo = new HashMap<>();
+    Map<String, Object> orderContactInfoMap = new HashMap<>();
+    Map<String, Object> orderContactInfoMapPpizza = new HashMap<>();
+    Map<String, Object> orderContactInfoMapAvocado = new HashMap<>();
+    Map<String, Object> orderContactInfoMapDjo = new HashMap<>();
 
     int totalPrice = 0, totalPricePpizza = 0, totalPriceAvocado = 0, totalPriceDjo = 0;
 
@@ -252,9 +252,6 @@ public class CartOrderingActivity extends AppCompatActivity {
                 String strDate = dateFormat.format(date).toString();
 
 
-
-
-
                 orderCustomerContacts(ORDER_NUMBER, ORDER_NAME, ORDER_ADDRESS);
 
 
@@ -262,8 +259,6 @@ public class CartOrderingActivity extends AppCompatActivity {
 
                 final HashMap<String, Object> cartMap = new HashMap<>();
                 final HashMap<String, Object> itemMap = new HashMap<>();
-
-                final HashMap<String, Object> mailmap = new HashMap<>();
 
                 List<CartModel> listGeneral = (ArrayList<CartModel>) getIntent().getSerializableExtra("itemList");
 
@@ -411,7 +406,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 strDate, ORDER_TIME, ORDER_DATE);
 
                         //История заказов
-                        OrderHistory(totalPrice,
+                        orderHistory(totalPrice,
                                 ORDER_NAME,
                                 ORDER_NUMBER,
                                 ORDER_ADDRESS,
@@ -419,8 +414,8 @@ public class CartOrderingActivity extends AppCompatActivity {
                                 ORDER_COMMENTARY);
 
                         //Отправка на почту
-                        SendToEmail(idDocument, listGeneral, listPpizza, listAvocado, listDjo,
-                                totalPrice);
+                        sendToEmail(idDocument, listGeneral, listPpizza, listAvocado, listDjo
+                        );
 
 
 
@@ -636,7 +631,7 @@ public class CartOrderingActivity extends AppCompatActivity {
 
 
                 //Начисление бонусов пользователю
-                UserBonusCounter();
+                userBonusCounter();
 
                 Intent intent = new Intent(getApplicationContext(), OrderPlacedActivity.class);
                 startActivity(intent);
@@ -657,9 +652,9 @@ public class CartOrderingActivity extends AppCompatActivity {
                         .set(orderContactMap);
             }
 
-            private void SendToEmail(String idDocument, List<CartModel> listGeneral,
-                                     List<CartModel> listPpizza,  List<CartModel> listAvocado,
-                                     List<CartModel> listDjo, int totalPrice) {
+            private void sendToEmail(String idDocument, List<CartModel> listGeneral,
+                                     List<CartModel> listPpizza, List<CartModel> listAvocado,
+                                     List<CartModel> listDjo) {
 
                 String cartToMail = TextUtils.join(", ", listGeneral);
 
@@ -761,7 +756,7 @@ public class CartOrderingActivity extends AppCompatActivity {
 
             }
 
-            private void UserBonusCounter() {
+            private void userBonusCounter() {
                 if (orderDeliveryMethod.getCheckedRadioButtonId() == R.id.radioButtonSelfDelivery) {
                     return;
                 } else {
@@ -803,7 +798,7 @@ public class CartOrderingActivity extends AppCompatActivity {
                 }
             }
 
-            private void OrderHistory(int totalPrice,
+            private void orderHistory(int totalPrice,
                                       String OrderName,
                                       String OrderNumber,
                                       String OrderAddress,
@@ -854,6 +849,9 @@ public class CartOrderingActivity extends AppCompatActivity {
                         });
             }
 
+
+
+
             private void orderCustomerData(String OrderNumber,
                                            String OrderName,
                                            String OrderAddress,
@@ -864,12 +862,14 @@ public class CartOrderingActivity extends AppCompatActivity {
 
                 int deliverySum = getIntent().getIntExtra("deliverySum", 0);
                 int totalSum = getIntent().getIntExtra("totalSum", 0);
+                int deliveryZoneCost = getIntent().getIntExtra("deliveryZoneCost", 0);
 
-                orderPpizza(OrderNumber, OrderName, OrderAddress, OrderCommentary, strDate);
 
-                orderAvocado(OrderNumber, OrderName, OrderAddress, OrderCommentary, strDate);
+                orderPpizza(OrderNumber, OrderName, OrderAddress, OrderCommentary, strDate, deliveryZoneCost, orderTime, orderDate);
 
-                orderDjo(OrderNumber, OrderName, OrderAddress, OrderCommentary, strDate);
+                orderAvocado(OrderNumber, OrderName, OrderAddress, OrderCommentary, strDate, deliveryZoneCost, orderTime, orderDate);
+
+                orderDjo(OrderNumber, OrderName, OrderAddress, OrderCommentary, strDate, deliveryZoneCost, orderTime, orderDate);
 
 
                 orderContactInfoMap.put("Имя заказчика:", OrderName);
@@ -886,7 +886,7 @@ public class CartOrderingActivity extends AppCompatActivity {
 
                 if (orderDeliveryMethod.getCheckedRadioButtonId() == R.id.radioButtonDelivery){
                     orderContactInfoMap.put("Способ доставки:", "Доставка");
-                    orderContactInfoMap.put("Сумма доставка:", deliverySum  + " ₽");
+                    orderContactInfoMap.put("Сумма доставки:", deliverySum  + " ₽");
                     orderContactInfoMap.put("Общая сумма заказа:", totalSum  + " ₽");
                 } else {
                     orderContactInfoMap.put("Способ доставки:", "Самовывоз");
@@ -911,13 +911,25 @@ public class CartOrderingActivity extends AppCompatActivity {
                                      String OrderName,
                                      String OrderAddress,
                                      String OrderCommentary,
-                                     String strDate) {
+                                     String strDate,
+                                     int deliveryZoneCost,
+                                     String orderTime,
+                                     String orderDate) {
                 orderContactInfoMapPpizza.put("Имя заказчика:", OrderName);
                 orderContactInfoMapPpizza.put("Номер телефона:", "+7" + OrderNumber);
                 orderContactInfoMapPpizza.put("Адрес:", OrderAddress);
                 orderContactInfoMapPpizza.put("Время отправки заявки:", strDate);
                 orderContactInfoMapPpizza.put("Комментарий заказчика:", OrderCommentary);
                 orderContactInfoMapPpizza.put("Общая сумма заказа:", totalPricePpizza  + " ₽");
+
+                if (orderDeliveryMethod.getCheckedRadioButtonId() == R.id.radioButtonDelivery){
+                    orderContactInfoMapPpizza.put("Способ доставки:", "Доставка");
+                    orderContactInfoMapPpizza.put("Сумма доставки:", deliveryZoneCost  + " ₽");
+                    orderContactInfoMapPpizza.put("Общая сумма заказа:", totalPricePpizza + deliveryZoneCost + " ₽");
+                } else {
+                    orderContactInfoMapPpizza.put("Способ доставки:", "Самовывоз");
+                    orderContactInfoMapPpizza.put("Общая сумма заказа:", totalPricePpizza + " ₽");
+                }
 
                 if (orderDeliverySwitch.isChecked()) {
                     return;
@@ -931,13 +943,25 @@ public class CartOrderingActivity extends AppCompatActivity {
                                       String OrderName,
                                       String OrderAddress,
                                       String OrderCommentary,
-                                      String strDate) {
+                                      String strDate,
+                                      int deliveryZoneCost,
+                                      String orderTime,
+                                      String orderDate) {
                 orderContactInfoMapAvocado.put("Имя заказчика:", OrderName);
                 orderContactInfoMapAvocado.put("Номер телефона:", "+7" + OrderNumber);
                 orderContactInfoMapAvocado.put("Адрес:", OrderAddress);
                 orderContactInfoMapAvocado.put("Время отправки заявки:", strDate);
                 orderContactInfoMapAvocado.put("Комментарий заказчика:", OrderCommentary);
                 orderContactInfoMapAvocado.put("Общая сумма заказа:", totalPriceAvocado  + " ₽");
+
+                if (orderDeliveryMethod.getCheckedRadioButtonId() == R.id.radioButtonDelivery){
+                    orderContactInfoMapAvocado.put("Способ доставки:", "Доставка");
+                    orderContactInfoMapAvocado.put("Сумма доставки:", deliveryZoneCost  + " ₽");
+                    orderContactInfoMapAvocado.put("Общая сумма заказа:", totalPriceAvocado + deliveryZoneCost + " ₽");
+                } else {
+                    orderContactInfoMapAvocado.put("Способ доставки:", "Самовывоз");
+                    orderContactInfoMapAvocado.put("Общая сумма заказа:", totalPriceAvocado + " ₽");
+                }
 
                 if (orderDeliverySwitch.isChecked()) {
                     return;
@@ -951,13 +975,25 @@ public class CartOrderingActivity extends AppCompatActivity {
                                   String OrderName,
                                   String OrderAddress,
                                   String OrderCommentary,
-                                  String strDate) {
+                                  String strDate,
+                                  int deliveryZoneCost,
+                                  String orderTime,
+                                  String orderDate) {
                 orderContactInfoMapDjo.put("Имя заказчика:", OrderName);
                 orderContactInfoMapDjo.put("Номер телефона:", "+7" + OrderNumber);
                 orderContactInfoMapDjo.put("Адрес:", OrderAddress);
                 orderContactInfoMapDjo.put("Время отправки заявки:", strDate);
                 orderContactInfoMapDjo.put("Комментарий заказчика:", OrderCommentary);
                 orderContactInfoMapDjo.put("Общая сумма заказа:", totalPriceDjo + " ₽");
+
+                if (orderDeliveryMethod.getCheckedRadioButtonId() == R.id.radioButtonDelivery){
+                    orderContactInfoMapDjo.put("Способ доставки:", "Доставка");
+                    orderContactInfoMapDjo.put("Сумма доставки:", deliveryZoneCost  + " ₽");
+                    orderContactInfoMapDjo.put("Общая сумма заказа:", totalPriceDjo + deliveryZoneCost + " ₽");
+                } else {
+                    orderContactInfoMapDjo.put("Способ доставки:", "Самовывоз");
+                    orderContactInfoMapDjo.put("Общая сумма заказа:", totalPriceDjo + " ₽");
+                }
 
                 if (orderDeliverySwitch.isChecked()) {
                     return;
@@ -967,6 +1003,155 @@ public class CartOrderingActivity extends AppCompatActivity {
                 }
             }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*            private void orderCustomerData(String OrderNumber,
+                                           String OrderName,
+                                           String OrderAddress,
+                                           String OrderCommentary,
+                                           String strDate,
+                                           String orderTime,
+                                           String orderDate) {
+
+                int deliverySum = getIntent().getIntExtra("deliverySum", 0);
+                int totalSum = getIntent().getIntExtra("totalSum", 0);
+                int deliveryZoneCost = getIntent().getIntExtra("deliveryZoneCost", 0);
+
+
+                if (ppizza(OrderNumber, OrderName, OrderAddress, OrderCommentary, strDate, orderTime, orderDate, deliveryZoneCost))
+                    return;
+
+
+                if (avocado(OrderNumber, OrderName, OrderAddress, OrderCommentary, strDate, orderTime, orderDate, deliveryZoneCost))
+                    return;
+
+
+                if (djo(OrderNumber, OrderName, OrderAddress, OrderCommentary, strDate, orderTime, orderDate, deliveryZoneCost))
+                    return;
+
+
+                orderContactInfoMap.put("Имя заказчика:", OrderName);
+                orderContactInfoMap.put("Номер телефона:", "+7" + OrderNumber);
+                orderContactInfoMap.put("Адрес:", OrderAddress);
+                orderContactInfoMap.put("Время отправки заявки:", strDate);
+                orderContactInfoMap.put("Комментарий заказчика:", OrderCommentary);
+
+                if (orderPayment.getCheckedRadioButtonId() == R.id.radioButtonCash){
+                    orderContactInfoMap.put("Способ оплаты:", "Наличными курьеру");
+                } else {
+                    orderContactInfoMap.put("Способ оплаты:", "Картой курьеру");
+                }
+
+                if (orderDeliveryMethod.getCheckedRadioButtonId() == R.id.radioButtonDelivery){
+                    orderContactInfoMap.put("Способ доставки:", "Доставка");
+                    orderContactInfoMap.put("Сумма доставки:", deliverySum  + " ₽");
+                    orderContactInfoMap.put("Общая сумма заказа:", totalSum  + " ₽");
+                } else {
+                    orderContactInfoMap.put("Способ доставки:", "Самовывоз");
+                    orderContactInfoMap.put("Общая сумма заказа:", totalSum - deliverySum  + " ₽");
+                }
+
+                if (orderDeliverySwitch.isChecked()) {
+                    return;
+                } else {
+                    orderContactInfoMap.put("Желаемое время доставки:", orderTime);
+                    orderContactInfoMap.put("Желаемая дата доставки:", orderDate);
+                }
+
+                FirebaseFirestore.getInstance()
+                        .collection("Users_Cart")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .collection("Оформление заказа")
+                        .add(orderContactInfoMap);
+            }
+
+            private boolean djo(String OrderNumber, String OrderName, String OrderAddress, String OrderCommentary, String strDate, String orderTime, String orderDate, int deliveryZoneCost) {
+                orderContactInfoMapDjo.put("Имя заказчика:", OrderName);
+                orderContactInfoMapDjo.put("Номер телефона:", "+7" + OrderNumber);
+                orderContactInfoMapDjo.put("Адрес:", OrderAddress);
+                orderContactInfoMapDjo.put("Время отправки заявки:", strDate);
+                orderContactInfoMapDjo.put("Комментарий заказчика:", OrderCommentary);
+
+                if (orderDeliveryMethod.getCheckedRadioButtonId() == R.id.radioButtonDelivery){
+                    orderContactInfoMapDjo.put("Способ доставки:", "Доставка");
+                    orderContactInfoMapDjo.put("Сумма доставки:", deliveryZoneCost  + " ₽");
+                    orderContactInfoMapDjo.put("Общая сумма заказа:", totalPriceDjo + deliveryZoneCost + " ₽");
+                } else {
+                    orderContactInfoMapDjo.put("Способ доставки:", "Самовывоз");
+                    orderContactInfoMapDjo.put("Общая сумма заказа:", totalPriceDjo + " ₽");
+                }
+
+                if (orderDeliverySwitch.isChecked()) {
+                    return true;
+                } else {
+                    orderContactInfoMapDjo.put("Желаемое время доставки:", orderTime);
+                    orderContactInfoMapDjo.put("Желаемая дата доставки:", orderDate);
+                }
+                return false;
+            }
+
+            private boolean avocado(String OrderNumber, String OrderName, String OrderAddress, String OrderCommentary, String strDate, String orderTime, String orderDate, int deliveryZoneCost) {
+                orderContactInfoMapAvocado.put("Имя заказчика:", OrderName);
+                orderContactInfoMapAvocado.put("Номер телефона:", "+7" + OrderNumber);
+                orderContactInfoMapAvocado.put("Адрес:", OrderAddress);
+                orderContactInfoMapAvocado.put("Время отправки заявки:", strDate);
+                orderContactInfoMapAvocado.put("Комментарий заказчика:", OrderCommentary);
+
+                if (orderDeliveryMethod.getCheckedRadioButtonId() == R.id.radioButtonDelivery){
+                    orderContactInfoMapAvocado.put("Способ доставки:", "Доставка");
+                    orderContactInfoMapAvocado.put("Сумма доставки:", deliveryZoneCost  + " ₽");
+                    orderContactInfoMapAvocado.put("Общая сумма заказа:", totalPriceAvocado + deliveryZoneCost + " ₽");
+                } else {
+                    orderContactInfoMapAvocado.put("Способ доставки:", "Самовывоз");
+                    orderContactInfoMapAvocado.put("Общая сумма заказа:", totalPriceAvocado + " ₽");
+                }
+
+                if (orderDeliverySwitch.isChecked()) {
+                    return true;
+                } else {
+                    orderContactInfoMapAvocado.put("Желаемое время доставки:", orderTime);
+                    orderContactInfoMapAvocado.put("Желаемая дата доставки:", orderDate);
+                }
+                return false;
+            }
+
+            private boolean ppizza(String OrderNumber, String OrderName, String OrderAddress, String OrderCommentary, String strDate, String orderTime, String orderDate, int deliveryZoneCost) {
+                orderContactInfoMapPpizza.put("Имя заказчика:", OrderName);
+                orderContactInfoMapPpizza.put("Номер телефона:", "+7" + OrderNumber);
+                orderContactInfoMapPpizza.put("Адрес:", OrderAddress);
+                orderContactInfoMapPpizza.put("Время отправки заявки:", strDate);
+                orderContactInfoMapPpizza.put("Комментарий заказчика:", OrderCommentary);
+
+                if (orderDeliveryMethod.getCheckedRadioButtonId() == R.id.radioButtonDelivery){
+                    orderContactInfoMapPpizza.put("Способ доставки:", "Доставка");
+                    orderContactInfoMapPpizza.put("Сумма доставки:", deliveryZoneCost  + " ₽");
+                    orderContactInfoMapPpizza.put("Общая сумма заказа:", totalPricePpizza + deliveryZoneCost + " ₽");
+                } else {
+                    orderContactInfoMapPpizza.put("Способ доставки:", "Самовывоз");
+                    orderContactInfoMapPpizza.put("Общая сумма заказа:", totalPricePpizza + " ₽");
+                }
+
+                if (orderDeliverySwitch.isChecked()) {
+                    return true;
+                } else {
+                    orderContactInfoMapPpizza.put("Желаемое время доставки:", orderTime);
+                    orderContactInfoMapPpizza.put("Желаемая дата доставки:", orderDate);
+                }
+                return false;
+            }
+            */
         });
     }
 

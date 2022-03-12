@@ -159,7 +159,7 @@
                     android:layout_marginStart="8dp"
                     android:text="Списать"
                     android:textAllCaps="false"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textStyle="normal"
                     app:backgroundTint="@color/orange"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -222,21 +222,26 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/menu"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:id="@+id/selectDeliveryZone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/orderBonusWriteOff"
                 android:layout_marginTop="5dp"
                 android:hint="Выберите зону доставки"
+                app:boxStrokeColor="@color/orange"
+                app:endIconTint="@color/orange"
+                app:hintTextColor="@color/orange"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/orderBonusWriteOff">
 
                 <AutoCompleteTextView
+                    android:id="@+id/selectDeliveryZone_TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColor="@color/orange" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
