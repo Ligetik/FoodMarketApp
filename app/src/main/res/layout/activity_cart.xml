@@ -221,37 +221,37 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/selectDeliveryZone"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/selectDeliveryZone"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderBonusInfo"
+            android:hint="Выберите зону доставки"
+            android:theme="@style/changeBackgroundColor"
+            android:visibility="gone"
+            app:boxStrokeColor="@color/orange"
+            app:endIconTint="@color/orange"
+            app:hintTextColor="@color/orange"
+            tools:visibility="gone">
+
+            <AutoCompleteTextView
+                android:id="@+id/selectDeliveryZone_TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/orderBonusWriteOff"
-                android:layout_marginTop="5dp"
-                android:hint="Выберите зону доставки"
-                app:boxStrokeColor="@color/orange"
-                app:endIconTint="@color/orange"
-                app:hintTextColor="@color/orange"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/orderBonusWriteOff">
+                android:focusable="false"
+                android:inputType="none"
+                android:textColor="@color/orange" />
 
-                <AutoCompleteTextView
-                    android:id="@+id/selectDeliveryZone_TextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:textColor="@color/orange" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:id="@+id/orderFreeDelivery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/orderBonusInfo"
+            android:layout_below="@id/selectDeliveryZone"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -319,7 +319,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:text="@string/total"
+                android:text="Сумма заказа"
                 android:textColor="@color/orange"
                 android:textSize="16sp"
                 android:textStyle="bold" />

@@ -44,6 +44,7 @@
     </RelativeLayout>
 
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -59,10 +60,161 @@
             android:padding="10dp">
 
             <TextView
+                android:id="@+id/orderDeliveryText_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView4"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Контактные данные"
+                android:textAlignment="center"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/orderDeliveryText_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderNumberLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Адрес доставки"
+                android:textAlignment="center"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orderFloorNumLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderEntranceNumLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:hint="Этаж"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:boxCornerRadiusBottomEnd="13dp"
+                app:boxCornerRadiusBottomStart="13dp"
+                app:boxCornerRadiusTopEnd="13dp"
+                app:boxCornerRadiusTopStart="13dp"
+                app:boxStrokeColor="@color/orange"
+                app:hintTextColor="@color/orange">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orderFloorNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orderEntranceNumLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderUnitNumLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:hint="Подъезд"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:boxCornerRadiusBottomEnd="13dp"
+                app:boxCornerRadiusBottomStart="13dp"
+                app:boxCornerRadiusTopEnd="13dp"
+                app:boxCornerRadiusTopStart="13dp"
+                app:boxStrokeColor="@color/orange"
+                app:hintTextColor="@color/orange">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orderEntranceNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orderUnitNumLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderHouseNumLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:hint="Квартира"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:boxCornerRadiusBottomEnd="13dp"
+                app:boxCornerRadiusBottomStart="13dp"
+                app:boxCornerRadiusTopEnd="13dp"
+                app:boxCornerRadiusTopStart="13dp"
+                app:boxStrokeColor="@color/orange"
+                app:hintTextColor="@color/orange">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orderUnitNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orderStreetLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderAddressLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:hint="Улица"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:boxCornerRadiusBottomEnd="13dp"
+                app:boxCornerRadiusBottomStart="13dp"
+                app:boxCornerRadiusTopEnd="13dp"
+                app:boxCornerRadiusTopStart="13dp"
+                app:boxStrokeColor="@color/orange"
+                app:hintTextColor="@color/orange">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orderStreet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orderHouseNumLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderStreetLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:hint="Дом"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:boxCornerRadiusBottomEnd="13dp"
+                app:boxCornerRadiusBottomStart="13dp"
+                app:boxCornerRadiusTopEnd="13dp"
+                app:boxCornerRadiusTopStart="13dp"
+                app:boxStrokeColor="@color/orange"
+                app:hintTextColor="@color/orange">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orderHouseNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
                 android:id="@+id/orderDeliveryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/orderAddressLayout"
+                android:layout_below="@id/orderFloorNumLayout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:text="Способ доставки"
@@ -126,9 +278,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView4"
+                android:layout_below="@id/orderDeliveryText_contact"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/name"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
@@ -178,18 +330,20 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/orderNumberLayout"
+                android:layout_below="@id/orderDeliveryText_address"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:hint="Адрес доставки: улица д. кв. этаж"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
+                android:visibility="gone"
                 app:boxCornerRadiusBottomEnd="13dp"
                 app:boxCornerRadiusBottomStart="13dp"
                 app:boxCornerRadiusTopEnd="13dp"
                 app:boxCornerRadiusTopStart="13dp"
                 app:boxStrokeColor="@color/orange"
-                app:hintTextColor="@color/orange">
+                app:hintTextColor="@color/orange"
+                tools:visibility="gone">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/orderAddress"
@@ -206,12 +360,25 @@
                 android:layout_centerHorizontal="true"
                 android:animateLayoutChanges="true">
 
+                <TextView
+                    android:id="@+id/orderDeliveryText_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="20dp"
+                    android:text="Время и дата"
+                    android:textAlignment="center"
+                    android:textColor="@color/orange"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/orderDeliverySwitch"
                     style="@style/Widget.App.Switch"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/orderDeliveryText_time"
                     android:checked="true"
                     android:clickable="false"
                     android:paddingLeft="15dp"

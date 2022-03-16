@@ -126,7 +126,11 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
         init();
 
-        selectDeliveryZone();
+        /**
+         *            ВЫРЕЗАНО
+         *            Зона доставки
+         *
+         * selectDeliveryZone();*/
 
         loadCartFromFribase();
 
@@ -151,7 +155,11 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
     }
 
-    private void selectDeliveryZone() {
+/**
+ *            ВЫРЕЗАНО
+ *          Зона доставки
+ *
+ * private void selectDeliveryZone() {
         ArrayList<String> list = new ArrayList<>();
         list.add("район Центральный - 160 ₽");
         list.add("район Семи Ветров - 200 ₽");
@@ -187,7 +195,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                 updateBonuses(cartModel2);
             }
         });
-    }
+    }*/
 
 
     private void loadBonuses() {
@@ -521,16 +529,19 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
                                     if(task.getResult().size() > 0) {
-                                        for (DocumentSnapshot document : task.getResult()) {
+/*                                        for (DocumentSnapshot document : task.getResult()) {
 
-                                        }
+                                        }*/
                                             Intent intent = new Intent(getApplicationContext(), CartOrderingActivity.class);
 
                                             intent.putExtra("itemList", (Serializable) cartModel2);
                                             intent.putExtra("bonus", orderBonusEditText.getText().toString());
                                             intent.putExtra("btnGetBonus", btnGetBonus.getText().toString());
-                                            intent.putExtra("deliverySum",/* txtTotalDelivery.getText().toString()*/ deliverySum);
-                                            intent.putExtra("totalSum", /*txtTotal.getText().toString()*/  sumTotal + deliverySum);
+                                            intent.putExtra("deliverySum", deliverySum);
+                                            intent.putExtra("totalSum", sumTotal /**
+                                             *            ВЫРЕЗАНО
+                                             *          Зона доставки
+                                             *          + deliverySum*/);
                                             intent.putExtra("deliveryZoneCost", deliveryZoneCost);
 
                                             startActivity(intent);
@@ -585,13 +596,16 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
         deliverySum = PodkrePizza + Avocado + Djo;
 
-        txtTotalDelivery.setText(deliverySum + " ₽");
+        txtTotalDelivery.setText("от " + deliverySum + " ₽");
 
         btnGetBonus.setText("Списать");
         orderBonusTitleText.setText("");
         orderBonusTitleCount.setText("");
 
-        txtTotal.setText(sum + deliverySum + " ₽");
+        txtTotal.setText(sum /**
+         *            ВЫРЕЗАНО
+         *          Зона доставки
+         *          + deliverySum*/ + " ₽");
 
         sumTotal = sum;
 

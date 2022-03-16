@@ -76,6 +76,11 @@
         <item name="colorSecondary">@color/orange</item>
     </style>
 
+    <style name="changeBackgroundColor"  parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="colorSurface">@color/white  </item>
+        <item name="colorPrimary">@color/blue</item>
+    </style>
+
     <style name="Theme.TestActivityAndroid_9.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.TestActivityAndroid_9.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

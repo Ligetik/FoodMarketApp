@@ -82,8 +82,6 @@ public class CallBackActivity extends AppCompatActivity {
                 userContact.put("Номер телефона:", "+7" + userNumber);
                 userContact.put("Дата и время:",  strDate);
 
-
-
                 FirebaseFirestore.getInstance()
                         .collection("Users_Cart")
                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -100,13 +98,12 @@ public class CallBackActivity extends AppCompatActivity {
                                 message.put("html", orderContactInfoMapStrPizza);
 
                                 Map<String,Object> mail = new HashMap<>();
-                                mail.put("to", "skyendofmind@gmail.com");
+                                mail.put("to", "dasha.gubar.23@inbox.ru");
                                 mail.put("message", message);
 
                                 FirebaseFirestore.getInstance()
                                         .collection("mail")
                                         .add(mail);
-
 
                                 Toast.makeText(getApplicationContext(), "Заявка отправлена!",Toast.LENGTH_SHORT).show();
 
